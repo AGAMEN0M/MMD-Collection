@@ -19,24 +19,22 @@ MonoBehaviour:
     materialNameEN: MMD (Shader Graph)
     materialMeno: Note space.
     useSlider: 0
-  - mmdMaterial: {fileID: 2100000, guid: e54bc815ff3cb414dadbbadc2b5a61bf, type: 2}
-    materialNameJP: "MMD - \u900F\u660E\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: MMD - Transparent (Shader Graph)
-    materialMeno: Note space.
-    useSlider: 0
+    surfaceType: 0
   - mmdMaterial: {fileID: 2100000, guid: cb45c2d4928ba7c48b9b3d888fb42c12, type: 2}
     materialNameJP: "MMD - \u30A8\u30C3\u30B8 (\u5897\u5E45\u30B7\u30A7\u30FC\u30C0\u30FC\u30A8\u30C7\u30A3\u30BF\u30FC)"
     materialNameEN: MMD - Edge (Amplify Shader Editor)
     materialMeno: Note space.
     useSlider: 0
-  - mmdMaterial: {fileID: 2100000, guid: 8e40de16149b5d843b2dca26842964f8, type: 2}
-    materialNameJP: "MMD - \u30A8\u30C3\u30B8 - \u900F\u660E (\u5897\u5E45\u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: MMD - Edge - Transparent (Amplify Shader Editor)
-    materialMeno: Note space.
-    useSlider: 0
-  - mmdMaterial: {fileID: 2100000, guid: 9681450fbed32d54794342cb76a68cf0, type: 2}
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: dad0b60f690318949b51c5faddedb061, type: 2}
     materialNameJP: 
     materialNameEN: 
     materialMeno: 
     useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: a4c883a78546533428d301690a141136, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0

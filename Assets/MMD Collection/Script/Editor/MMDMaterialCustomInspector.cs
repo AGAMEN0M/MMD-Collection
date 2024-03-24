@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 // Custom inspector for MMD (MikuMikuDance) materials.
 public class MMDMaterialCustomInspector : ShaderGUI
@@ -10,6 +11,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
     private string materialMeno;   // Memo for the material.
     private bool useSlider;        // Toggle to use sliders for float properties.
     private bool showMoreSystems;  // Toggle to show more systems in the inspector.
+    private bool surfaceType;      // Surface type of the material.
 
     private CustomMMDData customMMDData; // Reference to CustomMMDData asset.
 
@@ -39,10 +41,14 @@ public class MMDMaterialCustomInspector : ShaderGUI
         else
         {
             GUILayout.Space(30f);
+            SurfaceTypeDropdown(); // Render dropdown for surface type.
+            GUILayout.Space(10f);
             base.OnGUI(materialEditor, properties); // Render default material inspector.
         }
 
-        SaveData(materialEditor); // Save any changes made.
+        // Apply surface type keywords and save any changes made.
+        SurfaceTypeKeywords(materialEditor);
+        SaveData(materialEditor);
     }
 
     // Load material data from CustomMMDData asset.
@@ -63,6 +69,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
                 materialNameEN = existingMaterialInfo.materialNameEN; // Load English material name.
                 materialMeno = existingMaterialInfo.materialMeno;     // Load memo.
                 useSlider = existingMaterialInfo.useSlider;           // Load useSlider toggle.
+                surfaceType = existingMaterialInfo.surfaceType;       // Load surface type.
             }
             else
             {
@@ -71,6 +78,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
                 materialNameEN = ""; // English material name is empty.
                 materialMeno = "";   // Memo is empty.
                 useSlider = false;   // Slider usage is set to false.
+                surfaceType = false; // Surface type is set to opaque by default.
             }
         }
     }
@@ -93,6 +101,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
                 existingMaterialInfo.materialNameEN = materialNameEN; // Update English material name.
                 existingMaterialInfo.materialMeno = materialMeno;     // Update memo.
                 existingMaterialInfo.useSlider = useSlider;           // Update useSlider toggle.
+                existingMaterialInfo.surfaceType = surfaceType;       // Update surface type.
             }
             else
             {
@@ -103,7 +112,8 @@ public class MMDMaterialCustomInspector : ShaderGUI
                     materialNameJP = materialNameJP, // Set Japanese material name.
                     materialNameEN = materialNameEN, // Set English material name.
                     materialMeno = materialMeno,     // Set memo.
-                    useSlider = useSlider            // Set useSlider toggle.
+                    useSlider = useSlider,           // Set useSlider toggle.
+                    surfaceType = surfaceType        // Set surface type.
                 };
 
                 customMMDData.materialInfoList.Add(newMaterialInfo); // Add new material info to the list.
@@ -130,7 +140,11 @@ public class MMDMaterialCustomInspector : ShaderGUI
             if (existingMaterialInfo != null)
             {
                 // Check if any of the material properties have changed.
-                if (existingMaterialInfo.materialNameJP != materialNameJP || existingMaterialInfo.materialNameEN != materialNameEN || existingMaterialInfo.materialMeno != materialMeno || existingMaterialInfo.useSlider != useSlider)
+                if (existingMaterialInfo.materialNameJP != materialNameJP
+                    || existingMaterialInfo.materialNameEN != materialNameEN
+                    || existingMaterialInfo.materialMeno != materialMeno
+                    || existingMaterialInfo.useSlider != useSlider
+                    || existingMaterialInfo.surfaceType != surfaceType)
                 {
                     return true; // Changes detected.
                 }
@@ -242,10 +256,11 @@ public class MMDMaterialCustomInspector : ShaderGUI
 
         GUILayout.Space(30f);
 
-        // Renders Fog, Lighting, and Unity default properties.
+        // Renders Fog, Lighting, SurfaceType, and Unity default properties.
         GUILayout.Label("Unity Tools");
         DrawDropdownProperty(properties, "_FOG", "Fog:", new string[] { "On", "Off" });
         DrawDropdownProperty(properties, "_LIGHTING", "Lighting:", new string[] { "On", "Off" });
+        SurfaceTypeDropdown();
         GUILayout.Space(20f);
         materialEditor.RenderQueueField();
         materialEditor.EnableInstancingField();
@@ -396,5 +411,52 @@ public class MMDMaterialCustomInspector : ShaderGUI
         MaterialProperty property = FindProperty(propertyName, properties);
         property.floatValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(290f));
         EditorGUILayout.EndHorizontal();
+    }
+
+    // Render dropdown for selecting the surface type (opaque or transparent).
+    private void SurfaceTypeDropdown()
+    {
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Surface Type:", GUILayout.Width(100f));
+        string[] options = { "Opaque", "Transparent" };
+        int selectedIndex = surfaceType ? 1 : 0; // Determine the selected index based on the current surface type.
+        selectedIndex = EditorGUILayout.Popup(selectedIndex, options, GUILayout.Width(150f)); // Render the dropdown.
+        surfaceType = selectedIndex == 1; // Update surface type based on the selected index.
+        GUILayout.EndHorizontal();
+    }
+
+    // Apply surface type keywords based on the selected surface type.
+    private void SurfaceTypeKeywords(MaterialEditor materialEditor)
+    {
+        Material material = materialEditor.target as Material; // Get the material being edited.
+        List<string> keywords = new(material.shaderKeywords); // Get the current shader keywords.
+
+        // Check if the material should be transparent and add/remove keywords accordingly.
+        if (surfaceType)
+        {
+            if (!keywords.Contains("_ALPHAPREMULTIPLY_ON"))
+            {
+                keywords.Add("_ALPHAPREMULTIPLY_ON");
+            }
+            if (!keywords.Contains("_SURFACE_TYPE_TRANSPARENT"))
+            {
+                keywords.Add("_SURFACE_TYPE_TRANSPARENT");
+            }
+
+            material.shaderKeywords = keywords.ToArray(); // Apply the modified shader keywords to the material.
+        }
+        else
+        {
+            if (keywords.Contains("_ALPHAPREMULTIPLY_ON"))
+            {
+                keywords.Remove("_ALPHAPREMULTIPLY_ON");
+            }
+            if (keywords.Contains("_SURFACE_TYPE_TRANSPARENT"))
+            {
+                keywords.Remove("_SURFACE_TYPE_TRANSPARENT");
+            }
+
+            material.shaderKeywords = keywords.ToArray(); // Apply the modified shader keywords to the material.
+        }
     }
 }
