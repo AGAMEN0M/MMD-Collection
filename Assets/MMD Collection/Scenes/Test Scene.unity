@@ -158,11 +158,11 @@ MonoBehaviour:
   - transform: {fileID: 117057370}
     mesh: {fileID: -8246975807668640569, guid: a5cd164ea1f66c5469671830cbf05b15, type: 3}
     materials:
-    - {fileID: 2100000, guid: 9681450fbed32d54794342cb76a68cf0, type: 2}
+    - {fileID: 2100000, guid: dad0b60f690318949b51c5faddedb061, type: 2}
   - transform: {fileID: 117057370}
     mesh: {fileID: -7309037136039724561, guid: a5cd164ea1f66c5469671830cbf05b15, type: 3}
     materials:
-    - {fileID: 2100000, guid: 9681450fbed32d54794342cb76a68cf0, type: 2}
+    - {fileID: 2100000, guid: dad0b60f690318949b51c5faddedb061, type: 2}
   - transform: {fileID: 2099853210}
     mesh: {fileID: -8246975807668640569, guid: a5cd164ea1f66c5469671830cbf05b15, type: 3}
     materials:
