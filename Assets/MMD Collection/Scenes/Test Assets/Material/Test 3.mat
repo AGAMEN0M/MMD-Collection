@@ -21,7 +21,6 @@ Material:
   - _FOG_OFF
   - _G_SHAD_ON
   - _LIGHTING_ON
-  - _ON_ON
   - _S_MAP_ON
   - _S_SHAD_ON
   - _TOON
@@ -141,6 +140,7 @@ Material:
     - _EdgeSize: 0.561
     - _EnvironmentReflections: 1
     - _FOG: 1
+    - _Float7: 50
     - _G_SHAD: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.70710677
@@ -150,7 +150,7 @@ Material:
     - _Mode: 0
     - _NoShadowCasting: 0
     - _OcclusionStrength: 1
-    - _On: 1
+    - _On: 0
     - _Opaque: 1
     - _Parallax: 0.02
     - _QueueControl: 0
@@ -162,7 +162,7 @@ Material:
     - _S_SHAD: 1
     - _ShadowLum: 1.5
     - _Shininess: 50
-    - _Size: 0.561
+    - _Size: 1
     - _Smoothness: 0.70710677
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -183,15 +183,15 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _Ambient: {r: 0.1999999, g: 0.2, b: 0.5, a: 0}
+    - _Ambient: {r: 0, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 0.9063317, g: 0.9063317, b: 0.9063317, a: 1}
     - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _Diffuse: {r: 0.8, g: 0.8, b: 0.8, a: 0}
+    - _Diffuse: {r: 1, g: 0, b: 0, a: 0}
     - _EdgeColor: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Emissive: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Specular: {r: 0.6, g: 0.2, b: 0.6, a: 0}
+    - _Specular: {r: 0.6, g: 0.19999987, b: 0.6, a: 0}
     - _ToonTone: {r: 1, g: 0.5, b: 0.5, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7688909197169851153

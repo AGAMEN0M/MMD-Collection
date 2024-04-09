@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 28.29
-  m_Shader: {fileID: 4800000, guid: e802e5e26877eed43b4bd68db5b0abea, type: 3}
+  m_Shader: {fileID: 4800000, guid: a65994cb353789f49bdc50b95035f956, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -122,7 +122,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EdgeScale: 0.001
-    - _EdgeSize: 0.1
+    - _EdgeSize: 0.020000001
     - _EnvironmentReflections: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.70710677
