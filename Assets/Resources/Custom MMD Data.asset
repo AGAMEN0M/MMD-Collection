@@ -14,25 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showMoreSystems: 0
   materialInfoList:
-  - mmdMaterial: {fileID: 2100000, guid: 1a9aa76028e469044b474f6ba8912249, type: 2}
-    materialNameJP: "MMD\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: MMD (Shader Graph)
-    materialMeno: Note space.
-    useSlider: 0
-    surfaceType: 0
-  - mmdMaterial: {fileID: 2100000, guid: cb45c2d4928ba7c48b9b3d888fb42c12, type: 2}
-    materialNameJP: "MMD - \u30A8\u30C3\u30B8 (\u5897\u5E45\u30B7\u30A7\u30FC\u30C0\u30FC\u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: MMD - Edge (Amplify Shader Editor)
-    materialMeno: Note space.
-    useSlider: 0
-    surfaceType: 0
-  - mmdMaterial: {fileID: 2100000, guid: dad0b60f690318949b51c5faddedb061, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-    useSlider: 0
-    surfaceType: 0
-  - mmdMaterial: {fileID: 2100000, guid: a4c883a78546533428d301690a141136, type: 2}
+  - mmdMaterial: {fileID: 2100000, guid: b2a6f83b53e856844a65d76f07734a44, type: 2}
     materialNameJP: 
     materialNameEN: 
     materialMeno: 
