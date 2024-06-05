@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Disabled (Amplify Shader Editor)
+  m_Name: Disabled (Shader Graph)
   m_Shader: {fileID: -6465566751694194690, guid: 75632dc8894ea604690e365027760a9d,
     type: 3}
   m_Parent: {fileID: 0}
@@ -57,10 +57,11 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _CastShadows: 1
-    - _Cull: 2
+    - _Cull: 0
     - _DstBlend: 0
     - _EFFECTS: 0
     - _EdgeSize: 0
+    - _Fog: 0
     - _GSHAD: 0
     - _MultipleLights: 1
     - _On: 0
@@ -79,7 +80,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Ambient: {r: 0, g: 0.96862745, b: 0, a: 0}
+    - _Ambient: {r: 0, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _Specular: {r: 0.6, g: 0.2, b: 0.6, a: 0}

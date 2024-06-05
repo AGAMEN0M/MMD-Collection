@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEditor;
-using System.Collections.Generic;
+using System;
 
 // Custom inspector for MMD (MikuMikuDance) materials.
 public class MMDMaterialCustomInspector : ShaderGUI
@@ -9,9 +9,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
     private string materialNameJP; // Material name in Japanese.
     private string materialNameEN; // Material name in English.
     private string materialMeno;   // Memo for the material.
-    private bool useSlider;        // Toggle to use sliders for float properties.
     private bool showMoreSystems;  // Toggle to show more systems in the inspector.
-    private bool surfaceType;      // Surface type of the material.
 
     private CustomMMDData customMMDData; // Reference to CustomMMDData asset.
 
@@ -20,7 +18,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
     {
         // Show toggle for showing more systems.
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Show More Systems:", GUILayout.Width(130f));
+        GUILayout.Label("Show More Systems:", EditorStyles.boldLabel, GUILayout.Width(130f));
         showMoreSystems = EditorGUILayout.Toggle(showMoreSystems);
         GUILayout.EndHorizontal();
         GUILayout.Space(5f);
@@ -36,18 +34,15 @@ public class MMDMaterialCustomInspector : ShaderGUI
         // Render custom or default material inspector based on showMoreSystems toggle.
         if (!showMoreSystems)
         {
-            DrawCustomMaterialInspector(materialEditor, properties);
+            DrawCustomMaterialInspector(properties);
         }
         else
         {
             GUILayout.Space(30f);
-            SurfaceTypeDropdown(); // Render dropdown for surface type.
-            GUILayout.Space(10f);
             base.OnGUI(materialEditor, properties); // Render default material inspector.
         }
 
         // Apply surface type keywords and save any changes made.
-        SurfaceTypeKeywords(materialEditor);
         SaveData(materialEditor);
     }
 
@@ -68,8 +63,6 @@ public class MMDMaterialCustomInspector : ShaderGUI
                 materialNameJP = existingMaterialInfo.materialNameJP; // Load Japanese material name.
                 materialNameEN = existingMaterialInfo.materialNameEN; // Load English material name.
                 materialMeno = existingMaterialInfo.materialMeno;     // Load memo.
-                useSlider = existingMaterialInfo.useSlider;           // Load useSlider toggle.
-                surfaceType = existingMaterialInfo.surfaceType;       // Load surface type.
             }
             else
             {
@@ -77,8 +70,6 @@ public class MMDMaterialCustomInspector : ShaderGUI
                 materialNameJP = ""; // Japanese material name is empty.
                 materialNameEN = ""; // English material name is empty.
                 materialMeno = "";   // Memo is empty.
-                useSlider = false;   // Slider usage is set to false.
-                surfaceType = false; // Surface type is set to opaque by default.
             }
         }
     }
@@ -100,8 +91,6 @@ public class MMDMaterialCustomInspector : ShaderGUI
                 existingMaterialInfo.materialNameJP = materialNameJP; // Update Japanese material name.
                 existingMaterialInfo.materialNameEN = materialNameEN; // Update English material name.
                 existingMaterialInfo.materialMeno = materialMeno;     // Update memo.
-                existingMaterialInfo.useSlider = useSlider;           // Update useSlider toggle.
-                existingMaterialInfo.surfaceType = surfaceType;       // Update surface type.
             }
             else
             {
@@ -111,9 +100,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
                     mmdMaterial = material,          // Set the material reference.
                     materialNameJP = materialNameJP, // Set Japanese material name.
                     materialNameEN = materialNameEN, // Set English material name.
-                    materialMeno = materialMeno,     // Set memo.
-                    useSlider = useSlider,           // Set useSlider toggle.
-                    surfaceType = surfaceType        // Set surface type.
+                    materialMeno = materialMeno     // Set memo.
                 };
 
                 customMMDData.materialInfoList.Add(newMaterialInfo); // Add new material info to the list.
@@ -142,9 +129,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
                 // Check if any of the material properties have changed.
                 if (existingMaterialInfo.materialNameJP != materialNameJP
                     || existingMaterialInfo.materialNameEN != materialNameEN
-                    || existingMaterialInfo.materialMeno != materialMeno
-                    || existingMaterialInfo.useSlider != useSlider
-                    || existingMaterialInfo.surfaceType != surfaceType)
+                    || existingMaterialInfo.materialMeno != materialMeno)
                 {
                     return true; // Changes detected.
                 }
@@ -165,14 +150,14 @@ public class MMDMaterialCustomInspector : ShaderGUI
     }
 
     // Render the custom material inspector UI.
-    private void DrawCustomMaterialInspector(MaterialEditor materialEditor, MaterialProperty[] properties)
+    private void DrawCustomMaterialInspector(MaterialProperty[] properties)
     {
         // Render fields for material names and memo.
         EditorGUILayout.BeginHorizontal();
         GUILayout.BeginHorizontal(GUILayout.Width(400));
-        GUILayout.Label("Mat-Name: (JP)", GUILayout.Width(100f));
+        GUILayout.Label("Mat-Name: (JP)", EditorStyles.boldLabel, GUILayout.Width(100f));
         materialNameJP = EditorGUILayout.TextField(materialNameJP);
-        GUILayout.Label("(EN)", GUILayout.Width(30f));
+        GUILayout.Label("(EN)", EditorStyles.boldLabel, GUILayout.Width(30f));
         materialNameEN = EditorGUILayout.TextField(materialNameEN);
         GUILayout.EndHorizontal();
         EditorGUILayout.EndHorizontal();
@@ -180,35 +165,18 @@ public class MMDMaterialCustomInspector : ShaderGUI
         GUILayout.Space(10f);
 
         // Render properties for material color, opacity, reflection, and rendering.
-        GUILayout.Label("Material Color");
-        DrawColorProperty(properties, "_Diffuse", "Diffuse:");
+        GUILayout.Label("Material Color", EditorStyles.boldLabel);
+        DrawColorProperty(properties, "_Color", "Diffuse:");
         DrawColorProperty(properties, "_Specular", "Specular:");
         DrawColorProperty(properties, "_Ambient", "Ambient:");
         GUILayout.Space(10f);
 
-        // Add a toggle control to choose between sliders and text fields.
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Use Slider:", GUILayout.Width(100f));
-        useSlider = EditorGUILayout.Toggle(useSlider);
-        GUILayout.EndHorizontal();
-        GUILayout.Space(5f);
-
-        if (!useSlider)
-        {
-            // Use text fields for the _Opaque and _Reflection properties.
-            DrawFloatProperty(properties, "_Opaque", "Opaque:", 100f);
-            DrawFloatProperty(properties, "_Reflection", "Reflection:", 100f);
-        }
-        else
-        {
-            // Use sliders for the _Opaque and _Reflection properties.
-            DrawSliderFloatProperty(properties, "_Opaque", "Opaque:", 0f, 1f);
-            DrawSliderFloatProperty(properties, "_Reflection", "Reflection:", 0f, 1f);
-        }
-
+        DrawSliderFloatProperty(properties, "_Opaque", "Opaque:", 0f, 1f, 100f, 290f);
+        DrawFloatProperty(properties, "_Shininess", "Reflection:", 100f);
         GUILayout.Space(10f);
 
-        GUILayout.Label("Rendering");
+        GUILayout.Label("Rendering", EditorStyles.boldLabel);
+        /*
         EditorGUILayout.BeginHorizontal();
         GUILayout.BeginHorizontal(GUILayout.Width(100));
         DrawToggleUIProperty(properties, "_2_SIDE", "2-SIDE:", 60f);
@@ -223,48 +191,50 @@ public class MMDMaterialCustomInspector : ShaderGUI
         DrawToggleUIProperty(properties, "_S_SHAD", "S-SHAD:", 60f);
         GUILayout.EndHorizontal();
         EditorGUILayout.EndHorizontal();
-
+        */
         GUILayout.Space(10f);
 
         // Render properties for edge (outline).
-        GUILayout.Label("Edge (Outline)");
+        GUILayout.Label("Edge (Outline)", EditorStyles.boldLabel);
         EditorGUILayout.BeginHorizontal();
         GUILayout.BeginHorizontal(GUILayout.Width(100));
         DrawToggleUIProperty(properties, "_On", "On:", 30f);
         GUILayout.Space(30f);
-        DrawColorUIProperty(properties, "_Color");
+        DrawColorUIProperty(properties, "_OutlineColor");
         GUILayout.Space(30f);
-        DrawFloatProperty(properties, "_Size", "Size:", 40f);
+        DrawFloatProperty(properties, "_EdgeSize", "Size:", 40f);
         GUILayout.EndHorizontal();
         EditorGUILayout.EndHorizontal();
-        DrawVector4Property(properties, "_Color");
-
+        DrawVector4Property(properties, "_OutlineColor");
         GUILayout.Space(10f);
 
         // Render properties for texture and memo.
-        GUILayout.Label("Texture/Memo");
-        DrawDropdownProperty(properties, "_EFFECTS", "Effects:", new string[] { "- Disabled", "x Multi-Sphere", "+ Add-Sphere", "Sub-Tex" });
+        GUILayout.Label("Texture/Memo", EditorStyles.boldLabel);
+        DrawDropdownProperty(properties, "_Effects", "Effects:", new string[] { "- Disabled", "x Multi-Sphere", "+ Add-Sphere", "Sub-Tex" }, new float[] { 0, 2, 1, 3 });
         GUILayout.Space(5f);
-        DrawTextureProperty(properties, "_Texture", "Texture:");
-        DrawTextureProperty(properties, "_Toon", "Toon:");
-        DrawCubemapProperty(properties, "_SPH", "SPH:");
+        DrawTextureProperty(properties, "_MainTex", "Texture:");
+        DrawTextureProperty(properties, "_ToonTex", "Toon:");
+        DrawCubemapProperty(properties, "_SphereCube", "SPH:");
         GUILayout.Space(10f);
+
         EditorGUILayout.BeginHorizontal();
-        GUILayout.Label("Memo:", GUILayout.Width(50f));
+        GUILayout.Label("Memo:", EditorStyles.boldLabel, GUILayout.Width(50f));
         materialMeno = EditorGUILayout.TextArea(materialMeno, GUILayout.Height(80f));
         EditorGUILayout.EndHorizontal();
-
-        GUILayout.Space(30f);
+        GUILayout.Space(10f);
 
         // Renders Fog, Lighting, SurfaceType, and Unity default properties.
-        GUILayout.Label("Unity Tools");
-        DrawDropdownProperty(properties, "_FOG", "Fog:", new string[] { "On", "Off" });
-        DrawDropdownProperty(properties, "_LIGHTING", "Lighting:", new string[] { "On", "Off" });
-        SurfaceTypeDropdown();
-        GUILayout.Space(20f);
-        materialEditor.RenderQueueField();
-        materialEditor.EnableInstancingField();
-        materialEditor.DoubleSidedGIField();
+        GUILayout.Label("Custom Effects Settings", EditorStyles.boldLabel);
+        DrawSliderFloatProperty(properties, "_SpecularIntensity", "Specular Intensity:", 0f, 1f, 145f, 245f);
+        DrawSliderFloatProperty(properties, "_SPHOpacity", "SPH Opacity:", 0f, 1f, 145f, 245f);
+        DrawSliderFloatProperty(properties, "_ShadowLum", "Shadow Luminescence:", 0f, 10f, 145f, 245f);
+        DrawVector3Property(properties, "_ToonTone", "Toon Tone:", 145f);
+        DrawToggleUIProperty(properties, "_MultipleLights", "Multiple Lights:", 145f);
+        GUILayout.Space(10f);
+
+        GUILayout.Label("Unity Tools", EditorStyles.boldLabel);
+        // Surface Options
+        // Advanced Options
     }
 
     // Helper method to draw color property.
@@ -306,16 +276,12 @@ public class MMDMaterialCustomInspector : ShaderGUI
     {
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label(label, GUILayout.Width(space));
+
         MaterialProperty property = FindProperty(propertyName, properties);
         EditorGUI.showMixedValue = property.hasMixedValue;
-        var toggleValue = property.floatValue != 0;
-        EditorGUI.BeginChangeCheck();
-        toggleValue = EditorGUILayout.Toggle(toggleValue, GUILayout.Width(10f));
-        if (EditorGUI.EndChangeCheck())
-        {
-            property.floatValue = toggleValue ? 1 : 0;
-        }
+        var toggleValue = EditorGUILayout.Toggle(property.floatValue != 0, GUILayout.Width(10f));
         EditorGUI.showMixedValue = false;
+        property.floatValue = toggleValue ? 1 : 0;
         EditorGUILayout.EndHorizontal();
     }
 
@@ -329,6 +295,25 @@ public class MMDMaterialCustomInspector : ShaderGUI
         if (EditorGUI.EndChangeCheck())
         {
             colorProperty.colorValue = color;
+        }
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void DrawVector3Property(MaterialProperty[] properties, string propertyName, string label, float space)
+    {
+        EditorGUILayout.BeginHorizontal();
+        MaterialProperty vectorProperty = FindProperty(propertyName, properties);
+        Vector4 vector3Value = vectorProperty.vectorValue;
+        GUILayout.Label(label, GUILayout.Width(space));
+        EditorGUI.BeginChangeCheck();
+        float x = EditorGUILayout.FloatField(vector3Value.x, GUILayout.Width(50f));
+        GUILayout.Space(10f);
+        float y = EditorGUILayout.FloatField(vector3Value.y, GUILayout.Width(50f));
+        GUILayout.Space(10f);
+        float z = EditorGUILayout.FloatField(vector3Value.z, GUILayout.Width(50f));
+        if (EditorGUI.EndChangeCheck())
+        {
+            vectorProperty.vectorValue = new Vector3(x, y, z);
         }
         EditorGUILayout.EndHorizontal();
     }
@@ -362,7 +347,10 @@ public class MMDMaterialCustomInspector : ShaderGUI
         MaterialProperty textureProperty = FindProperty(propertyName, properties);
         EditorGUI.BeginChangeCheck();
         EditorGUI.showMixedValue = textureProperty.hasMixedValue;
-        Texture texture = EditorGUILayout.ObjectField(label, textureProperty.textureValue, typeof(Texture), false) as Texture;
+        GUILayout.BeginHorizontal();
+        GUILayout.Label(label, GUILayout.Width(100f));
+        Texture texture = EditorGUILayout.ObjectField("", textureProperty.textureValue, typeof(Texture), false, GUILayout.Width(60f)) as Texture;
+        GUILayout.EndHorizontal();
         if (EditorGUI.EndChangeCheck())
         {
             textureProperty.textureValue = texture;
@@ -378,7 +366,10 @@ public class MMDMaterialCustomInspector : ShaderGUI
         MaterialProperty cubemapProperty = FindProperty(propertyName, properties);
         EditorGUI.BeginChangeCheck();
         EditorGUI.showMixedValue = cubemapProperty.hasMixedValue;
-        Cubemap cubemap = EditorGUILayout.ObjectField(label, cubemapProperty.textureValue, typeof(Cubemap), false) as Cubemap;
+        GUILayout.BeginHorizontal();
+        GUILayout.Label(label, GUILayout.Width(100f));
+        Cubemap cubemap = EditorGUILayout.ObjectField("", cubemapProperty.textureValue, typeof(Cubemap), false, GUILayout.Width(60f)) as Cubemap;
+        GUILayout.EndHorizontal();
         if (EditorGUI.EndChangeCheck())
         {
             cubemapProperty.textureValue = cubemap;
@@ -388,6 +379,62 @@ public class MMDMaterialCustomInspector : ShaderGUI
     }
 
     // Helper method to draw dropdown property.
+    private void DrawDropdownProperty(MaterialProperty[] properties, string propertyName, string label, string[] displayOptions, float[] numberOptions)
+    {
+        if (displayOptions.Length != numberOptions.Length)
+        {
+            throw new ArgumentException("displayOptions and numberOptions must have the same length");
+        }
+
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label(label, GUILayout.Width(100f));
+        MaterialProperty dropdownProperty = FindProperty(propertyName, properties);
+        EditorGUI.BeginChangeCheck();
+        int selectedIndex = Array.IndexOf(numberOptions, dropdownProperty.floatValue);
+
+        if (selectedIndex == -1)
+        {
+            selectedIndex = 0;
+        }
+
+        selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(150f));
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            dropdownProperty.floatValue = numberOptions[selectedIndex];
+        }
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    // Helper method to draw float property with slider.
+    private void DrawSliderFloatProperty(MaterialProperty[] properties, string propertyName, string label, float minValue, float maxValue, float space, float sliderSpace)
+    {
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label(label, GUILayout.Width(space));
+        MaterialProperty property = FindProperty(propertyName, properties);
+        property.floatValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(sliderSpace));
+        EditorGUILayout.EndHorizontal();
+    }
+
+    /*
+    private void DrawToggleUIProperty(MaterialProperty[] properties, string propertyName, string label, float space)
+    {
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label(label, GUILayout.Width(space));
+        MaterialProperty property = FindProperty(propertyName, properties);
+        EditorGUI.showMixedValue = property.hasMixedValue;
+        var toggleValue = property.floatValue != 0;
+        EditorGUI.BeginChangeCheck();
+        toggleValue = EditorGUILayout.Toggle(toggleValue, GUILayout.Width(10f));
+        if (EditorGUI.EndChangeCheck())
+        {
+            property.floatValue = toggleValue ? 1 : 0;
+        }
+        EditorGUI.showMixedValue = false;
+        EditorGUILayout.EndHorizontal();
+    }
+
     private void DrawDropdownProperty(MaterialProperty[] properties, string propertyName, string label, string[] displayOptions)
     {
         EditorGUILayout.BeginHorizontal();
@@ -402,61 +449,5 @@ public class MMDMaterialCustomInspector : ShaderGUI
         }
         EditorGUILayout.EndHorizontal();
     }
-
-    // Helper method to draw float property with slider.
-    private void DrawSliderFloatProperty(MaterialProperty[] properties, string propertyName, string label, float minValue, float maxValue)
-    {
-        EditorGUILayout.BeginHorizontal();
-        GUILayout.Label(label, GUILayout.Width(100f));
-        MaterialProperty property = FindProperty(propertyName, properties);
-        property.floatValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(290f));
-        EditorGUILayout.EndHorizontal();
-    }
-
-    // Render dropdown for selecting the surface type (opaque or transparent).
-    private void SurfaceTypeDropdown()
-    {
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Surface Type:", GUILayout.Width(100f));
-        string[] options = { "Opaque", "Transparent" };
-        int selectedIndex = surfaceType ? 1 : 0; // Determine the selected index based on the current surface type.
-        selectedIndex = EditorGUILayout.Popup(selectedIndex, options, GUILayout.Width(150f)); // Render the dropdown.
-        surfaceType = selectedIndex == 1; // Update surface type based on the selected index.
-        GUILayout.EndHorizontal();
-    }
-
-    // Apply surface type keywords based on the selected surface type.
-    private void SurfaceTypeKeywords(MaterialEditor materialEditor)
-    {
-        Material material = materialEditor.target as Material; // Get the material being edited.
-        List<string> keywords = new(material.shaderKeywords); // Get the current shader keywords.
-
-        // Check if the material should be transparent and add/remove keywords accordingly.
-        if (surfaceType)
-        {
-            if (!keywords.Contains("_ALPHAPREMULTIPLY_ON"))
-            {
-                keywords.Add("_ALPHAPREMULTIPLY_ON");
-            }
-            if (!keywords.Contains("_SURFACE_TYPE_TRANSPARENT"))
-            {
-                keywords.Add("_SURFACE_TYPE_TRANSPARENT");
-            }
-
-            material.shaderKeywords = keywords.ToArray(); // Apply the modified shader keywords to the material.
-        }
-        else
-        {
-            if (keywords.Contains("_ALPHAPREMULTIPLY_ON"))
-            {
-                keywords.Remove("_ALPHAPREMULTIPLY_ON");
-            }
-            if (keywords.Contains("_SURFACE_TYPE_TRANSPARENT"))
-            {
-                keywords.Remove("_SURFACE_TYPE_TRANSPARENT");
-            }
-
-            material.shaderKeywords = keywords.ToArray(); // Apply the modified shader keywords to the material.
-        }
-    }
+    */
 }

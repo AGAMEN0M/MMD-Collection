@@ -20,3 +20,111 @@ MonoBehaviour:
     materialMeno: 
     useSlider: 0
     surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: fea0f609e837e404db90fdd01379775f, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 10f4f51d6298d454ba9425d872d87391, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 6501ecc0d86c40f44a46dc4f3be9ac74, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: ed6c74dc11814a0429897ff3d2759f94, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 0916a96cdd0f722489049ec08aa9ec2b, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: c1c564795c9f5db4eb458e1d74d1193d, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 53845d559431bf24085fe0e8862c1eba, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: c6dffdae30b952c4db084473ae0c1497, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: ddf7368940cdafa409fbf02570c78825, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: d01f1c93b6833d7439ad3a690d1bdf6f, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 20beff8fd4e8a444f9f182347a5fe03e, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: c1d532295fb9b7841aee20ca98b2376f, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 3a9de582bb881ab429f387b9f1a8e398, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 13a1492914b235f43a226e76e9ab3439, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 0a6a5485c82c8e145b42c91d73ac18b8, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 99dd082f785c94843ad117a2f3c28246, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 42856c3950e219245982a4556d7fe5ad, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0
+  - mmdMaterial: {fileID: 2100000, guid: 527ccbef9fc06e442b01aa7333b3a842, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+    useSlider: 0
+    surfaceType: 0

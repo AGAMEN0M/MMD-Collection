@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Multi Sphere (Amplify Shader Editor)
+  m_Name: Add Sphere (Shader Graph)
   m_Shader: {fileID: -6465566751694194690, guid: 75632dc8894ea604690e365027760a9d,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _EFFECTS_MULTI_SPHERE
+  - _EFFECTS_ADD_SPHERE
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -31,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SphereCube:
-        m_Texture: {fileID: 8900000, guid: a8a7bd80f070ab24abe78fbeb282fe0f, type: 3}
+        m_Texture: {fileID: 8900000, guid: d33a868444629e5489239c4dc31a2cb4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonTex:
@@ -59,8 +59,9 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 0
-    - _EFFECTS: 2
+    - _EFFECTS: 1
     - _EdgeSize: 0
+    - _Fog: 1
     - _GSHAD: 0
     - _MultipleLights: 1
     - _On: 0
@@ -79,7 +80,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _Ambient: {r: 0, g: 0.96862745, b: 0, a: 0}
+    - _Ambient: {r: 0, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _Specular: {r: 0.6, g: 0.2, b: 0.6, a: 0}

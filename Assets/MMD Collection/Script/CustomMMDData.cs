@@ -17,6 +17,4 @@ public class MMDMaterialInfo
     public string materialNameJP; // Material name in Japanese.
     public string materialNameEN; // Material name in English.
     public string materialMeno; // Memo for additional notes about the material.
-    public bool useSlider; // Boolean flag indicating whether to use a slider for this material.
-    public bool surfaceType; // Boolean flag indicating the surface type of the material.
 }

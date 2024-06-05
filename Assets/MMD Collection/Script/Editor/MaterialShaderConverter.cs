@@ -20,7 +20,7 @@ public class MaterialShaderConverter : MonoBehaviour
                 switch (materialToConvert.shader.name)
                 {
                     case "MMD4Mecanim/MMDLit":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Shader Graph)");
+                        //ChangeShader(materialToConvert, "");
                         break;
                     case "MMD4Mecanim/MMDLit-BothFaces":
                         //ChangeShader(materialToConvert, "");
