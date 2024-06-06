@@ -34,12 +34,14 @@ public class MMDMaterialCustomInspector : ShaderGUI
         // Render custom or default material inspector based on showMoreSystems toggle.
         if (!showMoreSystems)
         {
-            DrawCustomMaterialInspector(properties);
+            DrawCustomMaterialInspector(materialEditor, properties);
         }
         else
         {
             GUILayout.Space(30f);
+            DrawSurfaceOptions(materialEditor, properties);
             base.OnGUI(materialEditor, properties); // Render default material inspector.
+            DrawLightmapFlagsProperty(materialEditor);
         }
 
         // Apply surface type keywords and save any changes made.
@@ -150,7 +152,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
     }
 
     // Render the custom material inspector UI.
-    private void DrawCustomMaterialInspector(MaterialProperty[] properties)
+    private void DrawCustomMaterialInspector(MaterialEditor materialEditor, MaterialProperty[] properties)
     {
         // Render fields for material names and memo.
         EditorGUILayout.BeginHorizontal();
@@ -210,7 +212,9 @@ public class MMDMaterialCustomInspector : ShaderGUI
 
         // Render properties for texture and memo.
         GUILayout.Label("Texture/Memo", EditorStyles.boldLabel);
-        DrawDropdownProperty(properties, "_Effects", "Effects:", new string[] { "- Disabled", "x Multi-Sphere", "+ Add-Sphere", "Sub-Tex" }, new float[] { 0, 2, 1, 3 });
+        GUI.backgroundColor = GetFloatProperty(properties, "_Effects", 3) ? Color.red : Color.white;
+        DrawDropdownProperty(properties, "_Effects", "Effects:", new string[] { "- Disabled", "x Multi-Sphere", "+ Add-Sphere", "Sub-Tex" }, new float[] { 0, 2, 1, 3 }, 100, 150);
+        GUI.backgroundColor = Color.white;
         GUILayout.Space(5f);
         DrawTextureProperty(properties, "_MainTex", "Texture:");
         DrawTextureProperty(properties, "_ToonTex", "Toon:");
@@ -232,9 +236,37 @@ public class MMDMaterialCustomInspector : ShaderGUI
         DrawToggleUIProperty(properties, "_MultipleLights", "Multiple Lights:", 145f);
         GUILayout.Space(10f);
 
-        GUILayout.Label("Unity Tools", EditorStyles.boldLabel);
-        // Surface Options
-        // Advanced Options
+        DrawSurfaceOptions(materialEditor, properties);
+
+        GUILayout.Label("Advanced Options", EditorStyles.boldLabel);
+        materialEditor.RenderQueueField();
+        materialEditor.EnableInstancingField();
+        materialEditor.DoubleSidedGIField();
+        DrawLightmapFlagsProperty(materialEditor);
+    }
+
+    private void DrawSurfaceOptions(MaterialEditor materialEditor, MaterialProperty[] properties)
+    {
+        GUILayout.Label("Surface Options", EditorStyles.boldLabel);
+        DrawDropdownProperty(properties, "_Surface", "Surface Type", new string[] { "Opaque", "Transparent" }, new float[] { 0, 1 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true); // manuteção
+        if (GetToggleUIProperty(properties, "_Surface"))
+        {
+            DrawDropdownProperty(properties, "_Blend", "Blending Mode", new string[] { "Alpha", "Premultiply", "Additive", "Multiply" }, new float[] { 0, 1, 2, 3 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true); // manuteção _SrcBlend _DstBlend "_ALPHAMODULATE_ON"
+        }
+        DrawDropdownProperty(properties, "_Cull", "Render Face", new string[] { "Both", "Back", "Front" }, new float[] { 0, 1, 2 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true);
+        DrawDropdownProperty(properties, "_ZWriteControl", "Depth Write", new string[] { "Auto", "ForceEnabled", "ForceDisabIed" }, new float[] { 0, 1, 2 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true); // manuteção _ZWrite (DepthOnly)
+        DrawDropdownProperty(properties, "_ZTest", "Depth Test", new string[] { "Never", "Less", "Equal", "LEquaI", "Greater", "NotEqual", "GEqual", "Always" }, new float[] { 1, 2, 3, 4, 5, 6, 7, 8 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true);
+        DrawToggleUIKeyword(materialEditor, properties, "_AlphaClip", "Alpha Clipping", "_ALPHATEST_ON", false, EditorGUIUtility.labelWidth);
+        if (GetToggleUIProperty(properties, "_AlphaClip"))
+        {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Space(15f);
+            DrawSliderFloatProperty(properties, "_Cutoff", "Threshold", 0f, 1f, EditorGUIUtility.labelWidth - 15, EditorGUIUtility.fieldWidth, true);
+            EditorGUILayout.EndHorizontal();
+        }
+        DrawToggleUIShaderPass(materialEditor, "SHADOWCASTER", "Cast Shadows", EditorGUIUtility.labelWidth);
+        DrawToggleUIKeyword(materialEditor, properties, "_ReceiveShadows", "Receive Shadows", "_RECEIVE_SHADOWS_OFF", true, EditorGUIUtility.labelWidth);
+        GUILayout.Space(10f);
     }
 
     // Helper method to draw color property.
@@ -283,6 +315,69 @@ public class MMDMaterialCustomInspector : ShaderGUI
         EditorGUI.showMixedValue = false;
         property.floatValue = toggleValue ? 1 : 0;
         EditorGUILayout.EndHorizontal();
+    }
+    
+    private bool GetFloatProperty(MaterialProperty[] properties, string propertyName, float value)
+    {
+        MaterialProperty property = FindProperty(propertyName, properties);
+
+        if (property.floatValue == value)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool GetToggleUIProperty(MaterialProperty[] properties, string propertyName)
+    {
+        MaterialProperty property = FindProperty(propertyName, properties);
+
+        if (property.floatValue == 1f)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void DrawToggleUIShaderPass(MaterialEditor materialEditor, string passName, string label, float space)
+    {
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label(label, GUILayout.Width(space));
+        Material material = (Material)materialEditor.target;
+        bool oldValue = material.GetShaderPassEnabled(passName);
+        bool newValue = EditorGUILayout.Toggle(oldValue, GUILayout.Width(10f));
+        EditorGUILayout.EndHorizontal();
+        material.SetShaderPassEnabled(passName, newValue);
+    }
+
+    // Helper method to draw toggle UI property.
+    private void DrawToggleUIKeyword(MaterialEditor materialEditor, MaterialProperty[] properties, string propertyName, string label, string tag, bool invert, float space)
+    {
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label(label, GUILayout.Width(space));
+        MaterialProperty property = FindProperty(propertyName, properties);
+        EditorGUI.showMixedValue = property.hasMixedValue;
+        var toggleValue = EditorGUILayout.Toggle(property.floatValue != 0, GUILayout.Width(10f));
+        EditorGUI.showMixedValue = false;
+        property.floatValue = toggleValue ? 1 : 0;
+        EditorGUILayout.EndHorizontal();
+
+        Material material = (Material)materialEditor.target;
+        if (invert)
+        {
+            toggleValue = !toggleValue; // Inverte o valor do toggle
+        }
+
+        if (toggleValue)
+        {
+            material.EnableKeyword(tag);
+        }
+        else
+        {
+            material.DisableKeyword(tag);
+        }
     }
 
     // Helper method to draw color UI property.
@@ -379,7 +474,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
     }
 
     // Helper method to draw dropdown property.
-    private void DrawDropdownProperty(MaterialProperty[] properties, string propertyName, string label, string[] displayOptions, float[] numberOptions)
+    private void DrawDropdownProperty(MaterialProperty[] properties, string propertyName, string label, string[] displayOptions, float[] numberOptions, float space, float dropdownSpace, bool expand = false)
     {
         if (displayOptions.Length != numberOptions.Length)
         {
@@ -387,7 +482,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
         }
 
         EditorGUILayout.BeginHorizontal();
-        GUILayout.Label(label, GUILayout.Width(100f));
+        GUILayout.Label(label, GUILayout.Width(space));
         MaterialProperty dropdownProperty = FindProperty(propertyName, properties);
         EditorGUI.BeginChangeCheck();
         int selectedIndex = Array.IndexOf(numberOptions, dropdownProperty.floatValue);
@@ -397,8 +492,15 @@ public class MMDMaterialCustomInspector : ShaderGUI
             selectedIndex = 0;
         }
 
-        selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(150f));
-
+        if (!expand)
+        {
+            selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(dropdownSpace));
+        }
+        else
+        {
+            selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(dropdownSpace), GUILayout.ExpandWidth(true));
+        }
+        
         if (EditorGUI.EndChangeCheck())
         {
             dropdownProperty.floatValue = numberOptions[selectedIndex];
@@ -408,12 +510,48 @@ public class MMDMaterialCustomInspector : ShaderGUI
     }
 
     // Helper method to draw float property with slider.
-    private void DrawSliderFloatProperty(MaterialProperty[] properties, string propertyName, string label, float minValue, float maxValue, float space, float sliderSpace)
+    private void DrawSliderFloatProperty(MaterialProperty[] properties, string propertyName, string label, float minValue, float maxValue, float space, float sliderSpace, bool expand = false)
     {
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label(label, GUILayout.Width(space));
         MaterialProperty property = FindProperty(propertyName, properties);
-        property.floatValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(sliderSpace));
+        
+        if (!expand)
+        {
+            property.floatValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(sliderSpace));
+        }
+        else
+        {
+            property.floatValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(sliderSpace), GUILayout.ExpandWidth(true));
+        }
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void DrawLightmapFlagsProperty(MaterialEditor materialEditor)
+    {
+        string[] displayOptions = { "None", "Realtime", "Baked", "Emissive" };
+        MaterialGlobalIlluminationFlags[] flagOptions = {
+            MaterialGlobalIlluminationFlags.None,
+            MaterialGlobalIlluminationFlags.RealtimeEmissive,
+            MaterialGlobalIlluminationFlags.BakedEmissive,
+            MaterialGlobalIlluminationFlags.EmissiveIsBlack
+        };
+
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label("Global Illumination", GUILayout.Width(EditorGUIUtility.labelWidth));
+        
+        Material material = (Material)materialEditor.target;
+        MaterialGlobalIlluminationFlags currentFlag = material.globalIlluminationFlags;
+        int selectedIndex = Array.IndexOf(flagOptions, currentFlag);
+
+        EditorGUI.BeginChangeCheck();
+        selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions);
+        if (EditorGUI.EndChangeCheck())
+        {
+            material.globalIlluminationFlags = flagOptions[selectedIndex];
+        }
+
         EditorGUILayout.EndHorizontal();
     }
 
