@@ -14,139 +14,87 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showMoreSystems: 0
   materialInfoList:
-  - mmdMaterial: {fileID: 2100000, guid: b2a6f83b53e856844a65d76f07734a44, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
   - mmdMaterial: {fileID: 2100000, guid: fea0f609e837e404db90fdd01379775f, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Add Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 10f4f51d6298d454ba9425d872d87391, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Disabled (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 6501ecc0d86c40f44a46dc4f3be9ac74, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: ed6c74dc11814a0429897ff3d2759f94, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: 0916a96cdd0f722489049ec08aa9ec2b, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: c1c564795c9f5db4eb458e1d74d1193d, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
+    materialNameEN: Multi Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 53845d559431bf24085fe0e8862c1eba, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Add Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: c6dffdae30b952c4db084473ae0c1497, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Disabled (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: ddf7368940cdafa409fbf02570c78825, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
+    materialNameEN: Multi Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: ed6c74dc11814a0429897ff3d2759f94, type: 2}
+    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Add Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 0916a96cdd0f722489049ec08aa9ec2b, type: 2}
+    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Disabled (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: c1c564795c9f5db4eb458e1d74d1193d, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
+    materialNameEN: Multi Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: d01f1c93b6833d7439ad3a690d1bdf6f, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Add Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 20beff8fd4e8a444f9f182347a5fe03e, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Disabled (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: c1d532295fb9b7841aee20ca98b2376f, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
+    materialNameEN: Multi Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 3a9de582bb881ab429f387b9f1a8e398, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Add Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 13a1492914b235f43a226e76e9ab3439, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Disabled (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 0a6a5485c82c8e145b42c91d73ac18b8, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
+    materialNameEN: Multi Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 99dd082f785c94843ad117a2f3c28246, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Add Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 42856c3950e219245982a4556d7fe5ad, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: Disabled (Amplify Shader Editor)
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 527ccbef9fc06e442b01aa7333b3a842, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: 6e5554a403c18b042b5a25a43fc29584, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: 7a6c5acee5549014e88630a4892d50ca, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: 19b189c40d0d4a44dbba1289f4650b09, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: fc71cee22dde1624d8688cb55febf5a4, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: a5f0db4ea8807eb44aae70bdbe9e6f31, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: c50a06df3ec89f3468e05c14488d740e, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: 3efc49c3b9dfb4f41b8e94c4adef38b5, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: e302e85fa28733d40a24894b32eed3c5, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: 87fbb00fd6abb724e87e09365a24025d, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: d86674aefd355f9418fe4d8dbf26eb29, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: 2770751632a3b5b4d99c994d76621711, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: 902dfa9f080224f44bf74e7341a594fe, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: cb3bb1a8706562843b4131e2e939d0e9, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: fd9c081e4613bb14ea87fd91d3d7801a, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: c346eeac1ab2508479432297db610da4, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
+    materialNameEN: Multi Sphere (Amplify Shader Editor)
+    materialMeno: AGAMENOM

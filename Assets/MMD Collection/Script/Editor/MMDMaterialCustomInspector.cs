@@ -38,7 +38,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
         }
         else
         {
-            GUILayout.Space(30f);
+            GUILayout.Space(20f);
             DrawSurfaceOptions(materialEditor, properties);
             base.OnGUI(materialEditor, properties); // Render default material inspector.
             DrawLightmapFlagsProperty(materialEditor);
@@ -154,6 +154,9 @@ public class MMDMaterialCustomInspector : ShaderGUI
     // Render the custom material inspector UI.
     private void DrawCustomMaterialInspector(MaterialEditor materialEditor, MaterialProperty[] properties)
     {
+        GUIStyle redLabelStyle = new(GUI.skin.label);
+        redLabelStyle.normal.textColor = Color.red;
+
         // Render fields for material names and memo.
         EditorGUILayout.BeginHorizontal();
         GUILayout.BeginHorizontal(GUILayout.Width(400));
@@ -178,22 +181,20 @@ public class MMDMaterialCustomInspector : ShaderGUI
         GUILayout.Space(10f);
 
         GUILayout.Label("Rendering", EditorStyles.boldLabel);
-        /*
         EditorGUILayout.BeginHorizontal();
         GUILayout.BeginHorizontal(GUILayout.Width(100));
-        DrawToggleUIProperty(properties, "_2_SIDE", "2-SIDE:", 60f);
+        DrawToggle2sideUIProperty(properties);
         GUILayout.Space(30f);
-        DrawToggleUIProperty(properties, "_G_SHAD", "G-SHAD:", 60f);
+        DrawToggleUIShaderPass(materialEditor, "SHADOWCASTER", "G-SHAD:", 60f);
         GUILayout.EndHorizontal();
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.BeginHorizontal();
         GUILayout.BeginHorizontal(GUILayout.Width(100));
-        DrawToggleUIProperty(properties, "_S_MAP", "S-MAP:", 60f);
+        DrawToggleUIKeyword(materialEditor, properties, "_ReceiveShadows", "S-MAP:", "_RECEIVE_SHADOWS_OFF", true, 60f);
         GUILayout.Space(30f);
-        DrawToggleUIProperty(properties, "_S_SHAD", "S-SHAD:", 60f);
+        DrawDisabledToggle(redLabelStyle);
         GUILayout.EndHorizontal();
         EditorGUILayout.EndHorizontal();
-        */
         GUILayout.Space(10f);
 
         // Render properties for edge (outline).
@@ -213,6 +214,7 @@ public class MMDMaterialCustomInspector : ShaderGUI
         // Render properties for texture and memo.
         GUILayout.Label("Texture/Memo", EditorStyles.boldLabel);
         GUI.backgroundColor = GetFloatProperty(properties, "_Effects", 3) ? Color.red : Color.white;
+        if (GetFloatProperty(properties, "_Effects", 3)) GUILayout.Label("We do not have knowledge about this function to replicate", redLabelStyle);
         DrawDropdownProperty(properties, "_Effects", "Effects:", new string[] { "- Disabled", "x Multi-Sphere", "+ Add-Sphere", "Sub-Tex" }, new float[] { 0, 2, 1, 3 }, 100, 150);
         GUI.backgroundColor = Color.white;
         GUILayout.Space(5f);
@@ -248,13 +250,14 @@ public class MMDMaterialCustomInspector : ShaderGUI
     private void DrawSurfaceOptions(MaterialEditor materialEditor, MaterialProperty[] properties)
     {
         GUILayout.Label("Surface Options", EditorStyles.boldLabel);
-        DrawDropdownProperty(properties, "_Surface", "Surface Type", new string[] { "Opaque", "Transparent" }, new float[] { 0, 1 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true); // manuteção
+        DrawDropdownSurfaceTypeProperty(materialEditor, properties);
+        ToggleBlendingModeProperty(materialEditor, properties);
         if (GetToggleUIProperty(properties, "_Surface"))
         {
-            DrawDropdownProperty(properties, "_Blend", "Blending Mode", new string[] { "Alpha", "Premultiply", "Additive", "Multiply" }, new float[] { 0, 1, 2, 3 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true); // manuteção _SrcBlend _DstBlend "_ALPHAMODULATE_ON"
+            DrawDropdownBlendingModeProperty(materialEditor, properties);
         }
         DrawDropdownProperty(properties, "_Cull", "Render Face", new string[] { "Both", "Back", "Front" }, new float[] { 0, 1, 2 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true);
-        DrawDropdownProperty(properties, "_ZWriteControl", "Depth Write", new string[] { "Auto", "ForceEnabled", "ForceDisabIed" }, new float[] { 0, 1, 2 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true); // manuteção _ZWrite (DepthOnly)
+        DrawDropdownDepthWriteProperty(materialEditor, properties);
         DrawDropdownProperty(properties, "_ZTest", "Depth Test", new string[] { "Never", "Less", "Equal", "LEquaI", "Greater", "NotEqual", "GEqual", "Always" }, new float[] { 1, 2, 3, 4, 5, 6, 7, 8 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true);
         DrawToggleUIKeyword(materialEditor, properties, "_AlphaClip", "Alpha Clipping", "_ALPHATEST_ON", false, EditorGUIUtility.labelWidth);
         if (GetToggleUIProperty(properties, "_AlphaClip"))
@@ -555,37 +558,238 @@ public class MMDMaterialCustomInspector : ShaderGUI
         EditorGUILayout.EndHorizontal();
     }
 
-    /*
-    private void DrawToggleUIProperty(MaterialProperty[] properties, string propertyName, string label, float space)
+    private void DrawDropdownDepthWriteProperty(MaterialEditor materialEditor, MaterialProperty[] properties)
     {
         EditorGUILayout.BeginHorizontal();
-        GUILayout.Label(label, GUILayout.Width(space));
-        MaterialProperty property = FindProperty(propertyName, properties);
-        EditorGUI.showMixedValue = property.hasMixedValue;
-        var toggleValue = property.floatValue != 0;
+        GUILayout.Label("Depth Write", GUILayout.Width(EditorGUIUtility.labelWidth));
+
+        MaterialProperty zWriteControl = FindProperty("_ZWriteControl", properties);
+        MaterialProperty zWrite = FindProperty("_ZWrite", properties);
+        Material material = (Material)materialEditor.target;
+
         EditorGUI.BeginChangeCheck();
-        toggleValue = EditorGUILayout.Toggle(toggleValue, GUILayout.Width(10f));
+
+        int selectedIndex = 0;
+        bool newValue = false;
+        float newZWriteControl = zWriteControl.floatValue;
+        float newZWrite = zWrite.floatValue;
+
+        if (newZWriteControl == 0 && newZWrite == 0) selectedIndex = 0;
+        if (newZWriteControl == 1 && newZWrite == 1) selectedIndex = 1;
+        if (newZWriteControl == 2 && newZWrite == 0) selectedIndex = 2;
+
+        string[] displayOptions = new string[] { "Auto", "ForceEnabled", "ForceDisabIed" };
+        selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(EditorGUIUtility.fieldWidth), GUILayout.ExpandWidth(true));
+
+        if (selectedIndex == 0)
+        {
+            newZWriteControl = 0;
+            newZWrite = 0;
+            newValue = false;
+        }
+        else if (selectedIndex == 1)
+        {
+            newZWriteControl = 1;
+            newZWrite = 1;
+            newValue = true;
+        }
+        else if (selectedIndex == 2)
+        {
+            newZWriteControl = 2;
+            newZWrite = 0;
+            newValue = false;
+        }
+
         if (EditorGUI.EndChangeCheck())
         {
-            property.floatValue = toggleValue ? 1 : 0;
+            zWrite.floatValue = newZWrite;
+            zWriteControl.floatValue = newZWriteControl;
+            material.SetShaderPassEnabled("DepthOnly", newValue);
         }
-        EditorGUI.showMixedValue = false;
         EditorGUILayout.EndHorizontal();
     }
 
-    private void DrawDropdownProperty(MaterialProperty[] properties, string propertyName, string label, string[] displayOptions)
+    private void DrawDropdownBlendingModeProperty(MaterialEditor materialEditor, MaterialProperty[] properties)
     {
         EditorGUILayout.BeginHorizontal();
-        GUILayout.Label(label, GUILayout.Width(100f));
-        MaterialProperty dropdownProperty = FindProperty(propertyName, properties);
+        GUILayout.Label("Blending Mode", GUILayout.Width(EditorGUIUtility.labelWidth));
+
+        MaterialProperty blend = FindProperty("_Blend", properties);
+        MaterialProperty srcBlend = FindProperty("_SrcBlend", properties);
+        MaterialProperty dstBlend = FindProperty("_DstBlend", properties);
+        Material material = (Material)materialEditor.target;
+
         EditorGUI.BeginChangeCheck();
-        int selectedIndex = (int)dropdownProperty.floatValue;
-        selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(150f));
+
+        int selectedIndex = (int)blend.floatValue;
+
+        string[] displayOptions = new string[] { "Alpha", "Premultiply", "Additive", "Multiply" };
+        selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(EditorGUIUtility.fieldWidth), GUILayout.ExpandWidth(true));
+
         if (EditorGUI.EndChangeCheck())
         {
-            dropdownProperty.floatValue = selectedIndex;
+            switch (selectedIndex)
+            {
+                case 1: // Premultiply.
+                    blend.floatValue = 1;
+                    srcBlend.floatValue = 1;
+                    dstBlend.floatValue = 10;
+                    material.DisableKeyword("_ALPHAMODULATE_ON");
+                    break;
+                case 2: // Additive.
+                    blend.floatValue = 2;
+                    srcBlend.floatValue = 5;
+                    dstBlend.floatValue = 1;
+                    material.DisableKeyword("_ALPHAMODULATE_ON");
+                    break;
+                case 3: // Multiply.
+                    blend.floatValue = 3;
+                    srcBlend.floatValue = 2;
+                    dstBlend.floatValue = 0;
+                    material.EnableKeyword("_ALPHAMODULATE_ON");
+                    break;
+                default: // Alpha.
+                    blend.floatValue = 0;
+                    srcBlend.floatValue = 5;
+                    dstBlend.floatValue = 10;
+                    material.DisableKeyword("_ALPHAMODULATE_ON");
+                    break;
+            }
         }
+
         EditorGUILayout.EndHorizontal();
     }
-    */
+
+    private void ToggleBlendingModeProperty(MaterialEditor materialEditor, MaterialProperty[] properties)
+    {
+        MaterialProperty surface = FindProperty("_Surface", properties);
+        MaterialProperty blend = FindProperty("_Blend", properties);
+        MaterialProperty srcBlend = FindProperty("_SrcBlend", properties);
+        MaterialProperty dstBlend = FindProperty("_DstBlend", properties);
+        Material material = (Material)materialEditor.target;
+
+        int selectedIndex = (int)blend.floatValue;
+        bool surfaceOn = (surface.floatValue == 1);
+
+        switch (selectedIndex)
+        {
+            case 1: // Premultiply.
+                blend.floatValue = 1;
+                srcBlend.floatValue = 1;
+                dstBlend.floatValue = surfaceOn ? 10 : 0;
+                material.DisableKeyword("_ALPHAMODULATE_ON");
+                break;
+            case 2: // Additive.
+                blend.floatValue = 2;
+                srcBlend.floatValue = surfaceOn ? 5 : 1;
+                dstBlend.floatValue = surfaceOn ? 1 : 0;
+                material.DisableKeyword("_ALPHAMODULATE_ON");
+                break;
+            case 3: // Multiply.
+                blend.floatValue = 3;
+                srcBlend.floatValue = surfaceOn ? 2 : 1;
+                dstBlend.floatValue = 0;
+                if (surfaceOn)
+                {
+                    material.EnableKeyword("_ALPHAMODULATE_ON");
+                }
+                else
+                {
+                    material.DisableKeyword("_ALPHAMODULATE_ON");
+                }
+                break;
+            default: // Alpha.
+                blend.floatValue = 0;
+                srcBlend.floatValue = surfaceOn ? 5 : 1;
+                dstBlend.floatValue = surfaceOn ? 10 : 0;
+                material.DisableKeyword("_ALPHAMODULATE_ON");
+                break;
+        }
+    }
+
+    private void DrawDropdownSurfaceTypeProperty(MaterialEditor materialEditor, MaterialProperty[] properties)
+    {
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label("Surface Type", GUILayout.Width(EditorGUIUtility.labelWidth));
+
+        MaterialProperty surface = FindProperty("_Surface", properties);
+        Material material = (Material)materialEditor.target;
+
+        EditorGUI.BeginChangeCheck();
+
+        int selectedIndex = (int)surface.floatValue;
+
+        string[] displayOptions = new string[] { "Opaque", "Transparent" };
+        selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(EditorGUIUtility.fieldWidth), GUILayout.ExpandWidth(true));
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            switch (selectedIndex)
+            {
+                case 1: // Transparent.
+                    material.SetFloat("_Surface", 1);
+                    material.SetOverrideTag("RenderType", "Transparent");
+                    material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+                    break;
+                default: // Opaque.
+                    material.SetFloat("_Surface", 0);
+                    material.SetOverrideTag("RenderType", "Opaque");
+                    material.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
+                    break;
+            }
+        }
+
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void DrawDisabledToggle(GUIStyle redLabelStyle)
+    {
+        EditorGUI.BeginDisabledGroup(true);
+        GUI.backgroundColor = Color.red;
+        EditorGUILayout.BeginHorizontal();
+        GUIContent labelContent = new("S-SHAD:", "<color=red>Apparently the Unity graphics engine does not allow or is not capable of reproducing this</color>");
+        GUILayout.Label(labelContent, redLabelStyle, GUILayout.Width(60f));
+        bool value = false;
+        EditorGUILayout.Toggle(value, GUILayout.Width(10f));
+        EditorGUILayout.EndHorizontal();
+        GUI.backgroundColor = Color.white;
+        EditorGUI.EndDisabledGroup();
+    }
+
+    private void DrawToggle2sideUIProperty(MaterialProperty[] properties)
+    {
+        MaterialProperty cullProperty = FindProperty("_Cull", properties);
+        GUIStyle highlightStyle = new(GUI.skin.label);
+        Color originalTextColor = highlightStyle.normal.textColor;
+        Color highlightColor = Color.yellow;
+
+        if (cullProperty.floatValue == 1)
+        {
+            highlightStyle.normal.textColor = highlightColor;
+            GUI.backgroundColor = highlightColor;
+        }
+        else
+        {
+            highlightStyle.normal.textColor = originalTextColor;
+            GUI.backgroundColor = Color.white;
+        }
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUI.BeginDisabledGroup(cullProperty.floatValue == 1);
+        GUIContent labelContent = new("2-SIDE:", "<color=yellow>If necessary, you can use Render Face 'Back' manually</color>");
+        GUILayout.Label(labelContent, highlightStyle, GUILayout.Width(60f));
+        EditorGUI.showMixedValue = cullProperty.hasMixedValue;
+        bool isTwoSided = (cullProperty.floatValue == 0);
+        bool toggleValue = EditorGUILayout.Toggle(isTwoSided, GUILayout.Width(10f));
+        EditorGUI.showMixedValue = false;
+        EditorGUI.EndDisabledGroup();
+
+        if (cullProperty.floatValue != 1)
+        {
+            cullProperty.floatValue = toggleValue ? 0 : 2;
+        }
+
+        EditorGUILayout.EndHorizontal();
+        GUI.backgroundColor = Color.white;
+    }
 }

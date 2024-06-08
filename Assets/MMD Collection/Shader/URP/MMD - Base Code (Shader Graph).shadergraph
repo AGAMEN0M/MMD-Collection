@@ -19,18 +19,6 @@
             "m_Id": "961ba4b7d2114dcb9033eba68127dc89"
         },
         {
-            "m_Id": "2c85f1efe93e47278db7067f93683c5d"
-        },
-        {
-            "m_Id": "cc3c5005fc7d4ac6abe8ffc01e2334bc"
-        },
-        {
-            "m_Id": "d240caf5f580417d9ebfd8d421e7a526"
-        },
-        {
-            "m_Id": "49ce846ebcfc45da9fda94bd2c47e9dc"
-        },
-        {
             "m_Id": "28867608e6ce4d918396db1d0e7dedea"
         },
         {
@@ -79,9 +67,6 @@
         },
         {
             "m_Id": "5ae268f742f24eef8f2d4b77b7c31ca8"
-        },
-        {
-            "m_Id": "319ad922254e4447a1667496cb139b61"
         },
         {
             "m_Id": "fb10d46c0a1a4608beb1af976d81befe"
@@ -598,6 +583,9 @@
         },
         {
             "m_Id": "c82d83aa05b443a09c0e0a1982da755d"
+        },
+        {
+            "m_Id": "f14e0d0772134b479dd0911968601a13"
         }
     ],
     "m_Edges": [
@@ -6091,29 +6079,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty",
-    "m_ObjectId": "2c85f1efe93e47278db7067f93683c5d",
-    "m_Guid": {
-        "m_GuidSerialized": "681d477e-30ad-4ee0-b436-33e377a4c8ab"
-    },
-    "m_Name": "2-SIDE",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "2-SIDE",
-    "m_DefaultReferenceName": "_2_SIDE",
-    "m_OverrideReferenceName": "_2SIDE",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": false
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "2d986b57988c4dfb9d03c601adea996f",
     "m_Id": 0,
@@ -6315,27 +6280,6 @@
         "e32": 0.0,
         "e33": 1.0
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
-    "m_ObjectId": "319ad922254e4447a1667496cb139b61",
-    "m_Name": "Rendering",
-    "m_ChildObjectList": [
-        {
-            "m_Id": "2c85f1efe93e47278db7067f93683c5d"
-        },
-        {
-            "m_Id": "cc3c5005fc7d4ac6abe8ffc01e2334bc"
-        },
-        {
-            "m_Id": "d240caf5f580417d9ebfd8d421e7a526"
-        },
-        {
-            "m_Id": "49ce846ebcfc45da9fda94bd2c47e9dc"
-        }
-    ]
 }
 
 {
@@ -8011,29 +7955,6 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty",
-    "m_ObjectId": "49ce846ebcfc45da9fda94bd2c47e9dc",
-    "m_Guid": {
-        "m_GuidSerialized": "94583b6b-8c2c-495f-9074-f5b9c935eb51"
-    },
-    "m_Name": "S-SHAD",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "S-SHAD",
-    "m_DefaultReferenceName": "_S_SHAD",
-    "m_OverrideReferenceName": "_SSHAD",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": false
 }
 
 {
@@ -16633,29 +16554,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty",
-    "m_ObjectId": "cc3c5005fc7d4ac6abe8ffc01e2334bc",
-    "m_Guid": {
-        "m_GuidSerialized": "9b9bc9c1-6dd9-4572-9251-69cf5b463aa4"
-    },
-    "m_Name": "G-SHAD",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "G-SHAD",
-    "m_DefaultReferenceName": "_G_SHAD",
-    "m_OverrideReferenceName": "_GSHAD",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": false
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "cc96abec052f4a45b61caf80d068692a",
     "m_Id": 2,
@@ -17007,29 +16905,6 @@
         "z": 0.0,
         "w": 0.0
     }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty",
-    "m_ObjectId": "d240caf5f580417d9ebfd8d421e7a526",
-    "m_Guid": {
-        "m_GuidSerialized": "13dfa815-ed57-4a44-bf8b-c63d323ab70c"
-    },
-    "m_Name": "S-MAP",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "S-MAP",
-    "m_DefaultReferenceName": "_S_MAP",
-    "m_OverrideReferenceName": "_SMAP",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": false
 }
 
 {
@@ -18521,6 +18396,26 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "f14e0d0772134b479dd0911968601a13",
+    "m_Title": "Notes",
+    "m_Content": "==Material Color==\nDiffuse = Cor do material\n\nSpecular = Cor do reflexo da luz/brilho\n\nAmbient = (Ele afeta a cor do modelo e a iluminação também então eu acho que ele é tipo um raycastt)\n\nOpaque = Valor do alpha\n\nReflection = Valor do reflexo\n\n==Rendering==\n2-SIDE = Renderiza os dois lados da malha [Equilalete ao Render Face/_Cull]\n\nG-SHAD = Sombra no chão [Equilalete ao Cast Shadows/ShaderPass\"SHADOWCASTER\"]\r\n\nS-MAP = Sombra na malha (incuindo ela mesma) [Equilalete ao Receive Shadows/_ReceiveShadows/Keyword\"_RECEIVE_SHADOWS_OFF\"]\r\n\nS-SHAD = Sombra na malha (menos ela mesma) [Aparentemente o motor gráfico Unity não permite ou não é capaz de reproduzir isso]\n\n==Edge (Outline)==\nOn = Ativar o contorno\n\nColor = Cor do contorno incluindo trasparesia\n\nSize = Tamanho/distância do contorno\n\n==Texture/Memo==\nTexture = Textura do material\n\nToon = Complementa as sobras do objeto\n\nSPH = Reflexo artificial para compremetar o Specular\n\n***Effects***\nEle utilisa a textura do SPH.\n\nDisabled = não fais nada\n\nMulti-Sphere = Ele mutipica um mapa de esfera brilhante (ele me da uma sensação de ser um reflexo de metalico)\n\nAdd-Sphere = Ele cria um mapa de esfera brilhante (ele me da uma sensação de ser um reflexo de prático)\n\nSub-Tex = (Infelizmente não sei o que faz e mesmo com pesquisas não consegui entender)",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 624.7999877929688,
+        "y": -345.6000061035156,
+        "width": 559.2000122070313,
+        "height": 1179.199951171875
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
 }
 
 {
