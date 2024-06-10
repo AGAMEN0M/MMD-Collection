@@ -111,6 +111,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _DstBlendAlpha: 0
+    - _EFFECTS: 0
     - _EdgeSize: 0.1
     - _Effects: 0
     - _EnvironmentReflections: 1
