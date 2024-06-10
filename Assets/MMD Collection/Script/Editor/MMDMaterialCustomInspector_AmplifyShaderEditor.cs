@@ -238,9 +238,9 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
         GUILayout.Space(10f);
 
         GUILayout.Label("Texture/Memo", EditorStyles.boldLabel);
-        GUI.backgroundColor = HasFloatPropertyValue("_Effects", 3) ? Color.red : Color.white;
-        if (HasFloatPropertyValue("_Effects", 3)) GUILayout.Label("We do not have knowledge about this function to replicate", redLabelStyle);
-        RenderDropdownProperty("_Effects", "Effects:", new string[] { "- Disabled", "x Multi-Sphere", "+ Add-Sphere", "Sub-Tex" }, new float[] { 0, 2, 1, 3 }, 100, 150);
+        GUI.backgroundColor = HasFloatPropertyValue("_EFFECTS", 3) ? Color.red : Color.white;
+        if (HasFloatPropertyValue("_EFFECTS", 3)) GUILayout.Label("We do not have knowledge about this function to replicate", redLabelStyle);
+        RenderDropdownProperty("_EFFECTS", "Effects:", new string[] { "- Disabled", "x Multi-Sphere", "+ Add-Sphere", "Sub-Tex" }, new float[] { 0, 2, 1, 3 }, 100, 150);
         GUI.backgroundColor = Color.white;
         GUILayout.Space(5f);
         RenderTextureProperty("_MainTex", "Texture:");

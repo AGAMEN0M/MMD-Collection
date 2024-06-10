@@ -14,7 +14,7 @@ Shader "MMD Collection/URP/MMD - No Fog (Amplify Shader Editor)"
 		[Header(Edge (Outline))][ToggleOff]_On("On", Int) = 0
 		_OutlineColor("Color", Color) = (0,0,0,1)
 		_EdgeSize("Size", Float) = 0
-		[Enum(Disabled,0,Add Sphere,1,Multi Sphere,2)]_Effects("Effects", Float) = 0
+		[Enum(Disabled,0,Add Sphere,1,Multi Sphere,2)]_EFFECTS("Effects", Float) = 0
 		[Header(Texture (Memo))]_MainTex("Texture", 2D) = "white" {}
 		_ToonTex("Toon", 2D) = "white" {}
 		_SphereCube("SPH", CUBE) = "white" {}
@@ -260,7 +260,7 @@ Shader "MMD Collection/URP/MMD - No Fog (Amplify Shader Editor)"
 			float _SpecularIntensity;
 			float _Shininess;
 			float _SPHOpacity;
-			float _Effects;
+			float _EFFECTS;
 			float _ShadowLum;
 			float _Surface;
 			float _DstBlend;
@@ -586,7 +586,7 @@ Shader "MMD Collection/URP/MMD - No Fog (Amplify Shader Editor)"
 			float _SpecularIntensity;
 			float _Shininess;
 			float _SPHOpacity;
-			float _Effects;
+			float _EFFECTS;
 			float _ShadowLum;
 			float _Surface;
 			float _DstBlend;
@@ -835,7 +835,7 @@ Shader "MMD Collection/URP/MMD - No Fog (Amplify Shader Editor)"
 				float3 originalLightColor174 = locallightColor188;
 				half3 MMDLIT_GLOBALLIGHTING139 = half3(0.6,0.6,0.6);
 				float3 lightColor178 = ( originalLightColor174 * MMDLIT_GLOBALLIGHTING139 );
-				float tSphereMapBlend289 = _Effects;
+				float tSphereMapBlend289 = _EFFECTS;
 				float2 uv_MainTex = IN.ase_texcoord5.xyz.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 				float4 Albedo12 = tex2D( _MainTex, uv_MainTex );
 				float3 objToView109 = mul( UNITY_MATRIX_MV, float4( IN.ase_texcoord4.xyz, 1 ) ).xyz;
@@ -997,7 +997,7 @@ Shader "MMD Collection/URP/MMD - No Fog (Amplify Shader Editor)"
 			float _SpecularIntensity;
 			float _Shininess;
 			float _SPHOpacity;
-			float _Effects;
+			float _EFFECTS;
 			float _ShadowLum;
 			float _Surface;
 			float _DstBlend;
@@ -1293,7 +1293,7 @@ Shader "MMD Collection/URP/MMD - No Fog (Amplify Shader Editor)"
 			float _SpecularIntensity;
 			float _Shininess;
 			float _SPHOpacity;
-			float _Effects;
+			float _EFFECTS;
 			float _ShadowLum;
 			float _Surface;
 			float _DstBlend;
@@ -1572,7 +1572,7 @@ Shader "MMD Collection/URP/MMD - No Fog (Amplify Shader Editor)"
 			float _SpecularIntensity;
 			float _Shininess;
 			float _SPHOpacity;
-			float _Effects;
+			float _EFFECTS;
 			float _ShadowLum;
 			float _Surface;
 			float _DstBlend;
@@ -1842,7 +1842,7 @@ Shader "MMD Collection/URP/MMD - No Fog (Amplify Shader Editor)"
 			float _SpecularIntensity;
 			float _Shininess;
 			float _SPHOpacity;
-			float _Effects;
+			float _EFFECTS;
 			float _ShadowLum;
 			float _Surface;
 			float _DstBlend;
@@ -2122,7 +2122,7 @@ Shader "MMD Collection/URP/MMD - No Fog (Amplify Shader Editor)"
 			float _SpecularIntensity;
 			float _Shininess;
 			float _SPHOpacity;
-			float _Effects;
+			float _EFFECTS;
 			float _ShadowLum;
 			float _Surface;
 			float _DstBlend;
@@ -2485,7 +2485,6 @@ Node;AmplifyShaderEditor.RangedFloatNode;122;-7392,-1344;Inherit;False;Property;
 Node;AmplifyShaderEditor.RangedFloatNode;123;-7424,-1248;Inherit;False;Constant;_smoothness;smoothness;11;0;Create;True;0;0;0;False;0;False;0.001;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;201;-3712,-5856;Inherit;False;Property;_EdgeSize;Size;7;0;Create;False;0;0;0;False;0;False;0;0.1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.ColorNode;208;-4176,-6464;Inherit;False;Property;_OutlineColor;Color;6;0;Create;False;0;0;0;False;0;False;0,0,0,1;0,0,0,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;207;-5072,-1664;Inherit;False;Property;_Effects;Effects;8;1;[Enum];Create;True;0;3;Disabled;0;Add Sphere;1;Multi Sphere;2;0;False;0;False;0;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.PosVertexDataNode;258;-8064,-896;Inherit;False;0;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TransformPositionNode;259;-7872,-896;Inherit;True;Object;World;False;Fast;True;1;0;FLOAT3;0,0,0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.CustomExpressionNode;254;-7616,-896;Inherit;False;#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS$#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS$#pragma multi_compile_fragment _ _SHADOWS_SOFT$#pragma multi_compile _ SHADOWS_SHADOWMASK$$$#pragma multi_compile _ LIGHTMAP_SHADOW_MIXING$$float3 diffuseColor = 0@$WorldNormal = normalize( WorldNormal)@$$int pixelLightCount = GetAdditionalLightsCount()@$for(int i = 0@  i < pixelLightCount@ i++)${$	Light light = GetAdditionalLight(i, WorldPosition)@$        	half3 attenuatedLightColor = light.color * (light.distanceAttenuation * light.shadowAttenuation)@$        	diffuseColor += LightingLambert(attenuatedLightColor, light.direction, WorldNormal)@$}$$return diffuseColor@$;3;Create;2;True;WorldPosition;FLOAT3;0,0,0;In;;Inherit;False;True;WorldNormal;FLOAT3;0,0,0;In;;Inherit;False;My Custom Expression;True;False;0;;False;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
@@ -2575,6 +2574,7 @@ Node;AmplifyShaderEditor.RegisterLocalVarNode;287;-5104,-1504;Inherit;False;temp
 Node;AmplifyShaderEditor.RegisterLocalVarNode;289;-4912,-1664;Inherit;False;tSphereMapBlend;-1;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;73;-4176,-1792;Inherit;False;baseC;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;160;-4448,-3488;Inherit;False;MMDLit_GetTempDiffuse;-1;True;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.RangedFloatNode;207;-5072,-1664;Inherit;False;Property;_EFFECTS;Effects;8;1;[Enum];Create;False;0;3;Disabled;0;Add Sphere;1;Multi Sphere;2;0;False;0;False;0;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;True;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=DepthOnly;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;Meta;0;4;Meta;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;False;0;;0;0;Standard;0;False;0
@@ -2795,4 +2795,4 @@ WireConnection;0;0;208;0
 WireConnection;0;1;315;0
 WireConnection;0;3;212;0
 ASEEND*/
-//CHKSM=47E31825B070B3F0C1FE853F5B8F1DDE71027E28
+//CHKSM=971511E97C76DA7746F7566686A7905BAD7B0D0C

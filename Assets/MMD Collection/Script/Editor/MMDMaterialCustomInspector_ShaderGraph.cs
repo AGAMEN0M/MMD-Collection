@@ -260,6 +260,7 @@ public class MMDMaterialCustomInspector_ShaderGraph : ShaderGUI
         RenderSliderFloatProperty("_ShadowLum", "Shadow Luminescence:", 0f, 10f, 145f, 245f);
         RenderVector3Property("_ToonTone", "Toon Tone:", 145f);
         RenderUIToggle("_MultipleLights", "Multiple Lights:", 145f);
+        RenderUIToggle("_Fog", "Fog:", 145f);
         GUILayout.Space(10f);
 
         RenderSurfaceOptions();
