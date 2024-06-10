@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf43231ba71ff6041aafbbc9dd4431e7, type: 3}
   m_Name: Custom MMD Data
   m_EditorClassIdentifier: 
-  showMoreSystems: 0
+  showSystemsDefault: 0
   materialInfoList:
   - mmdMaterial: {fileID: 2100000, guid: fea0f609e837e404db90fdd01379775f, type: 2}
     materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
@@ -98,3 +98,91 @@ MonoBehaviour:
       \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
     materialNameEN: Multi Sphere (Amplify Shader Editor)
     materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 0378f415c1368ae47a736007b735efca, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: a4eef14b8a01599479b224b6d27ad4f0, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: a17d3956d0b52744fbb9cc3930c38243, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 348b60d5cccf283448e71bbb25c8babe, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: baf2677f14767e34a9acf90fe3538352, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: c40511b6a91f73144a88cbae4f6240f1, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: ac7e6505294962b408b8397a41b69f33, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 5d648b7d19ff29f4390d598fd6fa4779, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: bb92237b237d5f54f8d93893a90c74c1, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 790ad046cf941d54c8fa1eae6f982ab8, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 5e564d9d302099c4993f8f0f6afd5550, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 2136aee85b326c54eab9532537ba878f, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 449cd47ad09c974438e628fcd99647e5, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 590ca7e9abc95b04b9602f07730936d2, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: bce14d1380262b64e813092a6152ed8a, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: e13279b5aa32f874eba48a34569d29b8, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 6cd543794005e2149ba892eb81f3f8aa, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 3d48708385f28164cb0bc9ff41344df3, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 10fa2bc2f56e26e42898feb8935c04b4, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: abc12ff9f7d76654886dbab72aff9667, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 9b19ec4d3121c7b409646e5e4ffe4d7b, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: f02cb748466a8554eb6698a692a84480, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 

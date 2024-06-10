@@ -5,7 +5,7 @@ using UnityEngine;
 public class CustomMMDData : ScriptableObject
 {
     [Header("MMD Material Settings")]
-    public bool showMoreSystems; // Boolean flag indicating whether to show more shader systems.
+    public bool showSystemsDefault; // Boolean flag indicating whether to show more shader systems.
     public List<MMDMaterialInfo> materialInfoList = new(); // List to store information about MMD materials.
 }
 

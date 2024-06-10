@@ -16,14 +16,13 @@ Material:
   - _EFFECTS_MULTI_SPHERE
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3010
   stringTagMap:
     RenderType: Transparent
-  disabledShaderPasses:
-  - DepthOnly
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -60,6 +59,7 @@ Material:
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
+    - _Cutoff: 0.5
     - _DstBlend: 10
     - _EFFECTS: 2
     - _EdgeSize: 0
@@ -70,6 +70,7 @@ Material:
     - _Opaque: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _SMAP: 0
     - _SPHOpacity: 1
     - _SSHAD: 0
@@ -79,8 +80,8 @@ Material:
     - _SrcBlend: 5
     - _Surface: 1
     - _ZTest: 4
-    - _ZWrite: 0
-    - _ZWriteControl: 0
+    - _ZWrite: 1
+    - _ZWriteControl: 1
     m_Colors:
     - _Ambient: {r: 0, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 0, b: 0, a: 0}
