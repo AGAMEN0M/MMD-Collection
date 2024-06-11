@@ -144,7 +144,7 @@ Material:
     - _EdgeSize: 0.0005
     - _EnvironmentReflections: 1
     - _FOG: 1
-    - _Fog: 1
+    - _Fog: 0
     - _GSHAD: 1
     - _G_SHAD: 0
     - _GlossMapScale: 1
