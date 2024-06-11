@@ -168,3 +168,15 @@ MonoBehaviour:
     materialNameJP: 
     materialNameEN: 
     materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 26c24c0a990203842829ce574f7fb46e, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: c3dfe53a1ab44dd43bce0b0469d78134, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: baf2677f14767e34a9acf90fe3538352, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
