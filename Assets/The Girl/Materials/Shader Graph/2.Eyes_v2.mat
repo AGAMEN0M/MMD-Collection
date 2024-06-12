@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5731367189647538919
+--- !u!114 &-2718282703476319315
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,20 +20,23 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 3.Hair
+  m_Name: 2.Eyes_v2
   m_Shader: {fileID: -6465566751694194690, guid: 75632dc8894ea604690e365027760a9d,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _ADDITIONAL_LIGHT_SHADOWS
   - _EFFECTS_ADD_SPHERE
+  - _MAIN_LIGHT_SHADOWS
+  - _MAIN_LIGHT_SHADOWS_CASCADE
   m_InvalidKeywords:
   - _FOG_OFF
   - _LIGHTING_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2005
+  m_CustomRenderQueue: 2004
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -66,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: dfd97cac3d8ce744bab8102588588912, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -90,7 +93,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SphereCube:
-        m_Texture: {fileID: 8900000, guid: 995800b2bf375374db81ef83159eb839, type: 3}
+        m_Texture: {fileID: 8900000, guid: 127c5cb5d5751d443954916d14b15bd1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
@@ -121,6 +124,7 @@ Material:
     m_Floats:
     - _2SIDE: 1
     - _2_SIDE: 0
+    - _ADDITIONAL_LIGHT_SHADOWS: 1
     - _ALPower: 0
     - _AddLightToonCen: -0.1
     - _AddLightToonMin: 0.5
@@ -151,6 +155,8 @@ Material:
     - _Glossiness: 0.1
     - _GlossyReflections: 1
     - _LIGHTING: 0
+    - _MAIN_LIGHT_SHADOWS: 1
+    - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _Metallic: 0
     - _Mode: 0
     - _MultipleLights: 1
@@ -161,6 +167,7 @@ Material:
     - _Parallax: 0.02
     - _QueueControl: 1
     - _QueueOffset: 0
+    - _RECEIVE_SHADOWS_OFF: 0
     - _ReceiveShadows: 1
     - _Reflection: 1
     - _Revision: 2
@@ -188,9 +195,9 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 1
     m_Colors:
-    - _Ambient: {r: 0, g: 0, b: 0, a: 0}
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Color: {r: 0, g: 0, b: 0, a: 0}
+    - _Ambient: {r: 1, g: 1, b: 0, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 0, a: 1}
+    - _Color: {r: 1, g: 1, b: 0, a: 0}
     - _Diffuse: {r: 0.8, g: 0.8, b: 0.8, a: 0}
     - _EdgeColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

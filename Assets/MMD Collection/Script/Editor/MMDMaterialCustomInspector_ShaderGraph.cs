@@ -54,7 +54,8 @@ public class MMDMaterialCustomInspector_ShaderGraph : ShaderGUI
         }
 
         // Save any changes made to the material data.
-        CustomInspectorUtilityEditor.SaveData(customMMDMaterialData, currentMaterial, out materialNameJP, out materialNameEN, out materialMeno, out showSystemsDefault);
+        CustomInspectorUtilityEditor.SaveData(customMMDMaterialData, currentMaterial, materialNameJP, materialNameEN, materialMeno, showSystemsDefault);
+        CheckReceiveShadows();
     }
 
     // Render the custom material inspector UI.
@@ -156,5 +157,38 @@ public class MMDMaterialCustomInspector_ShaderGraph : ShaderGUI
         materialInspector.EnableInstancingField();
         materialInspector.DoubleSidedGIField();
         CustomInspectorUtilityEditor.RenderLightmapFlags(currentMaterial);
+    }
+
+    private void CheckReceiveShadows()
+    {
+        MaterialProperty receiveShadows = FindProperty("_ReceiveShadows", materialProperties);
+        MaterialProperty receiveShadowsOff = FindProperty("_RECEIVE_SHADOWS_OFF", materialProperties);
+        MaterialProperty mainLightShadows = FindProperty("_MAIN_LIGHT_SHADOWS", materialProperties);
+        MaterialProperty mainLightShadowsCascade = FindProperty("_MAIN_LIGHT_SHADOWS_CASCADE", materialProperties);
+        MaterialProperty additionalLightShadows = FindProperty("_ADDITIONAL_LIGHT_SHADOWS", materialProperties);
+        bool toggleValue = (receiveShadows.floatValue == 1);
+
+        if (toggleValue)
+        {
+            receiveShadowsOff.floatValue = 0;
+            mainLightShadows.floatValue = 1;
+            mainLightShadowsCascade.floatValue = 1;
+            additionalLightShadows.floatValue = 1;
+            currentMaterial.DisableKeyword("_RECEIVE_SHADOWS_OFF");
+            currentMaterial.EnableKeyword("_MAIN_LIGHT_SHADOWS");
+            currentMaterial.EnableKeyword("_MAIN_LIGHT_SHADOWS_CASCADE");
+            currentMaterial.EnableKeyword("_ADDITIONAL_LIGHT_SHADOWS");
+        }
+        else
+        {
+            receiveShadowsOff.floatValue = 1;
+            mainLightShadows.floatValue = 0;
+            mainLightShadowsCascade.floatValue = 0;
+            additionalLightShadows.floatValue = 0;
+            currentMaterial.EnableKeyword("_RECEIVE_SHADOWS_OFF");
+            currentMaterial.DisableKeyword("_MAIN_LIGHT_SHADOWS");
+            currentMaterial.DisableKeyword("_MAIN_LIGHT_SHADOWS_CASCADE");
+            currentMaterial.DisableKeyword("_ADDITIONAL_LIGHT_SHADOWS");
+        }
     }
 }

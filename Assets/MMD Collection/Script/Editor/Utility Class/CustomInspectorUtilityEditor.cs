@@ -34,13 +34,8 @@ public class CustomInspectorUtilityEditor : ShaderGUI
     }
 
     // Save current material data from the inspector fields.
-    public static void SaveData(CustomMMDData customMMDMaterialData, Material currentMaterial, out string materialNameJP, out string materialNameEN, out string materialMeno, out bool showSystemsDefault)
+    public static void SaveData(CustomMMDData customMMDMaterialData, Material currentMaterial, string materialNameJP, string materialNameEN, string materialMeno, bool showSystemsDefault)
     {
-        materialNameJP = "";
-        materialNameEN = "";
-        materialMeno = "";
-        showSystemsDefault = false;
-
         if (DetectChanges(customMMDMaterialData, currentMaterial, materialNameJP, materialNameEN, materialMeno, showSystemsDefault))
         {
             customMMDMaterialData.showSystemsDefault = showSystemsDefault;

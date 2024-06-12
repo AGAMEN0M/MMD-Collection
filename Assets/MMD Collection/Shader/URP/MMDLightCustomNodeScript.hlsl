@@ -37,7 +37,7 @@ void lightColor_float(float3 worldPos, out float3 OutputColor)
     #endif
 }
 
-// Calcula a contribuição de luzes adicionais na posição do mundo.
+// Calculates the contribution of additional lights to the world position.
 void additionalLights_float(float3 WorldPosition, float3 WorldNormal, out float3 Output)
 {
     #if defined(SHADERGRAPH_PREVIEW)

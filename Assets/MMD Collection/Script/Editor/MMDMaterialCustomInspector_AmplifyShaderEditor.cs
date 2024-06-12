@@ -54,7 +54,7 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
         }
 
         // Save any changes made to the material data.
-        CustomInspectorUtilityEditor.SaveData(customMMDMaterialData, currentMaterial, out materialNameJP, out materialNameEN, out materialMeno, out showSystemsDefault);
+        CustomInspectorUtilityEditor.SaveData(customMMDMaterialData, currentMaterial, materialNameJP, materialNameEN, materialMeno, showSystemsDefault);
     }
 
     // Render the custom material inspector UI.

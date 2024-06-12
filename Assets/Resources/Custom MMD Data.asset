@@ -236,3 +236,55 @@ MonoBehaviour:
     materialNameJP: 
     materialNameEN: 
     materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: fc71cee22dde1624d8688cb55febf5a4, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: c50a06df3ec89f3468e05c14488d740e, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 3efc49c3b9dfb4f41b8e94c4adef38b5, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: e302e85fa28733d40a24894b32eed3c5, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 87fbb00fd6abb724e87e09365a24025d, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: d86674aefd355f9418fe4d8dbf26eb29, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 2770751632a3b5b4d99c994d76621711, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: cb3bb1a8706562843b4131e2e939d0e9, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: fd9c081e4613bb14ea87fd91d3d7801a, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: c346eeac1ab2508479432297db610da4, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 7a6c5acee5549014e88630a4892d50ca, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: a5f0db4ea8807eb44aae70bdbe9e6f31, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 902dfa9f080224f44bf74e7341a594fe, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
