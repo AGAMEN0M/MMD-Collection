@@ -288,3 +288,11 @@ MonoBehaviour:
     materialNameJP: 
     materialNameEN: 
     materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: da50e82f78a5a9a44b3521dcb9b0af22, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 8ee9efcfe210b5c45a6c2da5d558e979, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 

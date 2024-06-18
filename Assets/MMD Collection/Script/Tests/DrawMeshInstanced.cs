@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("MMD Collection/Draw Mesh Instanced")]
 public class DrawMeshInstanced : MonoBehaviour
 {
     [Header("Settings")]
@@ -46,6 +47,23 @@ public class DrawMeshInstanced : MonoBehaviour
         if (OnDrawSelected)
         {
             DrawMesh(); // Call the method to draw mesh instances.
+        }
+
+        Gizmos.color = Color.green; // Set the Gizmo color to green.        
+        Gizmos.DrawSphere(transform.position, 0.15f); // Draw a sphere with a radius of 0.5 units.
+
+        // Ensure the list is not empty.
+        if (drawMeshInstancedLists.Count > 0)
+        {
+            foreach (var drawList in drawMeshInstancedLists)
+            {
+                // Draw a sphere at the position of each transform in the list.
+                if (drawList.transform != null)
+                {
+                    Gizmos.color = Color.red; // Set the Gizmo color to red.
+                    Gizmos.DrawSphere(drawList.transform.position, 0.15f); // Draw a sphere with a radius of 0.5 units.
+                }
+            }
         }
     }
 }

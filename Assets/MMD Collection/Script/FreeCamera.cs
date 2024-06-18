@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
+[AddComponentMenu("MMD Collection/Free Camera")]
 public class FreeCamera : MonoBehaviour
 {
     [Header("Camera Settings")]
