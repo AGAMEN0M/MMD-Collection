@@ -12,8 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _MULTIPLELIGHTS_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -114,11 +113,12 @@ Material:
     - _EdgeSize: 0.1
     - _Effects: 1
     - _EnvironmentReflections: 1
+    - _Fog: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _MultipleLights: 1
+    - _MultipleLights: 0
     - _OcclusionStrength: 1
     - _On: 1
     - _Opaque: 1

@@ -32,3 +32,11 @@ void additionalLights_float(float3 WorldPosition, float3 WorldNormal, out float3
     
     Output = diffuseColor;
 }
+
+void CalculateFogDensity_float(float3 objectPosition, out float fogDensity)
+{
+    float3 diff = objectPosition - _WorldSpaceCameraPos;
+    float distSquared = dot(diff, diff);
+    float maxDistSquared = 2500.0;
+    fogDensity = saturate(distSquared / maxDistSquared);
+}
