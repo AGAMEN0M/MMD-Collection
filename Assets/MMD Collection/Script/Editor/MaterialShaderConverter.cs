@@ -5,7 +5,7 @@ using UnityEditor;
 public class MaterialShaderConverter : MonoBehaviour
 {
     // This method is called when the menu item is selected in the Unity Editor.
-    [MenuItem("Assets/Convert Material Shader (MMD4Mecanim)")]
+    [MenuItem("Assets/MMD Collection/Convert Material Shader (MMD4Mecanim)")]
     public static void ConvertShader()
     {
         // Iterate over selected objects.
