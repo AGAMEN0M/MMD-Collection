@@ -55,7 +55,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _2SIDE: 0
     - _ADDITIONAL_LIGHT_SHADOWS: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
@@ -67,7 +66,6 @@ Material:
     - _EFFECTS: 2
     - _EdgeSize: 0
     - _Fog: 1
-    - _GSHAD: 0
     - _MAIN_LIGHT_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _MultipleLights: 1
@@ -77,9 +75,7 @@ Material:
     - _QueueOffset: 0
     - _RECEIVE_SHADOWS_OFF: 0
     - _ReceiveShadows: 1
-    - _SMAP: 0
     - _SPHOpacity: 1
-    - _SSHAD: 0
     - _ShadowLum: 1.5
     - _Shininess: 50
     - _SpecularIntensity: 1

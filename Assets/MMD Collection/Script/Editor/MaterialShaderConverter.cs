@@ -133,7 +133,7 @@ public class MaterialShaderConverter : MonoBehaviour
     }
 
     // Method to change the shader of a material.
-    public static void ChangeShader(Material materialToConvert, string newShaderName)
+    private static void ChangeShader(Material materialToConvert, string newShaderName)
     {
         Undo.RecordObject(materialToConvert, "Convert Material"); // Record the material change for undo purposes.
 
