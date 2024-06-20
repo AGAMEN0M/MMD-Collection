@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Disabled (Amplify Shader Editor)
-  m_Shader: {fileID: 4800000, guid: 685ea2cf92110ce41ba857dc3ebd6a20, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6a393ff4c50f1e7409bbe6affeab0cc1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -18,7 +18,7 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3009
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses: []
@@ -115,6 +115,7 @@ Material:
     - _EdgeSize: 0.1
     - _Effects: 0
     - _EnvironmentReflections: 1
+    - _Fog: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

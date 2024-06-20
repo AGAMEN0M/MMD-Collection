@@ -13,11 +13,12 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
+  - _FOG_ON
   - _MULTIPLELIGHTS_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2007
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -114,6 +115,7 @@ Material:
     - _EdgeSize: 0.1
     - _Effects: 2
     - _EnvironmentReflections: 1
+    - _Fog: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
