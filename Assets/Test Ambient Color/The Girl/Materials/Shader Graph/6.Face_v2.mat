@@ -31,64 +31,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: dfd97cac3d8ce744bab8102588588912, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SPH:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SpecGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SphereCube:
         m_Texture: {fileID: 8900000, guid: ef34a7df3ab18c14bb150231c8ed3f12, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Texture:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Toon:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonTex:
@@ -109,88 +57,39 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _2SIDE: 0
-    - _2_SIDE: 0
     - _ADDITIONAL_LIGHT_SHADOWS: 1
-    - _ALPower: 0
-    - _AddLightToonCen: -0.1
-    - _AddLightToonMin: 0.5
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _AmbientToDiffuse: 5
     - _Blend: 0
-    - _BlendModePreserveSpecular: 1
-    - _BumpScale: 1
     - _CastShadows: 1
-    - _ClearCoatMask: 0
-    - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DetailAlbedoMapScale: 1
-    - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _DstBlendAlpha: 0
     - _EFFECTS: 1
-    - _EdgeScale: 0.001
     - _EdgeSize: 0.0005
-    - _EnvironmentReflections: 1
-    - _FOG: 1
     - _Fog: 0
-    - _GSHAD: 1
-    - _G_SHAD: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0.1
-    - _GlossyReflections: 1
-    - _LIGHTING: 0
     - _MAIN_LIGHT_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
-    - _Metallic: 0
-    - _Mode: 0
     - _MultipleLights: 1
-    - _NoShadowCasting: 0
-    - _OcclusionStrength: 1
     - _On: 0
     - _Opaque: 1
-    - _Parallax: 0.02
     - _QueueControl: 1
     - _QueueOffset: 0
     - _RECEIVE_SHADOWS_OFF: 0
     - _ReceiveShadows: 1
-    - _Reflection: 1
-    - _Revision: 2
-    - _SMAP: 1
     - _SPHOpacity: 1
-    - _SSHAD: 1
-    - _S_MAP: 0
-    - _S_SHAD: 0
     - _ShadowLum: 1.5
     - _Shininess: 1
-    - _Size: 0.5
-    - _Smoothness: 0.1
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
     - _SpecularIntensity: 1
     - _SrcBlend: 1
-    - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _TessEdgeLength: 5
-    - _TessExtrusionAmount: 0
-    - _TessPhongStrength: 0.5
-    - _UVSec: 0
-    - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
     - _Ambient: {r: 1, g: 1, b: 0, a: 0}
-    - _BaseColor: {r: 1, g: 1, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 0, a: 0}
-    - _Diffuse: {r: 0.8, g: 0.8, b: 0.8, a: 0}
-    - _EdgeColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Emissive: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
     - _ToonTone: {r: 1, g: 0.5, b: 0.5, a: 0}
   m_BuildTextureStacks: []

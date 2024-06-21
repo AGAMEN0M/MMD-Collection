@@ -42,16 +42,3 @@ void additionalLights_float(float3 WorldPosition, float3 WorldNormal, out float3
     
     Output = diffuseColor; // Output the total diffuse color from all additional lights.
 }
-
-// Function to calculate fog density at a given object position.
-void CalculateFogDensity_float(float3 objectPosition, out float fogDensity)
-{
-    // Calculate the difference vector between object position and camera position.
-    float3 diff = objectPosition - _WorldSpaceCameraPos;
-    
-    float distSquared = dot(diff, diff); // Compute the squared distance.
-    float maxDistSquared = 2500.0; // Define the maximum squared distance for fog calculation.
-    
-    // Compute and output the fog density using the distance ratio, clamped between 0 and 1.
-    fogDensity = saturate(distSquared / maxDistSquared);
-}
