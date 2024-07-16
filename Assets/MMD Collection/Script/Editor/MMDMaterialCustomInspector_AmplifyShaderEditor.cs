@@ -142,6 +142,7 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
         CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_SpecularIntensity", "Specular Intensity:", 0f, 1f, 145f, 245f);
         CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_SPHOpacity", "SPH Opacity:", 0f, 1f, 145f, 245f);
         CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_ShadowLum", "Shadow Luminescence:", 0f, 10f, 145f, 245f);
+        CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_HDR", "HDR:", 1f, 1000f, 145f, 245f);
         CustomInspectorUtilityEditor.RenderVector3Property(materialProperties, "_ToonTone", "Toon Tone:", 145f);
         CustomInspectorUtilityEditor.RenderUIToggle(materialProperties, "_MultipleLights", "Multiple Lights:", 145f);
         CustomInspectorUtilityEditor.RenderKeywordToggle(materialProperties, currentMaterial, "_Fog", "Fog:", "_FOG_ON", false, 145f);
