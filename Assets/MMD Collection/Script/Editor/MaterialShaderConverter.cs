@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 public class MaterialShaderConverter : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class MaterialShaderConverter : MonoBehaviour
                 switch (materialToConvert.shader.name)
                 {
                     case "MMD4Mecanim/MMDLit":
-                        //ChangeShader(materialToConvert, "");
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false);
                         break;
                     case "MMD4Mecanim/MMDLit-BothFaces":
                         //ChangeShader(materialToConvert, "");
@@ -38,7 +39,7 @@ public class MaterialShaderConverter : MonoBehaviour
                         //ChangeShader(materialToConvert, "");
                         break;
                     case "MMD4Mecanim/MMDLit-Edge":
-                        //ChangeShader(materialToConvert, "");
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", true);
                         break;
                     case "MMD4Mecanim/MMDLit-NEXTEdge-Pass4":
                         //ChangeShader(materialToConvert, "");
@@ -133,57 +134,127 @@ public class MaterialShaderConverter : MonoBehaviour
     }
 
     // Method to change the shader of a material.
-    private static void ChangeShader(Material materialToConvert, string newShaderName)
+    private static void ChangeShader(Material materialToConvert, string newShaderName, bool Outline)
     {
         Undo.RecordObject(materialToConvert, "Convert Material"); // Record the material change for undo purposes.
 
         // Get the color from the old shader variable.
         Color oldColor = materialToConvert.GetColor("_Color");
-        Color oldColor2 = materialToConvert.GetColor("_Specular");
-        Color oldColor3 = materialToConvert.GetColor("_Ambient");
+        Color oldSpecular = materialToConvert.GetColor("_Specular");
+        Color oldAmbient = materialToConvert.GetColor("_Ambient");
 
-        float oldFloat = materialToConvert.GetFloat("_Shininess");
+        float oldShininess = materialToConvert.GetFloat("_Shininess");
 
         //float oldFloat2 = materialToConvert.GetFloat("???");
         //float oldFloat3 = materialToConvert.GetFloat("???");
         //float oldFloat4 = materialToConvert.GetFloat("???");
         //float oldFloat5 = materialToConvert.GetFloat("???");
+        
+        Color oldEdgeColor = materialToConvert.GetColor("_EdgeColor");
+        float oldEdgeSize = materialToConvert.GetFloat("_EdgeSize");
 
-        //float oldFloat6 = materialToConvert.GetFloat("???");
-        Color oldColor4 = materialToConvert.GetColor("_EdgeColor");
-        float oldFloat7 = materialToConvert.GetFloat("_EdgeSize");
+        int oldEFFECTS = 0;
+        if (materialToConvert.IsKeywordEnabled("SPHEREMAP_ADD"))
+        {
+            oldEFFECTS = 1;
+        }
+        else if (materialToConvert.IsKeywordEnabled("SPHEREMAP_MUL"))
+        {
+            oldEFFECTS = 2;
+        }
 
-        Texture oldTexture = materialToConvert.GetTexture("_MainTex");
-        Texture oldTexture2 = materialToConvert.GetTexture("_ToonTex");
-        Texture oldTexture3 = materialToConvert.GetTexture("_SphereCube");
-        //float oldFloat7 = materialToConvert.GetFloat("???");
+        Texture oldMainTex = materialToConvert.GetTexture("_MainTex");
+        Texture oldToonTex = materialToConvert.GetTexture("_ToonTex");
+        Texture oldSphereCube = materialToConvert.GetTexture("_SphereCube");
+
+        bool isSpecularOn = materialToConvert.IsKeywordEnabled("SPECULAR_ON");
+        float oldShadowLum = materialToConvert.GetFloat("_ShadowLum");
+        Color oldToonTone = materialToConvert.GetColor("_ToonTone");
+
+        int oldCustomRenderQueue = materialToConvert.renderQueue;
+        bool oldEnableInstancingVariants = materialToConvert.enableInstancing;
+        bool oldDoubleSidedGI = materialToConvert.doubleSidedGI;
+        MaterialGlobalIlluminationFlags oldLightmapFlags = materialToConvert.globalIlluminationFlags;
 
         materialToConvert.shader = Shader.Find(newShaderName); // Set the new shader for the material.
+        CleanMaterialProperties(materialToConvert);
 
         // Set the variable color in the new shader.
-        materialToConvert.SetColor("_Diffuse", oldColor);
-        materialToConvert.SetColor("_Specular", oldColor2);
-        materialToConvert.SetColor("_Ambient", oldColor3);
+        materialToConvert.SetColor("_Color", new Color(oldColor.r, oldColor.g, oldColor.b, 0));
+        materialToConvert.SetColor("_Specular", new Color(oldSpecular.r, oldSpecular.g, oldSpecular.b, 0));
+        materialToConvert.SetColor("_Ambient", new Color(oldAmbient.r, oldAmbient.g, oldAmbient.b, 0));
 
         materialToConvert.SetFloat("_Opaque", oldColor.a);
-        materialToConvert.SetFloat("_Reflection", oldFloat);
+        materialToConvert.SetFloat("_Shininess", oldShininess);
 
         //materialToConvert.SetFloat("_2_SIDE", oldFloat2);
         //materialToConvert.SetFloat("_G_SHAD", oldFloat3);
         //materialToConvert.SetFloat("_S_MAP", oldFloat4);
         //materialToConvert.SetFloat("_S_SHAD", oldFloat5);
+        
+        materialToConvert.SetFloat("_On", Outline ? 1 : 0);
+        materialToConvert.SetColor("_OutlineColor", oldEdgeColor);
+        materialToConvert.SetFloat("_EdgeSize", oldEdgeSize * 10);
 
-        //materialToConvert.SetFloat("_On", oldFloat6);
-        materialToConvert.SetColor("_Color", oldColor4);
-        materialToConvert.SetFloat("_Size", oldFloat7);
+        materialToConvert.SetFloat("_EFFECTS", oldEFFECTS);
+        materialToConvert.SetTexture("_MainTex", oldMainTex);
+        materialToConvert.SetTexture("_ToonTex", oldToonTex);
+        materialToConvert.SetTexture("_SphereCube", oldSphereCube);
 
-        materialToConvert.SetTexture("_Texture", oldTexture);
-        materialToConvert.SetTexture("_Toon", oldTexture2);
-        materialToConvert.SetTexture("_SPH", oldTexture3);
-        //materialToConvert.SetKeyword("_EFFECTS", oldFloat7);
+        materialToConvert.SetFloat("_SpecularIntensity", isSpecularOn? 1 : 0);
+        materialToConvert.SetFloat("_ShadowLum", oldShadowLum);
+        materialToConvert.SetColor("_ToonTone", oldToonTone);
+
+        materialToConvert.renderQueue = oldCustomRenderQueue;
+        materialToConvert.enableInstancing = oldEnableInstancingVariants;
+        materialToConvert.doubleSidedGI = oldDoubleSidedGI;
+        materialToConvert.globalIlluminationFlags = oldLightmapFlags;
 
         EditorUtility.SetDirty(materialToConvert); // Mark the material as dirty to ensure the change is saved.
         Debug.Log($"Material shader converted: {materialToConvert.name}"); // Log a message indicating the material shader has been converted.
+    }
+
+    public static void CleanMaterialProperties(Material material)
+    {
+        Shader shader = material.shader;
+
+        if (shader == null)
+        {
+            Debug.LogError($"The material '{material.name}' does not have a shader.");
+            return;
+        }
+
+        var validProperties = new HashSet<string>();
+
+        for (int i = 0; i < ShaderUtil.GetPropertyCount(shader); i++)
+        {
+            string propertyName = ShaderUtil.GetPropertyName(shader, i);
+            validProperties.Add(propertyName);
+        }
+
+        var materialSerializedObject = new SerializedObject(material);
+        var savedProperties = materialSerializedObject.FindProperty("m_SavedProperties");
+
+        RemoveInvalidProperties(savedProperties.FindPropertyRelative("m_TexEnvs"), validProperties);
+        RemoveInvalidProperties(savedProperties.FindPropertyRelative("m_Ints"), validProperties);
+        RemoveInvalidProperties(savedProperties.FindPropertyRelative("m_Floats"), validProperties);
+        RemoveInvalidProperties(savedProperties.FindPropertyRelative("m_Colors"), validProperties);
+
+        materialSerializedObject.ApplyModifiedProperties();
+    }
+
+    private static void RemoveInvalidProperties(SerializedProperty properties, HashSet<string> validProperties)
+    {
+        for (int i = properties.arraySize - 1; i >= 0; i--)
+        {
+            var property = properties.GetArrayElementAtIndex(i);
+            string propertyName = property.FindPropertyRelative("first").stringValue;
+
+            if (!validProperties.Contains(propertyName))
+            {
+                properties.DeleteArrayElementAtIndex(i);
+            }
+        }
     }
 }
 #endif

@@ -307,3 +307,15 @@ MonoBehaviour:
     materialNameJP: "\u30C6\u30B9\u30C82"
     materialNameEN: Test 2
     materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 8c33c150933eee844aa649602d463d35, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: d9508f90042bf224a9fc2082ba46c312, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: bf886f26a884b004f82e4e40cd520706, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
