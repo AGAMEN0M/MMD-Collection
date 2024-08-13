@@ -72,4 +72,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Ignora a pasta Assets/Packages/
-/[Aa]ssets/[Pp]ackages/
+/Assets/Packages/AmplifyShaderEditor
+/Assets/Packages/MMD4Mecanim
+/Assets/Editor
