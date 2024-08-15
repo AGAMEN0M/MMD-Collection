@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor v1.9.6.2
+// Made with Amplify Shader Editor v1.9.6.3
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "MMD Collection/URP/MMD - Base Code (Amplify Shader Editor)"
 {
@@ -2380,7 +2380,7 @@ Shader "MMD Collection/URP/MMD - Base Code (Amplify Shader Editor)"
 	Fallback Off
 }
 /*ASEBEGIN
-Version=19602
+Version=19603
 Node;AmplifyShaderEditor.CommentaryNode;273;-4096,-7648;Inherit;False;1665.6;1246.8;Base Properties;17;32;292;12;37;44;13;11;28;10;40;43;65;64;67;109;66;110;;1,1,1,1;0;0
 Node;AmplifyShaderEditor.SamplerNode;10;-2944,-7264;Inherit;True;Property;_MainTex;Texture;9;1;[Header];Create;False;1;Texture (Memo);0;0;False;0;False;-1;None;73029f145f0f8b2469831e89ee17037b;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
 Node;AmplifyShaderEditor.CommentaryNode;276;-640,-480;Inherit;False;1153.6;639;Color Transparency;17;246;14;17;16;249;247;250;205;27;9;8;7;6;5;4;3;2;;1,1,1,1;0;0
@@ -2889,4 +2889,4 @@ WireConnection;1;2;371;0
 WireConnection;1;3;246;0
 WireConnection;1;4;325;0
 ASEEND*/
-//CHKSM=95EEB9A0730E9E647CDFD1A83A29084D1FF8C818
+//CHKSM=EC09DF9AA1224389A6F4FA82D91DB6BC664A3855
