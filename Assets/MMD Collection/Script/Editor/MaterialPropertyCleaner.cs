@@ -1,6 +1,16 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This script provides a tool for Unity editors to clean up invalid properties from selected Material assets. 
+ *              It iterates through all selected materials, compares their properties with the ones defined in their 
+ *              associated shaders, and removes any properties that are no longer valid. This helps in maintaining the 
+ *              integrity and performance of materials by eliminating unnecessary or obsolete properties.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System.Collections.Generic;
 
 public class MaterialPropertyCleaner : MonoBehaviour
 {

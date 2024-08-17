@@ -1,3 +1,12 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This script is a custom inspector for MMD (MikuMikuDance) materials using the Amplify Shader Editor in Unity. 
+ *              It provides an extended interface to manage and tweak shader properties specific to MMD materials, 
+ *              allowing users to handle both standard and custom attributes efficiently.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using UnityEngine;
 using UnityEditor;
 

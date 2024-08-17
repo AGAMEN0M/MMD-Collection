@@ -1,7 +1,17 @@
-using UnityEngine;
-using UnityEditor;
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This script is designed to find all GameObjects in the Unity scene that have missing scripts attached. 
+ *              It iterates through all GameObjects in the project, checking each one for components that are 
+ *              null (indicating a missing script). The script then logs the number of objects found with missing 
+ *              scripts and selects them in the Unity Editor.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEditor;
 
 // This class finds all GameObjects in the scene that have missing scripts attached.
 public class FindMissingScripts : MonoBehaviour

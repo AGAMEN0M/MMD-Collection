@@ -1,3 +1,12 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: Custom inspector script for managing MMD (MikuMikuDance) materials within Unity using Shader Graph. 
+ *              This script allows for detailed customization of material properties, including colors, rendering options, 
+ *              and special effects, through a user-friendly interface in the Unity Editor.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using UnityEngine;
 using UnityEditor;
 

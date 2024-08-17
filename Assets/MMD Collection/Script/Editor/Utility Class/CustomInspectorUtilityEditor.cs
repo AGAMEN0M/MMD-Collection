@@ -1,3 +1,13 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This utility class extends ShaderGUI to assist with creating custom inspectors for Unity materials, 
+ *              particularly for managing and rendering properties related to MMD (MikuMikuDance) materials. It includes 
+ *              methods to load and save material data, render various material properties (e.g., surface options, color 
+ *              properties, blending modes), and handle specific shader-related settings within the Unity Editor.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using UnityEngine;
 using UnityEditor;
 using System;

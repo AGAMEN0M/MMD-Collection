@@ -1,3 +1,14 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: The CustomMMDDataUtilityEditor script is a Unity Editor utility class designed to manage CustomMMDData assets. 
+ *              It provides functionality to retrieve or create a CustomMMDData asset, ensuring that there is always an 
+ *              instance available. The script searches for an existing asset of type CustomMMDData and creates a new one 
+ *              if none is found. It also includes a method to remove invalid materials from the CustomMMDData asset by 
+ *              filtering out materials that are null, thus maintaining the integrity of the asset.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;

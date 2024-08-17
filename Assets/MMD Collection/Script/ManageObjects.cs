@@ -1,3 +1,14 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This script, intended for Unity, provides a custom editor interface to manage the visibility 
+ *              and state of a list of GameObjects within the scene. It allows users to toggle the visibility of 
+ *              individual objects or all objects in the list at once, remove objects from the list, and drag and 
+ *              drop new objects into the list. The script also offers options to hide objects from the inspector 
+ *              and customize the display of the default inspector for enhanced editor workflow.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using UnityEngine;
 using System.Linq;
 

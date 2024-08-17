@@ -1,3 +1,14 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This Unity script provides free movement control for the camera, allowing it to move and rotate 
+ *              freely in all directions. The camera's movement speed, rotation sensitivity, and zoom sensitivity 
+ *              can be adjusted. It supports normal and fast movement modes, as well as toggling a "look mode" to 
+ *              rotate the camera based on mouse movement. The script is ideal for first-person camera control or for 
+ *              navigation in a 3D environment.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]

@@ -1,7 +1,18 @@
-using UnityEngine;
-using UnityEditor;
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This Unity Editor script allows users to create prefabs from selected 3D model assets. 
+ *              It extracts all SkinnedMeshRenderer and MeshFilter components from the models and converts them into 
+ *              separate GameObjects. These GameObjects are then combined into a prefab, which is saved in the same 
+ *              directory as the original model. The script ensures that the generated prefabs retain the original mesh 
+ *              and material data.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
+using UnityEditor;
 
 public class CreatePrefabFromModel : EditorWindow
 {

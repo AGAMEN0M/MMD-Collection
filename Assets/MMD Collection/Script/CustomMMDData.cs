@@ -1,3 +1,13 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: The CustomMMDData script defines a ScriptableObject used to store custom data related to MMD (MikuMikuDance). 
+ *              It includes a boolean flag to control the visibility of shader systems and a list of MMDMaterialInfo objects, 
+ *              which contain information about various MMD materials. Each MMDMaterialInfo object stores a reference to a 
+ *              Unity Material, along with its name in Japanese and English, and a memo for additional notes.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using System.Collections.Generic;
 using UnityEngine;
 

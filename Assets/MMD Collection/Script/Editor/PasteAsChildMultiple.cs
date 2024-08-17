@@ -1,7 +1,17 @@
-using UnityEngine;
-using UnityEditor;
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This Unity editor script creates a custom tool to paste a selected prefab or GameObject as a child of 
+ *              multiple selected objects in the scene. The tool provides an option to enumerate the names of newly created 
+ *              child objects and automatically expands the hierarchy to show them. It includes error handling and allows 
+ *              for undoing the operation.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using System.Collections.Generic;
 using System;
+using UnityEngine;
+using UnityEditor;
 
 public class PasteAsChildMultiple : EditorWindow
 {

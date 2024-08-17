@@ -1,3 +1,13 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This Unity script allows for the efficient rendering of multiple instances of a mesh using GPU instancing. 
+ *              It supports drawing meshes either in real-time or only when selected in the editor. The script can reuse 
+ *              materials across submeshes or assign unique materials to each submesh. It also includes visual debugging 
+ *              in the Scene view through Gizmos, indicating the positions of the mesh instances.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using System.Collections.Generic;
 using UnityEngine;
 

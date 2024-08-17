@@ -307,15 +307,59 @@ MonoBehaviour:
     materialNameJP: "\u30C6\u30B9\u30C82"
     materialNameEN: Test 2
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 8c33c150933eee844aa649602d463d35, type: 2}
+  - mmdMaterial: {fileID: 2100000, guid: 5077cb9078b956444a08751f4c45edd4, type: 2}
     materialNameJP: 
     materialNameEN: 
     materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: d9508f90042bf224a9fc2082ba46c312, type: 2}
+  - mmdMaterial: {fileID: 2100000, guid: 32684b4c4faaafe499794ada96cc8a1d, type: 2}
     materialNameJP: 
     materialNameEN: 
     materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: bf886f26a884b004f82e4e40cd520706, type: 2}
+  - mmdMaterial: {fileID: 2100000, guid: 75649f5d60d42af4b9a13af419a784d9, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 520ba40969d91234bbd632bb58cb4898, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: cc575b2835f05d649ab42409e2080cdd, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 4adae1c690d582641a0d0a3384bf37f3, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: dd9eb344a24373c42b224b03993e386d, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: ef68d0b4f4aff4747964387884095517, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 25c5b8dc8884b7c4d8537c0326cf0eec, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 053da6157bcee1d4490fa7c8732e98be, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 46e86261cac68ac44bfd26da8d2ff585, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: 5e8d04bf4c13eb543aecc5ad9f76a5f8, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: b244e604f6d2d724ab5417d2036bc271, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 
+  - mmdMaterial: {fileID: 2100000, guid: d9c3c6e46ecdb7c459849ccbc88ca76a, type: 2}
     materialNameJP: 
     materialNameEN: 
     materialMeno: 

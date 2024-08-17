@@ -1,3 +1,13 @@
+/*
+ * ---------------------------------------------------------------------------
+ * Description: This Unity script copies the rotation of bones from one set of transforms (copyBone) to another 
+ *              set (pasteBone) in real-time, typically used for animation purposes. It includes an option to limit 
+ *              the rotation values to a specified maximum and allows toggling updates through the update property. 
+ *              The script ensures that the rotation data is copied correctly and clamped within set boundaries if required.
+ * Author: Lucas Gomes Cecchini
+ * Pseudonym: AGAMENOM
+ * ---------------------------------------------------------------------------
+*/
 using UnityEngine;
 
 [AddComponentMenu("MMD Collection/Copy Animation")]
