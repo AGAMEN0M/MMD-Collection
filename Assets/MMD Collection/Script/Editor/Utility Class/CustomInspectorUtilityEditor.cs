@@ -1,9 +1,8 @@
 /*
  * ---------------------------------------------------------------------------
- * Description: This utility class extends ShaderGUI to assist with creating custom inspectors for Unity materials, 
- *              particularly for managing and rendering properties related to MMD (MikuMikuDance) materials. It includes 
- *              methods to load and save material data, render various material properties (e.g., surface options, color 
- *              properties, blending modes), and handle specific shader-related settings within the Unity Editor.
+ * Description: This script is a custom extension for the Material Editor in Unity, providing advanced functionality 
+ *              for inspecting and modifying materials using custom shaders. It extends the ShaderGUI class, allowing 
+ *              fine-grained control over various properties of shaders and materials directly in the editor.
  * Author: Lucas Gomes Cecchini
  * Pseudonym: AGAMENOM
  * ---------------------------------------------------------------------------
@@ -151,7 +150,9 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions);
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(currentMaterial, "Change Global Illumination Flag");
             currentMaterial.globalIlluminationFlags = flagOptions[selectedIndex];
+            EditorUtility.SetDirty(currentMaterial);
         }
 
         EditorGUILayout.EndHorizontal();
@@ -165,10 +166,14 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         MaterialProperty colorProperty = FindProperty(propertyName, materialProperties);
         EditorGUI.BeginChangeCheck();
         Color color = EditorGUILayout.ColorField(GUIContent.none, colorProperty.colorValue, false, true, false, GUILayout.Width(50f));
+        
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(colorProperty.targets[0], "Change Color");
             colorProperty.colorValue = color;
+            EditorUtility.SetDirty(colorProperty.targets[0]);
         }
+
         GUILayout.Space(20f);
         GUILayout.Label("R", GUILayout.Width(15f));
         float r = EditorGUILayout.FloatField(color.r, GUILayout.Width(50f));
@@ -176,7 +181,14 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         float g = EditorGUILayout.FloatField(color.g, GUILayout.Width(50f));
         GUILayout.Label("B", GUILayout.Width(15f));
         float b = EditorGUILayout.FloatField(color.b, GUILayout.Width(50f));
-        colorProperty.colorValue = new Color(r, g, b, 0);
+
+        if (r != color.r || g != color.g || b != color.b)
+        {
+            Undo.RecordObject(colorProperty.targets[0], "Change Color Channels");
+            colorProperty.colorValue = new Color(r, g, b, color.a);
+            EditorUtility.SetDirty(colorProperty.targets[0]);
+        }
+
         EditorGUILayout.EndHorizontal();
     }
 
@@ -187,13 +199,23 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         GUILayout.Label(label, GUILayout.Width(space));
         MaterialProperty property = FindProperty(propertyName, materialProperties);
 
+        EditorGUI.BeginChangeCheck(); // Start change detection.
+        float newValue;
+
         if (!expand)
         {
-            property.floatValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(sliderSpace));
+            newValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(sliderSpace));
         }
         else
         {
-            property.floatValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(sliderSpace), GUILayout.ExpandWidth(true));
+            newValue = EditorGUILayout.Slider(property.floatValue, minValue, maxValue, GUILayout.Width(sliderSpace), GUILayout.ExpandWidth(true));
+        }
+
+        if (EditorGUI.EndChangeCheck()) // Check if there has been any change.
+        {
+            Undo.RecordObject(property.targets[0], "Change Float Property"); // Register material before moving.
+            property.floatValue = newValue; // Apply the new change.
+            EditorUtility.SetDirty(property.targets[0]); // Mark material as modified.
         }
 
         EditorGUILayout.EndHorizontal();
@@ -224,14 +246,18 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         GUILayout.Label(labelContent, highlightStyle, GUILayout.Width(60f));
         EditorGUI.showMixedValue = cullProperty.hasMixedValue;
         bool isTwoSided = (cullProperty.floatValue == 0);
+
+        EditorGUI.BeginChangeCheck();
         bool toggleValue = EditorGUILayout.Toggle(isTwoSided, GUILayout.Width(10f));
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(cullProperty.targets[0], "Change Cull Property");
+            cullProperty.floatValue = toggleValue ? 0 : 2;
+            EditorUtility.SetDirty(cullProperty.targets[0]);
+        }
+        
         EditorGUI.showMixedValue = false;
         EditorGUI.EndDisabledGroup();
-
-        if (cullProperty.floatValue != 1)
-        {
-            cullProperty.floatValue = toggleValue ? 0 : 2;
-        }
 
         EditorGUILayout.EndHorizontal();
         GUI.backgroundColor = Color.white;
@@ -245,7 +271,12 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         bool oldValue = currentMaterial.GetShaderPassEnabled(passName);
         bool newValue = EditorGUILayout.Toggle(oldValue, GUILayout.Width(10f));
         EditorGUILayout.EndHorizontal();
-        currentMaterial.SetShaderPassEnabled(passName, newValue);
+        if (oldValue != newValue)
+        {
+            Undo.RecordObject(currentMaterial, $"Change Shader Pass: {passName}"); // Register material before moving.
+            currentMaterial.SetShaderPassEnabled(passName, newValue); // Apply the change.
+            EditorUtility.SetDirty(currentMaterial); // Mark material as modified.
+        }
     }
 
     // Render a keyword toggle.
@@ -255,24 +286,31 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         GUILayout.Label(label, GUILayout.Width(space));
         MaterialProperty property = FindProperty(propertyName, materialProperties);
         EditorGUI.showMixedValue = property.hasMixedValue;
-        var toggleValue = EditorGUILayout.Toggle(property.floatValue != 0, GUILayout.Width(10f));
+
+        // Use EditorGUI.BeginChangeCheck to detect changes.
+        EditorGUI.BeginChangeCheck();
+        bool toggleValue = EditorGUILayout.Toggle(property.floatValue != 0, GUILayout.Width(10f));
         EditorGUI.showMixedValue = false;
-        property.floatValue = toggleValue ? 1 : 0;
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(currentMaterial, $"Change Keyword: {tag}");
+            property.floatValue = toggleValue ? 1 : 0; // Updates property value.
+            if (invert) { toggleValue = !toggleValue; } // Apply the password change.
+
+            if (toggleValue)
+            {
+                currentMaterial.EnableKeyword(tag);
+            }
+            else
+            {
+                currentMaterial.DisableKeyword(tag);
+            }
+
+            EditorUtility.SetDirty(currentMaterial); // Mark material as modified.
+        }
+
         EditorGUILayout.EndHorizontal();
-
-        if (invert)
-        {
-            toggleValue = !toggleValue;
-        }
-
-        if (toggleValue)
-        {
-            currentMaterial.EnableKeyword(tag);
-        }
-        else
-        {
-            currentMaterial.DisableKeyword(tag);
-        }
     }
 
     // Render a disabled toggle.
@@ -297,9 +335,17 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         GUILayout.Label(label, GUILayout.Width(space));
         MaterialProperty property = FindProperty(propertyName, materialProperties);
         EditorGUI.showMixedValue = property.hasMixedValue;
-        var toggleValue = EditorGUILayout.Toggle(property.floatValue != 0, GUILayout.Width(10f));
+
+        EditorGUI.BeginChangeCheck();
+        bool toggleValue = EditorGUILayout.Toggle(property.floatValue != 0, GUILayout.Width(10f));
         EditorGUI.showMixedValue = false;
-        property.floatValue = toggleValue ? 1 : 0;
+
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(property.targets[0], $"Change {label}");
+            property.floatValue = toggleValue ? 1 : 0;
+            EditorUtility.SetDirty(property.targets[0]);
+        }
         EditorGUILayout.EndHorizontal();
     }
 
@@ -312,7 +358,9 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         Color color = EditorGUILayout.ColorField(GUIContent.none, colorProperty.colorValue, false, true, false, GUILayout.Width(50f));
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(colorProperty.targets[0], $"Change {propertyName}");
             colorProperty.colorValue = color;
+            EditorUtility.SetDirty(colorProperty.targets[0]);
         }
         EditorGUILayout.EndHorizontal();
     }
@@ -323,7 +371,14 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label(label, GUILayout.Width(space));
         MaterialProperty property = FindProperty(propertyName, materialProperties);
-        property.floatValue = EditorGUILayout.FloatField(property.floatValue, GUILayout.Width(50f));
+        EditorGUI.BeginChangeCheck();
+        float newValue = EditorGUILayout.FloatField(property.floatValue, GUILayout.Width(50f));
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(property.targets[0], $"Change {propertyName}");
+            property.floatValue = newValue;
+            EditorUtility.SetDirty(property.targets[0]);
+        }
         EditorGUILayout.EndHorizontal();
     }
 
@@ -332,8 +387,10 @@ public class CustomInspectorUtilityEditor : ShaderGUI
     {
         EditorGUILayout.BeginHorizontal();
         MaterialProperty vectorProperty = FindProperty(propertyName, materialProperties);
-        Color color = vectorProperty.colorValue;
         EditorGUI.BeginChangeCheck();
+        Color color = vectorProperty.colorValue; // Capture the current value of the property as a color.
+
+        // Fields for editing RGBA components.
         GUILayout.Space(80f);
         float r = EditorGUILayout.FloatField(color.r, GUILayout.Width(50f));
         GUILayout.Space(10f);
@@ -344,7 +401,9 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         float a = EditorGUILayout.FloatField(color.a, GUILayout.Width(50f));
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(vectorProperty.targets[0], $"Change {propertyName}");
             vectorProperty.colorValue = new Color(r, g, b, a);
+            EditorUtility.SetDirty(vectorProperty.targets[0]);
         }
         EditorGUILayout.EndHorizontal();
     }
@@ -361,13 +420,12 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         GUILayout.Label(label, GUILayout.Width(space));
         MaterialProperty dropdownProperty = FindProperty(propertyName, materialProperties);
         EditorGUI.BeginChangeCheck();
+
+        // Find the selected index based on the current value.
         int selectedIndex = Array.IndexOf(numberOptions, dropdownProperty.floatValue);
+        if (selectedIndex == -1) { selectedIndex = 0; }
 
-        if (selectedIndex == -1)
-        {
-            selectedIndex = 0;
-        }
-
+        // Display the dropdown.
         if (!expand)
         {
             selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(dropdownSpace));
@@ -379,8 +437,10 @@ public class CustomInspectorUtilityEditor : ShaderGUI
 
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(currentMaterial, $"Change {propertyName}");
             dropdownProperty.floatValue = numberOptions[selectedIndex];
 
+            // Update the material's keywords.
             if (keywordOptions != null)
             {
                 foreach (string keyword in keywordOptions)
@@ -392,6 +452,7 @@ public class CustomInspectorUtilityEditor : ShaderGUI
                 }
                 currentMaterial.EnableKeyword(keywordOptions[selectedIndex]);
             }
+            EditorUtility.SetDirty(currentMaterial);
         }
         EditorGUILayout.EndHorizontal();
     }
@@ -409,7 +470,9 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         GUILayout.EndHorizontal();
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(textureProperty.targets[0], $"Change {propertyName}");
             textureProperty.textureValue = texture;
+            EditorUtility.SetDirty(textureProperty.targets[0]);
         }
         EditorGUI.showMixedValue = false;
         EditorGUILayout.EndHorizontal();
@@ -428,7 +491,9 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         GUILayout.EndHorizontal();
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(cubemapProperty.targets[0], $"Change {propertyName}");
             cubemapProperty.textureValue = cubemap;
+            EditorUtility.SetDirty(cubemapProperty.targets[0]);
         }
         EditorGUI.showMixedValue = false;
         EditorGUILayout.EndHorizontal();
@@ -449,7 +514,9 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         float z = EditorGUILayout.FloatField(vector3Value.z, GUILayout.Width(50f));
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(vectorProperty.targets[0], $"Change {propertyName}");
             vectorProperty.vectorValue = new Vector3(x, y, z);
+            EditorUtility.SetDirty(vectorProperty.targets[0]);
         }
         EditorGUILayout.EndHorizontal();
     }
@@ -524,9 +591,11 @@ public class CustomInspectorUtilityEditor : ShaderGUI
 
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(currentMaterial, "Change Depth Write Settings");
             zWrite.floatValue = newZWrite;
             zWriteControl.floatValue = newZWriteControl;
             currentMaterial.SetShaderPassEnabled("DepthOnly", newValue);
+            EditorUtility.SetDirty(currentMaterial);
         }
         EditorGUILayout.EndHorizontal();
     }
@@ -542,14 +611,14 @@ public class CustomInspectorUtilityEditor : ShaderGUI
         MaterialProperty dstBlend = FindProperty("_DstBlend", materialProperties);
 
         EditorGUI.BeginChangeCheck();
-
         int selectedIndex = (int)blend.floatValue;
-
         string[] displayOptions = new string[] { "Alpha", "Premultiply", "Additive", "Multiply" };
         selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(EditorGUIUtility.fieldWidth), GUILayout.ExpandWidth(true));
 
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(currentMaterial, "Change Blending Mode");
+
             switch (selectedIndex)
             {
                 case 1: // Premultiply.
@@ -577,6 +646,8 @@ public class CustomInspectorUtilityEditor : ShaderGUI
                     currentMaterial.DisableKeyword("_ALPHAMODULATE_ON");
                     break;
             }
+
+            EditorUtility.SetDirty(currentMaterial);
         }
 
         EditorGUILayout.EndHorizontal();
@@ -634,18 +705,17 @@ public class CustomInspectorUtilityEditor : ShaderGUI
     {
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Surface Type", GUILayout.Width(EditorGUIUtility.labelWidth));
-
         MaterialProperty surface = FindProperty("_Surface", materialProperties);
 
         EditorGUI.BeginChangeCheck();
-
         int selectedIndex = (int)surface.floatValue;
-
         string[] displayOptions = new string[] { "Opaque", "Transparent" };
         selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions, GUILayout.Width(EditorGUIUtility.fieldWidth), GUILayout.ExpandWidth(true));
 
         if (EditorGUI.EndChangeCheck())
         {
+            Undo.RecordObject(currentMaterial, "Change Surface Type");
+
             switch (selectedIndex)
             {
                 case 1: // Transparent.
@@ -659,6 +729,8 @@ public class CustomInspectorUtilityEditor : ShaderGUI
                     currentMaterial.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
                     break;
             }
+
+            EditorUtility.SetDirty(currentMaterial);
         }
 
         EditorGUILayout.EndHorizontal();
