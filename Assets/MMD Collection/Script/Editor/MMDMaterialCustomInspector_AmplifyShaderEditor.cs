@@ -7,6 +7,7 @@
  * Pseudonym: AGAMENOM
  * ---------------------------------------------------------------------------
 */
+using MMDCollectionEditor;
 using UnityEngine;
 using UnityEditor;
 
