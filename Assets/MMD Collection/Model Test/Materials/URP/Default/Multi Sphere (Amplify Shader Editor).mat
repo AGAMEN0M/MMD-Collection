@@ -11,9 +11,9 @@ Material:
   m_Shader: {fileID: 4800000, guid: 6a393ff4c50f1e7409bbe6affeab0cc1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - _FOG_ON
+  m_InvalidKeywords:
   - _MULTIPLELIGHTS_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -66,6 +66,7 @@ Material:
     - _EFFECTS: 2
     - _EdgeSize: 0.1
     - _Fog: 1
+    - _HDR: 1
     - _MultipleLights: 1
     - _On: 1
     - _Opaque: 1

@@ -66,6 +66,7 @@ Material:
     - _EFFECTS: 0
     - _EdgeSize: 0.1
     - _Fog: 0
+    - _HDR: 1
     - _MultipleLights: 1
     - _On: 1
     - _Opaque: 1

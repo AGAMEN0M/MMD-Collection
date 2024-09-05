@@ -67,6 +67,7 @@ Material:
     - _EFFECTS: 0
     - _EdgeSize: 0
     - _Fog: 0
+    - _HDR: 1
     - _MAIN_LIGHT_SHADOWS: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _MultipleLights: 1
