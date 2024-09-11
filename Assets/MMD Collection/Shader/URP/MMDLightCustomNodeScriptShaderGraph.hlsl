@@ -50,8 +50,11 @@ void additionalLights_float(float3 WorldPosition, float3 WorldNormal, out float3
         // Loop through each additional light to compute its contribution.
         for (int i = 0; i < pixelLightCount; i++)
         {
-            // Get the additional light based on its index and world position.
-            Light light = GetAdditionalLight(i, WorldPosition);
+            // Sample the shadow mask to determine shadow coverage at this fragment's position.
+            float4 shadowMask = SAMPLE_SHADOWMASK(dynamicLightmapUV);
+        
+            // Get the additional light based on its index, world position, and the shadow mask.
+            Light light = GetAdditionalLight(i, WorldPosition, shadowMask);
         
             // Calculate the attenuated light color considering distance and shadow attenuation.
             half3 attenuatedLightColor = light.color * (light.distanceAttenuation * light.shadowAttenuation);
