@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf43231ba71ff6041aafbbc9dd4431e7, type: 3}
   m_Name: Custom MMD Data
   m_EditorClassIdentifier: 
-  showSystemsDefault: 0
+  showSystemsDefault: 1
   materialInfoList:
   - mmdMaterial: {fileID: 2100000, guid: fea0f609e837e404db90fdd01379775f, type: 2}
     materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
@@ -170,126 +170,6 @@ MonoBehaviour:
     materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
     materialNameEN: Multi Sphere (Shader Graph)
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 26c24c0a990203842829ce574f7fb46e, type: 2}
-    materialNameJP: "\u30D8\u30A2"
-    materialNameEN: Hair
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: c3dfe53a1ab44dd43bce0b0469d78134, type: 2}
-    materialNameJP: "\u76EE_v2"
-    materialNameEN: Eyes_v2
-    materialMeno: ThegirlCs exe & AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: baf2677f14767e34a9acf90fe3538352, type: 2}
-    materialNameJP: "\u76EE_v1"
-    materialNameEN: Eyes_v1
-    materialMeno: ThegirlCs exe & AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 6e5554a403c18b042b5a25a43fc29584, type: 2}
-    materialNameJP: "\u982D"
-    materialNameEN: Head
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 348b60d5cccf283448e71bbb25c8babe, type: 2}
-    materialNameJP: "\u982D"
-    materialNameEN: Head
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 999e16bcdeb8df74dabfee554015b78b, type: 2}
-    materialNameJP: "\u30AF\u30E9\u30F3\u30D7"
-    materialNameEN: Clamps
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: ecac051f4060c214ca9c0ae004815a37, type: 2}
-    materialNameJP: "\u9762_v1"
-    materialNameEN: Face_v1
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 2fb7756fe2dc8974ab81d915e1708509, type: 2}
-    materialNameJP: "\u9762_v2"
-    materialNameEN: Face_v2
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 574e90ee0efee8c4ea3bd4a6ddbb2298, type: 2}
-    materialNameJP: "\u9762_v3"
-    materialNameEN: Face_v3
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 9411e92ef471ce643aff6f77e01e43fa, type: 2}
-    materialNameJP: "\u4F53"
-    materialNameEN: Body
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: a599bb800a5df654089928bd660bd292, type: 2}
-    materialNameJP: "\u9854\u306E\u53CD\u5FDC"
-    materialNameEN: Facial_Reactions
-    materialMeno: ThegirlCs exe & AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 6b8367dfb3094724281f7966122ff29f, type: 2}
-    materialNameJP: "\u8840\u306E\u6D99_v2"
-    materialNameEN: Blood Tears_v2
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 3a945e94891bd974da51ee3513d9cf78, type: 2}
-    materialNameJP: "\u8840\u306E\u6D99_v1"
-    materialNameEN: Blood Tears_v1
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 0a988cc327533c64087034d5e47e40f5, type: 2}
-    materialNameJP: "\u30D1\u30F3\u30C4"
-    materialNameEN: Pants
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: c177bdb370ddd804b8307d9b525a7719, type: 2}
-    materialNameJP: "\u30BB\u30FC\u30BF\u30FC"
-    materialNameEN: Sweater
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 4e14027dbab4fd24f9ce539e9af96a0e, type: 2}
-    materialNameJP: "\u30D6\u30FC\u30C4"
-    materialNameEN: Boots
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 19b189c40d0d4a44dbba1289f4650b09, type: 2}
-    materialNameJP: "\u76EE_v2"
-    materialNameEN: Eyes_v2
-    materialMeno: ThegirlCs exe & AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: fc71cee22dde1624d8688cb55febf5a4, type: 2}
-    materialNameJP: "\u76EE_v1"
-    materialNameEN: Eyes_v1
-    materialMeno: ThegirlCs exe & AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: c50a06df3ec89f3468e05c14488d740e, type: 2}
-    materialNameJP: "\u9762_v1"
-    materialNameEN: Face_v1
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 3efc49c3b9dfb4f41b8e94c4adef38b5, type: 2}
-    materialNameJP: "\u9762_v2"
-    materialNameEN: Face_v2
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: e302e85fa28733d40a24894b32eed3c5, type: 2}
-    materialNameJP: "\u9762_v3"
-    materialNameEN: Face_v3
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 87fbb00fd6abb724e87e09365a24025d, type: 2}
-    materialNameJP: "\u4F53"
-    materialNameEN: Body
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: d86674aefd355f9418fe4d8dbf26eb29, type: 2}
-    materialNameJP: "\u30D6\u30FC\u30C4"
-    materialNameEN: Boots
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 2770751632a3b5b4d99c994d76621711, type: 2}
-    materialNameJP: "\u30BB\u30FC\u30BF\u30FC"
-    materialNameEN: Sweater
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: cb3bb1a8706562843b4131e2e939d0e9, type: 2}
-    materialNameJP: "\u8840\u306E\u6D99_v1"
-    materialNameEN: Blood Tears_v1
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: fd9c081e4613bb14ea87fd91d3d7801a, type: 2}
-    materialNameJP: "\u8840\u306E\u6D99_v2"
-    materialNameEN: Blood Tears_v2
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: c346eeac1ab2508479432297db610da4, type: 2}
-    materialNameJP: "\u9854\u306E\u53CD\u5FDC"
-    materialNameEN: Facial_Reactions
-    materialMeno: ThegirlCs exe & AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 7a6c5acee5549014e88630a4892d50ca, type: 2}
-    materialNameJP: "\u30D8\u30A2"
-    materialNameEN: Hair
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: a5f0db4ea8807eb44aae70bdbe9e6f31, type: 2}
-    materialNameJP: "\u30AF\u30E9\u30F3\u30D7"
-    materialNameEN: Clamps
-    materialMeno: ThegirlCs exe
-  - mmdMaterial: {fileID: 2100000, guid: 902dfa9f080224f44bf74e7341a594fe, type: 2}
-    materialNameJP: "\u30D1\u30F3\u30C4"
-    materialNameEN: Pants
-    materialMeno: ThegirlCs exe
   - mmdMaterial: {fileID: 2100000, guid: da50e82f78a5a9a44b3521dcb9b0af22, type: 2}
     materialNameJP: "\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5 (DrawMeshInstanced)"
     materialNameEN: Shader Graph (DrawMeshInstanced)
@@ -299,11 +179,51 @@ MonoBehaviour:
       (DrawMeshInstanced)"
     materialNameEN: Amplify Shader Editor (DrawMeshInstanced)
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 2bbf091a0764f2443a9f3a3b8ed4b3c6, type: 2}
-    materialNameJP: "\u30C6\u30B9\u30C8"
-    materialNameEN: Test
+  - mmdMaterial: {fileID: 2100000, guid: 1353cfaf16da7514b80a64a61f7bf240, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: a89991b41791e12449dd6d53ff966593, type: 2}
-    materialNameJP: "\u30C6\u30B9\u30C82"
-    materialNameEN: Test 2
+  - mmdMaterial: {fileID: 2100000, guid: 8d228a55f1b1efd46a298f093e273976, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 50a0884f77d55804085c784134c8dede, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: c9b68fd94adc9c745966bee0fdcba99d, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: aa402382c85bb064fabb1ce91acb242f, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 24bc18f18b0b3df4e998a5939ad690e9, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 379b517202cbc184b8c0743f84a2d3ba, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 7af95fa4f96d8d64c9d869b449638338, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 918906903d567814e860e706bbc4a6a0, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 51c22f6e3b1601c4cb75d448717c9b53, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: d6299e5183096804493f3661ad95199c, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 77dc9e1bfaefde042a601e01097bff0c, type: 2}
+    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: SubTex (Amplify Shader Editor)
     materialMeno: AGAMENOM

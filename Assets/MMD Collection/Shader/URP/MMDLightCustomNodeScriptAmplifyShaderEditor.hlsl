@@ -45,3 +45,53 @@ void additionalLights_float(float3 WorldPosition, float3 WorldNormal, out float3
     
     Output = diffuseColor; // Output the total diffuse color from all additional lights.
 }
+
+// Function to select a UV layer based on the given layer index.
+void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, out float2 UV)
+{
+    if (Layer == 0)
+    {
+        UV = uv0; // UV0 - Standard UV channel.
+    }
+    else if (Layer == 1)
+    {
+        UV = uv1; // UV1 - Second UV channel.
+    }
+    else if (Layer == 2)
+    {
+        UV = uv2; // UV2 - Third UV channel.
+    }
+    else if (Layer == 3)
+    {
+        UV = uv3; // UV3 - Fourth UV channel.
+    }
+    else
+    {
+        UV = uv0; // Default value if Layer is out of range.
+    }
+}
+
+// Function to control effects based on the given layer index.
+void effectsControl_float(float Layer, float4 Base, float4 Add, float4 Multi, float4 Sub, out float4 RGBA)
+{
+    if (Layer == 0)
+    {
+        RGBA = Base; // Base effect.
+    }
+    else if (Layer == 1)
+    {
+        RGBA = Add; // Add effect.
+    }
+    else if (Layer == 2)
+    {
+        RGBA = Multi; // Multiply effect.
+    }
+    else if (Layer == 3)
+    {
+        RGBA = Sub; // Subtract effect.
+    }
+    else
+    {
+        RGBA = Base; // Default value if Layer is out of range.
+    }
+}

@@ -67,3 +67,28 @@ void additionalLights_float(float3 WorldPosition, float3 WorldNormal, out float3
     #endif
 }
 #endif // CUSTOM_LIGHTING_INCLUDED.
+
+// Function to select a UV layer based on the given layer index.
+void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, out float2 UV)
+{
+    if (Layer == 0)
+    {
+        UV = uv0; // UV0 - Standard UV channel.
+    }
+    else if (Layer == 1)
+    {
+        UV = uv1; // UV1 - Second UV channel.
+    }
+    else if (Layer == 2)
+    {
+        UV = uv2; // UV2 - Third UV channel.
+    }
+    else if (Layer == 3)
+    {
+        UV = uv3; // UV3 - Fourth UV channel.
+    }
+    else
+    {
+        UV = uv0; // Default value if Layer is out of range.
+    }
+}

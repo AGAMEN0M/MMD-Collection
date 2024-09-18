@@ -130,14 +130,19 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
 
         // Render texture and memo fields.
         GUILayout.Label("Texture/Memo", EditorStyles.boldLabel);
-        GUI.backgroundColor = CustomInspectorUtilityEditor.HasFloatPropertyValue(materialProperties, "_EFFECTS", 3) ? Color.red : Color.white;
-        if (CustomInspectorUtilityEditor.HasFloatPropertyValue(materialProperties, "_EFFECTS", 3)) GUILayout.Label("We do not have knowledge about this function to replicate", redLabelStyle);
         CustomInspectorUtilityEditor.RenderDropdownProperty(materialProperties, currentMaterial, "_EFFECTS", "Effects:", new string[] { "- Disabled", "x Multi-Sphere", "+ Add-Sphere", "Sub-Tex" }, new float[] { 0, 2, 1, 3 }, 100, 150);
-        GUI.backgroundColor = Color.white;
         GUILayout.Space(5f);
         CustomInspectorUtilityEditor.RenderTextureProperty(materialProperties, "_MainTex", "Texture:");
         CustomInspectorUtilityEditor.RenderTextureProperty(materialProperties, "_ToonTex", "Toon:");
-        CustomInspectorUtilityEditor.RenderCubemapProperty(materialProperties, "_SphereCube", "SPH:");
+        if (CustomInspectorUtilityEditor.HasFloatPropertyValue(materialProperties, "_EFFECTS", 3))
+        {
+            CustomInspectorUtilityEditor.RenderDropdownProperty(materialProperties, currentMaterial, "_UVLayer", "UV Layer:", new string[] { "Layer 1", "Layer 2", "Layer 3", "Layer 4" }, new float[] { 0, 1, 2, 3 }, 100, 150);
+            CustomInspectorUtilityEditor.RenderTextureProperty(materialProperties, "_SubTex", "SPH:");
+        }
+        else
+        {
+            CustomInspectorUtilityEditor.RenderCubemapProperty(materialProperties, "_SphereCube", "SPH:");
+        }
         GUILayout.Space(10f);
 
         // Render material memo field.
