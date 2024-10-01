@@ -14,15 +14,15 @@ using UnityEditor;
 // Custom inspector for MMD (MikuMikuDance) materials using Amplify Shader Editor.
 public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
 {
-    // Fields for storing material names and memo.
+    // Fields for storing material names (Japanese and English) and memo.
     private string materialNameJP;
     private string materialNameEN;
-    private string materialMeno;
-    private bool showSystemsDefault;
+    private string materialMeno; // Field for storing material memo.
+    private bool showSystemsDefault; // Toggle for showing system's default inspector.
 
     private CustomMMDData customMMDMaterialData; // Custom data structure for MMD materials.
 
-    // References to material editor, properties, and current material.
+    // References to the material editor, properties, and current material being edited.
     private MaterialEditor materialInspector;
     private MaterialProperty[] materialProperties;
     private Material currentMaterial;
@@ -30,12 +30,12 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
     // Main GUI function for rendering the custom inspector.
     public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)
     {
-        // Initialize material inspector and properties.
+        // Initialize material inspector and material properties.
         materialInspector = materialEditor;
         materialProperties = properties;
         currentMaterial = materialEditor.target as Material;
 
-        // Toggle for showing default systems.
+        // Toggle for showing default system inspector or custom inspector.
         GUILayout.BeginHorizontal();
         GUILayout.Label("Show Default Systems:", EditorStyles.boldLabel, GUILayout.Width(145f));
         showSystemsDefault = EditorGUILayout.Toggle(showSystemsDefault);
@@ -45,18 +45,20 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
         // Load custom MMD material data if not already loaded.
         if (customMMDMaterialData == null)
         {
+            // Load or create the MMD material data.
             customMMDMaterialData = CustomMMDDataUtilityEditor.GetOrCreateCustomMMDData();
             CustomMMDDataUtilityEditor.RemoveInvalidMaterials(customMMDMaterialData);
             CustomInspectorUtilityEditor.LoadData(customMMDMaterialData, currentMaterial, out materialNameJP, out materialNameEN, out materialMeno, out showSystemsDefault);
         }
 
-        // Render either the custom inspector or the default inspector based on the toggle.
+        // Render custom inspector if the toggle is off, otherwise render the default inspector.
         if (!showSystemsDefault)
         {
-            RenderCustomMaterialInspector();
+            RenderCustomMaterialInspector(); // Render custom inspector UI for MMD materials.
         }
         else
         {
+            // Render the default inspector when the toggle is on.
             GUILayout.Space(20f);
             CustomInspectorUtilityEditor.RenderSurfaceOptions(materialProperties, currentMaterial);
             base.OnGUI(materialInspector, materialProperties);
@@ -70,10 +72,7 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
     // Render the custom material inspector UI.
     private void RenderCustomMaterialInspector()
     {
-        GUIStyle redLabelStyle = new(GUI.skin.label);
-        redLabelStyle.normal.textColor = Color.red;
-
-        // Render fields for material names.
+        // Render fields for material names (Japanese and English).
         EditorGUILayout.BeginHorizontal();
         GUILayout.BeginHorizontal(GUILayout.Width(400));
         GUILayout.Label("Mat-Name: (JP)", EditorStyles.boldLabel, GUILayout.Width(100f));
@@ -84,14 +83,14 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
         EditorGUILayout.EndHorizontal();
         GUILayout.Space(10f);
 
-        // Render color properties.
+        // Render color properties for the material.
         GUILayout.Label("Material Color", EditorStyles.boldLabel);
         CustomInspectorUtilityEditor.RenderColorProperty(materialProperties, "_Color", "Diffuse:");
         CustomInspectorUtilityEditor.RenderColorProperty(materialProperties, "_Specular", "Specular:");
         CustomInspectorUtilityEditor.RenderColorProperty(materialProperties, "_Ambient", "Ambient:");
         GUILayout.Space(10f);
 
-        // Render slider and float properties.
+        // Render opacity and reflection sliders.
         CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_Opaque", "Opaque:", 0f, 1f, 100f, 290f);
         CustomInspectorUtilityEditor.RenderFloatProperty(materialProperties, "_Shininess", "Reflection:", 100f);
         GUILayout.Space(10f);
@@ -109,12 +108,12 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
         GUILayout.BeginHorizontal(GUILayout.Width(100));
         CustomInspectorUtilityEditor.RenderKeywordToggle(materialProperties, currentMaterial, "_ReceiveShadows", "S-MAP:", "_RECEIVE_SHADOWS_OFF", true, 60f);
         GUILayout.Space(30f);
-        CustomInspectorUtilityEditor.RenderDisabledToggle(redLabelStyle);
+        CustomInspectorUtilityEditor.RenderUIToggle(materialProperties, "_SShad", "S-SHAD:", 60f);
         GUILayout.EndHorizontal();
         EditorGUILayout.EndHorizontal();
         GUILayout.Space(10f);
 
-        // Render edge (outline) options.
+        // Render edge (outline) settings.
         GUILayout.Label("Edge (Outline)", EditorStyles.boldLabel);
         EditorGUILayout.BeginHorizontal();
         GUILayout.BeginHorizontal(GUILayout.Width(100));
@@ -145,14 +144,14 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
         }
         GUILayout.Space(10f);
 
-        // Render material memo field.
+        // Render memo field for additional notes or information about the material.
         EditorGUILayout.BeginHorizontal();
         GUILayout.Label("Memo:", EditorStyles.boldLabel, GUILayout.Width(50f));
         materialMeno = EditorGUILayout.TextArea(materialMeno, GUILayout.Height(80f));
         EditorGUILayout.EndHorizontal();
         GUILayout.Space(10f);
 
-        // Render custom effects settings section.
+        // Render additional custom effects settings.
         GUILayout.Label("Custom Effects Settings", EditorStyles.boldLabel);
         CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_SpecularIntensity", "Specular Intensity:", 0f, 1f, 145f, 245f);
         CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_SPHOpacity", "SPH Opacity:", 0f, 1f, 145f, 245f);
@@ -163,14 +162,14 @@ public class MMDMaterialCustomInspector_AmplifyShaderEditor : ShaderGUI
         CustomInspectorUtilityEditor.RenderKeywordToggle(materialProperties, currentMaterial, "_Fog", "Fog:", "_FOG_ON", false, 145f);
         GUILayout.Space(10f);
 
-        // Render surface options provided by the custom inspector utility.
+        // Render surface options from the custom inspector utility.
         CustomInspectorUtilityEditor.RenderSurfaceOptions(materialProperties, currentMaterial);
 
-        // Render advanced options section.
+        // Render advanced options.
         GUILayout.Label("Advanced Options", EditorStyles.boldLabel);
-        materialInspector.RenderQueueField();
-        materialInspector.EnableInstancingField();
-        materialInspector.DoubleSidedGIField();
+        materialInspector.RenderQueueField(); // Render the queue field.
+        materialInspector.EnableInstancingField(); // Enable GPU instancing.
+        materialInspector.DoubleSidedGIField(); // Enable double-sided global illumination.
         CustomInspectorUtilityEditor.RenderLightmapFlags(currentMaterial);
     }
 }

@@ -92,3 +92,28 @@ void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, 
         UV = uv0; // Default value if Layer is out of range.
     }
 }
+
+// Function to control effects based on the given layer index.
+void effectsControl_float(float Layer, float3 Base, float3 Add, float3 Multi, float3 Sub, out float3 RGB)
+{
+    if (Layer == 0)
+    {
+        RGB = Base; // Base effect.
+    }
+    else if (Layer == 1)
+    {
+        RGB = Add; // Add effect.
+    }
+    else if (Layer == 2)
+    {
+        RGB = Multi; // Multiply effect.
+    }
+    else if (Layer == 3)
+    {
+        RGB = Sub; // Subtract effect.
+    }
+    else
+    {
+        RGB = Base; // Default value if Layer is out of range.
+    }
+}

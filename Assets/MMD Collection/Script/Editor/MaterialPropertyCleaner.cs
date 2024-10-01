@@ -8,7 +8,9 @@
  * Pseudonym: AGAMENOM
  * ---------------------------------------------------------------------------
 */
+
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEditor;
 
@@ -42,6 +44,9 @@ public class MaterialPropertyCleaner : MonoBehaviour
                     continue; // Skip to the next selected object.
                 }
 
+                // Record the material state for Undo.
+                Undo.RecordObject(material, "Clean Invalid Material Properties");
+
                 // List of properties we will maintain.
                 var validProperties = new HashSet<string>();
 
@@ -64,6 +69,13 @@ public class MaterialPropertyCleaner : MonoBehaviour
 
                 // Apply changes to the material.
                 materialSerializedObject.ApplyModifiedProperties();
+
+                // Clean invalid keywords.
+                CleanInvalidKeywords(material, shader);
+
+                EditorUtility.SetDirty(material);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
             else
             {
@@ -86,6 +98,48 @@ public class MaterialPropertyCleaner : MonoBehaviour
             {
                 properties.DeleteArrayElementAtIndex(i);
             }
+        }
+    }
+
+    private static void CleanInvalidKeywords(Material material, Shader shader)
+    {
+        // Use reflection to access the internal 'GetShaderGlobalKeywords' method from ShaderUtil.
+        var getKeywordsMethod = typeof(ShaderUtil).GetMethod("GetShaderGlobalKeywords", BindingFlags.Static | BindingFlags.NonPublic);
+
+        if (getKeywordsMethod != null)
+        {
+            // Get the keywords currently assigned to the material.
+            string[] materialKeywords = material.shaderKeywords;
+
+            // Retrieve global shader keywords.
+            string[] globalKeywords = (string[])getKeywordsMethod.Invoke(null, new object[] { shader });
+
+            // Create a HashSet for quick look-up of valid keywords.
+            HashSet<string> validKeywords = new(globalKeywords);
+
+            // List to keep track of removed keywords.
+            List<string> removedKeywords = new();
+
+            // Loop through the material's keywords and disable the invalid ones.
+            foreach (string keyword in materialKeywords)
+            {
+                if (!validKeywords.Contains(keyword))
+                {
+                    material.DisableKeyword(keyword); // Disable invalid keyword.
+                    removedKeywords.Add(keyword); // Add to the removed keywords list.
+                }
+            }
+
+            // Log removed keywords if any were found.
+            if (removedKeywords.Count > 0)
+            {
+                Debug.Log($"Removed invalid keywords from material '{material.name}': {string.Join(", ", removedKeywords)}");
+            }
+        }
+        else
+        {
+            // Log an error if the ShaderUtil method cannot be found.
+            Debug.LogError("Failed to retrieve global shader keywords. ShaderUtil method not found.");
         }
     }
 }

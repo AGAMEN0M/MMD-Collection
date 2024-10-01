@@ -1,33 +1,34 @@
 /*
  * ---------------------------------------------------------------------------
- * Description: 
+ * Description: [Add a short description of the script here.]
  * Author: Lucas Gomes Cecchini
  * Pseudonym: AGAMENOM
  * ---------------------------------------------------------------------------
 */
 #if UNITY_EDITOR
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEditor;
 
 public class MaterialShaderConverter : MonoBehaviour
 {
-    // Menu item to convert selected materials' shaders.
+    // Menu item to convert the shaders of selected materials in the Unity Editor.
     [MenuItem("Assets/MMD Collection/Convert Material Shader (MMD4Mecanim)")]
     public static void ConvertShader()
     {
-        // Iterate through each selected object in the Unity Editor.
+        // Iterate through each selected object in the Unity Editor selection.
         foreach (Object selectedObject in Selection.objects)
         {
-            // Check if the selected object is a Material.
+            // Check if the selected object is a Material before proceeding.
             if (selectedObject is Material)
             {
                 Material materialToConvert = selectedObject as Material;
 
-                // Switch case to handle different shader names.
+                // Handle conversion based on the shader name assigned to the material.
                 switch (materialToConvert.shader.name)
                 {
-                    // Replace shader based on its name and assign appropriate flags.
+                    // Replace specific MMD shaders with their URP counterparts.
                     case "MMD4Mecanim/MMDLit":
                         ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, false, false, false);
                         break;
@@ -174,10 +175,11 @@ public class MaterialShaderConverter : MonoBehaviour
         Debug.LogError($"Uncatalogued Shader '{materialToConvert.shader.name}' on material '{materialToConvert.name}'. Please assign a replacement shader manually.");
     }
 
-    // Method to change the shader of the material and transfer properties.
+    // Method to change the shader of a material and transfer its properties to the new shader.
     private static void ChangeShader(Material materialToConvert, string newShaderName, bool transparent, bool outline, bool twoSide, bool gShad)
     {
-        Undo.RecordObject(materialToConvert, "Convert Material"); // Record the material state for undo operations.
+        // Record the material's state to enable undo functionality in the editor.
+        Undo.RecordObject(materialToConvert, "Convert Material");
 
         // Retrieve and store current material properties.
         Color oldColor = materialToConvert.GetColor("_Color");
@@ -192,7 +194,7 @@ public class MaterialShaderConverter : MonoBehaviour
         Color oldEdgeColor = materialToConvert.GetColor("_EdgeColor");
         float oldEdgeSize = materialToConvert.GetFloat("_EdgeSize");
 
-        // Determine if any special effects are enabled.
+        // Determine any special effects active on the material.
         int oldEFFECTS = 0;
         if (materialToConvert.IsKeywordEnabled("SPHEREMAP_ADD"))
         {
@@ -219,8 +221,9 @@ public class MaterialShaderConverter : MonoBehaviour
         bool oldDoubleSidedGI = materialToConvert.doubleSidedGI;
         MaterialGlobalIlluminationFlags oldLightmapFlags = materialToConvert.globalIlluminationFlags;
 
-        materialToConvert.shader = Shader.Find(newShaderName); // Apply new shader to the material.
-        CleanMaterialProperties(materialToConvert); // Clean up any invalid properties from the previous shader.
+        // Apply the new shader and clean up any obsolete properties.
+        materialToConvert.shader = Shader.Find(newShaderName);
+        CleanMaterialProperties(materialToConvert);
 
         // Set basic color and property values for the new shader.
         materialToConvert.SetColor("_Color", new Color(oldColor.r, oldColor.g, oldColor.b, 0));
@@ -243,8 +246,8 @@ public class MaterialShaderConverter : MonoBehaviour
             materialToConvert.SetFloat("_ReceiveShadows", 0);
             materialToConvert.DisableKeyword("_RECEIVE_SHADOWS_OFF");
         }
-        //materialToConvert.SetFloat("S-SHAD", sShad ? 1 : 0);
-        Debug.LogWarning($"S-SHAD = {sShad}"); // Debug log for shadow casting property.
+
+        materialToConvert.SetFloat("_SShad", sShad ? 1 : 0);
 
         materialToConvert.SetFloat("_On", outline ? 1 : 0);
         materialToConvert.SetColor("_OutlineColor", oldEdgeColor);
@@ -260,31 +263,31 @@ public class MaterialShaderConverter : MonoBehaviour
         materialToConvert.SetFloat("_ShadowLum", oldShadowLum);
         materialToConvert.SetColor("_ToonTone", oldToonTone);
 
+        // Handle transparency-related properties.
         if (transparent || transparentOutline)
         {
             materialToConvert.SetFloat("_Surface", 1);
             materialToConvert.SetOverrideTag("RenderType", "Transparent");
-            materialToConvert.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
             oldCustomRenderQueue = RenderQueueToTransparent(oldCustomRenderQueue);
         }
         else
         {
             materialToConvert.SetFloat("_Surface", 0);
             materialToConvert.SetOverrideTag("RenderType", "Opaque");
-            materialToConvert.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
         }
 
-        // Restore original settings for the material.
+        // Restore original rendering settings for the material.
         materialToConvert.renderQueue = oldCustomRenderQueue;
         materialToConvert.enableInstancing = oldEnableInstancingVariants;
         materialToConvert.doubleSidedGI = oldDoubleSidedGI;
         materialToConvert.globalIlluminationFlags = oldLightmapFlags;
 
+        // Mark the material as dirty to update the editor.
         EditorUtility.SetDirty(materialToConvert);
         Debug.Log($"Material shader converted: {materialToConvert.name}");
     }
 
-    // Adjusts the render queue value for transparent materials.
+    // Adjusts the render queue for transparent materials based on the current queue value.
     private static int RenderQueueToTransparent(int value)
     {
         if (value >= 2000 && value <= 2499)
@@ -298,7 +301,7 @@ public class MaterialShaderConverter : MonoBehaviour
         return value;
     }
 
-    // Cleans up properties that are no longer valid after changing the shader.
+    // Cleans up properties in the material that are invalid for the new shader.
     private static void CleanMaterialProperties(Material material)
     {
         Shader shader = material.shader;
@@ -311,7 +314,7 @@ public class MaterialShaderConverter : MonoBehaviour
 
         var validProperties = new HashSet<string>();
 
-        // Collect valid property names from the new shader.
+        // Collect valid properties from the new shader.
         for (int i = 0; i < ShaderUtil.GetPropertyCount(shader); i++)
         {
             string propertyName = ShaderUtil.GetPropertyName(shader, i);
@@ -321,16 +324,19 @@ public class MaterialShaderConverter : MonoBehaviour
         var materialSerializedObject = new SerializedObject(material);
         var savedProperties = materialSerializedObject.FindProperty("m_SavedProperties");
 
-        // Remove properties that are not valid for the new shader.
+        // Remove any properties that are no longer valid for the new shader.
         RemoveInvalidProperties(savedProperties.FindPropertyRelative("m_TexEnvs"), validProperties);
         RemoveInvalidProperties(savedProperties.FindPropertyRelative("m_Ints"), validProperties);
         RemoveInvalidProperties(savedProperties.FindPropertyRelative("m_Floats"), validProperties);
         RemoveInvalidProperties(savedProperties.FindPropertyRelative("m_Colors"), validProperties);
 
         materialSerializedObject.ApplyModifiedProperties();
+
+        // Clean invalid keywords.
+        CleanInvalidKeywords(material, shader);
     }
 
-    // Removes properties from the serialized material if they are not present in the new shader.
+    // Removes properties that are not valid for the current shader.
     private static void RemoveInvalidProperties(SerializedProperty properties, HashSet<string> validProperties)
     {
         for (int i = properties.arraySize - 1; i >= 0; i--)
@@ -342,6 +348,49 @@ public class MaterialShaderConverter : MonoBehaviour
             {
                 properties.DeleteArrayElementAtIndex(i); // Remove invalid property.
             }
+        }
+    }
+
+    private static void CleanInvalidKeywords(Material material, Shader shader)
+    {
+        // Use reflection to access the internal 'GetShaderGlobalKeywords' method from ShaderUtil.
+        var getKeywordsMethod = typeof(ShaderUtil).GetMethod("GetShaderGlobalKeywords", BindingFlags.Static | BindingFlags.NonPublic);
+
+        if (getKeywordsMethod != null)
+        {
+            // Get the keywords currently assigned to the material.
+            string[] materialKeywords = material.shaderKeywords;
+
+            // Retrieve global shader keywords.
+            string[] globalKeywords = (string[])getKeywordsMethod.Invoke(null, new object[] { shader });
+
+            // Create a HashSet for quick look-up of valid keywords.
+            HashSet<string> validKeywords = new(globalKeywords);
+
+            // List to keep track of removed keywords.
+            List<string> removedKeywords = new();
+
+            // Loop through the material's keywords and disable the invalid ones.
+            foreach (string keyword in materialKeywords)
+            {
+                if (!validKeywords.Contains(keyword))
+                {
+                    material.DisableKeyword(keyword); // Disable invalid keyword.
+                    removedKeywords.Add(keyword); // Add to the removed keywords list.
+                }
+            }
+            /*
+            // Log removed keywords if any were found.
+            if (removedKeywords.Count > 0)
+            {
+                Debug.Log($"Removed invalid keywords from material '{material.name}': {string.Join(", ", removedKeywords)}");
+            }
+            */
+        }
+        else
+        {
+            // Log an error if the ShaderUtil method cannot be found.
+            Debug.LogError("Failed to retrieve global shader keywords. ShaderUtil method not found.");
         }
     }
 }

@@ -13,7 +13,7 @@ using System;
 
 namespace MMDCollectionEditor
 {
-    // Utility class for custom inspectors.
+    // Utility class for custom inspectors extending ShaderGUI.
     public class CustomInspectorUtilityEditor : ShaderGUI
     {
         // Load existing material data into the inspector fields.
@@ -26,6 +26,7 @@ namespace MMDCollectionEditor
 
             if (customMMDMaterialData != null && customMMDMaterialData.materialInfoList != null)
             {
+                // Retrieve existing material info based on the current material.
                 showSystemsDefault = customMMDMaterialData.showSystemsDefault;
                 MMDMaterialInfo existingMaterialInfo = customMMDMaterialData.materialInfoList.Find(info => info.mmdMaterial == currentMaterial);
 
@@ -44,9 +45,10 @@ namespace MMDCollectionEditor
             }
         }
 
-        // Save current material data from the inspector fields.
+        // Saves material data from the inspector fields into the custom material data structure.
         public static void SaveData(CustomMMDData customMMDMaterialData, Material currentMaterial, string materialNameJP, string materialNameEN, string materialMeno, bool showSystemsDefault)
         {
+            // Check for changes before saving.
             if (DetectChanges(customMMDMaterialData, currentMaterial, materialNameJP, materialNameEN, materialMeno, showSystemsDefault))
             {
                 customMMDMaterialData.showSystemsDefault = showSystemsDefault;
@@ -54,12 +56,14 @@ namespace MMDCollectionEditor
 
                 if (existingMaterialInfo != null)
                 {
+                    // Update existing material information.
                     existingMaterialInfo.materialNameJP = materialNameJP;
                     existingMaterialInfo.materialNameEN = materialNameEN;
                     existingMaterialInfo.materialMeno = materialMeno;
                 }
                 else
                 {
+                    // Create new material information entry if it doesn't exist.
                     MMDMaterialInfo newMaterialInfo = new()
                     {
                         mmdMaterial = currentMaterial,
@@ -71,17 +75,19 @@ namespace MMDCollectionEditor
                     customMMDMaterialData.materialInfoList.Add(newMaterialInfo);
                 }
 
+                // Mark the data as dirty and refresh assets to reflect changes.
                 EditorUtility.SetDirty(customMMDMaterialData);
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
             }
         }
 
-        // Detect if any changes have been made to the material data.
+        // Checks if any changes have been made to the material data fields.
         public static bool DetectChanges(CustomMMDData customMMDMaterialData, Material currentMaterial, string materialNameJP, string materialNameEN, string materialMeno, bool showSystemsDefault)
         {
             if (customMMDMaterialData != null)
             {
+                // Check if any material properties have changed.
                 MMDMaterialInfo existingMaterialInfo = customMMDMaterialData.materialInfoList.Find(info => info.mmdMaterial == currentMaterial);
 
                 if (existingMaterialInfo != null)
@@ -93,9 +99,10 @@ namespace MMDCollectionEditor
                 }
                 else
                 {
-                    return true;
+                    return true;// New material.
                 }
 
+                // Check if the system default setting has changed.
                 if (customMMDMaterialData.showSystemsDefault != showSystemsDefault)
                 {
                     return true;
@@ -110,7 +117,7 @@ namespace MMDCollectionEditor
         {
             GUILayout.Label("Surface Options", EditorStyles.boldLabel);
             RenderSurfaceTypeDropdown(materialProperties, currentMaterial);
-            CheckBlendingMode(materialProperties, currentMaterial);
+            CheckBlendingMode(materialProperties);
             if (IsToggleUIPropertyEnabled(materialProperties, "_Surface"))
             {
                 RenderBlendingModeDropdown(materialProperties, currentMaterial);
@@ -118,7 +125,7 @@ namespace MMDCollectionEditor
             RenderDropdownProperty(materialProperties, currentMaterial, "_Cull", "Render Face", new string[] { "Both", "Back", "Front" }, new float[] { 0, 1, 2 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true);
             RenderDepthWriteDropdown(materialProperties, currentMaterial);
             RenderDropdownProperty(materialProperties, currentMaterial, "_ZTest", "Depth Test", new string[] { "Never", "Less", "Equal", "LEquaI", "Greater", "NotEqual", "GEqual", "Always" }, new float[] { 1, 2, 3, 4, 5, 6, 7, 8 }, EditorGUIUtility.labelWidth, EditorGUIUtility.fieldWidth, true);
-            RenderKeywordToggle(materialProperties, currentMaterial, "_AlphaClip", "Alpha Clipping", "_ALPHATEST_ON", false, EditorGUIUtility.labelWidth);
+            RenderUIToggle(materialProperties, "_AlphaClip", "Alpha Clipping", EditorGUIUtility.labelWidth);
             if (IsToggleUIPropertyEnabled(materialProperties, "_AlphaClip"))
             {
                 EditorGUILayout.BeginHorizontal();
@@ -131,7 +138,7 @@ namespace MMDCollectionEditor
             GUILayout.Space(10f);
         }
 
-        // Render options for lightmap flags.
+        // Renders Global Illumination flags in a dropdown menu.
         public static void RenderLightmapFlags(Material currentMaterial)
         {
             string[] displayOptions = { "None", "Realtime", "Baked", "Emissive" };
@@ -148,6 +155,7 @@ namespace MMDCollectionEditor
             MaterialGlobalIlluminationFlags currentFlag = currentMaterial.globalIlluminationFlags;
             int selectedIndex = Array.IndexOf(flagOptions, currentFlag);
 
+            // Handle dropdown changes.
             EditorGUI.BeginChangeCheck();
             selectedIndex = EditorGUILayout.Popup(selectedIndex, displayOptions);
             if (EditorGUI.EndChangeCheck())
@@ -160,7 +168,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a color property with a label.
+        // Renders a color picker field with individual RGB sliders.
         public static void RenderColorProperty(MaterialProperty[] materialProperties, string propertyName, string label)
         {
             EditorGUILayout.BeginHorizontal();
@@ -169,6 +177,7 @@ namespace MMDCollectionEditor
             EditorGUI.BeginChangeCheck();
             Color color = EditorGUILayout.ColorField(GUIContent.none, colorProperty.colorValue, false, true, false, GUILayout.Width(50f));
 
+            // Detect color changes.
             if (EditorGUI.EndChangeCheck())
             {
                 Undo.RecordObject(colorProperty.targets[0], "Change Color");
@@ -176,6 +185,7 @@ namespace MMDCollectionEditor
                 EditorUtility.SetDirty(colorProperty.targets[0]);
             }
 
+            // Render sliders for individual RGB channels.
             GUILayout.Space(20f);
             GUILayout.Label("R", GUILayout.Width(15f));
             float r = EditorGUILayout.FloatField(color.r, GUILayout.Width(50f));
@@ -184,6 +194,7 @@ namespace MMDCollectionEditor
             GUILayout.Label("B", GUILayout.Width(15f));
             float b = EditorGUILayout.FloatField(color.b, GUILayout.Width(50f));
 
+            // Update individual RGB values if any of them change.
             if (r != color.r || g != color.g || b != color.b)
             {
                 Undo.RecordObject(colorProperty.targets[0], "Change Color Channels");
@@ -315,21 +326,6 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a disabled toggle.
-        public static void RenderDisabledToggle(GUIStyle redLabelStyle)
-        {
-            EditorGUI.BeginDisabledGroup(true);
-            GUI.backgroundColor = Color.red;
-            EditorGUILayout.BeginHorizontal();
-            GUIContent labelContent = new("S-SHAD:", "<color=red>Apparently the Unity graphics engine does not allow or is not capable of reproducing this</color>");
-            GUILayout.Label(labelContent, redLabelStyle, GUILayout.Width(60f));
-            bool value = false;
-            EditorGUILayout.Toggle(value, GUILayout.Width(10f));
-            EditorGUILayout.EndHorizontal();
-            GUI.backgroundColor = Color.white;
-            EditorGUI.EndDisabledGroup();
-        }
-
         // Render a UI toggle.
         public static void RenderUIToggle(MaterialProperty[] materialProperties, string propertyName, string label, float space)
         {
@@ -411,7 +407,7 @@ namespace MMDCollectionEditor
         }
 
         // Render a dropdown property.
-        public static void RenderDropdownProperty(MaterialProperty[] materialProperties, Material currentMaterial, string propertyName, string label, string[] displayOptions, float[] numberOptions, float space, float dropdownSpace, bool expand = false, string[] keywordOptions = null)
+        public static void RenderDropdownProperty(MaterialProperty[] materialProperties, Material currentMaterial, string propertyName, string label, string[] displayOptions, float[] numberOptions, float space, float dropdownSpace, bool expand = false)
         {
             if (displayOptions.Length != numberOptions.Length)
             {
@@ -441,19 +437,6 @@ namespace MMDCollectionEditor
             {
                 Undo.RecordObject(currentMaterial, $"Change {propertyName}");
                 dropdownProperty.floatValue = numberOptions[selectedIndex];
-
-                // Update the material's keywords.
-                if (keywordOptions != null)
-                {
-                    foreach (string keyword in keywordOptions)
-                    {
-                        if (currentMaterial.IsKeywordEnabled(keyword))
-                        {
-                            currentMaterial.DisableKeyword(keyword);
-                        }
-                    }
-                    currentMaterial.EnableKeyword(keywordOptions[selectedIndex]);
-                }
                 EditorUtility.SetDirty(currentMaterial);
             }
             EditorGUILayout.EndHorizontal();
@@ -627,25 +610,21 @@ namespace MMDCollectionEditor
                         blend.floatValue = 1;
                         srcBlend.floatValue = 1;
                         dstBlend.floatValue = 10;
-                        currentMaterial.DisableKeyword("_ALPHAMODULATE_ON");
                         break;
                     case 2: // Additive.
                         blend.floatValue = 2;
                         srcBlend.floatValue = 5;
                         dstBlend.floatValue = 1;
-                        currentMaterial.DisableKeyword("_ALPHAMODULATE_ON");
                         break;
                     case 3: // Multiply.
                         blend.floatValue = 3;
                         srcBlend.floatValue = 2;
                         dstBlend.floatValue = 0;
-                        currentMaterial.EnableKeyword("_ALPHAMODULATE_ON");
                         break;
                     default: // Alpha.
                         blend.floatValue = 0;
                         srcBlend.floatValue = 5;
                         dstBlend.floatValue = 10;
-                        currentMaterial.DisableKeyword("_ALPHAMODULATE_ON");
                         break;
                 }
 
@@ -656,7 +635,7 @@ namespace MMDCollectionEditor
         }
 
         // Check and update blending mode based on properties.
-        public static void CheckBlendingMode(MaterialProperty[] materialProperties, Material currentMaterial)
+        public static void CheckBlendingMode(MaterialProperty[] materialProperties)
         {
             MaterialProperty surface = FindProperty("_Surface", materialProperties);
             MaterialProperty blend = FindProperty("_Blend", materialProperties);
@@ -672,32 +651,21 @@ namespace MMDCollectionEditor
                     blend.floatValue = 1;
                     srcBlend.floatValue = 1;
                     dstBlend.floatValue = surfaceOn ? 10 : 0;
-                    currentMaterial.DisableKeyword("_ALPHAMODULATE_ON");
                     break;
                 case 2: // Additive.
                     blend.floatValue = 2;
                     srcBlend.floatValue = surfaceOn ? 5 : 1;
                     dstBlend.floatValue = surfaceOn ? 1 : 0;
-                    currentMaterial.DisableKeyword("_ALPHAMODULATE_ON");
                     break;
                 case 3: // Multiply.
                     blend.floatValue = 3;
                     srcBlend.floatValue = surfaceOn ? 2 : 1;
                     dstBlend.floatValue = 0;
-                    if (surfaceOn)
-                    {
-                        currentMaterial.EnableKeyword("_ALPHAMODULATE_ON");
-                    }
-                    else
-                    {
-                        currentMaterial.DisableKeyword("_ALPHAMODULATE_ON");
-                    }
                     break;
                 default: // Alpha.
                     blend.floatValue = 0;
                     srcBlend.floatValue = surfaceOn ? 5 : 1;
                     dstBlend.floatValue = surfaceOn ? 10 : 0;
-                    currentMaterial.DisableKeyword("_ALPHAMODULATE_ON");
                     break;
             }
         }
@@ -723,12 +691,10 @@ namespace MMDCollectionEditor
                     case 1: // Transparent.
                         currentMaterial.SetFloat("_Surface", 1);
                         currentMaterial.SetOverrideTag("RenderType", "Transparent");
-                        currentMaterial.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
                         break;
                     default: // Opaque.
                         currentMaterial.SetFloat("_Surface", 0);
                         currentMaterial.SetOverrideTag("RenderType", "Opaque");
-                        currentMaterial.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
                         break;
                 }
 
