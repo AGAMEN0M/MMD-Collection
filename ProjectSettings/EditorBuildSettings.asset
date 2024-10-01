@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/MMD Collection/Scenes/Test Scene.unity
     guid: ba0f27e24e2d11446a23dca01c188f6a
   - enabled: 1
-    path: Assets/Test Ambient Color/Test 1.unity
+    path: Assets/Test/Test Ambient Color/Test 1.unity
     guid: 9e7bfa9e54c7c874fbf47c343cfb8c40
   m_configObjects: {}

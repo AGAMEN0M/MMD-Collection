@@ -39,8 +39,6 @@ Material:
     m_Floats:
     - _AdditionalLights: 1
     - _AlphaCutoff: 0.5
-    - _Int1: 1
-    - _Lights: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1

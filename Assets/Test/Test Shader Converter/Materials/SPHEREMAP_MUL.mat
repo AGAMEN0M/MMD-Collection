@@ -14,8 +14,7 @@ Material:
   m_ValidKeywords:
   - SPECULAR_ON
   - SPHEREMAP_MUL
-  m_InvalidKeywords:
-  - _TOON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0

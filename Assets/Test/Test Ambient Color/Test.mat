@@ -11,9 +11,9 @@ Material:
   m_Shader: {fileID: 4800000, guid: 6d437041cc96ada4aa4f5fed106f9fd2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
+  m_ValidKeywords:
   - _FOG_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -31,6 +31,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SphereCube:
         m_Texture: {fileID: 8900000, guid: d33a868444629e5489239c4dc31a2cb4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SubTex:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonTex:
@@ -65,6 +69,7 @@ Material:
     - _EFFECTS: 1
     - _EdgeSize: 0.1
     - _Fog: 1
+    - _HDR: 1
     - _MultipleLights: 1
     - _On: 1
     - _Opaque: 1
@@ -72,11 +77,13 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SPHOpacity: 1
+    - _SShad: 1
     - _ShadowLum: 1.5
     - _Shininess: 50
     - _SpecularIntensity: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _UVLayer: 0
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 1

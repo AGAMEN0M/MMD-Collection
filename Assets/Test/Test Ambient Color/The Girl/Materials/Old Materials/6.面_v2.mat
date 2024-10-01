@@ -15,8 +15,7 @@ Material:
   - SELFSHADOW_ON
   - SPECULAR_ON
   - SPHEREMAP_ADD
-  m_InvalidKeywords:
-  - _TOON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
