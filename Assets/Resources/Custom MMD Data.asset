@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf43231ba71ff6041aafbbc9dd4431e7, type: 3}
   m_Name: Custom MMD Data
   m_EditorClassIdentifier: 
-  showSystemsDefault: 1
+  showSystemsDefault: 0
   materialInfoList:
   - mmdMaterial: {fileID: 2100000, guid: fea0f609e837e404db90fdd01379775f, type: 2}
     materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC

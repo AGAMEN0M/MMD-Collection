@@ -115,6 +115,7 @@ public class MMDMaterialCustomInspector_ShaderGraph : ShaderGUI
         GUILayout.Space(10f);
 
         // Render edge (outline) settings.
+        EditorGUI.BeginDisabledGroup(true);
         GUILayout.Label("Edge (Outline)", EditorStyles.boldLabel);
         EditorGUILayout.BeginHorizontal();
         GUILayout.BeginHorizontal(GUILayout.Width(100));
@@ -127,6 +128,7 @@ public class MMDMaterialCustomInspector_ShaderGraph : ShaderGUI
         EditorGUILayout.EndHorizontal();
         CustomInspectorUtilityEditor.RenderVector4Property(materialProperties, "_OutlineColor");
         GUILayout.Space(10f);
+        EditorGUI.EndDisabledGroup();
 
         // Render texture and memo fields.
         GUILayout.Label("Texture/Memo", EditorStyles.boldLabel);

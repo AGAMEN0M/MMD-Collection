@@ -20,30 +20,21 @@ void lightColor_float(float3 worldPos, out float3 OutputColor)
     OutputColor = mainLight.color; // Output the color of the main light.
 }
 
-// Function to calculate the contribution of additional lights at a given world position and normal.
-void additionalLights_float(float3 WorldPosition, float3 WorldNormal, out float3 Output)
+void lightmapCol_float(float2 lightmapUV, out float3 Output)
 {
-    float3 diffuseColor = 0; // Initialize the diffuse color to zero.
-    WorldNormal = normalize(WorldNormal); // Normalize the world normal.
-    int pixelLightCount = GetAdditionalLightsCount(); // Get the count of additional pixel lights.
-    
-    // Loop through each additional light to compute its contribution.
-    for (int i = 0; i < pixelLightCount; i++)
-    {
-        // Sample the shadow mask to determine shadow coverage at this fragment's position.
-        float4 shadowMask = SAMPLE_SHADOWMASK(dynamicLightmapUV);
-        
-        // Get the additional light based on its index, world position, and the shadow mask.
-        Light light = GetAdditionalLight(i, WorldPosition, shadowMask);
-        
-        // Calculate the attenuated light color considering distance and shadow attenuation.
-        half3 attenuatedLightColor = light.color * (light.distanceAttenuation * light.shadowAttenuation);
-        
-        // Add the Lambertian lighting contribution of the current light to the diffuse color.
-        diffuseColor += LightingLambert(attenuatedLightColor, light.direction, WorldNormal);
-    }
-    
-    Output = diffuseColor; // Output the total diffuse color from all additional lights.
+	#ifdef LIGHTMAP_ON
+		// Ajusta as UVs do lightmap com Tiling e Offset (unity_LightmapST)
+        float2 adjustedUV = lightmapUV * unity_LightmapST.xy + unity_LightmapST.zw;
+
+        // Amostra o lightmap usando as UVs ajustadas
+        //float4 lightmapCol = UNITY_SAMPLE_TEX2D(unity_Lightmap, adjustedUV);
+
+        // Define a saída como a cor do lightmap
+        //Output = lightmapCol.rgb;
+		Output = float3(1, 0, 0);
+	#else
+		Output = float3(1, 1, 1);
+	#endif
 }
 
 // Function to select a UV layer based on the given layer index.
