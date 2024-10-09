@@ -66,6 +66,27 @@ void additionalLights_float(float3 WorldPosition, float3 WorldNormal, out float3
         Output = diffuseColor; // Output the total diffuse color from all additional lights.
     #endif
 }
+
+// Function to sample the lightmap color at the given UV coordinates.
+void lightmapCol_float(float2 lightmapUV, out float3 Output)
+{
+    #if defined(SHADERGRAPH_PREVIEW)
+        Output = 1; // Use default lightmap color for shader graph preview.
+    #else
+        float4 lightmapCol = 1; // Initialize lightmap color to default white (no lightmap influence).
+    
+        #ifdef LIGHTMAP_ON
+            // Adjust the lightmap UVs with Tiling and Offset (using unity_LightmapST)
+            float2 sizeLightmapUV = lightmapUV * unity_LightmapST.xy + unity_LightmapST.zw;
+    
+            // Sample the lightmap texture using the provided UV coordinates if lightmaps are enabled.
+            lightmapCol = 30 * SAMPLE_TEXTURE2D( unity_Lightmap, samplerunity_Lightmap, sizeLightmapUV );
+        #endif
+    
+        Output = lightmapCol.rgb; // Output the RGB component of the sampled or default lightmap color.
+    #endif
+}
+
 #endif // CUSTOM_LIGHTING_INCLUDED.
 
 // Function to select a UV layer based on the given layer index.

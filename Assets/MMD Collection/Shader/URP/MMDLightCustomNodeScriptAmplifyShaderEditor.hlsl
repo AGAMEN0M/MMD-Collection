@@ -20,21 +20,17 @@ void lightColor_float(float3 worldPos, out float3 OutputColor)
     OutputColor = mainLight.color; // Output the color of the main light.
 }
 
+// Function to sample the lightmap color at the given UV coordinates.
 void lightmapCol_float(float2 lightmapUV, out float3 Output)
 {
-	#ifdef LIGHTMAP_ON
-		// Ajusta as UVs do lightmap com Tiling e Offset (unity_LightmapST)
-        float2 adjustedUV = lightmapUV * unity_LightmapST.xy + unity_LightmapST.zw;
-
-        // Amostra o lightmap usando as UVs ajustadas
-        //float4 lightmapCol = UNITY_SAMPLE_TEX2D(unity_Lightmap, adjustedUV);
-
-        // Define a saída como a cor do lightmap
-        //Output = lightmapCol.rgb;
-		Output = float3(1, 0, 0);
-	#else
-		Output = float3(1, 1, 1);
+    float4 lightmapCol = 1; // Initialize lightmap color to default white (no lightmap influence).
+    
+    // Sample the lightmap texture using the provided UV coordinates if lightmaps are enabled.
+    #ifdef LIGHTMAP_ON
+        lightmapCol = 30 * SAMPLE_TEXTURE2D( unity_Lightmap, samplerunity_Lightmap, lightmapUV );
 	#endif
+    
+    Output = lightmapCol.rgb; // Output the RGB component of the sampled or default lightmap color.
 }
 
 // Function to select a UV layer based on the given layer index.
