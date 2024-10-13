@@ -5,15 +5,17 @@
  *              individual objects or all objects in the list at once, remove objects from the list, and drag and 
  *              drop new objects into the list. The script also offers options to hide objects from the inspector 
  *              and customize the display of the default inspector for enhanced editor workflow.
+ *              Additionally, in non-development builds, the script will automatically destroy the 
+ *              ManageObjects component at runtime to prevent it from affecting performance in release builds.
  * Author: Lucas Gomes Cecchini
  * Pseudonym: AGAMENOM
  * ---------------------------------------------------------------------------
 */
 using UnityEngine;
-using System.Linq;
 
 #if UNITY_EDITOR
 using UnityEditor;
+using System.Linq;
 #endif
 
 [AddComponentMenu("MMD Collection/Manage Objects")]
@@ -58,6 +60,11 @@ public class ManageObjects : MonoBehaviour
             Undo.RecordObject(this, $"Remove Object {manageObjects[i].gameObjects.name} from List");
             ArrayUtility.RemoveAt(ref manageObjects, i); // Remove item from the array.
         }
+    }
+#else
+    private void Start()
+    {
+        Destroy(this); // Destroys only the ManageObjects component, not the entire GameObject.
     }
 #endif
 }
