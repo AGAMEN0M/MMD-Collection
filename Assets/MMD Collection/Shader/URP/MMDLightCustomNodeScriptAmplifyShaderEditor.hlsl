@@ -27,7 +27,7 @@ void lightmapCol_float(float2 lightmapUV, out float3 Output)
     
     // Sample the lightmap texture using the provided UV coordinates if lightmaps are enabled.
     #ifdef LIGHTMAP_ON
-        lightmapCol = 30 * SAMPLE_TEXTURE2D( unity_Lightmap, samplerunity_Lightmap, lightmapUV );
+        lightmapCol = SAMPLE_TEXTURE2D( unity_Lightmap, samplerunity_Lightmap, lightmapUV );
 	#endif
     
     Output = lightmapCol.rgb; // Output the RGB component of the sampled or default lightmap color.
@@ -75,7 +75,7 @@ void effectsControl_float(float Layer, float4 Base, float4 Add, float4 Multi, fl
     }
     else if (Layer == 3)
     {
-        RGBA = Sub; // Subtract effect.
+        RGBA = Sub; // Sub-Texture effect.
     }
     else
     {

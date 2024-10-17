@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Add Sphere (Shader Graph)
-  m_Shader: {fileID: -6465566751694194690, guid: 75632dc8894ea604690e365027760a9d,
+  m_Shader: {fileID: -6465566751694194690, guid: f1a06050f0d68b24481b91196746e83f,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -19,7 +19,7 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2002
+  m_CustomRenderQueue: 2006
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -62,7 +62,7 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _CastShadows: 1
-    - _Cull: 2
+    - _Cull: 0
     - _Cutoff: 0.5
     - _DstBlend: 0
     - _EFFECTS: 1

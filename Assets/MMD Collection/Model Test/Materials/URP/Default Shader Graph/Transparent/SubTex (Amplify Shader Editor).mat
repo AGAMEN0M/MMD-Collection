@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Multi Sphere (Shader Graph)
-  m_Shader: {fileID: -6465566751694194690, guid: 75632dc8894ea604690e365027760a9d,
+  m_Name: SubTex (Amplify Shader Editor)
+  m_Shader: {fileID: -6465566751694194690, guid: f1a06050f0d68b24481b91196746e83f,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -20,7 +20,7 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3012
+  m_CustomRenderQueue: 3013
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses: []
@@ -37,7 +37,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 741fff69dbf494b459a162c0e48cc827, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonTex:
@@ -66,7 +66,7 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 10
-    - _EFFECTS: 2
+    - _EFFECTS: 3
     - _EdgeSize: 0
     - _Fog: 1
     - _HDR: 1

@@ -1,140 +1,203 @@
-#ifndef CUSTOM_LIGHTING_INCLUDED
-#define CUSTOM_LIGHTING_INCLUDED
-
-// Function to calculate the direction of the main light in world space.
-void WorldSpaceLightDir_float(float3 worldPos, out float3 Direction)
+// Function to compute spherical harmonics lighting based on the normal direction.
+void vLight_float(float3 normal, out float3 Output)
 {
-    #if defined(SHADERGRAPH_PREVIEW)
-        Direction = 1; // Use a default light direction for shader graph preview.
-    #else
-        float4 shadowCoord = TransformWorldToShadowCoord(worldPos); // Transform world position to shadow coordinates.
-        Light mainLight = GetMainLight(shadowCoord); // Get the main light information based on shadow coordinates.
-        Direction = mainLight.direction; // Output the direction of the main light.
-    #endif
+	#if defined(SHADERGRAPH_PREVIEW)
+		Output = 1; // In preview mode, output a constant value for debugging.
+	#else
+		Output = SampleSH(normal); // Sample the spherical harmonics with the given normal to get the lighting.
+	#endif
 }
 
 // Function to calculate shadow attenuation at a given world position.
-void shadowAtten_float(float3 worldPos, out float OutputShadowAtten)
+void shadowAtten_float(float3 worldPos, out float Output)
 {
-    #if defined(SHADERGRAPH_PREVIEW)
-        OutputShadowAtten = 1; // Use default shadow attenuation for shader graph preview.
-    #else
-        float4 shadowCoord = TransformWorldToShadowCoord(worldPos); // Transform world position to shadow coordinates.
-        Light mainLight = GetMainLight(shadowCoord); // Get the main light information based on shadow coordinates.
-        OutputShadowAtten = mainLight.shadowAttenuation; // Output the shadow attenuation from the main light.
-    #endif
+	#if defined(SHADERGRAPH_PREVIEW)
+		Output = 1; // In preview mode, output a constant value for debugging.
+	#else
+		float4 shadowCoord = TransformWorldToShadowCoord(worldPos); // Transform world position to shadow coordinates.
+		Light mainLight = GetMainLight(shadowCoord); // Get the main light information based on shadow coordinates.
+		Output = mainLight.shadowAttenuation; // Output the shadow attenuation from the main light.
+	#endif
 }
 
-// Function to calculate the color of the main light at a given world position.
-void lightColor_float(float3 worldPos, out float3 OutputColor)
+// Function to calculate the light color at a given world position.
+void lightColor_float(float3 worldPos, out float3 Output)
 {
-    #if defined(SHADERGRAPH_PREVIEW)
-        OutputColor = 1; // Use default light color for shader graph preview.
-    #else
-        float4 shadowCoord = TransformWorldToShadowCoord(worldPos); // Transform world position to shadow coordinates.
-        Light mainLight = GetMainLight(shadowCoord); // Get the main light information based on shadow coordinates.
-        OutputColor = mainLight.color; // Output the color of the main light.
-    #endif
-}
-
-// Function to calculate the contribution of additional lights at a given world position and normal.
-void additionalLights_float(float3 WorldPosition, float3 WorldNormal, out float3 Output)
-{
-    #if defined(SHADERGRAPH_PREVIEW)
-        Output = 1; // Use default light contribution for shader graph preview.
-    #else
-        float3 diffuseColor = 0; // Initialize the diffuse color to zero.
-        WorldNormal = normalize(WorldNormal); // Normalize the world normal.
-        int pixelLightCount = GetAdditionalLightsCount(); // Get the count of additional pixel lights.
-
-        // Loop through each additional light to compute its contribution.
-        for (int i = 0; i < pixelLightCount; i++)
-        {
-            // Sample the shadow mask to determine shadow coverage at this fragment's position.
-            float4 shadowMask = SAMPLE_SHADOWMASK(dynamicLightmapUV);
-        
-            // Get the additional light based on its index, world position, and the shadow mask.
-            Light light = GetAdditionalLight(i, WorldPosition, shadowMask);
-        
-            // Calculate the attenuated light color considering distance and shadow attenuation.
-            half3 attenuatedLightColor = light.color * (light.distanceAttenuation * light.shadowAttenuation);
-        
-            // Add the Lambertian lighting contribution of the current light to the diffuse color.
-            diffuseColor += LightingLambert(attenuatedLightColor, light.direction, WorldNormal);
-        }
-    
-        Output = diffuseColor; // Output the total diffuse color from all additional lights.
-    #endif
+	#if defined(SHADERGRAPH_PREVIEW)
+		Output = 1; // In preview mode, output a constant value for debugging.
+	#else
+		float4 shadowCoord = TransformWorldToShadowCoord(worldPos); // Transform world position to shadow coordinates.
+		Light mainLight = GetMainLight(shadowCoord); // Get the main light information based on shadow coordinates.
+		Output = mainLight.color; // Output the color of the main light.
+	#endif
 }
 
 // Function to sample the lightmap color at the given UV coordinates.
 void lightmapCol_float(float2 lightmapUV, out float3 Output)
 {
-    #if defined(SHADERGRAPH_PREVIEW)
-        Output = 1; // Use default lightmap color for shader graph preview.
-    #else
-        float4 lightmapCol = 1; // Initialize lightmap color to default white (no lightmap influence).
-    
-        #ifdef LIGHTMAP_ON
-            // Adjust the lightmap UVs with Tiling and Offset (using unity_LightmapST)
-            float2 sizeLightmapUV = lightmapUV * unity_LightmapST.xy + unity_LightmapST.zw;
-    
-            // Sample the lightmap texture using the provided UV coordinates if lightmaps are enabled.
-            lightmapCol = 30 * SAMPLE_TEXTURE2D( unity_Lightmap, samplerunity_Lightmap, sizeLightmapUV );
-        #endif
-    
-        Output = lightmapCol.rgb; // Output the RGB component of the sampled or default lightmap color.
-    #endif
+	#if defined(SHADERGRAPH_PREVIEW)
+		Output = 1; // In preview mode, output a constant value for debugging.
+	#else
+		float4 lightmapCol = 1; // Initialize lightmap color to default white (no lightmap influence).
+		
+		// Sample the lightmap texture using the provided UV coordinates if lightmaps are enabled.
+		#ifdef LIGHTMAP_ON
+			lightmapCol = SAMPLE_TEXTURE2D(unity_Lightmap, samplerunity_Lightmap, lightmapUV);
+		#endif
+		
+		Output = lightmapCol.rgb; // Output the RGB component of the sampled or default lightmap color.
+	#endif
 }
 
-#endif // CUSTOM_LIGHTING_INCLUDED.
-
 // Function to select a UV layer based on the given layer index.
-void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, out float2 UV)
+void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, out float2 Output)
 {
     if (Layer == 0)
     {
-        UV = uv0; // UV0 - Standard UV channel.
+        Output = uv0; // UV0 - Standard UV channel.
     }
     else if (Layer == 1)
     {
-        UV = uv1; // UV1 - Second UV channel.
+        Output = uv1; // UV1 - Second UV channel.
     }
     else if (Layer == 2)
     {
-        UV = uv2; // UV2 - Third UV channel.
+        Output = uv2; // UV2 - Third UV channel.
     }
     else if (Layer == 3)
     {
-        UV = uv3; // UV3 - Fourth UV channel.
+        Output = uv3; // UV3 - Fourth UV channel.
     }
     else
     {
-        UV = uv0; // Default value if Layer is out of range.
+        Output = uv0; // Default value if Layer is out of range.
     }
 }
 
 // Function to control effects based on the given layer index.
-void effectsControl_float(float Layer, float3 Base, float3 Add, float3 Multi, float3 Sub, out float3 RGB)
+void effectsControl_float(float Layer, float3 Base, float3 Add, float3 Multi, float3 Sub, out float3 Output)
 {
     if (Layer == 0)
     {
-        RGB = Base; // Base effect.
+        Output = Base; // Base effect.
     }
     else if (Layer == 1)
     {
-        RGB = Add; // Add effect.
+        Output = Add; // Add effect.
     }
     else if (Layer == 2)
     {
-        RGB = Multi; // Multiply effect.
+        Output = Multi; // Multiply effect.
     }
     else if (Layer == 3)
     {
-        RGB = Sub; // Subtract effect.
+        Output = Sub; // Sub-Texture effect.
     }
     else
     {
-        RGB = Base; // Default value if Layer is out of range.
+        Output = Base; // Default value if Layer is out of range.
     }
+}
+
+// Function to get the world space direction of the main light.
+void WorldSpaceLightDir_float(out float3 Output)
+{
+	#if defined(SHADERGRAPH_PREVIEW)
+		Output = 1; // In preview mode, output a constant value for debugging.
+	#else
+		Output = _MainLightPosition.xyz; // Output the world space direction of the main light.
+	#endif
+}
+
+// Function to calculate lightmap UV coordinates using transformation.
+void LightmapUV_float(float2 UV, out float2 Output)
+{
+	#if defined(SHADERGRAPH_PREVIEW)
+		Output = 1; // In preview mode, output a constant value for debugging.
+	#else
+		Output = UV * (unity_LightmapST).xy + (unity_LightmapST).zw; // Apply lightmap UV transformation.
+	#endif
+}
+
+// Function to calculate dynamic lightmap UV coordinates using transformation.
+void LightmapUV_Dynamic_float(float2 UV, out float2 Output)
+{
+	#if defined(SHADERGRAPH_PREVIEW)
+		Output = 1; // In preview mode, output a constant value for debugging.
+	#else
+		Output = UV * (unity_DynamicLightmapST).xy + (unity_DynamicLightmapST).zw; // Apply dynamic lightmap UV transformation.
+	#endif
+}
+
+// Function to switch between two light color inputs based on lightmap status.
+void Switch_float(float3 False, float3 True, out float3 Output)
+{
+	#ifdef LIGHTMAP_ON
+		Output = True; // Output True if lightmaps are enabled.
+	#else
+		Output = False; // Output False if lightmaps are disabled.
+	#endif
+}
+
+// Function to sample the shadow mask at the given lightmap UV coordinates.
+void ShadowMask_float(float2 LightmapUV, out float4 Output)
+{
+	#if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)
+		Output = SAMPLE_SHADOWMASK(LightmapUV.xy); // Sample the shadow mask texture.
+	#elif !defined(LIGHTMAP_ON)
+		Output = unity_ProbesOcclusion; // Output occlusion from probes if lightmaps are off.
+	#else
+		Output = half4(1, 1, 1, 1); // Output default white value if no shadows or lightmaps are used.
+	#endif
+}
+
+// Function to calculate additional light contributions for the Universal Render Pipeline (URP).
+void SRPAdditionalLight_float(float3 WorldPosition, float2 ScreenUV, float3 WorldNormal, float4 ShadowMask, out float3 Output)
+{
+	#if defined(SHADERGRAPH_PREVIEW)
+		Output = 1; // In preview mode, output a constant value for debugging.
+	#else
+		float3 Color = 0; // Initialize color to zero.
+	
+		#if defined(_ADDITIONAL_LIGHTS)
+			// Define a macro to calculate Lambertian lighting for additional lights.
+			#define SUM_LIGHTLAMBERT(Light) \ half3 AttLightColor = Light.color * ( Light.distanceAttenuation * Light.shadowAttenuation );\ Color += LightingLambert( AttLightColor, Light.direction, WorldNormal );
+			InputData inputData = (InputData)0; // Initialize input data for light calculations.
+			inputData.normalizedScreenSpaceUV = ScreenUV.xy;
+			inputData.positionWS = WorldPosition;
+			uint meshRenderingLayers = GetMeshRenderingLayer(); // Get mesh rendering layers for light layers compatibility.
+			uint pixelLightCount = GetAdditionalLightsCount(); // Get the count of additional lights.
+
+			// Loop through visible lights in forward-plus rendering.
+			#if USE_FORWARD_PLUS
+				for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
+				{
+					FORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK
+					Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);
+
+					#ifdef _LIGHT_LAYERS
+					if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
+					#endif
+					{
+						SUM_LIGHTLAMBERT(light); // Calculate Lambertian light contribution.
+					}
+				}
+			#endif
+
+			// Standard light loop for non-forward-plus rendering.
+			LIGHT_LOOP_BEGIN(pixelLightCount)
+			Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);
+
+			#ifdef _LIGHT_LAYERS
+			if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
+			#endif
+			{
+				SUM_LIGHTLAMBERT(light); // Calculate Lambertian light contribution.
+			}
+
+			LIGHT_LOOP_END
+		#endif
+
+		Output = Color; // Output the accumulated light color.
+	#endif
 }

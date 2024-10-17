@@ -7,32 +7,33 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Disabled (Shader Graph)
-  m_Shader: {fileID: -6465566751694194690, guid: 75632dc8894ea604690e365027760a9d,
+  m_Name: Add Sphere (Shader Graph)
+  m_Shader: {fileID: -6465566751694194690, guid: f1a06050f0d68b24481b91196746e83f,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ADDITIONAL_LIGHT_SHADOWS
   - _MAIN_LIGHT_SHADOWS_CASCADE
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2003
+  m_CustomRenderQueue: 3010
   stringTagMap:
-    RenderType: Opaque
+    RenderType: Transparent
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 73029f145f0f8b2469831e89ee17037b, type: 3}
+        m_Texture: {fileID: 2800000, guid: f686b8a20a6e5e94687e83d92fa6ac1c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SphereCube:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 8900000, guid: d33a868444629e5489239c4dc31a2cb4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubTex:
@@ -64,8 +65,8 @@ Material:
     - _CastShadows: 1
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DstBlend: 0
-    - _EFFECTS: 0
+    - _DstBlend: 10
+    - _EFFECTS: 1
     - _EdgeSize: 0
     - _Fog: 1
     - _HDR: 1
@@ -82,8 +83,8 @@ Material:
     - _ShadowLum: 1.5
     - _Shininess: 50
     - _SpecularIntensity: 1
-    - _SrcBlend: 1
-    - _Surface: 0
+    - _SrcBlend: 5
+    - _Surface: 1
     - _UVLayer: 1
     - _ZTest: 4
     - _ZWrite: 1
