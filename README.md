@@ -1,5 +1,5 @@
 # MMD-Collection
-This tool facilitates the use of [MMD](https://learnmmd.com/downloads/) models in Unity, as well as custom Shaders for this purpose. 
+This tool facilitates the use of [MMD](https://learnmmd.com/downloads/) (Miku Miku Dance) models in Unity, as well as custom Shaders for this purpose. 
 
 # Compatibility
 - [Unity 2022.3.40f1](https://unity.com/pt/releases/editor/whats-new/2022.3.40#notes)
