@@ -59,7 +59,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _ADDITIONAL_LIGHT_SHADOWS: 1
-    - _AlphaClip: 1
+    - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
     - _CastShadows: 1
