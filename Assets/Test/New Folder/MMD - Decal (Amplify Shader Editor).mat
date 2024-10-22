@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MMD - Decal (Amplify Shader Editor)
+  m_Shader: {fileID: 4800000, guid: 172c79eb3e2f0f54f90195f6b1042a46, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _FOG_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 73029f145f0f8b2469831e89ee17037b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SphereCube:
+        m_Texture: {fileID: 8900000, guid: 72a6f54d8d7e13442a02fcc34b43d48a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SubTex:
+        m_Texture: {fileID: 2800000, guid: a4bd0e91e1c27e244a687b69ae743b93, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ToonTex:
+        m_Texture: {fileID: 2800000, guid: e5c69abc421298e47bf21483382e7549, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _AlphaCutoff: 0.5
+    - _Blend: 0
+    - _CastShadows: 1
+    - _Cull: 2
+    - _Cutoff: 0.5
+    - _DecalAngleFadeSupported: 1
+    - _DecalMeshBiasType: 0
+    - _DecalMeshDepthBias: 0
+    - _DecalMeshViewBias: 0
+    - _DrawOrder: 0
+    - _DstBlend: 0
+    - _EFFECTS: 1
+    - _Fog: 1
+    - _HDR: 1
+    - _MultipleLights: 1
+    - _Opaque: 1
+    - _SPHOpacity: 1
+    - _SShad: 1
+    - _ShadowLum: 1.5
+    - _Shininess: 50
+    - _SpecularIntensity: 1
+    - _SrcBlend: 1
+    - _Surface: 0
+    - _UVLayer: 0
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 1
+    m_Colors:
+    - _Ambient: {r: 1, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 1, a: 0}
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Specular: {r: 0, g: 1, b: 1, a: 0}
+    - _Test: {r: 0, g: 0, b: 0, a: 0}
+    - _ToonTone: {r: 1, g: 0.5, b: 0.5, a: 0}
+  m_BuildTextureStacks: []
