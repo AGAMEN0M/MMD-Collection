@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MMD - Decal (Amplify Shader Editor)
+  m_Name: Decal (Amplify Shader Editor)
   m_Shader: {fileID: 4800000, guid: 172c79eb3e2f0f54f90195f6b1042a46, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,20 +24,24 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AddLightsTexture:
+        m_Texture: {fileID: 2800000, guid: a8de9c9c15d9c7e4eaa883c727391bee, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+        m_Offset: {x: 0.25, y: 0.25}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 73029f145f0f8b2469831e89ee17037b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SphereCube:
-        m_Texture: {fileID: 8900000, guid: 72a6f54d8d7e13442a02fcc34b43d48a, type: 3}
+        m_Texture: {fileID: 8900000, guid: a8a7bd80f070ab24abe78fbeb282fe0f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubTex:
-        m_Texture: {fileID: 2800000, guid: a4bd0e91e1c27e244a687b69ae743b93, type: 3}
+        m_Texture: {fileID: 2800000, guid: 741fff69dbf494b459a162c0e48cc827, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ToonTex:
-        m_Texture: {fileID: 2800000, guid: e5c69abc421298e47bf21483382e7549, type: 3}
+        m_Texture: {fileID: 2800000, guid: f35b8759e2061eb469494abb58b512c1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _texcoord:
@@ -58,6 +62,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AddLightBaseColor: 0
+    - _AddLightColor: 1
     - _AlphaClip: 0
     - _AlphaCutoff: 0.5
     - _Blend: 0
@@ -70,9 +76,10 @@ Material:
     - _DecalMeshViewBias: 0
     - _DrawOrder: 0
     - _DstBlend: 0
-    - _EFFECTS: 1
+    - _EFFECTS: 2
     - _Fog: 1
     - _HDR: 1
+    - _LightIntensity: 5
     - _MultipleLights: 1
     - _Opaque: 1
     - _SPHOpacity: 1
@@ -87,7 +94,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 1
     m_Colors:
-    - _Ambient: {r: 1, g: 0, b: 0, a: 0}
+    - _Ambient: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0, g: 0, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Specular: {r: 0, g: 1, b: 1, a: 0}
