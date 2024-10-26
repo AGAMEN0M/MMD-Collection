@@ -139,7 +139,7 @@ public class MMDMaterialCustomInspector_ShaderGraph : ShaderGUI
         if (CustomInspectorUtilityEditor.HasFloatPropertyValue(materialProperties, "_EFFECTS", 3))
         {
             CustomInspectorUtilityEditor.RenderDropdownProperty(materialProperties, currentMaterial, "_UVLayer", "UV Layer:", new string[] { "Layer 1", "Layer 2", "Layer 3", "Layer 4" }, new float[] { 0, 1, 2, 3 }, 100, 150);
-            CustomInspectorUtilityEditor.RenderTextureProperty(materialProperties, "_SubTex", "SPH:");
+            CustomInspectorUtilityEditor.RenderTextureProperty(materialProperties, "_SubTex", "SPH:", true, currentMaterial);
         }
         else
         {

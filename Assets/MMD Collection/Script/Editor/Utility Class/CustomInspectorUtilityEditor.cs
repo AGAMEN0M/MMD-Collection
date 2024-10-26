@@ -442,8 +442,8 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a texture property with a label.
-        public static void RenderTextureProperty(MaterialProperty[] materialProperties, string propertyName, string label)
+        // Render a texture property with a label and optional Scale/Offset display.
+        public static void RenderTextureProperty(MaterialProperty[] materialProperties, string propertyName, string label, bool showScaleOffset = false, Material currentMaterial = null)
         {
             EditorGUILayout.BeginHorizontal();
             MaterialProperty textureProperty = FindProperty(propertyName, materialProperties);
@@ -460,6 +460,41 @@ namespace MMDCollectionEditor
                 EditorUtility.SetDirty(textureProperty.targets[0]);
             }
             EditorGUI.showMixedValue = false;
+
+            // If showScaleOffset is true, render Scale and Offset fields next to the texture cube.
+            if (showScaleOffset && currentMaterial != null && texture != null)
+            {
+                // Fetch the current texture scale and offset.
+                Vector2 textureScale = currentMaterial.GetTextureScale(propertyName);
+                Vector2 textureOffset = currentMaterial.GetTextureOffset(propertyName);
+
+                GUILayout.BeginVertical();
+                EditorGUI.BeginChangeCheck();
+
+                // Tiling field.
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Tiling:", GUILayout.Width(50f));
+                textureScale = EditorGUILayout.Vector2Field("", textureScale, GUILayout.Width(170f));
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+
+                // Offset field.
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Offset:", GUILayout.Width(50f));
+                textureOffset = EditorGUILayout.Vector2Field("", textureOffset, GUILayout.Width(170f));
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+
+                GUILayout.EndVertical();
+                if (EditorGUI.EndChangeCheck())
+                {
+                    Undo.RecordObject(currentMaterial, $"Change Scale and Offset {propertyName}");
+                    currentMaterial.SetTextureScale(propertyName, textureScale);
+                    currentMaterial.SetTextureOffset(propertyName, textureOffset);
+                    EditorUtility.SetDirty(currentMaterial);
+                }
+            }
+
             EditorGUILayout.EndHorizontal();
         }
 
