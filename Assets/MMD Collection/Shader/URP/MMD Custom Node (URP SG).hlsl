@@ -161,9 +161,11 @@ void SRPAdditionalLight_float(float3 WorldPosition, float2 ScreenUV, float3 Worl
 	
 		#if defined(_ADDITIONAL_LIGHTS)
 			// Define a macro to calculate Lambertian lighting for additional lights.
-			#define SUM_LIGHTLAMBERT(Light) \ half3 AttLightColor = Light.color * ( Light.distanceAttenuation * Light.shadowAttenuation );\ Color += LightingLambert( AttLightColor, Light.direction, WorldNormal );
+			#define SUM_LIGHTLAMBERT(Light)\
+				half3 AttLightColor = Light.color * ( Light.distanceAttenuation * Light.shadowAttenuation );\
+				Color += LightingLambert( AttLightColor, Light.direction, WorldNormal );
 			InputData inputData = (InputData)0; // Initialize input data for light calculations.
-			inputData.normalizedScreenSpaceUV = ScreenUV.xy;
+			inputData.normalizedScreenSpaceUV = ScreenUV;
 			inputData.positionWS = WorldPosition;
 			uint meshRenderingLayers = GetMeshRenderingLayer(); // Get mesh rendering layers for light layers compatibility.
 			uint pixelLightCount = GetAdditionalLightsCount(); // Get the count of additional lights.
