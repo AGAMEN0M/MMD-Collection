@@ -6277,7 +6277,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -7913,7 +7913,7 @@
     "m_ObjectId": "1976af5254104149827bc0f5d8ffbf22",
     "m_Title": "Base Properties",
     "m_Position": {
-        "x": -2902.399658203125,
+        "x": -2902.39990234375,
         "y": -2390.39990234375
     }
 }
@@ -8396,8 +8396,8 @@
     "m_ObjectId": "1e0885c216c74c3b981329a70c323271",
     "m_Title": "Light Calculation",
     "m_Position": {
-        "x": -3856.7998046875,
-        "y": 1343.9998779296875
+        "x": -3856.80029296875,
+        "y": 1344.0
     }
 }
 
@@ -9000,7 +9000,7 @@
     "m_ObjectId": "22bbd67d838f4db9b6cc343f35b6ece9",
     "m_Title": "Additional lights",
     "m_Position": {
-        "x": -3249.599609375,
+        "x": -3523.199951171875,
         "y": 4816.0
     }
 }
@@ -9628,8 +9628,8 @@
     "m_ObjectId": "28ad30ee9ab144c9b0d9366607be0c24",
     "m_Title": "ToonRefl",
     "m_Position": {
-        "x": 10.0,
-        "y": 10.0
+        "x": -1756.0,
+        "y": 1344.0
     }
 }
 
@@ -10473,8 +10473,8 @@
     "m_ObjectId": "31ae963f0e7742d98b7912623ec2d152",
     "m_Title": "Fog",
     "m_Position": {
-        "x": 3167.2001953125,
-        "y": 4816.7998046875
+        "x": 3167.19921875,
+        "y": 4816.80029296875
     }
 }
 
@@ -12067,8 +12067,8 @@
     "m_ObjectId": "40cbe5cab86945c6892b08100402aa3f",
     "m_Title": "MMDLit_GetTempDiffuse",
     "m_Position": {
-        "x": -3827.19970703125,
-        "y": 273.60003662109377
+        "x": -3827.199951171875,
+        "y": 273.59991455078127
     }
 }
 
@@ -13242,8 +13242,8 @@
     "m_ObjectId": "4ccd5e0c6e4148b98d524603eb00ef3b",
     "m_Title": "globalAmbient",
     "m_Position": {
-        "x": -1545.598388671875,
-        "y": -834.39990234375
+        "x": -1600.800048828125,
+        "y": -834.400146484375
     }
 }
 
@@ -13475,7 +13475,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -14035,7 +14035,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -14251,7 +14251,7 @@
     "m_Title": "Sphere Map Composition - Option to Add, Multiply, Sub Tex, Turn off the effect",
     "m_Position": {
         "x": -1200.0,
-        "y": 2762.7998046875
+        "y": 2763.199951171875
     }
 }
 
@@ -14402,8 +14402,8 @@
     "m_ObjectId": "57ac776591cb46a2897e8dea0c41c0f2",
     "m_Title": "MMDLit_GetAmbientRate",
     "m_Position": {
-        "x": -1545.5999755859375,
-        "y": -277.60003662109377
+        "x": -1601.5999755859375,
+        "y": -277.5999755859375
     }
 }
 
@@ -15037,7 +15037,7 @@
     "m_Title": "Baked Lightmaps",
     "m_Position": {
         "x": -3863.199951171875,
-        "y": 2616.7998046875
+        "y": 2616.800048828125
     }
 }
 
@@ -15678,7 +15678,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -17637,7 +17637,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -17809,7 +17809,7 @@
     "m_ObjectId": "7b1b796bd66b4b188975c4f9716a9a93",
     "m_Title": "Color Transparency",
     "m_Position": {
-        "x": 255.19993591308595,
+        "x": 255.199951171875,
         "y": 6508.0
     }
 }
@@ -18359,8 +18359,8 @@
     "m_ObjectId": "8029dd8b639b4e1b890c5a76c593601f",
     "m_Title": "Specular",
     "m_Position": {
-        "x": -3115.2001953125,
-        "y": 3676.000244140625
+        "x": -3115.199951171875,
+        "y": 3675.999755859375
     }
 }
 
@@ -18558,7 +18558,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -18860,8 +18860,8 @@
     "m_ObjectId": "87a2a9f8d9c849299145cedd6c0d20fa",
     "m_Title": "Main light color",
     "m_Position": {
-        "x": 10.0,
-        "y": 10.0
+        "x": 729.5999755859375,
+        "y": 2311.999755859375
     }
 }
 
@@ -22667,7 +22667,7 @@
     "m_ObjectId": "a35bcba186584da0a5207fdc87673271",
     "m_Title": "SURFACE OPTIONS",
     "m_Position": {
-        "x": -1767.2000732421875,
+        "x": -1767.199951171875,
         "y": -2392.80029296875
     }
 }
@@ -23262,7 +23262,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -24920,6 +24920,9 @@
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
+    "m_DisableTint": false,
+    "m_AdditionalMotionVectorMode": 0,
+    "m_AlembicMotionVectors": false,
     "m_SupportsLODCrossFade": true,
     "m_CustomEditorGUI": "MMDMaterialCustomInspector_ShaderGraph",
     "m_SupportVFX": false
@@ -25003,7 +25006,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -26255,8 +26258,8 @@
     "m_ObjectId": "c49d01e3d5c84299a61c04ab72abf796",
     "m_Title": "Final Calculation Additional Lights",
     "m_Position": {
-        "x": 1340.0,
-        "y": 4185.60009765625
+        "x": 1340.0001220703125,
+        "y": 4185.59912109375
     }
 }
 
@@ -26531,8 +26534,8 @@
     "m_ObjectId": "c665c19ecf36465691c60d46214e30b6",
     "m_Title": "MMD constants",
     "m_Position": {
-        "x": -3705.60009765625,
-        "y": -2386.400390625
+        "x": -3698.400146484375,
+        "y": -2384.000244140625
     }
 }
 
@@ -26727,7 +26730,7 @@
     "m_Title": "MMDLit_GetTempAmbientL",
     "m_Position": {
         "x": -3827.199951171875,
-        "y": -834.3999633789063
+        "y": -834.400146484375
     }
 }
 
@@ -27757,7 +27760,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -28256,7 +28259,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -28878,8 +28881,8 @@
     "m_ObjectId": "de86a098b8424e918faf173b0e62442b",
     "m_Title": "MMDLIT_GetToonShadow",
     "m_Position": {
-        "x": 10.0,
-        "y": 10.0
+        "x": -1515.199951171875,
+        "y": 642.39990234375
     }
 }
 
@@ -29136,7 +29139,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -29359,8 +29362,8 @@
     "m_ObjectId": "e2da2a728f0947d9ba16f5e98b84176a",
     "m_Title": "MMDLit_GetTempAmbient",
     "m_Position": {
-        "x": 10.0,
-        "y": 10.0
+        "x": -572.0,
+        "y": -834.400146484375
     }
 }
 
@@ -32078,7 +32081,7 @@
     "m_Title": "Outline",
     "m_Position": {
         "x": -1137.5999755859375,
-        "y": -2395.199951171875
+        "y": -2395.2001953125
     }
 }
 
@@ -32380,7 +32383,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }

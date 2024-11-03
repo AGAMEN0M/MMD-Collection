@@ -203,7 +203,7 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
 			
 
 			#define _ALPHATEST_ON 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			
@@ -499,7 +499,7 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
 			#pragma instancing_options renderinglayer
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define _ALPHATEST_ON 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			
@@ -668,7 +668,7 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
 				#endif
 			}
 			
-			float3 AdditionalLightsLambertMask14x( float3 WorldPosition, float2 ScreenUV, float3 WorldNormal, float4 ShadowMask )
+			float3 AdditionalLightsLambertMask17x( float3 WorldPosition, float2 ScreenUV, float3 WorldNormal, float4 ShadowMask )
 			{
 				float3 Color = 0;
 				#if defined(_ADDITIONAL_LIGHTS)
@@ -681,7 +681,7 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
 					uint meshRenderingLayers = GetMeshRenderingLayer();
 					uint pixelLightCount = GetAdditionalLightsCount();	
 					#if USE_FORWARD_PLUS
-					for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
+					[loop] for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
 					{
 						FORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK
 						Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);
@@ -987,20 +987,20 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
 				effectsControl_float( Layer400 , Base400 , Add400 , Multi400 , Sub400 , RGBA400 );
 				float4 baseC73 = RGBA400;
 				float3 worldPosValue184_g94 = WorldPosition;
-				float3 WorldPosition136_g94 = worldPosValue184_g94;
+				float3 WorldPosition173_g94 = worldPosValue184_g94;
 				float4 ase_screenPosNorm = ScreenPos / ScreenPos.w;
 				ase_screenPosNorm.z = ( UNITY_NEAR_CLIP_VALUE >= 0 ) ? ase_screenPosNorm.z : ase_screenPosNorm.z * 0.5 + 0.5;
 				float2 ScreenUV183_g94 = (ase_screenPosNorm).xy;
-				float2 ScreenUV136_g94 = ScreenUV183_g94;
+				float2 ScreenUV173_g94 = ScreenUV183_g94;
 				float3 objToWorldDir261 = mul( GetObjectToWorldMatrix(), float4( IN.ase_normal, 0 ) ).xyz;
 				float3 worldNormalValue185_g94 = objToWorldDir261;
-				float3 WorldNormal136_g94 = worldNormalValue185_g94;
+				float3 WorldNormal173_g94 = worldNormalValue185_g94;
 				half2 LightmapUV1_g92 = (IN.ase_texcoord5.zw*(unity_DynamicLightmapST).xy + (unity_DynamicLightmapST).zw);
 				half4 localCalculateShadowMask1_g92 = CalculateShadowMask1_g92( LightmapUV1_g92 );
 				float4 shadowMaskValue182_g94 = localCalculateShadowMask1_g92;
-				float4 ShadowMask136_g94 = shadowMaskValue182_g94;
-				float3 localAdditionalLightsLambertMask14x136_g94 = AdditionalLightsLambertMask14x( WorldPosition136_g94 , ScreenUV136_g94 , WorldNormal136_g94 , ShadowMask136_g94 );
-				float3 mmdAdditionalLights268 = ( _MultipleLights == (float)1 ? ( localAdditionalLightsLambertMask14x136_g94 + globalAmbient143 ) : globalAmbient143 );
+				float4 ShadowMask173_g94 = shadowMaskValue182_g94;
+				float3 localAdditionalLightsLambertMask17x173_g94 = AdditionalLightsLambertMask17x( WorldPosition173_g94 , ScreenUV173_g94 , WorldNormal173_g94 , ShadowMask173_g94 );
+				float3 mmdAdditionalLights268 = ( _MultipleLights == (float)1 ? ( localAdditionalLightsLambertMask17x173_g94 + globalAmbient143 ) : globalAmbient143 );
 				float4 FinalColor336 = ( ( ( saturate( ( temp_cast_0 - ( _ShadowLum * ( temp_cast_1 - ( _SShad == (float)0 ? tex2DNode92 : lerpResult431 ) ) ) ) ) * float4( lightColor178 , 0.0 ) * RGBA399 ) + ( ( Specular131 * _Specular * float4( lightColor178 , 0.0 ) ) * _SpecularIntensity ) ) + ( baseC73 * float4( ( mmdAdditionalLights268 * MMDLit_GetAmbientRate48 ) , 0.0 ) ) );
 				
 				float tSgurfaceType248 = _Surface;
@@ -1059,7 +1059,7 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
 			#pragma multi_compile_instancing
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define _ALPHATEST_ON 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			
@@ -1406,7 +1406,7 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
 			#pragma multi_compile_instancing
 			#pragma multi_compile _ LOD_FADE_CROSSFADE
 			#define _ALPHATEST_ON 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			
@@ -1722,7 +1722,7 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
 			
 
 			#define _ALPHATEST_ON 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			
@@ -2035,7 +2035,7 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
 			
 
 			#define _ALPHATEST_ON 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			
@@ -2356,7 +2356,7 @@ Shader "MMD Collection/URP/MMD (Amplify Shader Editor)"
         	#pragma multi_compile_instancing
         	#pragma multi_compile _ LOD_FADE_CROSSFADE
         	#define _ALPHATEST_ON 1
-        	#define ASE_SRP_VERSION 140011
+        	#define ASE_SRP_VERSION 170003
 
 
 			
@@ -3257,4 +3257,4 @@ WireConnection;1;2;371;0
 WireConnection;1;3;246;0
 WireConnection;1;4;325;0
 ASEEND*/
-//CHKSM=E34D2637668CDDD447D146C775D3D398372E060C
+//CHKSM=89B554D3204EBF3843BFEC6F89C9D3D6130B41CF
