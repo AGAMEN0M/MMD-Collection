@@ -227,7 +227,3 @@ MonoBehaviour:
     materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
     materialNameEN: SubTex (Amplify Shader Editor)
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 13421abe4262a0b48b27ef43b4ba7080, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
