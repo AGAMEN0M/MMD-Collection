@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class MaterialShaderConverter : MonoBehaviour
 {
@@ -30,136 +31,109 @@ public class MaterialShaderConverter : MonoBehaviour
                 {
                     // Replace specific MMD shaders with their URP counterparts.
                     case "MMD4Mecanim/MMDLit":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, false, false, false);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, false, false, false, ShaderModel.MMD4);
                         break;
                     case "MMD4Mecanim/MMDLit-BothFaces":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, false, true, false);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, false, true, false, ShaderModel.MMD4);
                         break;
                     case "MMD4Mecanim/MMDLit-BothFaces-Edge":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, true, true, false);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, true, true, false, ShaderModel.MMD4);
                         break;
                     case "MMD4Mecanim/MMDLit-BothFaces-Transparent":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", true, false, true, false);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", true, false, true, false, ShaderModel.MMD4);
                         break;
                     case "MMD4Mecanim/MMDLit-BothFaces-Transparent-Edge":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", true, true, true, false);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", true, true, true, false, ShaderModel.MMD4);
                         break;
                     case "MMD4Mecanim/MMDLit-Dummy":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, false, false, false, ShaderModel.MMD4_Empty);
                         break;
                     case "MMD4Mecanim/MMDLit-Edge":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, true, false, false);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, true, false, false, ShaderModel.MMD4);
                         break;
                     case "MMD4Mecanim/MMDLit-NEXTEdge-Pass4":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD - Multiple Outline (Amplify Shader Editor)", false, false, false, false, ShaderModel.MMD4_Pass4);
                         break;
                     case "MMD4Mecanim/MMDLit-NEXTEdge-Pass8":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD - Multiple Outline (Amplify Shader Editor)", false, false, false, false, ShaderModel.MMD4_Pass8);
                         break;
                     case "MMD4Mecanim/MMDLit-NoShadowCasting":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // Não recebe sombra e não emite
                         break;
                     case "MMD4Mecanim/MMDLit-NoShadowCasting-BothFaces":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // Não recebe sombra e não emite (Duas fazes)
                         break;
                     case "MMD4Mecanim/MMDLit-NoShadowCasting-BothFaces-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // Não recebe sombra e não emite (Duas fazes e outline)
                         break;
                     case "MMD4Mecanim/MMDLit-NoShadowCasting-BothFaces-Transparent":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // Não recebe sombra e não emite (Duas fazes) [Trasparente]
                         break;
                     case "MMD4Mecanim/MMDLit-NoShadowCasting-BothFaces-Transparent-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // Não recebe sombra e não emite (Duas fazes e outline) [Trasparente]
                         break;
                     case "MMD4Mecanim/MMDLit-NoShadowCasting-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // Não recebe sombra e não emite (outline)
                         break;
                     case "MMD4Mecanim/MMDLit-NoShadowCasting-Transparent":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // Não recebe sombra e não emite [Trasparente]
                         break;
                     case "MMD4Mecanim/MMDLit-NoShadowCasting-Transparent-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // Não recebe sombra e não emite (outline) [Trasparente]
                         break;
                     case "MMD4Mecanim/MMDLit-Tess":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-BothFaces":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-BothFaces-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-BothFaces-Transparent":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-BothFaces-Transparent-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-NoShadowCasting":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-NoShadowCasting-BothFaces":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-NoShadowCasting-BothFaces-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-NoShadowCasting-BothFaces-Transparent":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-NoShadowCasting-BothFaces-Transparent-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-NoShadowCasting-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-NoShadowCasting-Transparent":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-NoShadowCasting-Transparent-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-Transparent":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Tess-Transparent-Edge":
-                        //ChangeShader(materialToConvert, "");
-                        Error(materialToConvert);
+                        // tecelagem
                         break;
                     case "MMD4Mecanim/MMDLit-Transparent":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", true, false, false, false);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", true, false, false, false, ShaderModel.MMD4);
                         break;
                     case "MMD4Mecanim/MMDLit-Transparent-Edge":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", true, true, false, false);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", true, true, false, false, ShaderModel.MMD4);
                         break;
                     default:
                         Debug.LogWarning($"Unable to convert shader: {materialToConvert.shader.name}");
@@ -169,18 +143,63 @@ public class MaterialShaderConverter : MonoBehaviour
         }
     }
 
-    // Logs an error if the shader is not cataloged.
-    private static void Error(Material materialToConvert)
+    private enum ShaderModel
     {
-        Debug.LogError($"Uncatalogued Shader '{materialToConvert.shader.name}' on material '{materialToConvert.name}'. Please assign a replacement shader manually.");
+        MMD4,
+        MMD4_Empty,
+        MMD4_Pass4,
+        MMD4_Pass8,
+        MMD4_Tessellation
     }
 
     // Method to change the shader of a material and transfer its properties to the new shader.
-    private static void ChangeShader(Material materialToConvert, string newShaderName, bool transparent, bool outline, bool twoSide, bool gShad)
+    private static void ChangeShader(Material materialToConvert, string newShaderName, bool transparent, bool outline, bool twoSide, bool gShad, ShaderModel model)
     {
         // Record the material's state to enable undo functionality in the editor.
         Undo.RecordObject(materialToConvert, "Convert Material");
 
+        // Store current render queue and lighting settings.
+        bool oldEnableInstancingVariants = materialToConvert.enableInstancing;
+        bool oldDoubleSidedGI = materialToConvert.doubleSidedGI;
+        MaterialGlobalIlluminationFlags oldLightmapFlags = materialToConvert.globalIlluminationFlags;
+
+        switch (model)
+        {
+            case ShaderModel.MMD4:
+                ApplyMMD4(materialToConvert, newShaderName, transparent, outline, twoSide, gShad, false);
+                break;
+            case ShaderModel.MMD4_Empty:
+                ApplyMMD4Empty(materialToConvert, newShaderName);
+                break;
+            case ShaderModel.MMD4_Pass4:
+                ApplyMMD4MultiplePass(materialToConvert, newShaderName, ShaderModel.MMD4_Pass4);
+                break;
+            case ShaderModel.MMD4_Pass8:
+                ApplyMMD4MultiplePass(materialToConvert, newShaderName, ShaderModel.MMD4_Pass8);
+                break;
+            case ShaderModel.MMD4_Tessellation:
+                ApplyMMD4(materialToConvert, newShaderName, transparent, outline, twoSide, gShad, true);
+                break;
+            default:
+                Debug.LogWarning($"Shader model {model} não suportado.");
+                break;
+        }
+
+        
+        // Restore original rendering settings for the material.
+        materialToConvert.enableInstancing = oldEnableInstancingVariants;
+        materialToConvert.doubleSidedGI = oldDoubleSidedGI;
+        materialToConvert.globalIlluminationFlags = oldLightmapFlags;
+
+        CleanMaterialProperties(materialToConvert);
+
+        // Mark the material as dirty to update the editor.
+        EditorUtility.SetDirty(materialToConvert);
+        Debug.Log($"Material shader converted: {materialToConvert.name}");
+    }
+
+    private static void ApplyMMD4(Material materialToConvert, string newShaderName, bool transparent, bool outline, bool twoSide, bool gShad, bool Tessellation)
+    {
         // Retrieve and store current material properties.
         Color oldColor = materialToConvert.GetColor("_Color");
         Color oldSpecular = materialToConvert.GetColor("_Specular");
@@ -217,13 +236,9 @@ public class MaterialShaderConverter : MonoBehaviour
 
         // Store current render queue and lighting settings.
         int oldCustomRenderQueue = materialToConvert.renderQueue;
-        bool oldEnableInstancingVariants = materialToConvert.enableInstancing;
-        bool oldDoubleSidedGI = materialToConvert.doubleSidedGI;
-        MaterialGlobalIlluminationFlags oldLightmapFlags = materialToConvert.globalIlluminationFlags;
 
         // Apply the new shader and clean up any obsolete properties.
         materialToConvert.shader = Shader.Find(newShaderName);
-        CleanMaterialProperties(materialToConvert);
 
         // Set basic color and property values for the new shader.
         materialToConvert.SetColor("_Color", new Color(oldColor.r, oldColor.g, oldColor.b, 0));
@@ -259,7 +274,7 @@ public class MaterialShaderConverter : MonoBehaviour
         materialToConvert.SetTexture("_ToonTex", oldToonTex);
         materialToConvert.SetTexture("_SphereCube", oldSphereCube);
 
-        materialToConvert.SetFloat("_SpecularIntensity", isSpecularOn? 1 : 0);
+        materialToConvert.SetFloat("_SpecularIntensity", isSpecularOn ? 1 : 0);
         materialToConvert.SetFloat("_ShadowLum", oldShadowLum);
         materialToConvert.SetColor("_ToonTone", oldToonTone);
 
@@ -276,15 +291,61 @@ public class MaterialShaderConverter : MonoBehaviour
             materialToConvert.SetOverrideTag("RenderType", "Opaque");
         }
 
-        // Restore original rendering settings for the material.
         materialToConvert.renderQueue = oldCustomRenderQueue;
-        materialToConvert.enableInstancing = oldEnableInstancingVariants;
-        materialToConvert.doubleSidedGI = oldDoubleSidedGI;
-        materialToConvert.globalIlluminationFlags = oldLightmapFlags;
+    }
 
-        // Mark the material as dirty to update the editor.
-        EditorUtility.SetDirty(materialToConvert);
-        Debug.Log($"Material shader converted: {materialToConvert.name}");
+    private static void ApplyMMD4Empty(Material materialToConvert, string newShaderName)
+    {
+        int oldCustomRenderQueue = materialToConvert.renderQueue;
+
+        materialToConvert.shader = Shader.Find(newShaderName);
+
+        materialToConvert.SetFloat("_Opaque", 0);
+
+        materialToConvert.SetFloat("_Cull", 2);
+        materialToConvert.SetShaderPassEnabled("SHADOWCASTER", false);
+        materialToConvert.SetFloat("_ReceiveShadows", 0);
+        materialToConvert.DisableKeyword("_RECEIVE_SHADOWS_OFF");
+
+        materialToConvert.SetFloat("_SShad", 0);
+
+        materialToConvert.SetFloat("_Surface", 1);
+        materialToConvert.SetOverrideTag("RenderType", "Transparent");
+        oldCustomRenderQueue = RenderQueueToTransparent(oldCustomRenderQueue);
+
+        materialToConvert.renderQueue = oldCustomRenderQueue;
+    }
+
+    private static void ApplyMMD4MultiplePass(Material materialToConvert, string newShaderName, ShaderModel layers)
+    {
+        int oldCustomRenderQueue = materialToConvert.renderQueue;
+
+        Color oldEdgeColor = materialToConvert.GetColor("_EdgeColor");
+        float oldEdgeSize = materialToConvert.GetFloat("_EdgeSize");
+        bool transparentOutline = oldEdgeColor.a < 1;
+
+        materialToConvert.shader = Shader.Find(newShaderName);
+
+        materialToConvert.SetFloat("_OutlineLayers", (layers == ShaderModel.MMD4_Pass8) ? 1 : 0);
+        materialToConvert.SetColor("_OutlineColor", oldEdgeColor);
+        materialToConvert.SetFloat("_EdgeSize", oldEdgeSize * 10);
+
+        materialToConvert.SetFloat("_ReceiveShadows", 0);
+        materialToConvert.DisableKeyword("_RECEIVE_SHADOWS_OFF");
+
+        if (transparentOutline)
+        {
+            materialToConvert.SetFloat("_Surface", 1);
+            materialToConvert.SetOverrideTag("RenderType", "Transparent");
+            oldCustomRenderQueue = RenderQueueToTransparent(oldCustomRenderQueue);
+        }
+        else
+        {
+            materialToConvert.SetFloat("_Surface", 0);
+            materialToConvert.SetOverrideTag("RenderType", "Opaque");
+        }
+
+        materialToConvert.renderQueue = oldCustomRenderQueue;
     }
 
     // Adjusts the render queue for transparent materials based on the current queue value.
