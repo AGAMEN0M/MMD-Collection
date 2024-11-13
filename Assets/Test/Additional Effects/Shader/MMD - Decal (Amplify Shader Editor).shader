@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor v1.9.6.3
+// Made with Amplify Shader Editor v1.9.7
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 {
@@ -79,7 +79,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#define _MATERIAL_AFFECTS_NORMAL 1
 			#define _MATERIAL_AFFECTS_NORMAL_BLEND 1
 			#define DECAL_ANGLE_FADE 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			#pragma vertex Vert
@@ -92,10 +92,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
 			#pragma multi_compile _ _DECAL_LAYERS
 
-			
-
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             #define HAVE_MESH_MODIFICATION
             #define SHADERPASS SHADERPASS_DBUFFER_PROJECTOR
@@ -103,36 +102,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if _RENDER_PASS_ENABLED
 			#define GBUFFER3 0
 			#define GBUFFER4 1
-			FRAMEBUFFER_INPUT_HALF(GBUFFER3);
-			FRAMEBUFFER_INPUT_HALF(GBUFFER4);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER3);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER4);
 			#endif
 
-			
-
-			
-            #if ASE_SRP_VERSION >=140007
 			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
-			#endif
-		
-
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-
-			
-            #if ASE_SRP_VERSION >=140009
-			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
-			#endif
-		
-
-			
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
-           
-
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/DebugMipmapStreamingMacros.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DecalInput.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderVariablesDecal.hlsl"
@@ -202,6 +187,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if defined(DECAL_ANGLE_FADE)
 			float _DecalAngleFadeSupported;
 			#endif
+			UNITY_TEXTURE_STREAMING_DEBUG_VARS;
 			CBUFFER_END
 
             #ifdef SCENEPICKINGPASS
@@ -240,10 +226,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
                 surfaceData.baseColor.xyz = half3(surfaceDescription.BaseColor);
                 surfaceData.baseColor.w = half(surfaceDescription.Alpha * fadeFactor);
 
-                #if defined(_MATERIAL_AFFECTS_NORMAL)
-                    surfaceData.normalWS.xyz = mul((half3x3)normalToWorld, surfaceDescription.NormalTS.xyz);
-                #else
-                    surfaceData.normalWS.xyz = normalToWorld[2].xyz;
+                #if (SHADERPASS == SHADERPASS_DBUFFER_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_PROJECTOR)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+						surfaceData.normalWS.xyz = normalize(mul((half3x3)normalToWorld, surfaceDescription.NormalTS.xyz));
+                    #else
+						surfaceData.normalWS.xyz = normalize(normalToWorld[2].xyz);
+                    #endif
+                #elif (SHADERPASS == SHADERPASS_DBUFFER_MESH) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_MESH) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_MESH)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+                        float sgn = input.tangentWS.w;
+                        float3 bitangent = sgn * cross(input.normalWS.xyz, input.tangentWS.xyz);
+                        half3x3 tangentToWorld = half3x3(input.tangentWS.xyz, bitangent.xyz, input.normalWS.xyz);
+        
+                        surfaceData.normalWS.xyz = normalize(TransformTangentToWorld(surfaceDescription.NormalTS, tangentToWorld));
+                    #else
+						surfaceData.normalWS.xyz = normalize(half3(input.normalWS));
+                    #endif
                 #endif
 
                 surfaceData.normalWS.w = surfaceDescription.NormalAlpha * fadeFactor;
@@ -349,12 +347,21 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				clip((surfaceRenderingLayer & projectorRenderingLayer) - 0.1);
             #endif
 
-
-				#if UNITY_REVERSED_Z
-					float depth = LoadSceneDepth(packedInput.positionCS.xy);
-				#else
-					float depth = lerp(UNITY_NEAR_CLIP_VALUE, 1, LoadSceneDepth(packedInput.positionCS.xy));
-				#endif
+			#if defined(DECAL_PROJECTOR)
+			#if UNITY_REVERSED_Z
+			#if _RENDER_PASS_ENABLED
+				float depth = LOAD_FRAMEBUFFER_X_INPUT(GBUFFER3, packedInput.positionCS.xy).x;
+			#else
+				float depth = LoadSceneDepth(packedInput.positionCS.xy);
+			#endif
+			#else
+			#if _RENDER_PASS_ENABLED
+				float depth = lerp(UNITY_NEAR_CLIP_VALUE, 1, LOAD_FRAMEBUFFER_X_INPUT(GBUFFER3, packedInput.positionCS.xy));
+			#else
+				float depth = lerp(UNITY_NEAR_CLIP_VALUE, 1, LoadSceneDepth(packedInput.positionCS.xy));
+			#endif
+			#endif
+			#endif
 
 				#if defined(DECAL_RECONSTRUCT_NORMAL)
 					#if defined(_DECAL_NORMAL_BLEND_HIGH)
@@ -368,7 +375,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 					half3 normalWS = half3(LoadSceneNormals(packedInput.positionCS.xy));
 				#endif
 
-				float2 positionSS = packedInput.positionCS.xy * _ScreenSize.zw;
+				float2 positionSS = FoveatedRemapNonUniformToLinearCS(packedInput.positionCS.xy) * _ScreenSize.zw;
 
 				float3 positionWS = ComputeWorldSpacePosition(positionSS, depth, UNITY_MATRIX_I_VP);
 
@@ -484,9 +491,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				effectsControl_float( Layer399 , Base399 , Add399 , Multi399 , Sub399 , RGBA399 );
 				float3 objToWorldDir180 = mul( GetObjectToWorldMatrix(), float4( packedInput.ase_normal, 0 ) ).xyz;
 				float3 normalizeResult181 = normalize( objToWorldDir180 );
-				float3 ase_worldViewDir = ( _WorldSpaceCameraPos.xyz - positionWS );
-				ase_worldViewDir = normalize(ase_worldViewDir);
-				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_worldViewDir ) );
+				float3 ase_viewVectorWS = ( _WorldSpaceCameraPos.xyz - positionWS );
+				float3 ase_viewDirWS = normalize( ase_viewVectorWS );
+				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_viewDirWS ) );
 				float dotResult128 = dot( normalizeResult181 , normalizeResult127 );
 				float Specular131 = pow( saturate( dotResult128 ) , max( _Shininess , 0.001 ) );
 				float localeffectsControl400 = ( 0.0 );
@@ -516,10 +523,6 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				GetSurfaceData(surfaceDescription, angleFadeFactor, surfaceData);
 				ENCODE_INTO_DBUFFER(surfaceData, outDBuffer);
 
-                #if defined(_FOVEATED_RENDERING_NON_UNIFORM_RASTER)
-                positionSS = RemapFoveatedRenderingDistortCS(packedInput.positionCS.xy, true) * _ScreenSize.zw;
-                #endif
-
 			}
             ENDHLSL
         }
@@ -542,7 +545,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#define _MATERIAL_AFFECTS_NORMAL 1
 			#define _MATERIAL_AFFECTS_NORMAL_BLEND 1
 			#define DECAL_ANGLE_FADE 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			#pragma vertex Vert
@@ -554,22 +557,16 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
 			#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
 			#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
-
-			
-
-			
-			#pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
-           
-
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
 			#pragma multi_compile _ _FORWARD_PLUS
-
-			
-
+			#pragma multi_compile_fragment _ _LIGHT_COOKIES
+			#pragma multi_compile_fragment _ DEBUG_DISPLAY
 			#pragma multi_compile _DECAL_NORMAL_BLEND_LOW _DECAL_NORMAL_BLEND_MEDIUM _DECAL_NORMAL_BLEND_HIGH
 			#pragma multi_compile _ _DECAL_LAYERS
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             #define ATTRIBUTES_NEED_NORMAL
 			#define ATTRIBUTES_NEED_TEXCOORD0
@@ -588,36 +585,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if _RENDER_PASS_ENABLED
 			#define GBUFFER3 0
 			#define GBUFFER4 1
-			FRAMEBUFFER_INPUT_HALF(GBUFFER3);
-			FRAMEBUFFER_INPUT_HALF(GBUFFER4);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER3);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER4);
 			#endif
 
-			
-
-			
-            #if ASE_SRP_VERSION >=140007
 			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
-			#endif
-		
-
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-
-			
-            #if ASE_SRP_VERSION >=140009
-			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
-			#endif
-		
-
-			
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
-           
-
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/DebugMipmapStreamingMacros.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DecalInput.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderVariablesDecal.hlsl"
@@ -630,6 +613,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#define ASE_NEEDS_FRAG_NORMAL
 			#define ASE_NEEDS_FRAG_TEXTURE_COORDINATES0
 			#define ASE_NEEDS_FRAG_POSITION
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
 
 
 			struct SurfaceDescription
@@ -659,10 +643,12 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				float4 positionCS : SV_POSITION;
 				float3 normalWS : TEXCOORD0;
 				float3 viewDirectionWS : TEXCOORD1;
-				float2 staticLightmapUV : TEXCOORD2;
-				float2 dynamicLightmapUV : TEXCOORD3;
-				float3 sh : TEXCOORD4;
-				float4 fogFactorAndVertexLight : TEXCOORD5;
+				float4 lightmapUVs : TEXCOORD2; // @diogo: packs both static (xy) and dynamic (zw)
+				float3 sh : TEXCOORD3;
+				float4 fogFactorAndVertexLight : TEXCOORD4;
+				#ifdef USE_APV_PROBE_OCCLUSION
+					float4 probeOcclusion : TEXCOORD5;
+				#endif
 				float3 ase_normal : NORMAL;
 				float4 ase_texcoord6 : TEXCOORD6;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -692,6 +678,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if defined(DECAL_ANGLE_FADE)
 			float _DecalAngleFadeSupported;
 			#endif
+			UNITY_TEXTURE_STREAMING_DEBUG_VARS;
 			CBUFFER_END
 
             #ifdef SCENEPICKINGPASS
@@ -734,10 +721,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
                 surfaceData.baseColor.xyz = half3(surfaceDescription.BaseColor);
                 surfaceData.baseColor.w = half(surfaceDescription.Alpha * fadeFactor);
 
-                #if defined(_MATERIAL_AFFECTS_NORMAL)
-                    surfaceData.normalWS.xyz = mul((half3x3)normalToWorld, surfaceDescription.NormalTS.xyz);
-                #else
-                    surfaceData.normalWS.xyz = normalToWorld[2].xyz;
+                #if (SHADERPASS == SHADERPASS_DBUFFER_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_PROJECTOR)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+						surfaceData.normalWS.xyz = normalize(mul((half3x3)normalToWorld, surfaceDescription.NormalTS.xyz));
+                    #else
+						surfaceData.normalWS.xyz = normalize(normalToWorld[2].xyz);
+                    #endif
+                #elif (SHADERPASS == SHADERPASS_DBUFFER_MESH) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_MESH) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_MESH)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+                        float sgn = input.tangentWS.w;
+                        float3 bitangent = sgn * cross(input.normalWS.xyz, input.tangentWS.xyz);
+                        half3x3 tangentToWorld = half3x3(input.tangentWS.xyz, bitangent.xyz, input.normalWS.xyz);
+        
+                        surfaceData.normalWS.xyz = normalize(TransformTangentToWorld(surfaceDescription.NormalTS, tangentToWorld));
+                    #else
+						surfaceData.normalWS.xyz = normalize(half3(input.normalWS));
+                    #endif
                 #endif
 
                 surfaceData.normalWS.w = surfaceDescription.NormalAlpha * fadeFactor;
@@ -809,27 +808,44 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				inputData.viewDirectionWS = viewDirectionWS;
 				inputData.shadowCoord = float4(0, 0, 0, 0);
 
-				inputData.fogCoord = half(input.fogFactorAndVertexLight.x);
-				inputData.vertexLighting = half3(input.fogFactorAndVertexLight.yzw);
+				#ifdef VARYINGS_NEED_FOG_AND_VERTEX_LIGHT
+					inputData.fogCoord = InitializeInputDataFog(float4(positionWS, 1.0), input.fogFactorAndVertexLight.x);
+					inputData.vertexLighting = input.fogFactorAndVertexLight.yzw;
+				#endif
 
 				#if defined(VARYINGS_NEED_DYNAMIC_LIGHTMAP_UV) && defined(DYNAMICLIGHTMAP_ON)
 					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, input.dynamicLightmapUV.xy, half3(input.sh), normalWS);
-				#elif defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
-					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, half3(input.sh), normalWS);
-				#endif
-
-				#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
 					inputData.shadowMask = SAMPLE_SHADOWMASK(input.staticLightmapUV);
+					#endif
+				#elif defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+				#if !defined(LIGHTMAP_ON) && (defined(PROBE_VOLUMES_L1) || defined(PROBE_VOLUMES_L2))
+    				inputData.bakedGI = SAMPLE_GI(input.sh,
+					GetAbsolutePositionWS(inputData.positionWS),
+					inputData.normalWS,
+					inputData.viewDirectionWS,
+					input.positionCS.xy,
+					input.probeOcclusion,
+					inputData.shadowMask);
+				#else
+					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, half3(input.sh), normalWS);
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+					inputData.shadowMask = SAMPLE_SHADOWMASK(input.staticLightmapUV);
+					#endif
+				#endif
 				#endif
 
 				#if defined(DEBUG_DISPLAY)
 					#if defined(VARYINGS_NEED_DYNAMIC_LIGHTMAP_UV) && defined(DYNAMICLIGHTMAP_ON)
 						inputData.dynamicLightmapUV = input.dynamicLightmapUV.xy;
 					#endif
-					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV && LIGHTMAP_ON)
-						inputData.staticLightmapUV = input.staticLightmapUV;
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV) && defined(LIGHTMAP_ON)
+						inputData.staticLightmapUV = input.staticLightmapUV
 					#elif defined(VARYINGS_NEED_SH)
 						inputData.vertexSH = input.sh;
+					#endif
+					#if defined(USE_APV_PROBE_OCCLUSION)
+						inputData.probeOcclusion = input.probeOcclusion;
 					#endif
 				#endif
 
@@ -916,11 +932,21 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				clip((surfaceRenderingLayer & projectorRenderingLayer) - 0.1);
             #endif
 
-				#if UNITY_REVERSED_Z
-					float depth = LoadSceneDepth(packedInput.positionCS.xy);
-				#else
-					float depth = lerp(UNITY_NEAR_CLIP_VALUE, 1, LoadSceneDepth(packedInput.positionCS.xy));
-				#endif
+			#if defined(DECAL_PROJECTOR)
+			#if UNITY_REVERSED_Z
+			#if _RENDER_PASS_ENABLED
+				float depth = LOAD_FRAMEBUFFER_X_INPUT(GBUFFER3, packedInput.positionCS.xy).x;
+			#else
+				float depth = LoadSceneDepth(packedInput.positionCS.xy);
+			#endif
+			#else
+			#if _RENDER_PASS_ENABLED
+				float depth = lerp(UNITY_NEAR_CLIP_VALUE, 1, LOAD_FRAMEBUFFER_X_INPUT(GBUFFER3, packedInput.positionCS.xy));
+			#else
+				float depth = lerp(UNITY_NEAR_CLIP_VALUE, 1, LoadSceneDepth(packedInput.positionCS.xy));
+			#endif
+			#endif
+			#endif
 
 				#if defined(DECAL_RECONSTRUCT_NORMAL)
 					#if defined(_DECAL_NORMAL_BLEND_HIGH)
@@ -934,7 +960,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 					half3 normalWS = half3(LoadSceneNormals(packedInput.positionCS.xy));
 				#endif
 
-				float2 positionSS = packedInput.positionCS.xy * _ScreenSize.zw;
+				float2 positionSS = FoveatedRemapNonUniformToLinearCS(packedInput.positionCS.xy) * _ScreenSize.zw;
 
 				float3 positionWS = ComputeWorldSpacePosition(positionSS, depth, UNITY_MATRIX_I_VP);
 
@@ -1048,7 +1074,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				effectsControl_float( Layer399 , Base399 , Add399 , Multi399 , Sub399 , RGBA399 );
 				float3 objToWorldDir180 = mul( GetObjectToWorldMatrix(), float4( packedInput.ase_normal, 0 ) ).xyz;
 				float3 normalizeResult181 = normalize( objToWorldDir180 );
-				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + packedInput.viewDirectionWS ) );
+				float3 ase_viewVectorWS = ( _WorldSpaceCameraPos.xyz - positionWS );
+				float3 ase_viewDirWS = normalize( ase_viewVectorWS );
+				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_viewDirWS ) );
 				float dotResult128 = dot( normalizeResult181 , normalizeResult127 );
 				float Specular131 = pow( saturate( dotResult128 ) , max( _Shininess , 0.001 ) );
 				float localeffectsControl400 = ( 0.0 );
@@ -1082,6 +1110,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 
 				GetSurfaceData( surfaceDescription, angleFadeFactor, surfaceData);
 
+				half3 normalToPack = surfaceData.normalWS.xyz;
 				#ifdef DECAL_RECONSTRUCT_NORMAL
 					surfaceData.normalWS.xyz = normalize(lerp(normalWS.xyz, surfaceData.normalWS.xyz, surfaceData.normalWS.w));
 				#endif
@@ -1095,10 +1124,6 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				half4 color = UniversalFragmentPBR(inputData, surface);
 				color.rgb = MixFog(color.rgb, inputData.fogCoord);
 				outColor = color;
-
-               #if defined(_FOVEATED_RENDERING_NON_UNIFORM_RASTER)
-               positionSS = RemapFoveatedRenderingDistortCS(packedInput.positionCS.xy, true) * _ScreenSize.zw;
-               #endif
 
 			}
 			ENDHLSL
@@ -1129,7 +1154,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#define _MATERIAL_AFFECTS_NORMAL 1
 			#define _MATERIAL_AFFECTS_NORMAL_BLEND 1
 			#define DECAL_ANGLE_FADE 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			#pragma vertex Vert
@@ -1139,13 +1164,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#pragma editor_sync_compilation
 
 			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-
-			
-
-			
-			#pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
-           
-
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
 			#pragma multi_compile _DECAL_NORMAL_BLEND_LOW _DECAL_NORMAL_BLEND_MEDIUM _DECAL_NORMAL_BLEND_HIGH
 			#pragma multi_compile _ _DECAL_LAYERS
 			#pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
@@ -1153,6 +1172,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             #define ATTRIBUTES_NEED_NORMAL
 			#define ATTRIBUTES_NEED_TEXCOORD0
@@ -1170,36 +1190,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if _RENDER_PASS_ENABLED
 			#define GBUFFER3 0
 			#define GBUFFER4 1
-			FRAMEBUFFER_INPUT_HALF(GBUFFER3);
-			FRAMEBUFFER_INPUT_HALF(GBUFFER4);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER3);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER4);
 			#endif
 
-			
-
-			
-            #if ASE_SRP_VERSION >=140007
 			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
-			#endif
-		
-
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-
-			
-            #if ASE_SRP_VERSION >=140009
-			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
-			#endif
-		
-
-			
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
-           
-
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/DebugMipmapStreamingMacros.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/UnityGBuffer.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DecalInput.hlsl"
@@ -1213,6 +1219,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#define ASE_NEEDS_FRAG_NORMAL
 			#define ASE_NEEDS_FRAG_TEXTURE_COORDINATES0
 			#define ASE_NEEDS_FRAG_POSITION
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
 
 
 			struct SurfaceDescription
@@ -1242,9 +1249,11 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				float4 positionCS : SV_POSITION;
 				float3 normalWS : TEXCOORD0;
 				float3 viewDirectionWS : TEXCOORD1;
-				float2 staticLightmapUV : TEXCOORD2;
-				float2 dynamicLightmapUV : TEXCOORD3;
-				float3 sh : TEXCOORD4;
+				float4 lightmapUVs : TEXCOORD2; // @diogo: packs both static (xy) and dynamic (zw)
+				float3 sh : TEXCOORD3;
+				#ifdef USE_APV_PROBE_OCCLUSION
+					float4 probeOcclusion : TEXCOORD4;
+				#endif
 				float3 ase_normal : NORMAL;
 				float4 ase_texcoord5 : TEXCOORD5;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -1274,6 +1283,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if defined(DECAL_ANGLE_FADE)
 			float _DecalAngleFadeSupported;
 			#endif
+			UNITY_TEXTURE_STREAMING_DEBUG_VARS;
 			CBUFFER_END
 
             #ifdef SCENEPICKINGPASS
@@ -1316,10 +1326,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
                 surfaceData.baseColor.xyz = half3(surfaceDescription.BaseColor);
                 surfaceData.baseColor.w = half(surfaceDescription.Alpha * fadeFactor);
 
-                #if defined(_MATERIAL_AFFECTS_NORMAL)
-                    surfaceData.normalWS.xyz = mul((half3x3)normalToWorld, surfaceDescription.NormalTS.xyz);
-                #else
-                    surfaceData.normalWS.xyz = normalToWorld[2].xyz;
+                #if (SHADERPASS == SHADERPASS_DBUFFER_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_PROJECTOR)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+						surfaceData.normalWS.xyz = normalize(mul((half3x3)normalToWorld, surfaceDescription.NormalTS.xyz));
+                    #else
+						surfaceData.normalWS.xyz = normalize(normalToWorld[2].xyz);
+                    #endif
+                #elif (SHADERPASS == SHADERPASS_DBUFFER_MESH) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_MESH) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_MESH)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+                        float sgn = input.tangentWS.w;
+                        float3 bitangent = sgn * cross(input.normalWS.xyz, input.tangentWS.xyz);
+                        half3x3 tangentToWorld = half3x3(input.tangentWS.xyz, bitangent.xyz, input.normalWS.xyz);
+        
+                        surfaceData.normalWS.xyz = normalize(TransformTangentToWorld(surfaceDescription.NormalTS, tangentToWorld));
+                    #else
+						surfaceData.normalWS.xyz = normalize(half3(input.normalWS));
+                    #endif
                 #endif
 
                 surfaceData.normalWS.w = surfaceDescription.NormalAlpha * fadeFactor;
@@ -1389,32 +1411,46 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				inputData.positionWS = positionWS;
 				inputData.normalWS = normalWS;
 				inputData.viewDirectionWS = viewDirectionWS;
-
 				inputData.shadowCoord = float4(0, 0, 0, 0);
 
 				#ifdef VARYINGS_NEED_FOG_AND_VERTEX_LIGHT
-					inputData.fogCoord = float4(input.fogFactorAndVertexLight.x);
-					inputData.vertexLighting = half3(input.fogFactorAndVertexLight.yzw);
+					inputData.fogCoord = InitializeInputDataFog(float4(positionWS, 1.0), input.fogFactorAndVertexLight.x);
+					inputData.vertexLighting = input.fogFactorAndVertexLight.yzw;
 				#endif
 
 				#if defined(VARYINGS_NEED_DYNAMIC_LIGHTMAP_UV) && defined(DYNAMICLIGHTMAP_ON)
 					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, input.dynamicLightmapUV.xy, half3(input.sh), normalWS);
-				#elif defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
-					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, half3(input.sh), normalWS);
-				#endif
-
-				#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
 					inputData.shadowMask = SAMPLE_SHADOWMASK(input.staticLightmapUV);
+					#endif
+				#elif defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+				#if !defined(LIGHTMAP_ON) && (defined(PROBE_VOLUMES_L1) || defined(PROBE_VOLUMES_L2))
+    				inputData.bakedGI = SAMPLE_GI(input.sh,
+					GetAbsolutePositionWS(inputData.positionWS),
+					inputData.normalWS,
+					inputData.viewDirectionWS,
+					input.positionCS.xy,
+					input.probeOcclusion,
+					inputData.shadowMask);
+				#else
+					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, half3(input.sh), normalWS);
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+					inputData.shadowMask = SAMPLE_SHADOWMASK(input.staticLightmapUV);
+					#endif
+				#endif
 				#endif
 
 				#if defined(DEBUG_DISPLAY)
 					#if defined(VARYINGS_NEED_DYNAMIC_LIGHTMAP_UV) && defined(DYNAMICLIGHTMAP_ON)
 						inputData.dynamicLightmapUV = input.dynamicLightmapUV.xy;
 					#endif
-					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV && LIGHTMAP_ON)
-						inputData.staticLightmapUV = input.staticLightmapUV;
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV) && defined(LIGHTMAP_ON)
+						inputData.staticLightmapUV = input.staticLightmapUV
 					#elif defined(VARYINGS_NEED_SH)
 						inputData.vertexSH = input.sh;
+					#endif
+					#if defined(USE_APV_PROBE_OCCLUSION)
+						inputData.probeOcclusion = input.probeOcclusion;
 					#endif
 				#endif
 
@@ -1491,11 +1527,21 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				clip((surfaceRenderingLayer & projectorRenderingLayer) - 0.1);
             #endif
 
-				#if UNITY_REVERSED_Z
-					float depth = LoadSceneDepth(packedInput.positionCS.xy);
-				#else
-					float depth = lerp(UNITY_NEAR_CLIP_VALUE, 1, LoadSceneDepth(packedInput.positionCS.xy));
-				#endif
+			#if defined(DECAL_PROJECTOR)
+			#if UNITY_REVERSED_Z
+			#if _RENDER_PASS_ENABLED
+				float depth = LOAD_FRAMEBUFFER_X_INPUT(GBUFFER3, packedInput.positionCS.xy).x;
+			#else
+				float depth = LoadSceneDepth(packedInput.positionCS.xy);
+			#endif
+			#else
+			#if _RENDER_PASS_ENABLED
+				float depth = lerp(UNITY_NEAR_CLIP_VALUE, 1, LOAD_FRAMEBUFFER_X_INPUT(GBUFFER3, packedInput.positionCS.xy));
+			#else
+				float depth = lerp(UNITY_NEAR_CLIP_VALUE, 1, LoadSceneDepth(packedInput.positionCS.xy));
+			#endif
+			#endif
+			#endif
 
 				#if defined(DECAL_RECONSTRUCT_NORMAL)
 					#if defined(_DECAL_NORMAL_BLEND_HIGH)
@@ -1509,7 +1555,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 					half3 normalWS = half3(LoadSceneNormals(packedInput.positionCS.xy));
 				#endif
 
-				float2 positionSS = packedInput.positionCS.xy * _ScreenSize.zw;
+				float2 positionSS = FoveatedRemapNonUniformToLinearCS(packedInput.positionCS.xy) * _ScreenSize.zw;
 
 				float3 positionWS = ComputeWorldSpacePosition(positionSS, depth, UNITY_MATRIX_I_VP);
 
@@ -1624,7 +1670,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				effectsControl_float( Layer399 , Base399 , Add399 , Multi399 , Sub399 , RGBA399 );
 				float3 objToWorldDir180 = mul( GetObjectToWorldMatrix(), float4( packedInput.ase_normal, 0 ) ).xyz;
 				float3 normalizeResult181 = normalize( objToWorldDir180 );
-				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + packedInput.viewDirectionWS ) );
+				float3 ase_viewVectorWS = ( _WorldSpaceCameraPos.xyz - positionWS );
+				float3 ase_viewDirWS = normalize( ase_viewVectorWS );
+				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_viewDirWS ) );
 				float dotResult128 = dot( normalizeResult181 , normalizeResult127 );
 				float Specular131 = pow( saturate( dotResult128 ) , max( _Shininess , 0.001 ) );
 				float localeffectsControl400 = ( 0.0 );
@@ -1657,42 +1705,38 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 
 				GetSurfaceData(surfaceDescription, angleFadeFactor, surfaceData);
 
-				InputData inputData;
-				InitializeInputData(packedInput, positionWS, surfaceData.normalWS.xyz, viewDirectionWS, inputData);
+				half3 normalToPack = surfaceData.normalWS.xyz;
+				#ifdef DECAL_RECONSTRUCT_NORMAL
+					surfaceData.normalWS.xyz = normalize(lerp(normalWS.xyz, surfaceData.normalWS.xyz, surfaceData.normalWS.w));
+				#endif
 
-				SurfaceData surface = (SurfaceData)0;
-				GetSurface(surfaceData, surface);
+					InputData inputData;
+					InitializeInputData(packedInput, positionWS, surfaceData.normalWS.xyz, viewDirectionWS, inputData);
 
-				BRDFData brdfData;
-				InitializeBRDFData(surface.albedo, surface.metallic, 0, surface.smoothness, surface.alpha, brdfData);
+					SurfaceData surface = (SurfaceData)0;
+					GetSurface(surfaceData, surface);
+
+					BRDFData brdfData;
+					InitializeBRDFData(surface.albedo, surface.metallic, 0, surface.smoothness, surface.alpha, brdfData);
 
 				#ifdef _MATERIAL_AFFECTS_ALBEDO
-					#ifdef DECAL_RECONSTRUCT_NORMAL
-						half3 normalGI = normalize(lerp(normalWS.xyz, surfaceData.normalWS.xyz, surfaceData.normalWS.w));
-					#else
-						half3 normalGI = surfaceData.normalWS.xyz;
-					#endif
-
 					Light mainLight = GetMainLight(inputData.shadowCoord, inputData.positionWS, inputData.shadowMask);
-					MixRealtimeAndBakedGI(mainLight, normalGI, inputData.bakedGI, inputData.shadowMask);
-					half3 color = GlobalIllumination(brdfData, inputData.bakedGI, surface.occlusion, normalGI, inputData.viewDirectionWS);
+					MixRealtimeAndBakedGI(mainLight, surfaceData.normalWS.xyz, inputData.bakedGI, inputData.shadowMask);
+					half3 color = GlobalIllumination(brdfData, inputData.bakedGI, surface.occlusion, surfaceData.normalWS.xyz, inputData.viewDirectionWS);
 				#else
 					half3 color = 0;
 				#endif
 
-				half3 packedNormalWS = PackNormal(surfaceData.normalWS.xyz);
+				#pragma warning (disable : 3578) // The output value isn't completely initialized.
+				half3 packedNormalWS = PackNormal(normalToPack);
 				fragmentOutput.GBuffer0 = half4(surfaceData.baseColor.rgb, surfaceData.baseColor.a);
 				fragmentOutput.GBuffer1 = 0;
 				fragmentOutput.GBuffer2 = half4(packedNormalWS, surfaceData.normalWS.a);
 				fragmentOutput.GBuffer3 = half4(surfaceData.emissive + color, surfaceData.baseColor.a);
-
 				#if OUTPUT_SHADOWMASK
-					fragmentOutput.GBuffer4 = inputData.shadowMask;
+					fragmentOutput.GBuffer4 = inputData.shadowMask; // will have unity_ProbesOcclusion value if subtractive lighting is used (baked)
 				#endif
-
-                #if defined(_FOVEATED_RENDERING_NON_UNIFORM_RASTER)
-                positionSS = RemapFoveatedRenderingDistortCS(packedInput.positionCS.xy, true) * _ScreenSize.zw;
-                #endif
+				#pragma warning (default : 3578) // Restore output value isn't completely initialized.
 
 			}
             ENDHLSL
@@ -1719,7 +1763,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#define _MATERIAL_AFFECTS_ALBEDO 1
 			#define _MATERIAL_AFFECTS_NORMAL 1
 			#define _MATERIAL_AFFECTS_NORMAL_BLEND 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			#pragma vertex Vert
@@ -1732,6 +1776,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             #define ATTRIBUTES_NEED_NORMAL
             #define ATTRIBUTES_NEED_TANGENT
@@ -1750,36 +1795,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if _RENDER_PASS_ENABLED
 			#define GBUFFER3 0
 			#define GBUFFER4 1
-			FRAMEBUFFER_INPUT_HALF(GBUFFER3);
-			FRAMEBUFFER_INPUT_HALF(GBUFFER4);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER3);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER4);
 			#endif
 
-			
-
-			
-            #if ASE_SRP_VERSION >=140007
 			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
-			#endif
-		
-
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-
-			
-            #if ASE_SRP_VERSION >=140009
-			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
-			#endif
-		
-
-			
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
-           
-
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/DebugMipmapStreamingMacros.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DecalInput.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderVariablesDecal.hlsl"
@@ -1854,6 +1885,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if defined(DECAL_ANGLE_FADE)
 			float _DecalAngleFadeSupported;
 			#endif
+			UNITY_TEXTURE_STREAMING_DEBUG_VARS;
 			CBUFFER_END
 
             #ifdef SCENEPICKINGPASS
@@ -1893,14 +1925,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
                 surfaceData.baseColor.xyz = half3(surfaceDescription.BaseColor);
                 surfaceData.baseColor.w = half(surfaceDescription.Alpha * fadeFactor);
 
-                #if defined(_MATERIAL_AFFECTS_NORMAL)
-                    float sgn = input.tangentWS.w;
-                    float3 bitangent = sgn * cross(input.normalWS.xyz, input.tangentWS.xyz);
-                    half3x3 tangentToWorld = half3x3(input.tangentWS.xyz, bitangent.xyz, input.normalWS.xyz);
-
-                    surfaceData.normalWS.xyz = normalize(TransformTangentToWorld(surfaceDescription.NormalTS, tangentToWorld));
-                #else
-                    surfaceData.normalWS.xyz = half3(input.normalWS);
+                #if (SHADERPASS == SHADERPASS_DBUFFER_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_PROJECTOR)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+						surfaceData.normalWS.xyz = normalize(mul((half3x3)normalToWorld, surfaceDescription.NormalTS.xyz));
+                    #else
+						surfaceData.normalWS.xyz = normalize(normalToWorld[2].xyz);
+                    #endif
+                #elif (SHADERPASS == SHADERPASS_DBUFFER_MESH) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_MESH) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_MESH)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+                        float sgn = input.tangentWS.w;
+                        float3 bitangent = sgn * cross(input.normalWS.xyz, input.tangentWS.xyz);
+                        half3x3 tangentToWorld = half3x3(input.tangentWS.xyz, bitangent.xyz, input.normalWS.xyz);
+        
+                        surfaceData.normalWS.xyz = normalize(TransformTangentToWorld(surfaceDescription.NormalTS, tangentToWorld));
+                    #else
+						surfaceData.normalWS.xyz = normalize(half3(input.normalWS));
+                    #endif
                 #endif
 
                 surfaceData.normalWS.w = surfaceDescription.NormalAlpha * fadeFactor;
@@ -2046,7 +2086,8 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 					half3 normalWS = half3(LoadSceneNormals(packedInput.positionCS.xy));
 				#endif
 
-				float2 positionSS = packedInput.positionCS.xy * _ScreenSize.zw;
+				float2 positionSS = FoveatedRemapNonUniformToLinearCS(packedInput.positionCS.xy) * _ScreenSize.zw;
+
 				float3 positionWS = packedInput.positionWS.xyz;
 				half3 viewDirectionWS = half3(1.0, 1.0, 1.0);
 
@@ -2126,9 +2167,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				effectsControl_float( Layer399 , Base399 , Add399 , Multi399 , Sub399 , RGBA399 );
 				float3 objToWorldDir180 = mul( GetObjectToWorldMatrix(), float4( packedInput.ase_normal, 0 ) ).xyz;
 				float3 normalizeResult181 = normalize( objToWorldDir180 );
-				float3 ase_worldViewDir = ( _WorldSpaceCameraPos.xyz - packedInput.positionWS );
-				ase_worldViewDir = normalize(ase_worldViewDir);
-				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_worldViewDir ) );
+				float3 ase_viewVectorWS = ( _WorldSpaceCameraPos.xyz - packedInput.positionWS );
+				float3 ase_viewDirWS = normalize( ase_viewVectorWS );
+				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_viewDirWS ) );
 				float dotResult128 = dot( normalizeResult181 , normalizeResult127 );
 				float Specular131 = pow( saturate( dotResult128 ) , max( _Shininess , 0.001 ) );
 				float localeffectsControl400 = ( 0.0 );
@@ -2158,9 +2199,6 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				GetSurfaceData(packedInput, surfaceDescription, surfaceData);
 				ENCODE_INTO_DBUFFER(surfaceData, outDBuffer);
 
-                #if defined(_FOVEATED_RENDERING_NON_UNIFORM_RASTER)
-                positionSS = RemapFoveatedRenderingDistortCS(packedInput.positionCS.xy, true) * _ScreenSize.zw;
-                #endif
 			}
 
             ENDHLSL
@@ -2182,7 +2220,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#define _MATERIAL_AFFECTS_ALBEDO 1
 			#define _MATERIAL_AFFECTS_NORMAL 1
 			#define _MATERIAL_AFFECTS_NORMAL_BLEND 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			#pragma vertex Vert
@@ -2194,24 +2232,21 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#pragma multi_compile _ LIGHTMAP_ON
 			#pragma multi_compile _ DYNAMICLIGHTMAP_ON
 			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
+			#pragma multi_compile _ USE_LEGACY_LIGHTMAPS
 			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
 			#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
 			#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
-
-			
-
-			
-			#pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
-           
-
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
 			#pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
 			#pragma multi_compile _ SHADOWS_SHADOWMASK
 			#pragma multi_compile _ _FORWARD_PLUS
 			#pragma multi_compile _DECAL_NORMAL_BLEND_LOW _DECAL_NORMAL_BLEND_MEDIUM _DECAL_NORMAL_BLEND_HIGH
+			#pragma multi_compile_fragment _ DEBUG_DISPLAY
 			#pragma multi_compile _ _DECAL_LAYERS
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             #define ATTRIBUTES_NEED_NORMAL
             #define ATTRIBUTES_NEED_TANGENT
@@ -2235,36 +2270,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if _RENDER_PASS_ENABLED
 			#define GBUFFER3 0
 			#define GBUFFER4 1
-			FRAMEBUFFER_INPUT_HALF(GBUFFER3);
-			FRAMEBUFFER_INPUT_HALF(GBUFFER4);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER3);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER4);
 			#endif
 
-			
-
-			
-            #if ASE_SRP_VERSION >=140007
 			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
-			#endif
-		
-
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-
-			
-            #if ASE_SRP_VERSION >=140009
-			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
-			#endif
-		
-
-			
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
-           
-
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/DebugMipmapStreamingMacros.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DecalInput.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderVariablesDecal.hlsl"
@@ -2311,10 +2332,12 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				float4 tangentWS : TEXCOORD2;
 				float4 texCoord0 : TEXCOORD3;
 				float3 viewDirectionWS : TEXCOORD4;
-				float2 staticLightmapUV : TEXCOORD5;
-				float2 dynamicLightmapUV : TEXCOORD6;
-				float3 sh : TEXCOORD7;
-				float4 fogFactorAndVertexLight : TEXCOORD8;
+				float4 lightmapUVs : TEXCOORD5; // @diogo: packs both static (xy) and dynamic (zw)
+				float3 sh : TEXCOORD6;
+				float4 fogFactorAndVertexLight : TEXCOORD7;
+				#ifdef USE_APV_PROBE_OCCLUSION
+					float4 probeOcclusion : TEXCOORD8;
+				#endif
 				float3 ase_normal : NORMAL;
 				float4 ase_texcoord9 : TEXCOORD9;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -2344,6 +2367,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if defined(DECAL_ANGLE_FADE)
 			float _DecalAngleFadeSupported;
 			#endif
+			UNITY_TEXTURE_STREAMING_DEBUG_VARS;
 			CBUFFER_END
 
             #ifdef SCENEPICKINGPASS
@@ -2387,14 +2411,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
                 surfaceData.baseColor.xyz = half3(surfaceDescription.BaseColor);
                 surfaceData.baseColor.w = half(surfaceDescription.Alpha * fadeFactor);
 
-                #if defined(_MATERIAL_AFFECTS_NORMAL)
-                    float sgn = input.tangentWS.w;
-                    float3 bitangent = sgn * cross(input.normalWS.xyz, input.tangentWS.xyz);
-                    half3x3 tangentToWorld = half3x3(input.tangentWS.xyz, bitangent.xyz, input.normalWS.xyz);
-
-                    surfaceData.normalWS.xyz = normalize(TransformTangentToWorld(surfaceDescription.NormalTS, tangentToWorld));
-                #else
-                    surfaceData.normalWS.xyz = half3(input.normalWS);
+                #if (SHADERPASS == SHADERPASS_DBUFFER_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_PROJECTOR)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+						surfaceData.normalWS.xyz = normalize(mul((half3x3)normalToWorld, surfaceDescription.NormalTS.xyz));
+                    #else
+						surfaceData.normalWS.xyz = normalize(normalToWorld[2].xyz);
+                    #endif
+                #elif (SHADERPASS == SHADERPASS_DBUFFER_MESH) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_MESH) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_MESH)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+                        float sgn = input.tangentWS.w;
+                        float3 bitangent = sgn * cross(input.normalWS.xyz, input.tangentWS.xyz);
+                        half3x3 tangentToWorld = half3x3(input.tangentWS.xyz, bitangent.xyz, input.normalWS.xyz);
+        
+                        surfaceData.normalWS.xyz = normalize(TransformTangentToWorld(surfaceDescription.NormalTS, tangentToWorld));
+                    #else
+						surfaceData.normalWS.xyz = normalize(half3(input.normalWS));
+                    #endif
                 #endif
 
                 surfaceData.normalWS.w = surfaceDescription.NormalAlpha * fadeFactor;
@@ -2474,32 +2506,46 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				inputData.positionWS = positionWS;
 				inputData.normalWS = normalWS;
 				inputData.viewDirectionWS = viewDirectionWS;
-
 				inputData.shadowCoord = float4(0, 0, 0, 0);
 
 				#ifdef VARYINGS_NEED_FOG_AND_VERTEX_LIGHT
-					inputData.fogCoord = half(input.fogFactorAndVertexLight.x);
-					inputData.vertexLighting = half3(input.fogFactorAndVertexLight.yzw);
+					inputData.fogCoord = InitializeInputDataFog(float4(positionWS, 1.0), input.fogFactorAndVertexLight.x);
+					inputData.vertexLighting = input.fogFactorAndVertexLight.yzw;
 				#endif
 
 				#if defined(VARYINGS_NEED_DYNAMIC_LIGHTMAP_UV) && defined(DYNAMICLIGHTMAP_ON)
 					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, input.dynamicLightmapUV.xy, half3(input.sh), normalWS);
-				#elif defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
-					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, half3(input.sh), normalWS);
-				#endif
-
-				#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
 					inputData.shadowMask = SAMPLE_SHADOWMASK(input.staticLightmapUV);
+					#endif
+				#elif defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+				#if !defined(LIGHTMAP_ON) && (defined(PROBE_VOLUMES_L1) || defined(PROBE_VOLUMES_L2))
+    				inputData.bakedGI = SAMPLE_GI(input.sh,
+					GetAbsolutePositionWS(inputData.positionWS),
+					inputData.normalWS,
+					inputData.viewDirectionWS,
+					input.positionCS.xy,
+					input.probeOcclusion,
+					inputData.shadowMask);
+				#else
+					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, half3(input.sh), normalWS);
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+					inputData.shadowMask = SAMPLE_SHADOWMASK(input.staticLightmapUV);
+					#endif
+				#endif
 				#endif
 
 				#if defined(DEBUG_DISPLAY)
 					#if defined(VARYINGS_NEED_DYNAMIC_LIGHTMAP_UV) && defined(DYNAMICLIGHTMAP_ON)
 						inputData.dynamicLightmapUV = input.dynamicLightmapUV.xy;
 					#endif
-					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV && LIGHTMAP_ON)
-						inputData.staticLightmapUV = input.staticLightmapUV;
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV) && defined(LIGHTMAP_ON)
+						inputData.staticLightmapUV = input.staticLightmapUV
 					#elif defined(VARYINGS_NEED_SH)
 						inputData.vertexSH = input.sh;
+					#endif
+					#if defined(USE_APV_PROBE_OCCLUSION)
+						inputData.probeOcclusion = input.probeOcclusion;
 					#endif
 				#endif
 
@@ -2613,7 +2659,8 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 					half3 normalWS = half3(LoadSceneNormals(packedInput.positionCS.xy));
 				#endif
 
-				float2 positionSS = packedInput.positionCS.xy * _ScreenSize.zw;
+				float2 positionSS = FoveatedRemapNonUniformToLinearCS(packedInput.positionCS.xy) * _ScreenSize.zw;
+
 				float3 positionWS = packedInput.positionWS.xyz;
 				half3 viewDirectionWS = half3(packedInput.viewDirectionWS);
 
@@ -2693,7 +2740,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				effectsControl_float( Layer399 , Base399 , Add399 , Multi399 , Sub399 , RGBA399 );
 				float3 objToWorldDir180 = mul( GetObjectToWorldMatrix(), float4( packedInput.ase_normal, 0 ) ).xyz;
 				float3 normalizeResult181 = normalize( objToWorldDir180 );
-				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + packedInput.viewDirectionWS ) );
+				float3 ase_viewVectorWS = ( _WorldSpaceCameraPos.xyz - packedInput.positionWS );
+				float3 ase_viewDirWS = normalize( ase_viewVectorWS );
+				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_viewDirWS ) );
 				float dotResult128 = dot( normalizeResult181 , normalizeResult127 );
 				float Specular131 = pow( saturate( dotResult128 ) , max( _Shininess , 0.001 ) );
 				float localeffectsControl400 = ( 0.0 );
@@ -2726,6 +2775,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 
 				GetSurfaceData(packedInput, surfaceDescription, surfaceData);
 
+				half3 normalToPack = surfaceData.normalWS.xyz;
 				#ifdef DECAL_RECONSTRUCT_NORMAL
 					surfaceData.normalWS.xyz = normalize(lerp(normalWS.xyz, surfaceData.normalWS.xyz, surfaceData.normalWS.w));
 				#endif
@@ -2739,10 +2789,6 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				half4 color = UniversalFragmentPBR(inputData, surface);
 				color.rgb = MixFog(color.rgb, inputData.fogCoord);
 				outColor = color;
-
-                #if defined(_FOVEATED_RENDERING_NON_UNIFORM_RASTER)
-                positionSS = RemapFoveatedRenderingDistortCS(packedInput.positionCS.xy, true) * _ScreenSize.zw;
-                #endif
 
 			}
             ENDHLSL
@@ -2770,7 +2816,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#define _MATERIAL_AFFECTS_ALBEDO 1
 			#define _MATERIAL_AFFECTS_NORMAL 1
 			#define _MATERIAL_AFFECTS_NORMAL_BLEND 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			#pragma vertex Vert
@@ -2782,14 +2828,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#pragma multi_compile _ LIGHTMAP_ON
 			#pragma multi_compile _ DYNAMICLIGHTMAP_ON
 			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
+			#pragma multi_compile _ USE_LEGACY_LIGHTMAPS
 			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
-
-			
-
-			
-			#pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
-           
-
+            #pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
 			#pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
 			#pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
 			#pragma multi_compile _DECAL_NORMAL_BLEND_LOW _DECAL_NORMAL_BLEND_MEDIUM _DECAL_NORMAL_BLEND_HIGH
@@ -2799,6 +2840,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             #define ATTRIBUTES_NEED_NORMAL
             #define ATTRIBUTES_NEED_TANGENT
@@ -2822,36 +2864,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if _RENDER_PASS_ENABLED
 			#define GBUFFER3 0
 			#define GBUFFER4 1
-			FRAMEBUFFER_INPUT_HALF(GBUFFER3);
-			FRAMEBUFFER_INPUT_HALF(GBUFFER4);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER3);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER4);
 			#endif
 
-			
-
-			
-            #if ASE_SRP_VERSION >=140007
 			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
-			#endif
-		
-
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-
-			
-            #if ASE_SRP_VERSION >=140009
-			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
-			#endif
-		
-
-			
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
-           
-
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/DebugMipmapStreamingMacros.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
+			#include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ProbeVolumeVariants.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/UnityGBuffer.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DecalInput.hlsl"
@@ -2899,10 +2927,12 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				float4 tangentWS : TEXCOORD2;
 				float4 texCoord0 : TEXCOORD3;
 				float3 viewDirectionWS : TEXCOORD4;
-				float2 staticLightmapUV : TEXCOORD5;
-				float2 dynamicLightmapUV : TEXCOORD6;
-				float3 sh : TEXCOORD7;
-				float4 fogFactorAndVertexLight : TEXCOORD8;
+				float4 lightmapUVs : TEXCOORD5; // @diogo: packs both static (xy) and dynamic (zw)
+				float3 sh : TEXCOORD6;
+				float4 fogFactorAndVertexLight : TEXCOORD7;
+				#ifdef USE_APV_PROBE_OCCLUSION
+					float4 probeOcclusion : TEXCOORD10;
+				#endif
 				float3 ase_normal : NORMAL;
 				float4 ase_texcoord9 : TEXCOORD9;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -2932,6 +2962,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if defined(DECAL_ANGLE_FADE)
 			float _DecalAngleFadeSupported;
 			#endif
+			UNITY_TEXTURE_STREAMING_DEBUG_VARS;
 			CBUFFER_END
 
             #ifdef SCENEPICKINGPASS
@@ -2975,14 +3006,22 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
                 surfaceData.baseColor.xyz = half3(surfaceDescription.BaseColor);
                 surfaceData.baseColor.w = half(surfaceDescription.Alpha * fadeFactor);
 
-                #if defined(_MATERIAL_AFFECTS_NORMAL)
-                    float sgn = input.tangentWS.w;
-                    float3 bitangent = sgn * cross(input.normalWS.xyz, input.tangentWS.xyz);
-                    half3x3 tangentToWorld = half3x3(input.tangentWS.xyz, bitangent.xyz, input.normalWS.xyz);
-
-                    surfaceData.normalWS.xyz = normalize(TransformTangentToWorld(surfaceDescription.NormalTS, tangentToWorld));
-                #else
-                    surfaceData.normalWS.xyz = half3(input.normalWS);
+                #if (SHADERPASS == SHADERPASS_DBUFFER_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_PROJECTOR) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_PROJECTOR)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+						surfaceData.normalWS.xyz = normalize(mul((half3x3)normalToWorld, surfaceDescription.NormalTS.xyz));
+                    #else
+						surfaceData.normalWS.xyz = normalize(normalToWorld[2].xyz);
+                    #endif
+                #elif (SHADERPASS == SHADERPASS_DBUFFER_MESH) || (SHADERPASS == SHADERPASS_DECAL_SCREEN_SPACE_MESH) || (SHADERPASS == SHADERPASS_DECAL_GBUFFER_MESH)
+                    #if defined(_MATERIAL_AFFECTS_NORMAL)
+                        float sgn = input.tangentWS.w;
+                        float3 bitangent = sgn * cross(input.normalWS.xyz, input.tangentWS.xyz);
+                        half3x3 tangentToWorld = half3x3(input.tangentWS.xyz, bitangent.xyz, input.normalWS.xyz);
+        
+                        surfaceData.normalWS.xyz = normalize(TransformTangentToWorld(surfaceDescription.NormalTS, tangentToWorld));
+                    #else
+						surfaceData.normalWS.xyz = normalize(half3(input.normalWS));
+                    #endif
                 #endif
 
                 surfaceData.normalWS.w = surfaceDescription.NormalAlpha * fadeFactor;
@@ -3061,30 +3100,46 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				inputData.positionWS = positionWS;
 				inputData.normalWS = normalWS;
 				inputData.viewDirectionWS = viewDirectionWS;
-
 				inputData.shadowCoord = float4(0, 0, 0, 0);
 
-				inputData.fogCoord = half(input.fogFactorAndVertexLight.x);
-				inputData.vertexLighting = half3(input.fogFactorAndVertexLight.yzw);
+				#ifdef VARYINGS_NEED_FOG_AND_VERTEX_LIGHT
+					inputData.fogCoord = InitializeInputDataFog(float4(positionWS, 1.0), input.fogFactorAndVertexLight.x);
+					inputData.vertexLighting = input.fogFactorAndVertexLight.yzw;
+				#endif
 
 				#if defined(VARYINGS_NEED_DYNAMIC_LIGHTMAP_UV) && defined(DYNAMICLIGHTMAP_ON)
 					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, input.dynamicLightmapUV.xy, half3(input.sh), normalWS);
-				#elif defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
-					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, half3(input.sh), normalWS);
-				#endif
-
-				#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
 					inputData.shadowMask = SAMPLE_SHADOWMASK(input.staticLightmapUV);
+					#endif
+				#elif defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+				#if !defined(LIGHTMAP_ON) && (defined(PROBE_VOLUMES_L1) || defined(PROBE_VOLUMES_L2))
+    				inputData.bakedGI = SAMPLE_GI(input.sh,
+					GetAbsolutePositionWS(inputData.positionWS),
+					inputData.normalWS,
+					inputData.viewDirectionWS,
+					input.positionCS.xy,
+					input.probeOcclusion,
+					inputData.shadowMask);
+				#else
+					inputData.bakedGI = SAMPLE_GI(input.staticLightmapUV, half3(input.sh), normalWS);
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV)
+					inputData.shadowMask = SAMPLE_SHADOWMASK(input.staticLightmapUV);
+					#endif
+				#endif
 				#endif
 
 				#if defined(DEBUG_DISPLAY)
 					#if defined(VARYINGS_NEED_DYNAMIC_LIGHTMAP_UV) && defined(DYNAMICLIGHTMAP_ON)
 						inputData.dynamicLightmapUV = input.dynamicLightmapUV.xy;
 					#endif
-					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV && LIGHTMAP_ON)
-						inputData.staticLightmapUV = input.staticLightmapUV;
+					#if defined(VARYINGS_NEED_STATIC_LIGHTMAP_UV) && defined(LIGHTMAP_ON)
+						inputData.staticLightmapUV = input.staticLightmapUV
 					#elif defined(VARYINGS_NEED_SH)
 						inputData.vertexSH = input.sh;
+					#endif
+					#if defined(USE_APV_PROBE_OCCLUSION)
+						inputData.probeOcclusion = input.probeOcclusion;
 					#endif
 				#endif
 
@@ -3199,7 +3254,8 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				half3 normalWS = half3(LoadSceneNormals(packedInput.positionCS.xy));
 			#endif
 
-				float2 positionSS = packedInput.positionCS.xy * _ScreenSize.zw;
+				float2 positionSS = FoveatedRemapNonUniformToLinearCS(packedInput.positionCS.xy) * _ScreenSize.zw;
+
 				float3 positionWS = packedInput.positionWS.xyz;
 				half3 viewDirectionWS = half3(packedInput.viewDirectionWS);
 
@@ -3279,7 +3335,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				effectsControl_float( Layer399 , Base399 , Add399 , Multi399 , Sub399 , RGBA399 );
 				float3 objToWorldDir180 = mul( GetObjectToWorldMatrix(), float4( packedInput.ase_normal, 0 ) ).xyz;
 				float3 normalizeResult181 = normalize( objToWorldDir180 );
-				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + packedInput.viewDirectionWS ) );
+				float3 ase_viewVectorWS = ( _WorldSpaceCameraPos.xyz - packedInput.positionWS );
+				float3 ase_viewDirWS = normalize( ase_viewVectorWS );
+				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_viewDirWS ) );
 				float dotResult128 = dot( normalizeResult181 , normalizeResult127 );
 				float Specular131 = pow( saturate( dotResult128 ) , max( _Shininess , 0.001 ) );
 				float localeffectsControl400 = ( 0.0 );
@@ -3312,42 +3370,38 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 
 				GetSurfaceData(packedInput, surfaceDescription, surfaceData);
 
-				InputData inputData;
-				InitializeInputData(packedInput, positionWS, surfaceData.normalWS.xyz, viewDirectionWS, inputData);
+				half3 normalToPack = surfaceData.normalWS.xyz;
+				#ifdef DECAL_RECONSTRUCT_NORMAL
+					surfaceData.normalWS.xyz = normalize(lerp(normalWS.xyz, surfaceData.normalWS.xyz, surfaceData.normalWS.w));
+				#endif
 
-				SurfaceData surface = (SurfaceData)0;
-				GetSurface(surfaceData, surface);
+					InputData inputData;
+					InitializeInputData(packedInput, positionWS, surfaceData.normalWS.xyz, viewDirectionWS, inputData);
 
-				BRDFData brdfData;
-				InitializeBRDFData(surface.albedo, surface.metallic, 0, surface.smoothness, surface.alpha, brdfData);
+					SurfaceData surface = (SurfaceData)0;
+					GetSurface(surfaceData, surface);
+
+					BRDFData brdfData;
+					InitializeBRDFData(surface.albedo, surface.metallic, 0, surface.smoothness, surface.alpha, brdfData);
 
 				#ifdef _MATERIAL_AFFECTS_ALBEDO
-					#ifdef DECAL_RECONSTRUCT_NORMAL
-						half3 normalGI = normalize(lerp(normalWS.xyz, surfaceData.normalWS.xyz, surfaceData.normalWS.w));
-					#else
-						half3 normalGI = surfaceData.normalWS.xyz;
-					#endif
-
 					Light mainLight = GetMainLight(inputData.shadowCoord, inputData.positionWS, inputData.shadowMask);
-					MixRealtimeAndBakedGI(mainLight, normalGI, inputData.bakedGI, inputData.shadowMask);
-					half3 color = GlobalIllumination(brdfData, inputData.bakedGI, surface.occlusion, normalGI, inputData.viewDirectionWS);
+					MixRealtimeAndBakedGI(mainLight, surfaceData.normalWS.xyz, inputData.bakedGI, inputData.shadowMask);
+					half3 color = GlobalIllumination(brdfData, inputData.bakedGI, surface.occlusion, surfaceData.normalWS.xyz, inputData.viewDirectionWS);
 				#else
 					half3 color = 0;
 				#endif
 
-				half3 packedNormalWS = PackNormal(surfaceData.normalWS.xyz);
+				#pragma warning (disable : 3578) // The output value isn't completely initialized.
+				half3 packedNormalWS = PackNormal(normalToPack);
 				fragmentOutput.GBuffer0 = half4(surfaceData.baseColor.rgb, surfaceData.baseColor.a);
 				fragmentOutput.GBuffer1 = 0;
 				fragmentOutput.GBuffer2 = half4(packedNormalWS, surfaceData.normalWS.a);
 				fragmentOutput.GBuffer3 = half4(surfaceData.emissive + color, surfaceData.baseColor.a);
-
 				#if OUTPUT_SHADOWMASK
-					fragmentOutput.GBuffer4 = inputData.shadowMask;
+					fragmentOutput.GBuffer4 = inputData.shadowMask; // will have unity_ProbesOcclusion value if subtractive lighting is used (baked)
 				#endif
-
-                #if defined(_FOVEATED_RENDERING_NON_UNIFORM_RASTER)
-                positionSS = RemapFoveatedRenderingDistortCS(packedInput.positionCS.xy, true) * _ScreenSize.zw;
-                #endif
+				#pragma warning (default : 3578) // Restore output value isn't completely initialized.
 
 			}
 
@@ -3368,7 +3422,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#define _MATERIAL_AFFECTS_ALBEDO 1
 			#define _MATERIAL_AFFECTS_NORMAL 1
 			#define _MATERIAL_AFFECTS_NORMAL_BLEND 1
-			#define ASE_SRP_VERSION 140011
+			#define ASE_SRP_VERSION 170003
 
 
 			#pragma multi_compile_instancing
@@ -3378,6 +3432,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Texture.hlsl"
+			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             #define HAVE_MESH_MODIFICATION
 
@@ -3387,8 +3442,8 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if _RENDER_PASS_ENABLED
 			#define GBUFFER3 0
 			#define GBUFFER4 1
-			FRAMEBUFFER_INPUT_HALF(GBUFFER3);
-			FRAMEBUFFER_INPUT_HALF(GBUFFER4);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER3);
+			FRAMEBUFFER_INPUT_X_HALF(GBUFFER4);
 			#endif
 
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
@@ -3397,17 +3452,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Input.hlsl"
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/TextureStack.hlsl"
-
-			
-            #if ASE_SRP_VERSION >=140009
-			#include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
-			#endif
-		
-
-			
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRendering.hlsl"
-           
-
+            #include_with_pragmas "Packages/com.unity.render-pipelines.core/ShaderLibrary/FoveatedRenderingKeywords.hlsl"
+			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/DebugMipmapStreamingMacros.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ShaderGraphFunctions.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/Editor/ShaderGraph/Includes/ShaderPass.hlsl"
 			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DecalInput.hlsl"
@@ -3461,6 +3508,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 			#if defined(DECAL_ANGLE_FADE)
 			float _DecalAngleFadeSupported;
 			#endif
+			UNITY_TEXTURE_STREAMING_DEBUG_VARS;
 			CBUFFER_END
 
             #ifdef SCENEPICKINGPASS
@@ -3637,9 +3685,9 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 				float3 objToWorldDir180 = mul( GetObjectToWorldMatrix(), float4( packedInput.ase_normal, 0 ) ).xyz;
 				float3 normalizeResult181 = normalize( objToWorldDir180 );
 				float3 ase_worldPos = packedInput.ase_texcoord2.xyz;
-				float3 ase_worldViewDir = ( _WorldSpaceCameraPos.xyz - ase_worldPos );
-				ase_worldViewDir = normalize(ase_worldViewDir);
-				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_worldViewDir ) );
+				float3 ase_viewVectorWS = ( _WorldSpaceCameraPos.xyz - ase_worldPos );
+				float3 ase_viewDirWS = normalize( ase_viewVectorWS );
+				float3 normalizeResult127 = normalize( ( _MainLightPosition.xyz + ase_viewDirWS ) );
 				float dotResult128 = dot( normalizeResult181 , normalizeResult127 );
 				float Specular131 = pow( saturate( dotResult128 ) , max( _Shininess , 0.001 ) );
 				float localeffectsControl400 = ( 0.0 );
@@ -3667,7 +3715,7 @@ Shader  "MMD Collection/URP/Effects/MMD - Decal (Amplify Shader Editor)"
 	Fallback Off
 }
 /*ASEBEGIN
-Version=19603
+Version=19700
 Node;AmplifyShaderEditor.CommentaryNode;21;-5984,-4640;Inherit;False;1276.801;543.8008;NdotL;7;89;62;59;60;61;84;68;;1,1,1,1;0;0
 Node;AmplifyShaderEditor.CommentaryNode;273;-4448,-7424;Inherit;False;1628.8;1278.8;Base Properties;17;12;10;37;40;43;65;64;67;109;66;110;13;11;32;44;28;292;;1,1,1,1;0;0
 Node;AmplifyShaderEditor.NormalVertexDataNode;68;-5952,-4576;Inherit;True;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -4073,4 +4121,4 @@ WireConnection;414;0;17;3
 WireConnection;480;0;371;0
 WireConnection;480;1;205;0
 ASEEND*/
-//CHKSM=A9E4068327AC04DAB016C14A8F2D90CBDD10DC04
+//CHKSM=1661B37F06377A89AEAD14B42A10255E788627A8

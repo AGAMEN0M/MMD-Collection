@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
   m_Name: GetLightmap
   m_EditorClassIdentifier: 
-  m_functionInfo: "// Made with Amplify Shader Editor v1.9.6.3\n// Available at the
-    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19603\nNode;AmplifyShaderEditor.CommentaryNode;27;608,-320;Inherit;False;324;162.8;Original
+  m_functionInfo: "// Made with Amplify Shader Editor v1.9.7\n// Available at the
+    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19700\nNode;AmplifyShaderEditor.CommentaryNode;27;608,-320;Inherit;False;324;162.8;Original
     Code;1;25;;1,1,1,1;0;0\nNode;AmplifyShaderEditor.FunctionNode;24;544,-64;Inherit;False;Lightmap
     UV;-1;;91;1940f027d0458684eb0ad486f669d7d5;1,1,0;0;1;FLOAT2;0\nNode;AmplifyShaderEditor.CustomExpressionNode;11;736,-64;Float;False;return
-    SAMPLE_TEXTURE2D( unity_Lightmap, samplerunity_Lightmap, UV )@;4;Create;1;True;UV;FLOAT2;0,0;In;;Float;False;SampleLightmapHD;True;False;0;;False;1;0;FLOAT2;0,0;False;1;FLOAT4;0\nNode;AmplifyShaderEditor.FunctionNode;25;656,-256;Inherit;False;FetchLightmapValue;0;;92;43de3d4ae59f645418fdd020d1b8e78e;1,23,1;0;1;FLOAT3;0\nNode;AmplifyShaderEditor.FunctionOutput;0;928,-64;Inherit;False;True;-1;Output;0;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0\nWireConnection;11;0;24;0\nWireConnection;0;0;11;0\nASEEND*/\n//CHKSM=3436C0568AFEDD8D0767935BD7DAE708A59AF893"
+    SAMPLE_TEXTURE2D( unity_Lightmap, samplerunity_Lightmap, UV )@;4;Create;1;True;UV;FLOAT2;0,0;In;;Float;False;SampleLightmapHD;True;False;0;;False;1;0;FLOAT2;0,0;False;1;FLOAT4;0\nNode;AmplifyShaderEditor.FunctionNode;25;656,-256;Inherit;False;FetchLightmapValue;0;;92;43de3d4ae59f645418fdd020d1b8e78e;1,23,1;0;1;FLOAT3;0\nNode;AmplifyShaderEditor.FunctionOutput;0;928,-64;Inherit;False;True;-1;Output;0;False;1;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0\nWireConnection;11;0;24;0\nWireConnection;0;0;11;0\nASEEND*/\n//CHKSM=FC7F5AC61F332B471514808F5683A771703398DD"
   m_functionName: 
   m_description: 'Fetches the value from the lightmap. Multiply the fetched value
     by the final fragment color. '

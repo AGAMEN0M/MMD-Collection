@@ -65,10 +65,10 @@ public class MaterialShaderConverter : MonoBehaviour
                         ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, true, false, false, ShaderModel.Default);
                         break;
                     case "MMD4Mecanim/MMDLit-NEXTEdge-Pass4":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD - Multiple Outline (Amplify Shader Editor)", false, false, false, false, ShaderModel.FourLayers);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD - Multiple Outline (Code)", false, false, false, false, ShaderModel.FourLayers);
                         break;
                     case "MMD4Mecanim/MMDLit-NEXTEdge-Pass8":
-                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD - Multiple Outline (Amplify Shader Editor)", false, false, false, false, ShaderModel.EightLayers);
+                        ChangeShader(materialToConvert, "MMD Collection/URP/MMD - Multiple Outline (Code)", false, false, false, false, ShaderModel.EightLayers);
                         break;
                     case "MMD4Mecanim/MMDLit-NoShadowCasting":
                         ChangeShader(materialToConvert, "MMD Collection/URP/MMD (Amplify Shader Editor)", false, false, false, false, ShaderModel.NoShadow);
@@ -366,7 +366,6 @@ public class MaterialShaderConverter : MonoBehaviour
         // Retrieve current outline color and edge size to retain in the new shader.
         Color oldEdgeColor = materialToConvert.GetColor("_EdgeColor");
         float oldEdgeSize = materialToConvert.GetFloat("_EdgeSize");
-        bool transparentOutline = oldEdgeColor.a < 1;
 
         materialToConvert.shader = Shader.Find(newShaderName); // Apply the new shader to the material.
 
@@ -375,23 +374,7 @@ public class MaterialShaderConverter : MonoBehaviour
 
         // Set outline properties for the new shader.
         materialToConvert.SetColor("_OutlineColor", oldEdgeColor);
-        materialToConvert.SetFloat("_EdgeSize", oldEdgeSize * 10);
-
-        materialToConvert.SetFloat("_ReceiveShadows", 0);
-        materialToConvert.DisableKeyword("_RECEIVE_SHADOWS_OFF");
-
-        // Set material transparency mode and adjust render queue if needed.
-        if (transparentOutline)
-        {
-            materialToConvert.SetFloat("_Surface", 1); // Enable transparent outline mode.
-            materialToConvert.SetOverrideTag("RenderType", "Transparent");
-            oldCustomRenderQueue = RenderQueueToTransparent(oldCustomRenderQueue);
-        }
-        else
-        {
-            materialToConvert.SetFloat("_Surface", 0); // Set to opaque mode.
-            materialToConvert.SetOverrideTag("RenderType", "Opaque");
-        }
+        materialToConvert.SetFloat("_OutlineSize", oldEdgeSize * 10);
 
         materialToConvert.renderQueue = oldCustomRenderQueue;
     }
