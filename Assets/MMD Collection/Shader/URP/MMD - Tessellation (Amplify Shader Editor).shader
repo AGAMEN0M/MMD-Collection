@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor v1.9.7
+// Made with Amplify Shader Editor v1.9.7.1
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 {
@@ -211,6 +211,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 			#pragma domain DomainFunction
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
+			#define ASE_VERSION 19701
 			#define ASE_SRP_VERSION 170003
 
 
@@ -508,6 +509,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 			#pragma domain DomainFunction
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
+			#define ASE_VERSION 19701
 			#define ASE_SRP_VERSION 170003
 
 
@@ -1059,6 +1061,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 			#pragma domain DomainFunction
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
+			#define ASE_VERSION 19701
 			#define ASE_SRP_VERSION 170003
 
 
@@ -1406,6 +1409,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 			#pragma domain DomainFunction
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
+			#define ASE_VERSION 19701
 			#define ASE_SRP_VERSION 170003
 
 
@@ -1725,6 +1729,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 			#pragma domain DomainFunction
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
+			#define ASE_VERSION 19701
 			#define ASE_SRP_VERSION 170003
 
 
@@ -2029,6 +2034,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 			#pragma domain DomainFunction
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
+			#define ASE_VERSION 19701
 			#define ASE_SRP_VERSION 170003
 
 
@@ -2341,6 +2347,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
         	#pragma domain DomainFunction
         	#define ASE_PHONG_TESSELLATION
         	#define ASE_LENGTH_TESSELLATION
+        	#define ASE_VERSION 19701
         	#define ASE_SRP_VERSION 170003
 
 
@@ -2664,7 +2671,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 	Fallback Off
 }
 /*ASEBEGIN
-Version=19700
+Version=19701
 Node;AmplifyShaderEditor.CommentaryNode;282;-2656,-4160;Inherit;False;2145.128;2174.384;Sphere Map Composition - Option to Add, Multiply, Sub Tex, Turn off the effect;35;401;399;408;284;400;379;57;63;56;289;207;407;406;405;283;377;378;380;80;75;78;79;77;73;39;71;477;478;384;484;391;485;486;487;488;;1,1,1,1;0;0
 Node;AmplifyShaderEditor.TexturePropertyNode;478;-2560,-2816;Inherit;True;Property;_SubTex;SPH SubTex;14;0;Create;False;0;0;0;False;0;False;None;a4bd0e91e1c27e244a687b69ae743b93;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.CommentaryNode;273;-4096,-7648;Inherit;False;1665.6;1246.8;Base Properties;17;32;292;12;37;44;13;11;28;10;40;43;65;64;67;109;66;110;;1,1,1,1;0;0
@@ -3244,4 +3251,4 @@ WireConnection;498;1;315;0
 WireConnection;498;2;324;0
 WireConnection;498;3;212;0
 ASEEND*/
-//CHKSM=6841774490F80E08B4F5121E74FC8EAAB435ED1D
+//CHKSM=E457FF400E36A41B0FB5DF63418B1FC8650B4E9E
