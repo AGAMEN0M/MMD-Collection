@@ -49,7 +49,7 @@ public class GlobalLightManager : MonoBehaviour
     private void GetAllDirectionalLights()
     {
         // Get all lights (including inactive) in the current scene
-        var allLights = FindObjectsOfType<Light>();
+        var allLights = FindObjectsByType<Light>(FindObjectsSortMode.None);
         allDirectionalLights = new List<Light>(System.Array.FindAll(allLights, light => light.type == LightType.Directional && light.enabled));
     }
 
