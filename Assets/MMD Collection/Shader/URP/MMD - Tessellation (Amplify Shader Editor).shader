@@ -45,11 +45,11 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 
-		//_TessPhongStrength( "Phong Tess Strength", Range( 0, 1 ) ) = 0.5
+		_TessPhongStrength( "Phong Tess Strength", Range( 0, 1 ) ) = 0.5
 		//_TessValue( "Tess Max Tessellation", Range( 1, 32 ) ) = 16
 		//_TessMin( "Tess Min Distance", Float ) = 10
 		//_TessMax( "Tess Max Distance", Float ) = 25
-		//_TessEdgeLength ( "Edge length", Range( 2, 50 ) ) = 16
+		_TessEdgeLength ( "Edge length", Range( 2, 50 ) ) = 16
 		//_TessMaxDisp( "Tess Max Displacement", Float ) = 25
 
 		[HideInInspector] _QueueOffset("_QueueOffset", Float) = 0
@@ -385,7 +385,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -420,7 +420,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _PhongTessStrength;
+				float phongStrength = _TessPhongStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -823,7 +823,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -861,7 +861,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _PhongTessStrength;
+				float phongStrength = _TessPhongStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -1337,7 +1337,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -1375,7 +1375,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _PhongTessStrength;
+				float phongStrength = _TessPhongStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -1685,7 +1685,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -1723,7 +1723,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _PhongTessStrength;
+				float phongStrength = _TessPhongStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -2018,7 +2018,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -2056,7 +2056,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _PhongTessStrength;
+				float phongStrength = _TessPhongStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -2324,7 +2324,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -2362,7 +2362,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _PhongTessStrength;
+				float phongStrength = _TessPhongStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -2652,7 +2652,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -2690,7 +2690,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _PhongTessStrength;
+				float phongStrength = _TessPhongStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -3097,7 +3097,7 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;506;768,-1152;Float;False;F
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;507;768,-1152;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthNormalsOnly;0;9;DepthNormalsOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=DepthNormalsOnly;False;True;9;d3d11;metal;vulkan;xboxone;xboxseries;playstation;ps4;ps5;switch;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;508;768,-1152;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;1;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;MotionVectors;0;10;MotionVectors;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;5;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;False;False;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=MotionVectors;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;499;768,-1152;Float;False;True;-1;2;MMDTessellationMaterialCustomInspector_AmplifyShaderEditor;0;13;MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor);2992e84f91cbeb14eab234972e07ea9d;True;Forward;0;1;Forward;9;False;False;False;False;False;False;False;False;False;False;False;False;True;0;True;_Invalid;True;True;0;True;_Cull;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=_Surface=RenderType;Queue=Overlay=Queue=-2000;UniversalMaterialType=Unlit;True;5;True;12;all;0;True;True;1;1;True;_SrcBlend;0;True;_DstBlend;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;True;True;1;True;_ZWrite;True;3;True;_ZTest;True;True;0;False;;0;False;;True;1;LightMode=UniversalForwardOnly;False;False;12;Include;;False;;Native;False;0;0;;Pragma;multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE;False;;Custom;False;0;0;;Pragma;multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS;False;;Custom;False;0;0;;Pragma;multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS;False;;Custom;False;0;0;;Pragma;multi_compile_fragment _ _SHADOWS_SOFT;False;;Custom;False;0;0;;Pragma;multi_compile _ SHADOWS_SHADOWMASK;False;;Custom;False;0;0;;Pragma;multi_compile _ LIGHTMAP_SHADOW_MIXING;False;;Custom;False;0;0;;Pragma;multi_compile_fog;False;;Custom;False;0;0;;Pragma;multi_compile _ _FOG_ON;False;;Custom;False;0;0;;Custom;#ifdef _FOG_ON;False;;Custom;False;0;0;;Define;ASE_FOG 1;False;;Custom;False;0;0;;Custom;#endif;False;;Custom;False;0;0;;;0;0;Standard;27;Surface;0;0;  Blend;0;0;Two Sided;1;0;Alpha Clipping;1;0;  Use Shadow Threshold;0;0;Forward Only;0;0;Cast Shadows;1;0;Receive Shadows;1;0;Motion Vectors;0;0;  Add Precomputed Velocity;0;0;GPU Instancing;1;0;LOD CrossFade;1;0;Built-in Fog;0;638670621200094653;Meta Pass;0;0;Extra Pre Pass;1;638670624603007853;Tessellation;1;638670638954938407;  Phong;1;638670638974924703;  Strength;0.5,True,_PhongTessStrength;638670639086480540;  Type;2;638670641429772971;  Tess;16,True,_EdgeLength;638670639265146067;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;20,True,_EdgeLength;0;  Max Displacement;25,False,;0;Write Depth;0;0;  Early Z;0;0;Vertex Position,InvertActionOnDeselection;1;0;0;11;True;True;True;True;False;False;True;True;True;False;False;False;;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;498;32,-1348;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ExtraPrePass;0;0;OutlinePass;5;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;5;True;12;all;0;True;True;1;0;True;_SrcBlend;0;True;_DstBlend;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;True;True;1;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;True;True;1;True;_ZWrite;True;3;True;_ZTest;True;True;0;False;;0;False;;True;0;False;False;0;;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;498;0,-7424;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ExtraPrePass;0;0;OutlinePass;5;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;5;True;12;all;0;True;True;1;0;True;_SrcBlend;0;True;_DstBlend;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;True;True;1;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;True;True;1;True;_ZWrite;True;3;True;_ZTest;True;True;0;False;;0;False;;True;0;False;False;0;;0;0;Standard;0;False;0
 WireConnection;484;2;478;0
 WireConnection;485;2;478;0
 WireConnection;486;2;478;0
@@ -3368,4 +3368,4 @@ WireConnection;498;1;315;0
 WireConnection;498;2;324;0
 WireConnection;498;3;212;0
 ASEEND*/
-//CHKSM=17A43F25A57B6D68ED6CF48029835BA36800B8A7
+//CHKSM=24ADC46BABD1C57D033789A3CDD4389C7DD34D86
