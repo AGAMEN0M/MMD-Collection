@@ -5176,6 +5176,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "SRPAdditionalLight",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADERGRAPH_PREVIEW)\r\n\tOutput = 1;\r\n#else\r\n\tfloat3 Color = 0;\r\n\t#if defined(_ADDITIONAL_LIGHTS)\r\n\t#define SUM_LIGHTLAMBERT(Light) \\ half3 AttLightColor = Light.color * ( Light.distanceAttenuation * Light.shadowAttenuation );\\ Color += LightingLambert( AttLightColor, Light.direction, WorldNormal );\r\n\t\tInputData inputData = (InputData)0;\r\n\t\tinputData.normalizedScreenSpaceUV = ScreenUV.xy;\r\n\t\tinputData.positionWS = WorldPosition;\r\n\t\tuint meshRenderingLayers = GetMeshRenderingLayer();\r\n\t\tuint pixelLightCount = GetAdditionalLightsCount();\r\n\r\n\t\t#if USE_FORWARD_PLUS\r\n\t\t\tfor (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)\r\n\t\t\t{\r\n\t\t\t\tFORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK\r\n\t\t\t\tLight light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);\r\n\r\n\t\t\t\t#ifdef _LIGHT_LAYERS\r\n\t\t\t\tif (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))\r\n\t\t\t\t#endif\r\n\t\t\t\t{\r\n\t\t\t\t\tSUM_LIGHTLAMBERT( light );\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t#endif\r\n\r\n\t\tLIGHT_LOOP_BEGIN( pixelLightCount )\r\n\t\tLight light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);\r\n\r\n\t\t#ifdef _LIGHT_LAYERS\r\n\t\tif (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))\r\n\t\t#endif\r\n\t\t{\r\n\t\tSUM_LIGHTLAMBERT( light );\r\n\t\t}\r\n\r\n\t\tLIGHT_LOOP_END\r\n\t#endif\r\n\r\n\tOutput = Color;\r\n#endif"
 }
 
@@ -5273,6 +5274,7 @@
     "m_SourceType": 1,
     "m_FunctionName": "Enter function name here...",
     "m_FunctionSource": "",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -8396,7 +8398,7 @@
     "m_ObjectId": "1e0885c216c74c3b981329a70c323271",
     "m_Title": "Light Calculation",
     "m_Position": {
-        "x": -3856.80029296875,
+        "x": -3856.7998046875,
         "y": 1344.0
     }
 }
@@ -8907,6 +8909,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "Switch",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#ifdef LIGHTMAP_ON\r\n\tOutput = True;\r\n#else\r\n\tOutput = False;\r\n#endif"
 }
 
@@ -9246,6 +9249,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "ShadowMask",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)\r\n\tOutput = SAMPLE_SHADOWMASK( LightmapUV.xy );\r\n#elif !defined (LIGHTMAP_ON)\r\n\tOutput = unity_ProbesOcclusion;\r\n#else\r\n\tOutput = half4( 1, 1, 1, 1 );\r\n#endif"
 }
 
@@ -10473,7 +10477,7 @@
     "m_ObjectId": "31ae963f0e7742d98b7912623ec2d152",
     "m_Title": "Fog",
     "m_Position": {
-        "x": 3167.19921875,
+        "x": 3167.2001953125,
         "y": 4816.80029296875
     }
 }
@@ -11537,6 +11541,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "uvLayer",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "if (Layer == 0)\r\n{\r\n\tOutput =  uv0;\r\n}\r\nelse if (Layer == 1)\r\n{\r\n\tOutput =   uv1;\r\n}\r\nelse if (Layer == 2)\r\n{\r\n\tOutput =  uv2;\r\n}\r\nelse if (Layer == 3)\r\n{\r\n\tOutput =  uv3;\r\n}\r\nelse\r\n{\r\n\tOutput =  uv0;\r\n}"
 }
 
@@ -11767,6 +11772,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "shadowAtten",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADERGRAPH_PREVIEW)\r\n\tOutput = 1;\r\n#else\r\n\tfloat4 shadowCoord = TransformWorldToShadowCoord(worldPos); \r\n\tLight mainLight = GetMainLight(shadowCoord);\r\n\tOutput = mainLight.shadowAttenuation;\r\n#endif"
 }
 
@@ -13243,7 +13249,7 @@
     "m_Title": "globalAmbient",
     "m_Position": {
         "x": -1600.800048828125,
-        "y": -834.400146484375
+        "y": -834.3997802734375
     }
 }
 
@@ -16225,6 +16231,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "LightmapUV",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Output = UV * (unity_LightmapST).xy + (unity_LightmapST).zw;"
 }
 
@@ -16316,6 +16323,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "lightColor",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADERGRAPH_PREVIEW)\r\n\tOutput = 1;\r\n#else\r\n\tfloat4 shadowCoord = TransformWorldToShadowCoord(worldPos);\r\n\tLight mainLight = GetMainLight(shadowCoord);\r\n\tOutput = mainLight.color;\r\n#endif"
 }
 
@@ -17866,6 +17874,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "effectsControl",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "if (Layer == 0)\r\n{\r\n\tOutput =  Base;\r\n}\r\nelse if (Layer == 1)\r\n{\r\n\tOutput =  Add;\r\n}\r\nelse if (Layer == 2)\r\n{\r\n\tOutput =  Multi;\r\n}\r\nelse if (Layer == 3)\r\n{\r\n\tOutput =  Sub;\r\n}\r\nelse\r\n{\r\n\tOutput =  Base;\r\n}"
 }
 
@@ -19899,6 +19908,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "lightmapCol",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "float4 lightmapCol = 1;\r\n\r\n#ifdef LIGHTMAP_ON\r\n\tlightmapCol = SAMPLE_TEXTURE2D( unity_Lightmap, samplerunity_Lightmap, lightmapUV );\r\n#endif\r\n\r\nOutput = lightmapCol.rgb;"
 }
 
@@ -22668,7 +22678,7 @@
     "m_Title": "SURFACE OPTIONS",
     "m_Position": {
         "x": -1767.199951171875,
-        "y": -2392.80029296875
+        "y": -2392.7998046875
     }
 }
 
@@ -25404,6 +25414,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "effectsControl",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "if (Layer == 0)\r\n{\r\n\tOutput =  Base;\r\n}\r\nelse if (Layer == 1)\r\n{\r\n\tOutput =  Add;\r\n}\r\nelse if (Layer == 2)\r\n{\r\n\tOutput =  Multi;\r\n}\r\nelse if (Layer == 3)\r\n{\r\n\tOutput =  Sub;\r\n}\r\nelse\r\n{\r\n\tOutput =  Base;\r\n}"
 }
 
@@ -26534,7 +26545,7 @@
     "m_ObjectId": "c665c19ecf36465691c60d46214e30b6",
     "m_Title": "MMD constants",
     "m_Position": {
-        "x": -3698.400146484375,
+        "x": -3698.399658203125,
         "y": -2384.000244140625
     }
 }
@@ -26730,7 +26741,7 @@
     "m_Title": "MMDLit_GetTempAmbientL",
     "m_Position": {
         "x": -3827.199951171875,
-        "y": -834.400146484375
+        "y": -834.3997802734375
     }
 }
 
@@ -27190,6 +27201,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "WorldSpaceLightDir",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADERGRAPH_PREVIEW)\r\n\tOutput = 1;\r\n#else\r\n\tOutput = _MainLightPosition.xyz;\r\n#endif"
 }
 
@@ -27830,6 +27842,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "vLight",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADERGRAPH_PREVIEW)\r\n\tOutput = 1;\r\n#else\r\n\tOutput = SampleSH(normal);\r\n#endif"
 }
 
@@ -29363,7 +29376,7 @@
     "m_Title": "MMDLit_GetTempAmbient",
     "m_Position": {
         "x": -572.0,
-        "y": -834.400146484375
+        "y": -834.3997802734375
     }
 }
 
@@ -30809,6 +30822,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "LightmapUV_Dynamic",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Output = UV * (unity_DynamicLightmapST).xy + (unity_DynamicLightmapST).zw;"
 }
 
@@ -31768,6 +31782,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "WorldSpaceLightDir",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADERGRAPH_PREVIEW)\r\n\tOutput = 1;\r\n#else\r\n\tOutput = _MainLightPosition.xyz;\r\n#endif"
 }
 
@@ -32081,7 +32096,7 @@
     "m_Title": "Outline",
     "m_Position": {
         "x": -1137.5999755859375,
-        "y": -2395.2001953125
+        "y": -2395.19970703125
     }
 }
 

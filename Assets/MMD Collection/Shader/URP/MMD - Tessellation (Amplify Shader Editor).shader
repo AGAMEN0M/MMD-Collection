@@ -45,11 +45,11 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 
-		_TessPhongStrength( "Phong Tess Strength", Range( 0, 1 ) ) = 0.5
+		//_TessPhongStrength( "Phong Tess Strength", Range( 0, 1 ) ) = 0.5
 		//_TessValue( "Tess Max Tessellation", Range( 1, 32 ) ) = 16
 		//_TessMin( "Tess Min Distance", Float ) = 10
 		//_TessMax( "Tess Max Distance", Float ) = 25
-		_TessEdgeLength ( "Edge length", Range( 2, 50 ) ) = 16
+		//_TessEdgeLength ( "Edge length", Range( 2, 50 ) ) = 16
 		//_TessMaxDisp( "Tess Max Displacement", Float ) = 25
 
 		[HideInInspector] _QueueOffset("_QueueOffset", Float) = 0
@@ -385,7 +385,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -420,7 +420,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _TessPhongStrength;
+				float phongStrength = _PhongTessStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -823,7 +823,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -861,7 +861,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _TessPhongStrength;
+				float phongStrength = _PhongTessStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -1337,7 +1337,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -1375,7 +1375,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _TessPhongStrength;
+				float phongStrength = _PhongTessStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -1685,7 +1685,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -1723,7 +1723,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _TessPhongStrength;
+				float phongStrength = _PhongTessStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -2018,7 +2018,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -2056,7 +2056,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _TessPhongStrength;
+				float phongStrength = _PhongTessStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -2324,7 +2324,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -2362,7 +2362,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _TessPhongStrength;
+				float phongStrength = _PhongTessStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -2652,7 +2652,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				TessellationFactors output;
 				float4 tf = 1;
 				float tessValue = _TessValue; float tessMin = _TessMin; float tessMax = _TessMax;
-				float edgeLength = _TessEdgeLength; float tessMaxDisp = _TessMaxDisp;
+				float edgeLength = _EdgeLength; float tessMaxDisp = _TessMaxDisp;
 				#if defined(ASE_FIXED_TESSELLATION)
 				tf = FixedTess( tessValue );
 				#elif defined(ASE_DISTANCE_TESSELLATION)
@@ -2690,7 +2690,7 @@ Shader "MMD Collection/URP/MMD - Tessellation (Amplify Shader Editor)"
 				float3 pp[3];
 				for (int i = 0; i < 3; ++i)
 					pp[i] = output.positionOS.xyz - patch[i].normalOS * (dot(output.positionOS.xyz, patch[i].normalOS) - dot(patch[i].positionOS.xyz, patch[i].normalOS));
-				float phongStrength = _TessPhongStrength;
+				float phongStrength = _PhongTessStrength;
 				output.positionOS.xyz = phongStrength * (pp[0]*bary.x + pp[1]*bary.y + pp[2]*bary.z) + (1.0f-phongStrength) * output.positionOS.xyz;
 				#endif
 				UNITY_TRANSFER_INSTANCE_ID(patch[0], output);
@@ -3368,4 +3368,4 @@ WireConnection;498;1;315;0
 WireConnection;498;2;324;0
 WireConnection;498;3;212;0
 ASEEND*/
-//CHKSM=24ADC46BABD1C57D033789A3CDD4389C7DD34D86
+//CHKSM=BA96B3A861880EB18647484DA30A421F7B039D32
