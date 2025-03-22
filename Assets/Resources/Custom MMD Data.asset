@@ -227,3 +227,12 @@ MonoBehaviour:
     materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
     materialNameEN: SubTex (Amplify Shader Editor)
     materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: d2acccdd2b0c6314fa097574792ec17d, type: 2}
+    materialNameJP: "MMD \u9802\u70B9\u30AB\u30E9\u30FC (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
+      \u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: MMD Vertex Color (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: c8ca8345f1c7cda4c88852770a8a1d0e, type: 2}
+    materialNameJP: "MMD \u9802\u70B9\u30AB\u30E9\u30FC (\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5)"
+    materialNameEN: MMD Vertex Color (Shader Graph)
+    materialMeno: AGAMENOM
