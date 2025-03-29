@@ -8,7 +8,7 @@ This tool facilitates the use of [MMD (Miku Miku Dance)](https://learnmmd.com/do
 
 # Download
 
-[MMD Collection - Package v0.0.7](https://drive.google.com/file/d/1MWGqp4RGjFy7MpK2cSHeExdY1KW8_amj/view?usp=drive_link)
+[MMD Collection - Package v0.0.8](https://drive.google.com/file/d/1zp9tET1tA3PDUVpWE9oKq2xoUstLwP4c/view?usp=drive_link)
  / 
 [Documentation](https://drive.google.com/file/d/1b57xESSD2MgVusDFmEDSg0pc7HsACUXn/view?usp=drive_link)
 
@@ -29,4 +29,4 @@ If you have suggestions for improvements and bug fixes, please share them with m
 # Old Versions
 [Old Versions - Package](https://drive.google.com/drive/folders/19pbcDSKguJPxQJnT9euMLY83m2MjU8hO?usp=drive_link)
 
-Current version in Git v5.8
+Current version in Git v5.9
