@@ -16,7 +16,7 @@ namespace MMDCollectionEditor
     // Utility class for custom inspectors extending ShaderGUI.
     public class CustomInspectorUtilityEditor : ShaderGUI
     {
-        // Load existing material data into the inspector fields.
+        /// <summary> Loads existing material data into the inspector fields. </summary>
         public static void LoadData(CustomMMDData customMMDMaterialData, Material currentMaterial, out string materialNameJP, out string materialNameEN, out string materialMeno, out bool showSystemsDefault)
         {
             materialNameJP = "";
@@ -45,7 +45,7 @@ namespace MMDCollectionEditor
             }
         }
 
-        // Saves material data from the inspector fields into the custom material data structure.
+        /// <summary> Saves material data from the inspector fields into the custom material data structure. </summary>
         public static void SaveData(CustomMMDData customMMDMaterialData, Material currentMaterial, string materialNameJP, string materialNameEN, string materialMeno, bool showSystemsDefault)
         {
             // Check for changes before saving.
@@ -82,7 +82,7 @@ namespace MMDCollectionEditor
             }
         }
 
-        // Checks if any changes have been made to the material data fields.
+        /// <summary> Checks if any changes have been made to the material data fields. </summary>
         public static bool DetectChanges(CustomMMDData customMMDMaterialData, Material currentMaterial, string materialNameJP, string materialNameEN, string materialMeno, bool showSystemsDefault)
         {
             if (customMMDMaterialData != null)
@@ -112,7 +112,7 @@ namespace MMDCollectionEditor
             return false;
         }
 
-        // Render options for surface properties.
+        /// <summary> Renders options for surface properties. </summary>
         public static void RenderSurfaceOptions(MaterialProperty[] materialProperties, Material currentMaterial)
         {
             GUILayout.Label("Surface Options", EditorStyles.boldLabel);
@@ -138,16 +138,16 @@ namespace MMDCollectionEditor
             GUILayout.Space(10f);
         }
 
-        // Renders Global Illumination flags in a dropdown menu.
+        /// <summary> Renders Global Illumination flags in a dropdown menu. </summary>
         public static void RenderLightmapFlags(Material currentMaterial)
         {
             string[] displayOptions = { "None", "Realtime", "Baked", "Emissive" };
             MaterialGlobalIlluminationFlags[] flagOptions = {
-            MaterialGlobalIlluminationFlags.None,
-            MaterialGlobalIlluminationFlags.RealtimeEmissive,
-            MaterialGlobalIlluminationFlags.BakedEmissive,
-            MaterialGlobalIlluminationFlags.EmissiveIsBlack
-        };
+                MaterialGlobalIlluminationFlags.None,
+                MaterialGlobalIlluminationFlags.RealtimeEmissive,
+                MaterialGlobalIlluminationFlags.BakedEmissive,
+                MaterialGlobalIlluminationFlags.EmissiveIsBlack
+            };
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Global Illumination", GUILayout.Width(EditorGUIUtility.labelWidth));
@@ -168,7 +168,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Renders a color picker field with individual RGB sliders.
+        /// <summary> Renders a color picker field with individual RGB sliders. </summary>
         public static void RenderColorProperty(MaterialProperty[] materialProperties, string propertyName, string label)
         {
             EditorGUILayout.BeginHorizontal();
@@ -205,7 +205,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a float property as a slider.
+        /// <summary> Renders a float property as a slider. </summary>
         public static void RenderSliderFloatProperty(MaterialProperty[] materialProperties, string propertyName, string label, float minValue, float maxValue, float space, float sliderSpace, bool expand = false)
         {
             EditorGUILayout.BeginHorizontal();
@@ -234,7 +234,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a toggle for double-sided rendering.
+        /// <summary> Renders a toggle for double-sided rendering. </summary>
         public static void RenderDoubleSidedToggle(MaterialProperty[] materialProperties)
         {
             MaterialProperty cullProperty = FindProperty("_Cull", materialProperties);
@@ -276,7 +276,7 @@ namespace MMDCollectionEditor
             GUI.backgroundColor = Color.white;
         }
 
-        // Render a shader pass toggle.
+        /// <summary> Renders a shader pass toggle. </summary>
         public static void RenderShaderPassToggle(Material currentMaterial, string passName, string label, float space)
         {
             EditorGUILayout.BeginHorizontal();
@@ -292,7 +292,7 @@ namespace MMDCollectionEditor
             }
         }
 
-        // Render a keyword toggle.
+        /// <summary> Renders a keyword toggle. </summary>
         public static void RenderKeywordToggle(MaterialProperty[] materialProperties, Material currentMaterial, string propertyName, string label, string tag, bool invert, float space)
         {
             EditorGUILayout.BeginHorizontal();
@@ -326,7 +326,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a UI toggle.
+        /// <summary> Renders a UI toggle. </summary>
         public static void RenderUIToggle(MaterialProperty[] materialProperties, string propertyName, string label, float space)
         {
             EditorGUILayout.BeginHorizontal();
@@ -347,7 +347,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a UI color property.
+        /// <summary> Renders a UI color property. </summary>
         public static void RenderUIColorProperty(MaterialProperty[] materialProperties, string propertyName)
         {
             EditorGUILayout.BeginHorizontal();
@@ -363,7 +363,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a float property with a label.
+        /// <summary> Render a float property with a label. </summary>
         public static void RenderFloatProperty(MaterialProperty[] materialProperties, string propertyName, string label, float space)
         {
             EditorGUILayout.BeginHorizontal();
@@ -380,7 +380,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a Vector4 property.
+        /// <summary> Render a Vector4 property. </summary>
         public static void RenderVector4Property(MaterialProperty[] materialProperties, string propertyName)
         {
             EditorGUILayout.BeginHorizontal();
@@ -406,7 +406,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a dropdown property.
+        /// <summary> Render a dropdown property with label and options. </summary>
         public static void RenderDropdownProperty(MaterialProperty[] materialProperties, Material currentMaterial, string propertyName, string label, string[] displayOptions, float[] numberOptions, float space, float dropdownSpace, bool expand = false)
         {
             if (displayOptions.Length != numberOptions.Length)
@@ -442,7 +442,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a texture property with a label and optional Scale/Offset display.
+        /// <summary> Render a texture property with optional Scale/Offset controls. </summary>
         public static void RenderTextureProperty(MaterialProperty[] materialProperties, string propertyName, string label, bool showScaleOffset = false, Material currentMaterial = null)
         {
             EditorGUILayout.BeginHorizontal();
@@ -498,7 +498,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a cubemap property with a label.
+        /// <summary> Render a cubemap property with a label. </summary>
         public static void RenderCubemapProperty(MaterialProperty[] materialProperties, string propertyName, string label)
         {
             EditorGUILayout.BeginHorizontal();
@@ -519,7 +519,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a Vector3 property with a label.
+        /// <summary> Render a Vector3 property with a label. </summary>
         public static void RenderVector3Property(MaterialProperty[] materialProperties, string propertyName, string label, float space)
         {
             EditorGUILayout.BeginHorizontal();
@@ -541,33 +541,21 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Check if a toggle UI property is enabled.
+        /// <summary> Check if a toggle UI property is enabled. </summary>
         public static bool IsToggleUIPropertyEnabled(MaterialProperty[] materialProperties, string propertyName)
         {
             MaterialProperty property = FindProperty(propertyName, materialProperties);
-
-            if (property.floatValue == 1f)
-            {
-                return true;
-            }
-
-            return false;
+            return property.floatValue == 1f;
         }
 
-        // Check if a float property has a specific value.
+        /// <summary> Check if a float property has a specific value. </summary>
         public static bool HasFloatPropertyValue(MaterialProperty[] materialProperties, string propertyName, float value)
         {
             MaterialProperty property = FindProperty(propertyName, materialProperties);
-
-            if (property.floatValue == value)
-            {
-                return true;
-            }
-
-            return false;
+            return property.floatValue == value;
         }
 
-        // Render a dropdown for depth write options.
+        /// <summary> Render a dropdown for depth write options. </summary>
         public static void RenderDepthWriteDropdown(MaterialProperty[] materialProperties, Material currentMaterial)
         {
             EditorGUILayout.BeginHorizontal();
@@ -620,7 +608,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Render a dropdown for blending mode options.
+        /// <summary> Render a dropdown for blending mode options. </summary>
         public static void RenderBlendingModeDropdown(MaterialProperty[] materialProperties, Material currentMaterial)
         {
             EditorGUILayout.BeginHorizontal();
@@ -669,7 +657,7 @@ namespace MMDCollectionEditor
             EditorGUILayout.EndHorizontal();
         }
 
-        // Check and update blending mode based on properties.
+        /// <summary> Check and update blending mode based on properties. </summary>
         public static void CheckBlendingMode(MaterialProperty[] materialProperties)
         {
             MaterialProperty surface = FindProperty("_Surface", materialProperties);
@@ -705,7 +693,7 @@ namespace MMDCollectionEditor
             }
         }
 
-        // Render a dropdown for surface type options.
+        /// <summary> Render a dropdown for surface type options. </summary>
         public static void RenderSurfaceTypeDropdown(MaterialProperty[] materialProperties, Material currentMaterial)
         {
             EditorGUILayout.BeginHorizontal();

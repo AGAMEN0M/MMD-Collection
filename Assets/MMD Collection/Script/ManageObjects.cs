@@ -29,7 +29,10 @@ public class ManageObjects : MonoBehaviour
     [HideInInspector] public bool hide = false;         // Whether to hide objects in the inspector.
     [HideInInspector] public bool hideInspector = true; // Whether to hide the default inspector.
 
-    // Toggles the visibility of a specific object in the list.
+    /// <summary>
+    /// Toggles the visibility of a specific object in the list.
+    /// </summary>
+    /// <param name="i">Index of the object to toggle.</param>
     public void Toggle(int i)
     {
         Undo.RecordObject(this, $"Toggle Visibility of Object"); // Record action for undo.
@@ -38,6 +41,9 @@ public class ManageObjects : MonoBehaviour
         manageObjects[i].gameObjects.SetActive(manageObjects[i].objectState); // Apply state to the GameObject.
     }
 
+    /// <summary>
+    /// Toggles the visibility of all objects in the list.
+    /// </summary>
     public void ToggleAll()
     {
         Undo.RecordObject(this, "Toggle Visibility of All Objects"); // Record action for undo.
@@ -51,7 +57,10 @@ public class ManageObjects : MonoBehaviour
         }
     }
 
-    // Removes an object from the list by index.
+    /// <summary>
+    /// Removes an object from the list by index.
+    /// </summary>
+    /// <param name="i">Index of the object to remove.</param>
     public void RemoveItem(int i)
     {
         if (i >= 0 && i < manageObjects.Length)

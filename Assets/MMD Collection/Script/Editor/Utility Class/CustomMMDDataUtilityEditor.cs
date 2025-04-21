@@ -19,19 +19,22 @@ namespace MMDCollectionEditor
     // Utility class for managing CustomMMDData assets within the Unity Editor.
     public static class CustomMMDDataUtilityEditor
     {
-        // Retrieves or creates the CustomMMDData asset.
+        /// <summary>
+        /// Retrieves the existing CustomMMDData asset or creates a new one if none exists.
+        /// </summary>
+        /// <returns>A valid instance of CustomMMDData.</returns>
         public static CustomMMDData GetOrCreateCustomMMDData()
         {
             // Attempt to find an existing CustomMMDData asset.
             CustomMMDData customMMDData = FindCustomMMDData();
 
             // If not found, create a new one.
-#pragma warning disable IDE0270
+        #pragma warning disable IDE0270
             if (customMMDData == null)
             {
                 customMMDData = CreateCustomMMDData();
             }
-#pragma warning restore IDE0270
+        #pragma warning restore IDE0270
 
             return customMMDData;
         }
@@ -73,7 +76,10 @@ namespace MMDCollectionEditor
             return customMMDData; // Return the newly created asset.
         }
 
-        // Removes any invalid materials from the CustomMMDData asset.
+        /// <summary>
+        /// Removes any entries with null materials from the CustomMMDData's material list.
+        /// </summary>
+        /// <param name="customMMDMaterialData">The CustomMMDData asset to clean.</param>
         public static void RemoveInvalidMaterials(CustomMMDData customMMDMaterialData)
         {
             // Ensure the asset is not null.

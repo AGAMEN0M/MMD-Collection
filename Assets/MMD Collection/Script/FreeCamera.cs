@@ -96,7 +96,9 @@ public class FreeCamera : MonoBehaviour
         StopLooking();
     }
 
-    // Method to start look mode.
+    /// <summary>
+    /// Starts look mode, hiding and locking the cursor to the center of the screen.
+    /// </summary>
     public void StartLooking()
     {
         looking = true;
@@ -104,7 +106,9 @@ public class FreeCamera : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor to the center of the screen.
     }
 
-    // Method to stop look mode.
+    /// <summary>
+    /// Stops look mode, showing and unlocking the cursor from the center of the screen.
+    /// </summary>
     public void StopLooking()
     {
         looking = false;
