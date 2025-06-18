@@ -5134,15 +5134,15 @@
     "m_Group": {
         "m_Id": "22bbd67d838f4db9b6cc343f35b6ece9"
     },
-    "m_Name": "SRPAdditionalLight (Custom Function)",
+    "m_Name": "AdditionalLightsHalfLambertMask (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2342.399658203125,
-            "y": 5428.0,
-            "width": 263.999755859375,
-            "height": 349.60009765625
+            "x": -2387.199951171875,
+            "y": 5428.00048828125,
+            "width": 347.199951171875,
+            "height": 349.599609375
         }
     },
     "m_Slots": [
@@ -5174,7 +5174,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "SRPAdditionalLight",
+    "m_FunctionName": "AdditionalLightsHalfLambertMask",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
     "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADERGRAPH_PREVIEW)\r\n\tOutput = 1;\r\n#else\r\n\tfloat3 Color = 0;\r\n\t#if defined(_ADDITIONAL_LIGHTS)\r\n\t#define SUM_LIGHTLAMBERT(Light) \\ half3 AttLightColor = Light.color * ( Light.distanceAttenuation * Light.shadowAttenuation );\\ Color += LightingLambert( AttLightColor, Light.direction, WorldNormal );\r\n\t\tInputData inputData = (InputData)0;\r\n\t\tinputData.normalizedScreenSpaceUV = ScreenUV.xy;\r\n\t\tinputData.positionWS = WorldPosition;\r\n\t\tuint meshRenderingLayers = GetMeshRenderingLayer();\r\n\t\tuint pixelLightCount = GetAdditionalLightsCount();\r\n\r\n\t\t#if USE_FORWARD_PLUS\r\n\t\t\tfor (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)\r\n\t\t\t{\r\n\t\t\t\tFORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK\r\n\t\t\t\tLight light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);\r\n\r\n\t\t\t\t#ifdef _LIGHT_LAYERS\r\n\t\t\t\tif (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))\r\n\t\t\t\t#endif\r\n\t\t\t\t{\r\n\t\t\t\t\tSUM_LIGHTLAMBERT( light );\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t#endif\r\n\r\n\t\tLIGHT_LOOP_BEGIN( pixelLightCount )\r\n\t\tLight light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);\r\n\r\n\t\t#ifdef _LIGHT_LAYERS\r\n\t\tif (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))\r\n\t\t#endif\r\n\t\t{\r\n\t\tSUM_LIGHTLAMBERT( light );\r\n\t\t}\r\n\r\n\t\tLIGHT_LOOP_END\r\n\t#endif\r\n\r\n\tOutput = Color;\r\n#endif"
@@ -5265,7 +5265,7 @@
         "HLSL"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -8398,7 +8398,7 @@
     "m_ObjectId": "1e0885c216c74c3b981329a70c323271",
     "m_Title": "Light Calculation",
     "m_Position": {
-        "x": -3856.7998046875,
+        "x": -3856.800048828125,
         "y": 1344.0
     }
 }
@@ -8842,10 +8842,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3223.999755859375,
-            "y": 5050.39990234375,
+            "x": -3268.800048828125,
+            "y": 5050.400390625,
             "width": 208.0,
-            "height": 277.599609375
+            "height": 277.60009765625
         }
     },
     "m_Slots": [
@@ -9003,7 +9003,7 @@
     "m_ObjectId": "22bbd67d838f4db9b6cc343f35b6ece9",
     "m_Title": "Additional lights",
     "m_Position": {
-        "x": -3523.199951171875,
+        "x": -3568.0,
         "y": 4816.0
     }
 }
@@ -9216,15 +9216,15 @@
     "m_Group": {
         "m_Id": "22bbd67d838f4db9b6cc343f35b6ece9"
     },
-    "m_Name": "ShadowMask (Custom Function)",
+    "m_Name": "CalculateShadowMask (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2646.399658203125,
+            "x": -2691.199951171875,
             "y": 5813.60009765625,
             "width": 232.0,
-            "height": 277.599609375
+            "height": 277.60009765625
         }
     },
     "m_Slots": [
@@ -9247,7 +9247,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "ShadowMask",
+    "m_FunctionName": "CalculateShadowMask",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
     "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)\r\n\tOutput = SAMPLE_SHADOWMASK( LightmapUV.xy );\r\n#elif !defined (LIGHTMAP_ON)\r\n\tOutput = unity_ProbesOcclusion;\r\n#else\r\n\tOutput = half4( 1, 1, 1, 1 );\r\n#endif"
@@ -10477,7 +10477,7 @@
     "m_ObjectId": "31ae963f0e7742d98b7912623ec2d152",
     "m_Title": "Fog",
     "m_Position": {
-        "x": 3167.2001953125,
+        "x": 3167.199951171875,
         "y": 4816.80029296875
     }
 }
@@ -11429,10 +11429,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3497.599853515625,
-            "y": 5050.39990234375,
+            "x": -3542.39990234375,
+            "y": 5050.400390625,
             "width": 208.0,
-            "height": 311.2001953125
+            "height": 310.39990234375
         }
     },
     "m_Slots": [
@@ -12759,10 +12759,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2646.399658203125,
-            "y": 4876.0,
+            "x": -2691.199951171875,
+            "y": 4876.00048828125,
             "width": 208.0,
-            "height": 312.7998046875
+            "height": 312.0
         }
     },
     "m_Slots": [
@@ -17650,6 +17650,7 @@
     },
     "isMainTexture": false,
     "useTilingAndOffset": true,
+    "useTexelSize": true,
     "m_Modifiable": true,
     "m_DefaultType": 0
 }
@@ -17817,7 +17818,7 @@
     "m_ObjectId": "7b1b796bd66b4b188975c4f9716a9a93",
     "m_Title": "Color Transparency",
     "m_Position": {
-        "x": 255.199951171875,
+        "x": 255.2000732421875,
         "y": 6508.0
     }
 }
@@ -18869,7 +18870,7 @@
     "m_ObjectId": "87a2a9f8d9c849299145cedd6c0d20fa",
     "m_Title": "Main light color",
     "m_Position": {
-        "x": 729.5999755859375,
+        "x": 729.60009765625,
         "y": 2311.999755859375
     }
 }
@@ -20451,10 +20452,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2646.399658203125,
-            "y": 5428.0,
-            "width": 212.7998046875,
-            "height": 337.60009765625
+            "x": -2691.199951171875,
+            "y": 5428.00048828125,
+            "width": 212.800048828125,
+            "height": 336.0
         }
     },
     "m_Slots": [
@@ -22367,7 +22368,7 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2960.000244140625,
+            "x": -3004.800048828125,
             "y": 5050.400390625,
             "width": 208.0,
             "height": 304.0
@@ -23277,6 +23278,7 @@
     },
     "isMainTexture": false,
     "useTilingAndOffset": true,
+    "useTexelSize": true,
     "m_Modifiable": true,
     "m_DefaultType": 0
 }
@@ -23521,10 +23523,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3223.999755859375,
+            "x": -3268.800048828125,
             "y": 5813.60009765625,
             "width": 208.0,
-            "height": 311.19970703125
+            "height": 310.400390625
         }
     },
     "m_Slots": [
@@ -25021,6 +25023,7 @@
     },
     "isMainTexture": false,
     "useTilingAndOffset": false,
+    "useTexelSize": true,
     "m_Modifiable": true,
     "m_DefaultType": 0
 }
@@ -26269,7 +26272,7 @@
     "m_ObjectId": "c49d01e3d5c84299a61c04ab72abf796",
     "m_Title": "Final Calculation Additional Lights",
     "m_Position": {
-        "x": 1340.0001220703125,
+        "x": 1339.999755859375,
         "y": 4185.59912109375
     }
 }
@@ -26545,7 +26548,7 @@
     "m_ObjectId": "c665c19ecf36465691c60d46214e30b6",
     "m_Title": "MMD constants",
     "m_Position": {
-        "x": -3698.399658203125,
+        "x": -3698.39990234375,
         "y": -2384.000244140625
     }
 }
@@ -29056,10 +29059,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2959.999755859375,
-            "y": 5428.0,
+            "x": -3004.800048828125,
+            "y": 5428.00048828125,
             "width": 208.0,
-            "height": 312.7998046875
+            "height": 312.0
         }
     },
     "m_Slots": [
@@ -30621,7 +30624,7 @@
     "m_ObjectId": "eafcb18e103a495c9991e8a40bfa212e",
     "m_Title": "Specular Final Calculation",
     "m_Position": {
-        "x": 1336.0001220703125,
+        "x": 1335.999755859375,
         "y": 3643.999755859375
     }
 }
@@ -30794,10 +30797,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -2959.999755859375,
+            "x": -3004.800048828125,
             "y": 5813.60009765625,
-            "width": 280.800048828125,
-            "height": 277.599609375
+            "width": 279.199951171875,
+            "height": 277.60009765625
         }
     },
     "m_Slots": [

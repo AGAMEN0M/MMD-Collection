@@ -140,7 +140,7 @@ void Switch_float(float3 False, float3 True, out float3 Output)
 }
 
 // Function to sample the shadow mask at the given lightmap UV coordinates.
-void ShadowMask_float(float2 LightmapUV, out float4 Output)
+void CalculateShadowMask_float(float2 LightmapUV, out float4 Output)
 {
 	#if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)
 		Output = SAMPLE_SHADOWMASK(LightmapUV.xy); // Sample the shadow mask texture.
@@ -151,55 +151,57 @@ void ShadowMask_float(float2 LightmapUV, out float4 Output)
 	#endif
 }
 
-// Function to calculate additional light contributions for the Universal Render Pipeline (URP).
-void SRPAdditionalLight_float(float3 WorldPosition, float2 ScreenUV, float3 WorldNormal, float4 ShadowMask, out float3 Output)
+// Function to calculate additional light contributions using Half-Lambert lighting in the Universal Render Pipeline (URP).
+void AdditionalLightsHalfLambertMask_float(float3 WorldPosition, float2 ScreenUV, float3 WorldNormal, float4 ShadowMask, out float3 Output)
 {
 	#if defined(SHADERGRAPH_PREVIEW)
 		Output = 1; // In preview mode, output a constant value for debugging.
 	#else
-		float3 Color = 0; // Initialize color to zero.
+		float3 Color = 0; // Initialize color to black.
 	
 		#if defined(_ADDITIONAL_LIGHTS)
-			// Define a macro to calculate Lambertian lighting for additional lights.
-			#define SUM_LIGHTLAMBERT(Light)\
-				half3 AttLightColor = Light.color * ( Light.distanceAttenuation * Light.shadowAttenuation );\
-				Color += LightingLambert( AttLightColor, Light.direction, WorldNormal );
-			InputData inputData = (InputData)0; // Initialize input data for light calculations.
-			inputData.normalizedScreenSpaceUV = ScreenUV;
-			inputData.positionWS = WorldPosition;
-			uint meshRenderingLayers = GetMeshRenderingLayer(); // Get mesh rendering layers for light layers compatibility.
-			uint pixelLightCount = GetAdditionalLightsCount(); // Get the count of additional lights.
+			// Define a macro to calculate Half-Lambert lighting for additional lights.
+			#define SUM_LIGHTHALFLAMBERT(Light)\
+				half3 AttLightColor = Light.color * (Light.distanceAttenuation * Light.shadowAttenuation);\
+				Color += (dot(Light.direction, WorldNormal) * 0.5 + 0.5)* AttLightColor; // Calculate Half-Lambert contribution.
+	
+			InputData inputData = (InputData)0; // Initialize input data structure.
+			inputData.normalizedScreenSpaceUV = ScreenUV; // Assign screen UVs.
+			inputData.positionWS = WorldPosition; // Assign world position.
+	
+			uint meshRenderingLayers = GetMeshRenderingLayer(); // Retrieve mesh rendering layers.
+			uint pixelLightCount = GetAdditionalLightsCount(); // Get the number of additional lights.
 
-			// Loop through visible lights in forward-plus rendering.
-			#if USE_FORWARD_PLUS
+			// Iterate through visible additional lights using Forward+ rendering.
+			#if USE_CLUSTER_LIGHT_LOOP
 				[loop] for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
 				{
-					FORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK
-					Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);
+					CLUSTER_LIGHT_LOOP_SUBTRACTIVE_LIGHT_CHECK
+					Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask); // Fetch light data.
 
 					#ifdef _LIGHT_LAYERS
-					if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
+					if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Match light layers if enabled.
 					#endif
 					{
-						SUM_LIGHTLAMBERT(light); // Calculate Lambertian light contribution.
+						SUM_LIGHTHALFLAMBERT(light); // Accumulate light using Half-Lambert model.
 					}
 				}
 			#endif
 
-			// Standard light loop for non-forward-plus rendering.
+			// Fallback light loop for standard (non-Forward+) rendering.
 			LIGHT_LOOP_BEGIN(pixelLightCount)
-			Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);
+			Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask); // Fetch light data.
 
 			#ifdef _LIGHT_LAYERS
-			if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
+			if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Match light layers if enabled.
 			#endif
 			{
-				SUM_LIGHTLAMBERT(light); // Calculate Lambertian light contribution.
+				SUM_LIGHTHALFLAMBERT(light); // Accumulate light using Half-Lambert model.
 			}
 
 			LIGHT_LOOP_END
 		#endif
 
-		Output = Color; // Output the accumulated light color.
+		Output = Color; // Set the output color with accumulated lighting.
 	#endif
 }

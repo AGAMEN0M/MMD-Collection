@@ -85,6 +85,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _UVLayer: 0
+    - _XRMotionVectorsPass: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 1

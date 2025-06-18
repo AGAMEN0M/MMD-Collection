@@ -2,15 +2,15 @@
 This tool facilitates the use of [MMD (Miku Miku Dance)](https://learnmmd.com/downloads/) models in Unity, as well as custom Shaders for this purpose. 
 
 # Compatibility
-- [Unity 6000.0.45f1](https://unity.com/pt/releases/editor/whats-new/6000.0.45)
-- [Amplify Shader Editor v 1.9.9](https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570)
+- [Unity 6000.1.7f1](https://unity.com/releases/editor/whats-new/6000.1.7)
+- [Amplify Shader Editor v 1.9.9.1](https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570)
 - [MMD4Mecanim 2020-01-05](https://stereoarts.jp/)
 
 # Download
 
-[MMD Collection - Package v0.1.0](https://drive.google.com/file/d/1t-FgbwwuT9tlojwitJO87Us8vIHccjPG/view?usp=drive_link)
+[MMD Collection - Package v0.1.1](https://drive.google.com/file/d/1EId8NLI2AZjMr7k6C_nS7BwLDFyZiSNw/view?usp=drive_link)
  / 
-[Documentation](https://drive.google.com/file/d/1pr-fjM7gi86LxI3kOb_ZhamRMy5ZPdCv/view?usp=drive_link)
+[Documentation](https://drive.google.com/file/d/1PwRDWcaiVXris1IAxmDs46nXvKfqkpOa/view?usp=drive_link)
 
 # Shader
 
@@ -29,4 +29,4 @@ If you have suggestions for improvements and bug fixes, please share them with m
 # Old Versions
 [Old Versions - Package](https://drive.google.com/drive/folders/19pbcDSKguJPxQJnT9euMLY83m2MjU8hO?usp=drive_link)
 
-Current version in Git v6.1
+Current version in Git v6.2
