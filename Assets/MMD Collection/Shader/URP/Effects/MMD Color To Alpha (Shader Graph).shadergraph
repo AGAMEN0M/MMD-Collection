@@ -5225,7 +5225,7 @@
     "m_Group": {
         "m_Id": "22bbd67d838f4db9b6cc343f35b6ece9"
     },
-    "m_Name": "AdditionalLightsHalfLambertMask (Custom Function)",
+    "m_Name": "SRPAdditionalLight (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -5265,7 +5265,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "AdditionalLightsHalfLambertMask",
+    "m_FunctionName": "SRPAdditionalLight",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
     "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADERGRAPH_PREVIEW)\r\n\tOutput = 1;\r\n#else\r\n\tfloat3 Color = 0;\r\n\t#if defined(_ADDITIONAL_LIGHTS)\r\n\t#define SUM_LIGHTLAMBERT(Light) \\ half3 AttLightColor = Light.color * ( Light.distanceAttenuation * Light.shadowAttenuation );\\ Color += LightingLambert( AttLightColor, Light.direction, WorldNormal );\r\n\t\tInputData inputData = (InputData)0;\r\n\t\tinputData.normalizedScreenSpaceUV = ScreenUV.xy;\r\n\t\tinputData.positionWS = WorldPosition;\r\n\t\tuint meshRenderingLayers = GetMeshRenderingLayer();\r\n\t\tuint pixelLightCount = GetAdditionalLightsCount();\r\n\r\n\t\t#if USE_FORWARD_PLUS\r\n\t\t\tfor (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)\r\n\t\t\t{\r\n\t\t\t\tFORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK\r\n\t\t\t\tLight light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);\r\n\r\n\t\t\t\t#ifdef _LIGHT_LAYERS\r\n\t\t\t\tif (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))\r\n\t\t\t\t#endif\r\n\t\t\t\t{\r\n\t\t\t\t\tSUM_LIGHTLAMBERT( light );\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t#endif\r\n\r\n\t\tLIGHT_LOOP_BEGIN( pixelLightCount )\r\n\t\tLight light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);\r\n\r\n\t\t#ifdef _LIGHT_LAYERS\r\n\t\tif (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))\r\n\t\t#endif\r\n\t\t{\r\n\t\tSUM_LIGHTLAMBERT( light );\r\n\t\t}\r\n\r\n\t\tLIGHT_LOOP_END\r\n\t#endif\r\n\r\n\tOutput = Color;\r\n#endif"
@@ -8061,7 +8061,7 @@
     "m_Title": "Base Properties",
     "m_Position": {
         "x": -2902.39990234375,
-        "y": -2390.39990234375
+        "y": -2390.40087890625
     }
 }
 
@@ -8544,7 +8544,7 @@
     "m_Title": "Light Calculation",
     "m_Position": {
         "x": -3856.800048828125,
-        "y": 1344.0
+        "y": 1343.999755859375
     }
 }
 
@@ -9361,7 +9361,7 @@
     "m_Group": {
         "m_Id": "22bbd67d838f4db9b6cc343f35b6ece9"
     },
-    "m_Name": "CalculateShadowMask (Custom Function)",
+    "m_Name": "ShadowMask (Custom Function)",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {
@@ -9392,7 +9392,7 @@
         "m_SerializableColors": []
     },
     "m_SourceType": 0,
-    "m_FunctionName": "CalculateShadowMask",
+    "m_FunctionName": "ShadowMask",
     "m_FunctionSource": "97c93066b58ff1e4eae7115e4bde77f2",
     "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "#if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)\r\n\tOutput = SAMPLE_SHADOWMASK( LightmapUV.xy );\r\n#elif !defined (LIGHTMAP_ON)\r\n\tOutput = unity_ProbesOcclusion;\r\n#else\r\n\tOutput = half4( 1, 1, 1, 1 );\r\n#endif"
@@ -9777,8 +9777,8 @@
     "m_ObjectId": "28ad30ee9ab144c9b0d9366607be0c24",
     "m_Title": "ToonRefl",
     "m_Position": {
-        "x": -1756.0,
-        "y": 1344.0
+        "x": -1756.000244140625,
+        "y": 1343.999755859375
     }
 }
 
@@ -10622,7 +10622,7 @@
     "m_ObjectId": "31ae963f0e7742d98b7912623ec2d152",
     "m_Title": "Fog",
     "m_Position": {
-        "x": 3167.199951171875,
+        "x": 3167.19970703125,
         "y": 4816.80029296875
     }
 }
@@ -12269,7 +12269,7 @@
     "m_Title": "MMDLit_GetTempDiffuse",
     "m_Position": {
         "x": -3827.199951171875,
-        "y": 273.5999755859375
+        "y": 273.599853515625
     }
 }
 
@@ -13443,8 +13443,8 @@
     "m_ObjectId": "4ccd5e0c6e4148b98d524603eb00ef3b",
     "m_Title": "globalAmbient",
     "m_Position": {
-        "x": -1600.800048828125,
-        "y": -834.3997802734375
+        "x": -1600.7996826171875,
+        "y": -834.399658203125
     }
 }
 
@@ -14618,7 +14618,7 @@
     "m_ObjectId": "57ac776591cb46a2897e8dea0c41c0f2",
     "m_Title": "MMDLit_GetAmbientRate",
     "m_Position": {
-        "x": -1601.5999755859375,
+        "x": -1601.60009765625,
         "y": -277.5999755859375
     }
 }
@@ -15915,7 +15915,7 @@
     "m_Title": "NdotL",
     "m_Position": {
         "x": -5092.0,
-        "y": 1363.2000732421875
+        "y": 1363.199951171875
     }
 }
 
@@ -18144,7 +18144,7 @@
     "m_ObjectId": "7b1b796bd66b4b188975c4f9716a9a93",
     "m_Title": "Color Transparency",
     "m_Position": {
-        "x": 255.2000732421875,
+        "x": 255.20021057128907,
         "y": 6508.0
     }
 }
@@ -19197,7 +19197,7 @@
     "m_Title": "Main light color",
     "m_Position": {
         "x": 729.60009765625,
-        "y": 2311.999755859375
+        "y": 2312.0
     }
 }
 
@@ -21934,7 +21934,7 @@
     "m_ObjectId": "9c729f6b80ed43f6ab84d392df20fb74",
     "m_Title": "Color To Alpha",
     "m_Position": {
-        "x": 779.999755859375,
+        "x": 780.0,
         "y": 7292.80029296875
     }
 }
@@ -23016,7 +23016,7 @@
     "m_Title": "SURFACE OPTIONS",
     "m_Position": {
         "x": -1767.199951171875,
-        "y": -2392.7998046875
+        "y": -2392.800048828125
     }
 }
 
@@ -26660,7 +26660,7 @@
     "m_ObjectId": "c49d01e3d5c84299a61c04ab72abf796",
     "m_Title": "Final Calculation Additional Lights",
     "m_Position": {
-        "x": 1339.999755859375,
+        "x": 1340.0,
         "y": 4185.599609375
     }
 }
@@ -26936,8 +26936,8 @@
     "m_ObjectId": "c665c19ecf36465691c60d46214e30b6",
     "m_Title": "MMD constants",
     "m_Position": {
-        "x": -3698.39990234375,
-        "y": -2384.000244140625
+        "x": -3698.400146484375,
+        "y": -2384.0
     }
 }
 
@@ -27168,7 +27168,7 @@
     "m_Title": "MMDLit_GetTempAmbientL",
     "m_Position": {
         "x": -3827.199951171875,
-        "y": -834.3997802734375
+        "y": -834.399658203125
     }
 }
 
@@ -27502,7 +27502,7 @@
     "m_Title": "New Group",
     "m_Position": {
         "x": -740.0,
-        "y": 1237.6002197265625
+        "y": 1237.60009765625
     }
 }
 
@@ -29377,7 +29377,7 @@
     "m_Title": "MMDLIT_GetToonShadow",
     "m_Position": {
         "x": -1515.199951171875,
-        "y": 642.39990234375
+        "y": 642.4000244140625
     }
 }
 
@@ -29905,8 +29905,8 @@
     "m_ObjectId": "e2da2a728f0947d9ba16f5e98b84176a",
     "m_Title": "MMDLit_GetTempAmbient",
     "m_Position": {
-        "x": -572.0,
-        "y": -834.3997802734375
+        "x": -571.9996337890625,
+        "y": -834.399658203125
     }
 }
 
@@ -31166,7 +31166,7 @@
     "m_ObjectId": "eafcb18e103a495c9991e8a40bfa212e",
     "m_Title": "Specular Final Calculation",
     "m_Position": {
-        "x": 1335.999755859375,
+        "x": 1336.0003662109375,
         "y": 3643.999755859375
     }
 }
@@ -32671,7 +32671,7 @@
     "m_Title": "Outline",
     "m_Position": {
         "x": -1137.5999755859375,
-        "y": -2395.19970703125
+        "y": -2395.199951171875
     }
 }
 

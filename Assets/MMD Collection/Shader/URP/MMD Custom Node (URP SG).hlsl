@@ -52,11 +52,7 @@ void lightmapCol_float(float2 lightmapUV, out float3 Output)
 // Function to select a UV layer based on the given layer index.
 void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, out float2 Output)
 {
-    if (Layer == 0)
-    {
-        Output = uv0; // UV0 - Standard UV channel.
-    }
-    else if (Layer == 1)
+    if (Layer == 1)
     {
         Output = uv1; // UV1 - Second UV channel.
     }
@@ -70,18 +66,14 @@ void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, 
     }
     else
     {
-        Output = uv0; // Default value if Layer is out of range.
+        Output = uv0; // UV0 - Default UV channel if layer is out of range.
     }
 }
 
 // Function to control effects based on the given layer index.
 void effectsControl_float(float Layer, float3 Base, float3 Add, float3 Multi, float3 Sub, out float3 Output)
 {
-    if (Layer == 0)
-    {
-        Output = Base; // Base effect.
-    }
-    else if (Layer == 1)
+    if (Layer == 1)
     {
         Output = Add; // Add effect.
     }
@@ -95,7 +87,7 @@ void effectsControl_float(float Layer, float3 Base, float3 Add, float3 Multi, fl
     }
     else
     {
-        Output = Base; // Default value if Layer is out of range.
+        Output = Base; // Default value if layer is out of range, returning Base effect.
     }
 }
 
@@ -140,7 +132,7 @@ void Switch_float(float3 False, float3 True, out float3 Output)
 }
 
 // Function to sample the shadow mask at the given lightmap UV coordinates.
-void CalculateShadowMask_float(float2 LightmapUV, out float4 Output)
+void ShadowMask_float(float2 LightmapUV, out float4 Output)
 {
 	#if defined(SHADOWS_SHADOWMASK) && defined(LIGHTMAP_ON)
 		Output = SAMPLE_SHADOWMASK(LightmapUV.xy); // Sample the shadow mask texture.
@@ -151,8 +143,8 @@ void CalculateShadowMask_float(float2 LightmapUV, out float4 Output)
 	#endif
 }
 
-// Function to calculate additional light contributions using Half-Lambert lighting in the Universal Render Pipeline (URP).
-void AdditionalLightsHalfLambertMask_float(float3 WorldPosition, float2 ScreenUV, float3 WorldNormal, float4 ShadowMask, out float3 Output)
+// Function to calculate additional light contributions using Lambert lighting in the Universal Render Pipeline (URP).
+void SRPAdditionalLight_float(float3 WorldPosition, float2 ScreenUV, float3 WorldNormal, float4 ShadowMask, out float3 Output)
 {
 	#if defined(SHADERGRAPH_PREVIEW)
 		Output = 1; // In preview mode, output a constant value for debugging.
@@ -160,19 +152,19 @@ void AdditionalLightsHalfLambertMask_float(float3 WorldPosition, float2 ScreenUV
 		float3 Color = 0; // Initialize color to black.
 	
 		#if defined(_ADDITIONAL_LIGHTS)
-			// Define a macro to calculate Half-Lambert lighting for additional lights.
-			#define SUM_LIGHTHALFLAMBERT(Light)\
+			// Define a macro to calculate Lambert lighting for additional lights.
+			#define SUM_LIGHTLAMBERT(Light)\
 				half3 AttLightColor = Light.color * (Light.distanceAttenuation * Light.shadowAttenuation);\
-				Color += (dot(Light.direction, WorldNormal) * 0.5 + 0.5)* AttLightColor; // Calculate Half-Lambert contribution.
+				Color += LightingLambert(AttLightColor, Light.direction, WorldNormal); // Calculate Lambert diffuse contribution.
 	
 			InputData inputData = (InputData)0; // Initialize input data structure.
-			inputData.normalizedScreenSpaceUV = ScreenUV; // Assign screen UVs.
-			inputData.positionWS = WorldPosition; // Assign world position.
+			inputData.normalizedScreenSpaceUV = ScreenUV; // Assign screen UV coordinates.
+			inputData.positionWS = WorldPosition; // Assign world position in world space.
 	
 			uint meshRenderingLayers = GetMeshRenderingLayer(); // Retrieve mesh rendering layers.
-			uint pixelLightCount = GetAdditionalLightsCount(); // Get the number of additional lights.
+			uint pixelLightCount = GetAdditionalLightsCount(); // Get the number of additional lights affecting the pixel.
 
-			// Iterate through visible additional lights using Forward+ rendering.
+			// Iterate through visible additional lights using Cluster Light Loop rendering.
 			#if USE_CLUSTER_LIGHT_LOOP
 				[loop] for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
 				{
@@ -180,28 +172,28 @@ void AdditionalLightsHalfLambertMask_float(float3 WorldPosition, float2 ScreenUV
 					Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask); // Fetch light data.
 
 					#ifdef _LIGHT_LAYERS
-					if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Match light layers if enabled.
+					if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Check if light layer matches the mesh.
 					#endif
 					{
-						SUM_LIGHTHALFLAMBERT(light); // Accumulate light using Half-Lambert model.
+						SUM_LIGHTLAMBERT(light); // Accumulate light using Lambert model.
 					}
 				}
 			#endif
 
-			// Fallback light loop for standard (non-Forward+) rendering.
+			// Fallback loop for all remaining additional lights.
 			LIGHT_LOOP_BEGIN(pixelLightCount)
-			Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask); // Fetch light data.
+				Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask); // Fetch light data.
 
-			#ifdef _LIGHT_LAYERS
-			if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Match light layers if enabled.
-			#endif
-			{
-				SUM_LIGHTHALFLAMBERT(light); // Accumulate light using Half-Lambert model.
-			}
-
+				#ifdef _LIGHT_LAYERS
+				if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Check if light layer matches the mesh.
+				#endif
+				{
+					SUM_LIGHTLAMBERT(light); // Accumulate light using Lambert model.
+				}
+	
 			LIGHT_LOOP_END
 		#endif
 
-		Output = Color; // Set the output color with accumulated lighting.
+		Output = Color; // Set the output color with the accumulated lighting.
 	#endif
 }

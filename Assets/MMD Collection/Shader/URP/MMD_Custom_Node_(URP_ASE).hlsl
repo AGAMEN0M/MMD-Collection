@@ -36,11 +36,7 @@ void lightmapCol_float(float2 lightmapUV, out float3 Output)
 // Function to select a UV layer based on the given layer index.
 void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, out float2 UV)
 {
-    if (Layer == 0)
-    {
-        UV = uv0; // UV0 - Standard UV channel.
-    }
-    else if (Layer == 1)
+    if (Layer == 1)
     {
         UV = uv1; // UV1 - Second UV channel.
     }
@@ -54,18 +50,14 @@ void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, 
     }
     else
     {
-        UV = uv0; // Default value if Layer is out of range.
+        UV = uv0; // UV0 - Default UV channel if layer is out of range.
     }
 }
 
 // Function to control effects based on the given layer index.
 void effectsControl_float(float Layer, float4 Base, float4 Add, float4 Multi, float4 Sub, out float4 RGBA)
 {
-    if (Layer == 0)
-    {
-        RGBA = Base; // Base effect.
-    }
-    else if (Layer == 1)
+    if (Layer == 1)
     {
         RGBA = Add; // Add effect.
     }
@@ -79,6 +71,6 @@ void effectsControl_float(float Layer, float4 Base, float4 Add, float4 Multi, fl
     }
     else
     {
-        RGBA = Base; // Default value if Layer is out of range.
+        RGBA = Base; // Default value if layer is out of range, returning Base effect.
     }
 }
