@@ -7,22 +7,20 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MMD Vertex Color (Shader Graph)
-  m_Shader: {fileID: -6465566751694194690, guid: e69550f901e9bc340ba9990bf4611a61,
+  m_Name: MMD Normal and Height Map (Shader Graph)
+  m_Shader: {fileID: -6465566751694194690, guid: 6d120e796a7ff68439009998c14dd5bd,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ADDITIONAL_LIGHT_SHADOWS
   - _MAIN_LIGHT_SHADOWS_CASCADE
-  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3002
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: 2002
+  stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
   m_LockedProperties: 
@@ -30,27 +28,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 73029f145f0f8b2469831e89ee17037b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTexA:
-        m_Texture: {fileID: 2800000, guid: aaeb3b21b359d66428fbf66f0cec1ab7, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTexB:
-        m_Texture: {fileID: 2800000, guid: 741fff69dbf494b459a162c0e48cc827, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTexG:
         m_Texture: {fileID: 2800000, guid: a4bd0e91e1c27e244a687b69ae743b93, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTexR:
-        m_Texture: {fileID: 2800000, guid: f686b8a20a6e5e94687e83d92fa6ac1c, type: 3}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 125b3b53a546a904c8039f3aeb3eb853, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 2800000, guid: 68772842b464a0a4ca885bac0e43b0c5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SphereCube:
-        m_Texture: {fileID: 8900000, guid: d33a868444629e5489239c4dc31a2cb4, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SubTex:
@@ -79,19 +69,20 @@ Material:
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
+    - _BumpScale: 1.2
     - _CastShadows: 1
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DstBlend: 10
-    - _EFFECTS: 1
+    - _DstBlend: 0
+    - _EFFECTS: 0
     - _EdgeSize: 0
     - _Fog: 1
     - _HDR: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
-    - _MaskIntensity: 100
     - _MultipleLights: 1
     - _On: 0
     - _Opaque: 1
+    - _Parallax: 0.015
     - _QueueControl: 1
     - _QueueOffset: 0
     - _RECEIVE_SHADOWS_OFF: 0
@@ -100,9 +91,11 @@ Material:
     - _SShad: 1
     - _ShadowLum: 1.5
     - _Shininess: 50
+    - _SimulatorHeightMap: 1
+    - _SimulatorNormalMap: 1
     - _SpecularIntensity: 1
-    - _SrcBlend: 5
-    - _Surface: 1
+    - _SrcBlend: 1
+    - _Surface: 0
     - _UVLayer: 0
     - _ZTest: 4
     - _ZWrite: 1
@@ -115,7 +108,7 @@ Material:
     - _ToonTone: {r: 1, g: 0.5, b: 0.5, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &2639615272743500346
+--- !u!114 &6164762893994312036
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

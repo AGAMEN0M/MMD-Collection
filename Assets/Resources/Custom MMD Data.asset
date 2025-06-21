@@ -243,5 +243,14 @@ MonoBehaviour:
   - mmdMaterial: {fileID: 2100000, guid: 16d6bb2e8261b6d4caec6a47695ac0c6, type: 2}
     materialNameJP: "MMD \u30AB\u30E9\u30FC\u304B\u3089\u30A2\u30EB\u30D5\u30A1\u3078\uFF08Amplify
       \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
-    materialNameEN: MMD  Color To Alpha (Amplify Shader Editor)
+    materialNameEN: MMD Color To Alpha (Amplify Shader Editor)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 904ed62481b6eb545a897b4cec42cdc7, type: 2}
+    materialNameJP: "MMD \u6CD5\u7DDA\u3068\u9AD8\u3055\u30DE\u30C3\u30D7\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
+    materialNameEN: MMD Normal and Height Map (Shader Graph)
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: cdd9ae42ecd66ba48893c62b5cd37051, type: 2}
+    materialNameJP: "MMD \u6CD5\u7DDA\u3068\u9AD8\u3055\u30DE\u30C3\u30D7 (Amplify
+      \u30B7\u30A7\u30FC\u30C0\u30FC\u30A8\u30C7\u30A3\u30BF\u30FC)"
+    materialNameEN: MMD Normal and Height Map (Amplify Shader Editor)
     materialMeno: AGAMENOM

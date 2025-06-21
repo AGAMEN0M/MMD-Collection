@@ -68,12 +68,12 @@ Material:
     - _Cutoff: 0.5
     - _DstBlend: 10
     - _EFFECTS: 1
-    - _EdgeSize: 0.1
+    - _EdgeSize: 0
     - _Fog: 1
     - _HDR: 1
     - _MAIN_LIGHT_SHADOWS_CASCADE: 1
     - _MultipleLights: 1
-    - _On: 1
+    - _On: 0
     - _Opaque: 1
     - _QueueControl: 1
     - _QueueOffset: 0

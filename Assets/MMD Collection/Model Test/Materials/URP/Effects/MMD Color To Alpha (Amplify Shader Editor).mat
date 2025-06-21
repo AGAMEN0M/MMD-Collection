@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MMD  Color To Alpha (Amplify Shader Editor)
+  m_Name: MMD Color To Alpha (Amplify Shader Editor)
   m_Shader: {fileID: 4800000, guid: e244bec1642316c4f8f697eec9162f7e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -85,6 +85,7 @@ Material:
     - _SrcBlend: 5
     - _Surface: 1
     - _UVLayer: 0
+    - _XRMotionVectorsPass: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 1

@@ -524,4 +524,6 @@ Shader "MMD Collection/URP/MMD - Multiple Outline (Code)"
             ENDCG
         }
     }
+
+    Fallback "Universal Render Pipeline/Unlit"
 }
