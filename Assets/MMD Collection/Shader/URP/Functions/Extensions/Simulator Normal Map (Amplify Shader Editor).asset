@@ -60,7 +60,14 @@ MonoBehaviour:
     Color;3;4;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0\nNode;AmplifyShaderEditor.FunctionOutput,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;0;2368,512;Inherit;False;True;-1;OutputColor;0;True;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0\nWireConnection;6;0;11;0\nWireConnection;8;0;9;0\nWireConnection;21;0;6;0\nWireConnection;21;1;8;0\nWireConnection;7;0;10;0\nWireConnection;24;0;21;0\nWireConnection;24;1;7;0\nWireConnection;33;0;24;0\nWireConnection;45;0;33;0\nWireConnection;45;1;4;0\nWireConnection;4;0;15;0\nWireConnection;46;0;45;0\nWireConnection;47;0;46;0\nWireConnection;47;1;5;0\nWireConnection;48;0;3;0\nWireConnection;48;1;47;0\nWireConnection;3;0;14;3\nWireConnection;49;0;48;0\nWireConnection;49;1;2;0\nWireConnection;2;0;20;0\nWireConnection;19;0;1;0\nWireConnection;19;1;18;0\nWireConnection;19;2;49;0\nWireConnection;19;3;50;0\nWireConnection;50;0;2;0\nWireConnection;1;0;17;0\nWireConnection;13;0;12;0\nWireConnection;14;1;13;0\nWireConnection;51;0;19;0\nWireConnection;5;0;16;1\nWireConnection;0;0;51;0\nASEEND*/\n//CHKSM=10AB505A69D898CC3905D4BB32F1EF7CBA97A701"
   m_functionName: 
-  m_description: 
+  m_description: 'Simulates lighting using a normal map without relying on the engine
+    lighting pipeline.
+
+    Useful for debugging normals, light direction, and shading
+    behavior in isolation.
+
+    Can be toggled on/off to compare simulated lighting
+    against the real shader output.'
   m_additionalIncludes:
     m_additionalIncludes: []
     m_outsideIncludes: []

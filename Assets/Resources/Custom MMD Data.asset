@@ -254,3 +254,7 @@ MonoBehaviour:
       \u30B7\u30A7\u30FC\u30C0\u30FC\u30A8\u30C7\u30A3\u30BF\u30FC)"
     materialNameEN: MMD Normal and Height Map (Amplify Shader Editor)
     materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 5c82f1d5b726da642a04f6e8ca70f5e8, type: 2}
+    materialNameJP: 
+    materialNameEN: 
+    materialMeno: 

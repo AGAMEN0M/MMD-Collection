@@ -167,7 +167,7 @@ public class MMDColorToAlphaCustomInspector_ShaderGraph : ShaderGUI
 
         GUILayout.Label("Color to Alpha Settings", EditorStyles.boldLabel);
         CustomInspectorUtilityEditor.RenderColorProperty(materialProperties, "_ColortoAlpha", "Color to Alpha:");
-        CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_ColorTolerance", "Color Tolerance:", 1f, 1000f, 145f, 245f);
+        CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_ColorTolerance", "Color Tolerance:", 0f, 1f, 145f, 245f);
         GUILayout.Space(10f);
 
         // Render surface options from the custom inspector utility.

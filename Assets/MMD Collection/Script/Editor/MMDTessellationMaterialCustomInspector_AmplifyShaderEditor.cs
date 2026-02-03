@@ -168,6 +168,16 @@ public class MMDTessellationMaterialCustomInspector_AmplifyShaderEditor : Shader
         // Render surface options from the custom inspector utility.
         CustomInspectorUtilityEditor.RenderSurfaceOptions(materialProperties, currentMaterial);
 
+        string tag = "_ALPHATEST_ON";
+        if (CustomInspectorUtilityEditor.IsToggleUIPropertyEnabled(materialProperties, "_AlphaClip"))
+        {
+            currentMaterial.EnableKeyword(tag);
+        }
+        else
+        {
+            currentMaterial.DisableKeyword(tag);
+        }
+
         // Render advanced options.
         GUILayout.Label("Advanced Options", EditorStyles.boldLabel);
         materialInspector.RenderQueueField(); // Render the queue field.

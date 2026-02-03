@@ -164,11 +164,21 @@ public class MMDColorToAlphaCustomInspector_AmplifyShaderEditor : ShaderGUI
 
         GUILayout.Label("Color to Alpha Settings", EditorStyles.boldLabel);
         CustomInspectorUtilityEditor.RenderColorProperty(materialProperties, "_ColortoAlpha", "Color to Alpha:");
-        CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_ColorTolerance", "Color Tolerance:", 1f, 1000f, 145f, 245f);
+        CustomInspectorUtilityEditor.RenderSliderFloatProperty(materialProperties, "_ColorTolerance", "Color Tolerance:", 0f, 1f, 145f, 245f);
         GUILayout.Space(10f);
 
         // Render surface options from the custom inspector utility.
         CustomInspectorUtilityEditor.RenderSurfaceOptions(materialProperties, currentMaterial);
+
+        string tag = "_ALPHATEST_ON";
+        if (CustomInspectorUtilityEditor.IsToggleUIPropertyEnabled(materialProperties, "_AlphaClip"))
+        {
+            currentMaterial.EnableKeyword(tag);
+        }
+        else
+        {
+            currentMaterial.DisableKeyword(tag);
+        }
 
         // Render advanced options.
         GUILayout.Label("Advanced Options", EditorStyles.boldLabel);
