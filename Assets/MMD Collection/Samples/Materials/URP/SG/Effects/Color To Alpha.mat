@@ -17,7 +17,7 @@ Material:
   - _MAIN_LIGHT_SHADOWS_CASCADE
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
-  m_LightmapFlags: 2
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3002
@@ -68,7 +68,7 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DstBlend: 10
-    - _DstBlendAlpha: 0
+    - _DstBlendAlpha: 10
     - _EFFECTS: 1
     - _EdgeSize: 0
     - _Fog: 1

@@ -14,7 +14,7 @@ namespace MMDCollection.BoneRenderer
 {
     [CustomEditor(typeof(MMDBoneRenderer))]
     [CanEditMultipleObjects]
-    public class MMDBoneRendererInspector : Editor
+    public class MMDBoneRendererInspector : UnityEditor.Editor
     {
         // Overrides the default Inspector GUI to support live updates and correctly handle Undo/Redo operations.
         public override void OnInspectorGUI()

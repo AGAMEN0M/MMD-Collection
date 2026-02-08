@@ -12,17 +12,16 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _ADDITIONAL_LIGHT_SHADOWS
   - _FOG_ON
-  - _MAIN_LIGHT_SHADOWS_CASCADE
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _SIMULATORHEIGHTMAP_ON
+  - _SIMULATORNORMALMAP_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2002
+  m_CustomRenderQueue: 2004
   stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3

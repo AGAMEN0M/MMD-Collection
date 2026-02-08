@@ -49,48 +49,6 @@ void lightmapCol_float(float2 lightmapUV, out float3 Output)
 	#endif
 }
 
-// Function to select a UV layer based on the given layer index.
-void uvLayer_float(float Layer, float2 uv0, float2 uv1, float2 uv2, float2 uv3, out float2 Output)
-{
-    if (Layer == 1)
-    {
-        Output = uv1; // UV1 - Second UV channel.
-    }
-    else if (Layer == 2)
-    {
-        Output = uv2; // UV2 - Third UV channel.
-    }
-    else if (Layer == 3)
-    {
-        Output = uv3; // UV3 - Fourth UV channel.
-    }
-    else
-    {
-        Output = uv0; // UV0 - Default UV channel if layer is out of range.
-    }
-}
-
-// Function to control effects based on the given layer index.
-void effectsControl_float(float Layer, float3 Base, float3 Add, float3 Multi, float3 Sub, out float3 Output)
-{
-    if (Layer == 1)
-    {
-        Output = Add; // Add effect.
-    }
-    else if (Layer == 2)
-    {
-        Output = Multi; // Multiply effect.
-    }
-    else if (Layer == 3)
-    {
-        Output = Sub; // Sub-Texture effect.
-    }
-    else
-    {
-        Output = Base; // Default value if layer is out of range, returning Base effect.
-    }
-}
-
 // Function to get the world space direction of the main light.
 void WorldSpaceLightDir_float(out float3 Output)
 {

@@ -14,247 +14,231 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showSystemsDefault: 0
   materialInfoList:
-  - mmdMaterial: {fileID: 2100000, guid: fea0f609e837e404db90fdd01379775f, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Add Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 10f4f51d6298d454ba9425d872d87391, type: 2}
-    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Disabled (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 6501ecc0d86c40f44a46dc4f3be9ac74, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
-    materialNameEN: Multi Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 53845d559431bf24085fe0e8862c1eba, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Add Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: c6dffdae30b952c4db084473ae0c1497, type: 2}
-    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Disabled (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: ddf7368940cdafa409fbf02570c78825, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
-    materialNameEN: Multi Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: ed6c74dc11814a0429897ff3d2759f94, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Add Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 0916a96cdd0f722489049ec08aa9ec2b, type: 2}
-    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Disabled (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: c1c564795c9f5db4eb458e1d74d1193d, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
-    materialNameEN: Multi Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: d01f1c93b6833d7439ad3a690d1bdf6f, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Add Sphere (Amplify Shader Editor)
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
     materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 20beff8fd4e8a444f9f182347a5fe03e, type: 2}
-    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Disabled (Amplify Shader Editor)
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
     materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: c1d532295fb9b7841aee20ca98b2376f, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
-    materialNameEN: Multi Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 3a9de582bb881ab429f387b9f1a8e398, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Add Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 13a1492914b235f43a226e76e9ab3439, type: 2}
-    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Disabled (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 0a6a5485c82c8e145b42c91d73ac18b8, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
-    materialNameEN: Multi Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 99dd082f785c94843ad117a2f3c28246, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0(Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Add Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 42856c3950e219245982a4556d7fe5ad, type: 2}
-    materialNameJP: "\u7121\u52B9 (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: Disabled (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 527ccbef9fc06e442b01aa7333b3a842, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
-    materialNameEN: Multi Sphere (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 0378f415c1368ae47a736007b735efca, type: 2}
-    materialNameJP: "\u7121\u52B9 (\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5)"
-    materialNameEN: Disabled (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: a4eef14b8a01599479b224b6d27ad4f0, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Add Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: a17d3956d0b52744fbb9cc3930c38243, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Multi Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: c40511b6a91f73144a88cbae4f6240f1, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Add Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: ac7e6505294962b408b8397a41b69f33, type: 2}
-    materialNameJP: "\u7121\u52B9 (\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5)"
-    materialNameEN: Disabled (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 5d648b7d19ff29f4390d598fd6fa4779, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Multi Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: bb92237b237d5f54f8d93893a90c74c1, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Add Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 790ad046cf941d54c8fa1eae6f982ab8, type: 2}
-    materialNameJP: "\u7121\u52B9 (\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5)"
-    materialNameEN: Disabled (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 5e564d9d302099c4993f8f0f6afd5550, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Multi Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 2136aee85b326c54eab9532537ba878f, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Add Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 449cd47ad09c974438e628fcd99647e5, type: 2}
-    materialNameJP: "\u7121\u52B9 (\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5)"
-    materialNameEN: Disabled (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 590ca7e9abc95b04b9602f07730936d2, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Multi Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: bce14d1380262b64e813092a6152ed8a, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Add Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: e13279b5aa32f874eba48a34569d29b8, type: 2}
-    materialNameJP: "\u7121\u52B9 (\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5)"
-    materialNameEN: Disabled (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 6cd543794005e2149ba892eb81f3f8aa, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Multi Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 3d48708385f28164cb0bc9ff41344df3, type: 2}
-    materialNameJP: "\u7403\u4F53\u306E\u8FFD\u52A0\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Add Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 10fa2bc2f56e26e42898feb8935c04b4, type: 2}
-    materialNameJP: "\u7121\u52B9 (\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5)"
-    materialNameEN: Disabled (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: abc12ff9f7d76654886dbab72aff9667, type: 2}
-    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: Multi Sphere (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: da50e82f78a5a9a44b3521dcb9b0af22, type: 2}
-    materialNameJP: "\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5 (DrawMeshInstanced)"
-    materialNameEN: Shader Graph (DrawMeshInstanced)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 8ee9efcfe210b5c45a6c2da5d558e979, type: 2}
-    materialNameJP: "Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC
-      (DrawMeshInstanced)"
-    materialNameEN: Amplify Shader Editor (DrawMeshInstanced)
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
     materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 1353cfaf16da7514b80a64a61f7bf240, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 8d228a55f1b1efd46a298f093e273976, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
+  - mmdMaterial: {fileID: 2100000, guid: 3a9de582bb881ab429f387b9f1a8e398, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 13a1492914b235f43a226e76e9ab3439, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 0a6a5485c82c8e145b42c91d73ac18b8, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
     materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 50a0884f77d55804085c784134c8dede, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 99dd082f785c94843ad117a2f3c28246, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 42856c3950e219245982a4556d7fe5ad, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 527ccbef9fc06e442b01aa7333b3a842, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 8d228a55f1b1efd46a298f093e273976, type: 2}
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: fea0f609e837e404db90fdd01379775f, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 10f4f51d6298d454ba9425d872d87391, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 6501ecc0d86c40f44a46dc4f3be9ac74, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
     materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: c9b68fd94adc9c745966bee0fdcba99d, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: aa402382c85bb064fabb1ce91acb242f, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
+  - mmdMaterial: {fileID: 2100000, guid: 53845d559431bf24085fe0e8862c1eba, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: c6dffdae30b952c4db084473ae0c1497, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: ddf7368940cdafa409fbf02570c78825, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
     materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 24bc18f18b0b3df4e998a5939ad690e9, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 379b517202cbc184b8c0743f84a2d3ba, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
+  - mmdMaterial: {fileID: 2100000, guid: ed6c74dc11814a0429897ff3d2759f94, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 7af95fa4f96d8d64c9d869b449638338, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
+  - mmdMaterial: {fileID: 2100000, guid: 0916a96cdd0f722489049ec08aa9ec2b, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 918906903d567814e860e706bbc4a6a0, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
+  - mmdMaterial: {fileID: 2100000, guid: c1c564795c9f5db4eb458e1d74d1193d, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 51c22f6e3b1601c4cb75d448717c9b53, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: d6299e5183096804493f3661ad95199c, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 77dc9e1bfaefde042a601e01097bff0c, type: 2}
-    materialNameJP: "SubTex (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: SubTex (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: d2acccdd2b0c6314fa097574792ec17d, type: 2}
-    materialNameJP: "MMD \u9802\u70B9\u30AB\u30E9\u30FC (Amplify \u30B7\u30A7\u30FC\u30C0\u30FC
-      \u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: MMD Vertex Color (Amplify Shader Editor)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: c8ca8345f1c7cda4c88852770a8a1d0e, type: 2}
-    materialNameJP: "MMD \u9802\u70B9\u30AB\u30E9\u30FC (\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5)"
-    materialNameEN: MMD Vertex Color (Shader Graph)
-    materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: d82ea9fdfcad539429107f93cc6b8274, type: 2}
-    materialNameJP: "MMD \u30AB\u30E9\u30FC\u304B\u3089\u30A2\u30EB\u30D5\u30A1 (\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5)"
-    materialNameEN: MMD Color To Alpha (Shader Graph)
+  - mmdMaterial: {fileID: 2100000, guid: aa402382c85bb064fabb1ce91acb242f, type: 2}
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
     materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 16d6bb2e8261b6d4caec6a47695ac0c6, type: 2}
-    materialNameJP: "MMD \u30AB\u30E9\u30FC\u304B\u3089\u30A2\u30EB\u30D5\u30A1\u3078\uFF08Amplify
-      \u30B7\u30A7\u30FC\u30C0\u30FC \u30A8\u30C7\u30A3\u30BF\u30FC\uFF09"
-    materialNameEN: MMD Color To Alpha (Amplify Shader Editor)
+    materialNameJP: "\u30AB\u30E9\u30FC\u304B\u3089\u30A2\u30EB\u30D5\u30A1"
+    materialNameEN: Color To Alpha
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 904ed62481b6eb545a897b4cec42cdc7, type: 2}
-    materialNameJP: "MMD \u6CD5\u7DDA\u3068\u9AD8\u3055\u30DE\u30C3\u30D7\uFF08\u30B7\u30A7\u30FC\u30C0\u30FC\u30B0\u30E9\u30D5\uFF09"
-    materialNameEN: MMD Normal and Height Map (Shader Graph)
+  - mmdMaterial: {fileID: 2100000, guid: 8ee9efcfe210b5c45a6c2da5d558e979, type: 2}
+    materialNameJP: "\u30E1\u30C3\u30B7\u30E5\u30A4\u30F3\u30B9\u30BF\u30F3\u30B9\u3092\u63CF\u753B"
+    materialNameEN: Draw Mesh Instanced
     materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: cdd9ae42ecd66ba48893c62b5cd37051, type: 2}
-    materialNameJP: "MMD \u6CD5\u7DDA\u3068\u9AD8\u3055\u30DE\u30C3\u30D7 (Amplify
-      \u30B7\u30A7\u30FC\u30C0\u30FC\u30A8\u30C7\u30A3\u30BF\u30FC)"
-    materialNameEN: MMD Normal and Height Map (Amplify Shader Editor)
+    materialNameJP: "\u6CD5\u7DDA\u30DE\u30C3\u30D7\u3068\u9AD8\u3055\u30DE\u30C3\u30D7"
+    materialNameEN: Normal and Height Map
     materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 5c82f1d5b726da642a04f6e8ca70f5e8, type: 2}
-    materialNameJP: 
-    materialNameEN: 
-    materialMeno: 
+    materialNameJP: "\u30C6\u30C3\u30BB\u30EC\u30FC\u30B7\u30E7\u30F3"
+    materialNameEN: Tessellation
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: d2acccdd2b0c6314fa097574792ec17d, type: 2}
+    materialNameJP: "\u9802\u70B9\u30AB\u30E9\u30FC"
+    materialNameEN: Vertex Color
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 2136aee85b326c54eab9532537ba878f, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 449cd47ad09c974438e628fcd99647e5, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 590ca7e9abc95b04b9602f07730936d2, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 379b517202cbc184b8c0743f84a2d3ba, type: 2}
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: bce14d1380262b64e813092a6152ed8a, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: e13279b5aa32f874eba48a34569d29b8, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 6cd543794005e2149ba892eb81f3f8aa, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 918906903d567814e860e706bbc4a6a0, type: 2}
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 3d48708385f28164cb0bc9ff41344df3, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 10fa2bc2f56e26e42898feb8935c04b4, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: abc12ff9f7d76654886dbab72aff9667, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 7af95fa4f96d8d64c9d869b449638338, type: 2}
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: a4eef14b8a01599479b224b6d27ad4f0, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 0378f415c1368ae47a736007b735efca, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: a17d3956d0b52744fbb9cc3930c38243, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 51c22f6e3b1601c4cb75d448717c9b53, type: 2}
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: c40511b6a91f73144a88cbae4f6240f1, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: ac7e6505294962b408b8397a41b69f33, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 5d648b7d19ff29f4390d598fd6fa4779, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: d6299e5183096804493f3661ad95199c, type: 2}
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: bb92237b237d5f54f8d93893a90c74c1, type: 2}
+    materialNameJP: "\u7403\u3092\u8FFD\u52A0"
+    materialNameEN: Add Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 790ad046cf941d54c8fa1eae6f982ab8, type: 2}
+    materialNameJP: "\u7121\u52B9"
+    materialNameEN: Disabled
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 5e564d9d302099c4993f8f0f6afd5550, type: 2}
+    materialNameJP: "\u30DE\u30EB\u30C1\u30B9\u30D5\u30A3\u30A2"
+    materialNameEN: Multi Sphere
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 77dc9e1bfaefde042a601e01097bff0c, type: 2}
+    materialNameJP: "\u30B5\u30D6\u30C6\u30C3\u30AF\u30B9"
+    materialNameEN: SubTex
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: d82ea9fdfcad539429107f93cc6b8274, type: 2}
+    materialNameJP: "\u30AB\u30E9\u30FC\u304B\u3089\u30A2\u30EB\u30D5\u30A1"
+    materialNameEN: Color To Alpha
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: da50e82f78a5a9a44b3521dcb9b0af22, type: 2}
+    materialNameJP: "\u30E1\u30C3\u30B7\u30E5\u30A4\u30F3\u30B9\u30BF\u30F3\u30B9\u3092\u63CF\u753B"
+    materialNameEN: Draw Mesh Instanced
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 904ed62481b6eb545a897b4cec42cdc7, type: 2}
+    materialNameJP: "\u6CD5\u7DDA\u30DE\u30C3\u30D7\u3068\u9AD8\u3055\u30DE\u30C3\u30D7"
+    materialNameEN: Normal and Height Map
+    materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: c8ca8345f1c7cda4c88852770a8a1d0e, type: 2}
+    materialNameJP: "\u9802\u70B9\u30AB\u30E9\u30FC"
+    materialNameEN: Vertex Color
+    materialMeno: AGAMENOM

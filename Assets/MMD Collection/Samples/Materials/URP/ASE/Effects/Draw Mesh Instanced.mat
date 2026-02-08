@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2002
+  m_CustomRenderQueue: 2003
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -61,7 +61,6 @@ Material:
     m_Floats:
     - _AddPrecomputedVelocity: 1
     - _AlphaClip: 0
-    - _AlphaCutoff: 0.5
     - _Blend: 0
     - _CastShadows: 1
     - _Cull: 2
