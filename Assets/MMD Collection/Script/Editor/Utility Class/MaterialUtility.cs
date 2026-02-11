@@ -177,15 +177,16 @@ namespace MMDCollection.Editor
         #endregion
 
         #region === Basic Property Drawers ===
-
+        
         /// <summary>
-        /// Draws a color field with optional alpha and per-channel controls.
+        /// Draws a color field with optional alpha, HDR support, and per-channel controls.
         /// </summary>
         /// <param name="label">Label and tooltip shown in the inspector.</param>
         /// <param name="properties">Material properties array provided by the inspector.</param>
         /// <param name="propertyName">Name of the color property in the shader.</param>
         /// <param name="alpha">Whether the alpha channel should be exposed.</param>
-        public static void ColorProperty(GUIContent label, MaterialProperty[] properties, string propertyName, bool alpha = false)
+        /// <param name="hdr">Whether the color field should allow HDR values.</param>
+        public static void ColorProperty(GUIContent label, MaterialProperty[] properties, string propertyName, bool alpha = false, bool hdr = false)
         {
             // Retrieve the color property from the selected materials.
             var colorProperty = MaterialEditor.GetMaterialProperty(properties.Select(p => p.targets).FirstOrDefault(), propertyName);
@@ -201,7 +202,13 @@ namespace MMDCollection.Editor
             EditorGUI.BeginChangeCheck();
 
             // Draw compact color picker.
-            Color color = EditorGUILayout.ColorField(GUIContent.none, colorProperty.colorValue, false, alpha, false, GUILayout.Width(50f));
+            Color color = EditorGUILayout.ColorField(
+                GUIContent.none,
+                colorProperty.colorValue,
+                false, // Show eyedropper.
+                alpha, // Show alpha channel if requested.
+                hdr,   // Enable HDR mode if requested.
+                GUILayout.Width(50f));
 
             if (EditorGUI.EndChangeCheck())
             {
@@ -905,11 +912,7 @@ namespace MMDCollection.Editor
             {
                 // Use the first material as a reference for initial values.
                 var referenceMat = texProp.targets[0] as Material;
-                if (referenceMat == null)
-                {
-                    EditorGUILayout.EndHorizontal();
-                    return;
-                }
+                if (referenceMat == null) return;
 
                 // Fetch current tiling and offset values.
                 Vector2 scale = referenceMat.GetTextureScale(propertyName);
@@ -926,58 +929,96 @@ namespace MMDCollection.Editor
                     if (mat.GetTextureOffset(propertyName) != offset) mixedOffset = true;
                 }
 
-                GUILayout.BeginVertical();
+                // Get the Rect of the last GUILayout element (the texture field) and adjust.
+                Rect objectRect = GUILayoutUtility.GetLastRect();
+                objectRect.y += 20f; // Move slightly down.
+                objectRect.width = Mathf.Max(0f, objectRect.width - 70f); // Reserve space on the right.
 
-                // ---- Tiling ----
-                EditorGUI.showMixedValue = mixedScale;
-                EditorGUI.BeginChangeCheck();
-
-                // Draw tiling vector field.
-                scale = EditorGUILayout.Vector2Field("Tiling", scale, GUILayout.MinWidth(160f));
-
-                if (EditorGUI.EndChangeCheck())
-                {
-                    // Register Undo for tiling changes.
-                    Undo.RecordObjects(texProp.targets, $"Change {propertyName} Tiling");
-
-                    // Apply tiling to all selected materials.
-                    foreach (var obj in texProp.targets)
-                    {
-                        if (obj is Material mat)
-                        {
-                            mat.SetTextureScale(propertyName, scale);
-                            EditorUtility.SetDirty(mat);
-                        }
-                    }
-                }
-
-                // ---- Offset ----
-                EditorGUI.showMixedValue = mixedOffset;
-                EditorGUI.BeginChangeCheck();
-
-                // Draw offset vector field.
-                offset = EditorGUILayout.Vector2Field("Offset", offset, GUILayout.MinWidth(160f));
-
-                if (EditorGUI.EndChangeCheck())
-                {
-                    // Register Undo for offset changes.
-                    Undo.RecordObjects(texProp.targets, $"Change {propertyName} Offset");
-
-                    // Apply offset to all selected materials.
-                    foreach (var obj in texProp.targets)
-                    {
-                        if (obj is Material mat)
-                        {
-                            mat.SetTextureOffset(propertyName, offset);
-                            EditorUtility.SetDirty(mat);
-                        }
-                    }
-                }
-
-                EditorGUI.showMixedValue = false; // Reset mixed value state.
-
-                GUILayout.EndVertical();
+                // Draw tiling and offset fields in this Rect.
+                DrawScaleOffsetInRect(objectRect, texProp, propertyName, scale, offset, mixedScale, mixedOffset);
             }
+        }
+
+        /// <summary>
+        /// Draws Tiling and Offset Vector2 fields inside a specified rectangle, updating the material property values.
+        /// </summary>
+        /// <param name="boxArea">Rect area where the fields will be drawn.</param>
+        /// <param name="texProp">Material property representing the texture.</param>
+        /// <param name="propertyName">Name of the texture property.</param>
+        /// <param name="scale">Current tiling value of the texture.</param>
+        /// <param name="offset">Current offset value of the texture.</param>
+        /// <param name="mixedScale">True if multiple materials have different tiling values.</param>
+        /// <param name="mixedOffset">True if multiple materials have different offset values.</param>
+        private static void DrawScaleOffsetInRect(Rect boxArea, MaterialProperty texProp, string propertyName, Vector2 scale, Vector2 offset, bool mixedScale, bool mixedOffset)
+        {
+            float lineHeight = EditorGUIUtility.singleLineHeight;
+            float spacing = EditorGUIUtility.standardVerticalSpacing;
+            float localLabelWidth = 60f; // Width for the labels ("Tiling" and "Offset").
+
+            // ---- Line Rects ----
+            Rect tilingLine = new(boxArea.x, boxArea.y, boxArea.width, lineHeight);
+            Rect offsetLine = new(boxArea.x, boxArea.y + lineHeight + spacing, boxArea.width, lineHeight);
+
+            // ---- Shared split logic for label and field ----
+            Rect GetLabelRect(Rect line) => new(line.x, line.y, localLabelWidth, line.height);
+
+            Rect GetFieldRect(Rect line)
+            {
+                float minFieldWidth = 80f; // Minimum allowed field width.
+                float fieldWidth = line.width - localLabelWidth;
+                fieldWidth = Mathf.Max(minFieldWidth, fieldWidth); // Prevent negative or too small width.
+                return new Rect(line.x + localLabelWidth, line.y, fieldWidth, line.height);
+            }
+
+            // ================= TILING =================
+            EditorGUI.showMixedValue = mixedScale;
+            EditorGUI.BeginChangeCheck();
+
+            EditorGUI.LabelField(GetLabelRect(tilingLine), "Tiling");
+            scale = EditorGUI.Vector2Field(GetFieldRect(tilingLine), GUIContent.none, scale);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                // Register Undo for tiling changes.
+                Undo.RecordObjects(texProp.targets, $"Change {propertyName} Tiling");
+
+                // Apply tiling to all selected materials.
+                foreach (var obj in texProp.targets)
+                {
+                    if (obj is Material mat)
+                    {
+                        mat.SetTextureScale(propertyName, scale);
+                        EditorUtility.SetDirty(mat);
+                    }
+                }
+            }
+
+            EditorGUI.showMixedValue = false;
+
+            // ================= OFFSET =================
+            EditorGUI.showMixedValue = mixedOffset;
+            EditorGUI.BeginChangeCheck();
+
+            EditorGUI.LabelField(GetLabelRect(offsetLine), "Offset");
+            offset = EditorGUI.Vector2Field(GetFieldRect(offsetLine), GUIContent.none, offset);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                // Register Undo for offset changes.
+                Undo.RecordObjects(texProp.targets, $"Change {propertyName} Offset");
+
+                // Apply offset to all selected materials.
+                foreach (var obj in texProp.targets)
+                {
+                    if (obj is Material mat)
+                    {
+                        mat.SetTextureOffset(propertyName, offset);
+                        EditorUtility.SetDirty(mat);
+                    }
+                }
+            }
+
+            EditorGUI.showMixedValue = false;
         }
 
         #endregion

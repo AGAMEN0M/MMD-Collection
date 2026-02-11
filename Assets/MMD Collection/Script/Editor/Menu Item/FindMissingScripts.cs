@@ -14,39 +14,42 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
-/// <summary>
-/// Utility class to find all GameObjects in the scene with missing scripts attached.
-/// </summary>
-public static class FindMissingScripts
+namespace MMDCollection.Editor
 {
-    #region === Menu Methods ===
-
     /// <summary>
-    /// Finds all GameObjects in the current scene that have missing scripts and selects them in the Editor.
+    /// Utility class to find all GameObjects in the scene with missing scripts attached.
     /// </summary>
-    [MenuItem("GameObject/MMD Collection/Find Missing Scripts", false, 1)]
-    private static void FindAllMissingScripts()
+    public static class FindMissingScripts
     {
-        List<GameObject> objectsWithMissingScripts = new(); // List to store all GameObjects with missing scripts.
-        var allObjects = Resources.FindObjectsOfTypeAll<GameObject>(); // Find all GameObjects in all loaded scenes.
+        #region === Menu Methods ===
 
-        // Iterate through all GameObjects.
-        foreach (var obj in allObjects)
+        /// <summary>
+        /// Finds all GameObjects in the current scene that have missing scripts and selects them in the Editor.
+        /// </summary>
+        [MenuItem("GameObject/MMD Collection/Find Missing Scripts", false, 1)]
+        private static void FindAllMissingScripts()
         {
-            // Skip objects that are not part of a valid scene, not loaded, or are hidden/not editable.
-            if (!obj.scene.IsValid() || !obj.scene.isLoaded || (obj.hideFlags & (HideFlags.NotEditable | HideFlags.HideAndDontSave)) != 0) continue;
+            List<GameObject> objectsWithMissingScripts = new(); // List to store all GameObjects with missing scripts.
+            var allObjects = Resources.FindObjectsOfTypeAll<GameObject>(); // Find all GameObjects in all loaded scenes.
 
-            var components = obj.GetComponents<Component>(); // Get all components attached to the GameObject.
+            // Iterate through all GameObjects.
+            foreach (var obj in allObjects)
+            {
+                // Skip objects that are not part of a valid scene, not loaded, or are hidden/not editable.
+                if (!obj.scene.IsValid() || !obj.scene.isLoaded || (obj.hideFlags & (HideFlags.NotEditable | HideFlags.HideAndDontSave)) != 0) continue;
 
-            if (components == null) continue; // Skip if no components are found (shouldn't happen, but added for safety).
+                var components = obj.GetComponents<Component>(); // Get all components attached to the GameObject.
 
-            // If any component is null, it indicates a missing script.
-            if (components != null && components.Any(c => c == null)) objectsWithMissingScripts.Add(obj);
+                if (components == null) continue; // Skip if no components are found (shouldn't happen, but added for safety).
+
+                // If any component is null, it indicates a missing script.
+                if (components != null && components.Any(c => c == null)) objectsWithMissingScripts.Add(obj);
+            }
+
+            Debug.Log($"Found {objectsWithMissingScripts.Count} GameObjects with missing scripts.");
+            Selection.objects = objectsWithMissingScripts.ToArray(); // Select the objects in the Editor for easy inspection.
         }
 
-        Debug.Log($"Found {objectsWithMissingScripts.Count} GameObjects with missing scripts.");
-        Selection.objects = objectsWithMissingScripts.ToArray(); // Select the objects in the Editor for easy inspection.
+        #endregion
     }
-
-    #endregion
 }

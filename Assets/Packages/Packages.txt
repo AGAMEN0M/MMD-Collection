@@ -1,3 +1,7 @@
 - Amplify Shader Editor
 
+- Amplify Shader Pack
+
 - MMD4Mecanim
+
+- MMD 6 Unity Tool
