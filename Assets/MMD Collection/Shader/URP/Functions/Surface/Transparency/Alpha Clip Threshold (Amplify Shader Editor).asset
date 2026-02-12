@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
   m_Name: Alpha Clip Threshold (Amplify Shader Editor)
   m_EditorClassIdentifier: AmplifyShaderEditor::AmplifyShaderEditor.AmplifyShaderFunction
-  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.7\n// Available at the
-    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19907\nNode;AmplifyShaderEditor.Compare,
+  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.8\n// Available at the
+    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19908\nNode;AmplifyShaderEditor.Compare,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;2;-256,0;Inherit;True;0;4;0;FLOAT;0;False;1;INT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.IntNode,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;3;-640,0;Inherit;False;Constant;_Int12;Int
     12;29;0;Create;True;0;0;0;False;0;False;1;0;False;0;0;0;1;INT;0\nNode;AmplifyShaderEditor.FunctionInput,
@@ -23,7 +23,7 @@ MonoBehaviour:
     Cutoff;1;1;False;1;0;FLOAT;0.5;False;1;FLOAT;0\nNode;AmplifyShaderEditor.RangedFloatNode,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;4;-512,384;Inherit;False;Constant;_Float2;Float
     2;29;0;Create;True;0;0;0;False;0;False;0.0001;0;0;0;0;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionOutput,
-    AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;0;0,0;Inherit;True;True;-1;Output;0;False;1;0;FLOAT;0;False;1;FLOAT;0\nWireConnection;2;0;7;0\nWireConnection;2;1;3;0\nWireConnection;2;2;6;0\nWireConnection;2;3;4;0\nWireConnection;0;0;2;0\nASEEND*/\n//CHKSM=9E286E3AC41D550F5834DCF5D13DC683951EBF1F"
+    AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;0;0,0;Inherit;True;True;-1;Output;0;False;1;0;FLOAT;0;False;1;FLOAT;0\nWireConnection;2;0;7;0\nWireConnection;2;1;3;0\nWireConnection;2;2;6;0\nWireConnection;2;3;4;0\nWireConnection;0;0;2;0\nASEEND*/\n//CHKSM=DD8BFD0D710CCF5BBB30C7990AE6E0DEC5A0910D"
   m_functionName: 
   m_description: Evaluates an alpha clipping condition based on the input alpha and
     cutoff threshold for transparency control.

@@ -118,6 +118,10 @@ MonoBehaviour:
     materialNameJP: "\u30E1\u30C3\u30B7\u30E5\u30A4\u30F3\u30B9\u30BF\u30F3\u30B9\u3092\u63CF\u753B"
     materialNameEN: Draw Mesh Instanced
     materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: c05291ab0fad5c146b24da80cb44dc96, type: 2}
+    materialNameJP: "\u6392\u51FA\u30DE\u30C3\u30D7"
+    materialNameEN: Emission Map
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: cdd9ae42ecd66ba48893c62b5cd37051, type: 2}
     materialNameJP: "\u6CD5\u7DDA\u30DE\u30C3\u30D7\u3068\u9AD8\u3055\u30DE\u30C3\u30D7"
     materialNameEN: Normal and Height Map
@@ -234,6 +238,10 @@ MonoBehaviour:
     materialNameJP: "\u30E1\u30C3\u30B7\u30E5\u30A4\u30F3\u30B9\u30BF\u30F3\u30B9\u3092\u63CF\u753B"
     materialNameEN: Draw Mesh Instanced
     materialMeno: AGAMENOM
+  - mmdMaterial: {fileID: 2100000, guid: 4ecc9609cf464b24e83501506024fafe, type: 2}
+    materialNameJP: "\u6392\u51FA\u30DE\u30C3\u30D7"
+    materialNameEN: Emission Map
+    materialMeno: AGAMENOM
   - mmdMaterial: {fileID: 2100000, guid: 904ed62481b6eb545a897b4cec42cdc7, type: 2}
     materialNameJP: "\u6CD5\u7DDA\u30DE\u30C3\u30D7\u3068\u9AD8\u3055\u30DE\u30C3\u30D7"
     materialNameEN: Normal and Height Map
@@ -242,11 +250,3 @@ MonoBehaviour:
     materialNameJP: "\u9802\u70B9\u30AB\u30E9\u30FC"
     materialNameEN: Vertex Color
     materialMeno: AGAMENOM
-  - mmdMaterial: {fileID: 2100000, guid: 4ecc9609cf464b24e83501506024fafe, type: 2}
-    materialNameJP: 
-    materialNameEN: Emission Map
-    materialMeno: 
-  - mmdMaterial: {fileID: 2100000, guid: c05291ab0fad5c146b24da80cb44dc96, type: 2}
-    materialNameJP: 
-    materialNameEN: Emission Map
-    materialMeno: 

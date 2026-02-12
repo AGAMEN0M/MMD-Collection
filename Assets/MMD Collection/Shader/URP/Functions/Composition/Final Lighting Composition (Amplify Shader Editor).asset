@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
   m_Name: Final Lighting Composition (Amplify Shader Editor)
   m_EditorClassIdentifier: AmplifyShaderEditor::AmplifyShaderEditor.AmplifyShaderFunction
-  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.7\n// Available at the
-    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19907\nNode;AmplifyShaderEditor.CommentaryNode,
+  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.8\n// Available at the
+    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19908\nNode;AmplifyShaderEditor.CommentaryNode,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;42;1376,-864;Inherit;False;446.144;413.232;HDR;2;41;17;;1,1,1,1;0;0\nNode;AmplifyShaderEditor.CommentaryNode,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;40;256,-800;Inherit;False;765.344;732.4319;Final
     Calculation Additional Lights;5;9;10;39;38;37;;1,1,1,1;0;0\nNode;AmplifyShaderEditor.CommentaryNode,
@@ -54,7 +54,7 @@ MonoBehaviour:
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;39;288,-320;Inherit;True;Ambient
     Blend Factor;3;9;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0\nNode;AmplifyShaderEditor.FunctionInput,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;41;1408,-704;Inherit;True;HDR;1;10;False;1;0;FLOAT;1;False;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionOutput,
-    AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;0;1856,-800;Inherit;True;True;-1;Output;0;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0\nWireConnection;5;0;28;0\nWireConnection;5;1;29;0\nWireConnection;12;0;31;0\nWireConnection;12;1;25;0\nWireConnection;12;2;32;0\nWireConnection;25;0;5;0\nWireConnection;7;0;33;0\nWireConnection;7;1;34;0\nWireConnection;7;2;6;0\nWireConnection;8;0;7;0\nWireConnection;8;1;35;0\nWireConnection;13;0;12;0\nWireConnection;13;1;8;0\nWireConnection;10;0;38;0\nWireConnection;10;1;39;0\nWireConnection;14;0;13;0\nWireConnection;14;1;9;0\nWireConnection;9;0;37;0\nWireConnection;9;1;10;0\nWireConnection;17;0;14;0\nWireConnection;17;1;41;0\nWireConnection;0;0;17;0\nASEEND*/\n//CHKSM=7314B3956CC488F5370ABE4D6DB0A0E42979A85B"
+    AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;0;1856,-800;Inherit;True;True;-1;Output;0;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0\nWireConnection;5;0;28;0\nWireConnection;5;1;29;0\nWireConnection;12;0;31;0\nWireConnection;12;1;25;0\nWireConnection;12;2;32;0\nWireConnection;25;0;5;0\nWireConnection;7;0;33;0\nWireConnection;7;1;34;0\nWireConnection;7;2;6;0\nWireConnection;8;0;7;0\nWireConnection;8;1;35;0\nWireConnection;13;0;12;0\nWireConnection;13;1;8;0\nWireConnection;10;0;38;0\nWireConnection;10;1;39;0\nWireConnection;14;0;13;0\nWireConnection;14;1;9;0\nWireConnection;9;0;37;0\nWireConnection;9;1;10;0\nWireConnection;17;0;14;0\nWireConnection;17;1;41;0\nWireConnection;0;0;17;0\nASEEND*/\n//CHKSM=BB793A6FAEDC78957B3B2679D3061C4E15BEA25C"
   m_functionName: 
   m_description: 'Composes the final shaded color by combining baked lighting, toon
     ramp shading, sphere map effects, specular highlights, additional lights, and

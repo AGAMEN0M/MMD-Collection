@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
   m_Name: Light Calculation (Amplify Shader Editor)
   m_EditorClassIdentifier: AmplifyShaderEditor::AmplifyShaderEditor.AmplifyShaderFunction
-  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.7\n// Available at the
-    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19907\nNode;AmplifyShaderEditor.TransformPositionNode,
+  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.8\n// Available at the
+    Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19908\nNode;AmplifyShaderEditor.TransformPositionNode,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;8;-1536,256;Inherit;True;Object;World;False;Fast;True;1;0;FLOAT3;0,0,0;False;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4\nNode;AmplifyShaderEditor.BreakToComponentsNode,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;10;-1216,-640;Inherit;True;FLOAT3;1;0;FLOAT3;0,0,0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15\nNode;AmplifyShaderEditor.SimpleMultiplyOpNode,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;4;-384,-640;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.SimpleAddOpNode,
@@ -44,7 +44,7 @@ MonoBehaviour:
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;22;384,-64;Inherit;True;False;-1;Clamped
     Light Response;2;False;1;0;FLOAT;0;False;1;FLOAT;0\nNode;AmplifyShaderEditor.FunctionOutput,
     AmplifyShaderEditor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null;18;-992,384;Inherit;True;False;-1;Original
-    Light Color;3;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0\nWireConnection;8;0;9;0\nWireConnection;10;0;19;0\nWireConnection;4;0;10;1\nWireConnection;4;1;20;0\nWireConnection;1;0;4;0\nWireConnection;1;1;21;0\nWireConnection;21;0;10;2\nWireConnection;2;0;10;2\nWireConnection;2;1;3;0\nWireConnection;3;0;10;0\nWireConnection;3;1;6;0\nWireConnection;6;0;16;3\nWireConnection;6;1;7;0\nWireConnection;16;1;8;0\nWireConnection;15;1;8;0\nWireConnection;23;0;1;0\nWireConnection;23;1;2;0\nWireConnection;0;0;1;0\nWireConnection;17;0;2;0\nWireConnection;22;0;23;0\nWireConnection;18;0;15;3\nASEEND*/\n//CHKSM=DFFDC9C992732742C0A9F65C43EB4173877F85CB"
+    Light Color;3;False;1;0;FLOAT3;0,0,0;False;1;FLOAT3;0\nWireConnection;8;0;9;0\nWireConnection;10;0;19;0\nWireConnection;4;0;10;1\nWireConnection;4;1;20;0\nWireConnection;1;0;4;0\nWireConnection;1;1;21;0\nWireConnection;21;0;10;2\nWireConnection;2;0;10;2\nWireConnection;2;1;3;0\nWireConnection;3;0;10;0\nWireConnection;3;1;6;0\nWireConnection;6;0;16;3\nWireConnection;6;1;7;0\nWireConnection;16;1;8;0\nWireConnection;15;1;8;0\nWireConnection;23;0;1;0\nWireConnection;23;1;2;0\nWireConnection;0;0;1;0\nWireConnection;17;0;2;0\nWireConnection;22;0;23;0\nWireConnection;18;0;15;3\nASEEND*/\n//CHKSM=D323540F14BFD260C99F2B3BBB4A39B83210536C"
   m_functionName: 
   m_description: "Performs a stylized light calculation based on a toon control vector
     and the raw N\xB7L term.\nComputes a light response, a toon-based light modulation
