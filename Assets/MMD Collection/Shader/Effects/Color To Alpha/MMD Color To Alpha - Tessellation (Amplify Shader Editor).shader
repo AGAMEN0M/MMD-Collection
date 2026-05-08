@@ -64,7 +64,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 
 		[HideInInspector] _XRMotionVectorsPass("_XRMotionVectorsPass", Float) = 1
 
-		//[HideInInspector] _AlphaClip("__clip", Float) = 1.0
+		[HideInInspector] _AlphaClip("__clip", Float) = 1.0
 	}
 
 	SubShader
@@ -223,7 +223,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
 			#define ASE_VERSION 19908
-			#define ASE_SRP_VERSION 170200
+			#define ASE_SRP_VERSION -1
 
 
 			#pragma vertex vert
@@ -571,7 +571,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
 			#define ASE_VERSION 19908
-			#define ASE_SRP_VERSION 170200
+			#define ASE_SRP_VERSION -1
 
 
 			#pragma multi_compile_fragment _ _DBUFFER_MRT1 _DBUFFER_MRT2 _DBUFFER_MRT3
@@ -580,6 +580,28 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 
 			#pragma vertex vert
 			#pragma fragment frag
+
+			// Option "Keep Lighting Variants"
+			//#define UNLIT_REALTIME_LIGHTING 1
+			//#pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+			//#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+			//#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+			//#pragma multi_compile_fragment _ _REFLECTION_PROBE_BLENDING
+			//#pragma multi_compile_fragment _ _REFLECTION_PROBE_BOX_PROJECTION
+			//#pragma multi_compile_fragment _ _REFLECTION_PROBE_ATLAS
+			//#pragma multi_compile _ REFLECTION_PROBE_ROTATION
+			//#pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
+			//#pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
+			//#pragma multi_compile _ SHADOWS_SHADOWMASK
+			//#pragma multi_compile_fragment _ _LIGHT_LAYERS
+			//#pragma multi_compile_fragment _ _LIGHT_COOKIES
+			//#pragma multi_compile _ _CLUSTER_LIGHT_LOOP
+
+			// Option "Default Decal Blending"
+			#define UNLIT_DEFAULT_DECAL_BLENDING 1
+
+			// Option "Default SSAO"
+			#define UNLIT_DEFAULT_SSAO 1
 
 			#define SHADERPASS SHADERPASS_UNLIT
 
@@ -619,7 +641,6 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 			#define ASE_NEEDS_FRAG_WORLD_VIEW_DIR
 			#define ASE_NEEDS_WORLD_POSITION
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_FRAG_SCREEN_POSITION_NORMALIZED
 			#define ASE_NEEDS_FRAG_TEXTURE_COORDINATES2
 			#pragma multi_compile __ _FOG_ON
 			#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
@@ -631,6 +652,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 			#pragma multi_compile _ LIGHTMAP_ON
 			#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
 			#pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
+			#pragma multi_compile _ _FORWARD_PLUS
 			#pragma multi_compile _ _CLUSTER_LIGHT_LOOP
 			#pragma multi_compile _ _LIGHT_LAYERS
 			#pragma multi_compile _ LIGHTMAP_SHADOW_MIXING
@@ -734,41 +756,21 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 				#endif
 			}
 			
-			float3 AdditionalLightsLambertMask171x( float3 WorldPosition, float2 ScreenUV, float3 WorldNormal, float4 ShadowMask )
+			float3 AdditionalLightsLambertMask10x( float3 WorldPosition, float3 WorldNormal, float4 ShadowMask )
 			{
 				float3 Color = 0;
-				#if defined(_ADDITIONAL_LIGHTS)
-					#define SUM_LIGHTLAMBERT(Light)\
-						half3 AttLightColor = Light.color * ( Light.distanceAttenuation * Light.shadowAttenuation );\
-						Color += LightingLambert( AttLightColor, Light.direction, WorldNormal );
-					InputData inputData = (InputData)0;
-					inputData.normalizedScreenSpaceUV = ScreenUV;
-					inputData.positionWS = WorldPosition;
-					uint meshRenderingLayers = GetMeshRenderingLayer();
-					uint pixelLightCount = GetAdditionalLightsCount();	
-					#if USE_CLUSTER_LIGHT_LOOP
-					[loop] for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
+				#ifdef _ADDITIONAL_LIGHTS
+					uint lightCount = GetAdditionalLightsCount();
+					for (uint lightIndex = 0u; lightIndex < lightCount; ++lightIndex)
 					{
-						CLUSTER_LIGHT_LOOP_SUBTRACTIVE_LIGHT_CHECK
+						#if ASE_SRP_VERSION >= 100000
 						Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);
-						#ifdef _LIGHT_LAYERS
-						if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
+						#else
+						Light light = GetAdditionalLight(lightIndex, WorldPosition);
 						#endif
-						{
-							SUM_LIGHTLAMBERT( light );
-						}
+						half3 AttLightColor = light.color *(light.distanceAttenuation * light.shadowAttenuation);
+						Color +=LightingLambert(AttLightColor, light.direction, WorldNormal);
 					}
-					#endif
-					
-					LIGHT_LOOP_BEGIN( pixelLightCount )
-						Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask);
-						#ifdef _LIGHT_LAYERS
-						if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers))
-						#endif
-						{
-							SUM_LIGHTLAMBERT( light );
-						}
-					LIGHT_LOOP_END
 				#endif
 				return Color;
 			}
@@ -1042,19 +1044,17 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 				float4 lerpResult14_g61373 = lerp( lerpResult6_g61373 , temp_output_15_0_g61371 , step( 1.5 , Layer_Value17_g61373 ));
 				float4 lerpResult16_g61373 = lerp( lerpResult14_g61373 , Albedo_Texture41_g61371 , step( 2.5 , Layer_Value17_g61373 ));
 				float3 WorldPosition288_g61387 = PositionWS;
-				float3 WorldPosition337_g61387 = WorldPosition288_g61387;
-				float2 ScreenUV286_g61387 = (ScreenPosNorm).xy;
-				float2 ScreenUV337_g61387 = ScreenUV286_g61387;
+				float3 WorldPosition294_g61387 = WorldPosition288_g61387;
 				float3 objToWorldDir5_g61386 = mul( GetObjectToWorldMatrix(), float4( input.ase_normal, 0.0 ) ).xyz;
 				float3 WorldNormal281_g61387 = objToWorldDir5_g61386;
-				float3 WorldNormal337_g61387 = WorldNormal281_g61387;
+				float3 WorldNormal294_g61387 = WorldNormal281_g61387;
 				half2 LightmapUV1_g61389 = (input.ase_texcoord4.zw*(unity_DynamicLightmapST).xy + (unity_DynamicLightmapST).zw);
 				half4 localCalculateShadowMask1_g61389 = CalculateShadowMask1_g61389( LightmapUV1_g61389 );
 				float4 ShadowMask360_g61387 = localCalculateShadowMask1_g61389;
-				float4 ShadowMask337_g61387 = ShadowMask360_g61387;
-				float3 localAdditionalLightsLambertMask171x337_g61387 = AdditionalLightsLambertMask171x( WorldPosition337_g61387 , ScreenUV337_g61387 , WorldNormal337_g61387 , ShadowMask337_g61387 );
+				float4 ShadowMask294_g61387 = ShadowMask360_g61387;
+				float3 localAdditionalLightsLambertMask10x294_g61387 = AdditionalLightsLambertMask10x( WorldPosition294_g61387 , WorldNormal294_g61387 , ShadowMask294_g61387 );
 				float3 temp_output_13_0_g61386 = temp_output_654_0;
-				float3 Additional_Lights268 = ( _MultipleLights == (float)1 ? ( localAdditionalLightsLambertMask171x337_g61387 + temp_output_13_0_g61386 ) : temp_output_13_0_g61386 );
+				float3 Additional_Lights268 = ( _MultipleLights == (float)1 ? ( localAdditionalLightsLambertMask10x294_g61387 + temp_output_13_0_g61386 ) : temp_output_13_0_g61386 );
 				
 				float Sgurface248 = _Surface;
 				float Sub_Texture_Mask647 = tex2DNode10_g61371.a;
@@ -1091,7 +1091,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 				inputData.normalWS = NormalWS;
 				inputData.viewDirectionWS = ViewDirWS;
 
-				#if defined(_SCREEN_SPACE_OCCLUSION) && !defined(_SURFACE_TYPE_TRANSPARENT)
+				#if defined(_SCREEN_SPACE_OCCLUSION) && !defined(_SURFACE_TYPE_TRANSPARENT) && defined(UNLIT_DEFAULT_SSAO)
 					float2 normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(input.positionCS);
 					AmbientOcclusionFactor aoFactor = GetScreenSpaceAmbientOcclusion(normalizedScreenSpaceUV);
 					Color.rgb *= aoFactor.directAmbientOcclusion;
@@ -1101,7 +1101,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 					inputData.fogCoord = InitializeInputDataFog(float4(inputData.positionWS, 1.0), input.positionWSAndFogFactor.w);
 				#endif
 
-				#if defined(_DBUFFER)
+				#if defined(_DBUFFER) && defined(UNLIT_DEFAULT_DECAL_BLENDING)
 					ApplyDecalToBaseColor(input.positionCS, Color);
 				#endif
 
@@ -1155,7 +1155,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
 			#define ASE_VERSION 19908
-			#define ASE_SRP_VERSION 170200
+			#define ASE_SRP_VERSION -1
 
 
 			#pragma multi_compile_vertex _ _CASTING_PUNCTUAL_LIGHT_SHADOW
@@ -1514,7 +1514,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
 			#define ASE_VERSION 19908
-			#define ASE_SRP_VERSION 170200
+			#define ASE_SRP_VERSION -1
 
 
 			#pragma vertex vert
@@ -1842,7 +1842,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
 			#define ASE_VERSION 19908
-			#define ASE_SRP_VERSION 170200
+			#define ASE_SRP_VERSION -1
 
 
 			#pragma vertex vert
@@ -2153,7 +2153,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
 			#define ASE_PHONG_TESSELLATION
 			#define ASE_LENGTH_TESSELLATION
 			#define ASE_VERSION 19908
-			#define ASE_SRP_VERSION 170200
+			#define ASE_SRP_VERSION -1
 
 
 			#pragma vertex vert
@@ -2474,7 +2474,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha - Tessellation (Amplify Sh
         	#define ASE_PHONG_TESSELLATION
         	#define ASE_LENGTH_TESSELLATION
         	#define ASE_VERSION 19908
-        	#define ASE_SRP_VERSION 170200
+        	#define ASE_SRP_VERSION -1
 
 
         	#pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
@@ -3039,4 +3039,4 @@ WireConnection;498;0;671;29
 WireConnection;498;1;671;0
 WireConnection;498;3;671;30
 ASEEND*/
-//CHKSM=89A5102062AE99E0619951A0875128146E912E81
+//CHKSM=FEFB771CC1A6B627A72058531F743BB703C93ECC
