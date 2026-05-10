@@ -1,0 +1,1898 @@
+{
+    "m_SGVersion": 3,
+    "m_Type": "UnityEditor.ShaderGraph.GraphData",
+    "m_ObjectId": "6bf8985043a745ea8496a0560b8aa51c",
+    "m_Properties": [
+        {
+            "m_Id": "fc05a49c99ab40ab805df901df474388"
+        },
+        {
+            "m_Id": "1e471879b5e646d6bba702d01bfb8fd7"
+        },
+        {
+            "m_Id": "161933be7bd84f57a431994f53bd655f"
+        },
+        {
+            "m_Id": "de2b85a7a88c4785b830048561c87561"
+        }
+    ],
+    "m_Keywords": [],
+    "m_Dropdowns": [],
+    "m_CategoryData": [
+        {
+            "m_Id": "564d2447ce48466da3d8b2b8fbb6f1d4"
+        }
+    ],
+    "m_Nodes": [
+        {
+            "m_Id": "bd4f463557eb4a72babaf428c6ad0c72"
+        },
+        {
+            "m_Id": "7f5220fee69742889cec41e83ac018c7"
+        },
+        {
+            "m_Id": "50d4a5f21176453aa9095c3fdabb0878"
+        },
+        {
+            "m_Id": "7eff7a183b014e5d95c085e0d1ddf6b7"
+        },
+        {
+            "m_Id": "e1e85271f75a41c9b959cf0e021659cc"
+        },
+        {
+            "m_Id": "6da63028a34f4aa19c292d939cb08e1b"
+        },
+        {
+            "m_Id": "69ad155dda4540f8a11d7c524fb79905"
+        },
+        {
+            "m_Id": "fc90b5d976de42b993eef2ff7addd222"
+        },
+        {
+            "m_Id": "c421d03015a74629b6c0a3e077e57f11"
+        },
+        {
+            "m_Id": "08efb01f75c54f38bfc271b5e8f2c003"
+        },
+        {
+            "m_Id": "7c959aec7b9f41879eab854258a625cf"
+        },
+        {
+            "m_Id": "93d158222629425ea9e00c7aa96f1da1"
+        },
+        {
+            "m_Id": "97a88e5e41b94a85a6b7478c3decb804"
+        },
+        {
+            "m_Id": "8ea9907bfe5e45629aa67b013e5a19ea"
+        },
+        {
+            "m_Id": "8e7afd40392f4f05bfdf6c736ca9d16a"
+        },
+        {
+            "m_Id": "8ce1435c6eea43e589520082d9965857"
+        }
+    ],
+    "m_GroupDatas": [],
+    "m_StickyNoteDatas": [
+        {
+            "m_Id": "68e022f8f98e4bec9a4cd8ba25aee98e"
+        },
+        {
+            "m_Id": "5abe4a1da4e44c09b91eb97000eebc36"
+        },
+        {
+            "m_Id": "194b034b24b7412d9a7698ac29454d43"
+        }
+    ],
+    "m_Edges": [
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "08efb01f75c54f38bfc271b5e8f2c003"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "8ce1435c6eea43e589520082d9965857"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "69ad155dda4540f8a11d7c524fb79905"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "8ce1435c6eea43e589520082d9965857"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "69ad155dda4540f8a11d7c524fb79905"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "e1e85271f75a41c9b959cf0e021659cc"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "7c959aec7b9f41879eab854258a625cf"
+                },
+                "m_SlotId": 4
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "6da63028a34f4aa19c292d939cb08e1b"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "8ce1435c6eea43e589520082d9965857"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "97a88e5e41b94a85a6b7478c3decb804"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "8e7afd40392f4f05bfdf6c736ca9d16a"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "e1e85271f75a41c9b959cf0e021659cc"
+                },
+                "m_SlotId": 7
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "8ea9907bfe5e45629aa67b013e5a19ea"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "e1e85271f75a41c9b959cf0e021659cc"
+                },
+                "m_SlotId": 3
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "93d158222629425ea9e00c7aa96f1da1"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "97a88e5e41b94a85a6b7478c3decb804"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "97a88e5e41b94a85a6b7478c3decb804"
+                },
+                "m_SlotId": 2
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "bd4f463557eb4a72babaf428c6ad0c72"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "c421d03015a74629b6c0a3e077e57f11"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "e1e85271f75a41c9b959cf0e021659cc"
+                },
+                "m_SlotId": 4
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "e1e85271f75a41c9b959cf0e021659cc"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "7c959aec7b9f41879eab854258a625cf"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "e1e85271f75a41c9b959cf0e021659cc"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "7eff7a183b014e5d95c085e0d1ddf6b7"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "fc90b5d976de42b993eef2ff7addd222"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "e1e85271f75a41c9b959cf0e021659cc"
+                },
+                "m_SlotId": 2
+            }
+        }
+    ],
+    "m_VertexContext": {
+        "m_Position": {
+            "x": 0.0,
+            "y": 0.0
+        },
+        "m_Blocks": [
+            {
+                "m_Id": "bd4f463557eb4a72babaf428c6ad0c72"
+            },
+            {
+                "m_Id": "7f5220fee69742889cec41e83ac018c7"
+            },
+            {
+                "m_Id": "50d4a5f21176453aa9095c3fdabb0878"
+            }
+        ]
+    },
+    "m_FragmentContext": {
+        "m_Position": {
+            "x": 0.0,
+            "y": 200.0
+        },
+        "m_Blocks": [
+            {
+                "m_Id": "7eff7a183b014e5d95c085e0d1ddf6b7"
+            },
+            {
+                "m_Id": "6da63028a34f4aa19c292d939cb08e1b"
+            }
+        ]
+    },
+    "m_PreviewData": {
+        "serializedMesh": {
+            "m_SerializedMesh": "{\"mesh\":{\"instanceID\":0}}",
+            "m_Guid": ""
+        },
+        "preventRotation": false
+    },
+    "m_Path": "MMD Collection/URP",
+    "m_GraphPrecision": 1,
+    "m_PreviewMode": 2,
+    "m_OutputNode": {
+        "m_Id": ""
+    },
+    "m_SubDatas": [],
+    "m_ActiveTargets": [
+        {
+            "m_Id": "e0d5f43b8bef44b7ae52ebdd6603452c"
+        }
+    ]
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
+    "m_ObjectId": "059bb5070eed449d8f6a09ccff161277",
+    "m_Id": 1,
+    "m_DisplayName": "B",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "B",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "e00": 2.0,
+        "e01": 2.0,
+        "e02": 2.0,
+        "e03": 2.0,
+        "e10": 2.0,
+        "e11": 2.0,
+        "e12": 2.0,
+        "e13": 2.0,
+        "e20": 2.0,
+        "e21": 2.0,
+        "e22": 2.0,
+        "e23": 2.0,
+        "e30": 2.0,
+        "e31": 2.0,
+        "e32": 2.0,
+        "e33": 2.0
+    },
+    "m_DefaultValue": {
+        "e00": 1.0,
+        "e01": 0.0,
+        "e02": 0.0,
+        "e03": 0.0,
+        "e10": 0.0,
+        "e11": 1.0,
+        "e12": 0.0,
+        "e13": 0.0,
+        "e20": 0.0,
+        "e21": 0.0,
+        "e22": 1.0,
+        "e23": 0.0,
+        "e30": 0.0,
+        "e31": 0.0,
+        "e32": 0.0,
+        "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "08efb01f75c54f38bfc271b5e8f2c003",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -790.4000854492188,
+            "y": -47.199989318847659,
+            "width": 97.60009765625,
+            "height": 33.599998474121097
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "57a0f6e1c4284985936b1ab1a169686a"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "161933be7bd84f57a431994f53bd655f"
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "09d49340e06143b1aa0e8a87d08b70d6",
+    "m_Id": 3,
+    "m_DisplayName": "outlineLayers",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "outlineLayers",
+    "m_StageCapability": 3,
+    "m_Value": 4.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": [],
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "161933be7bd84f57a431994f53bd655f",
+    "m_Guid": {
+        "m_GuidSerialized": "11810ba1-c98f-4d89-9102-632d07437014"
+    },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
+    "m_Name": "Size",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Size",
+    "m_DefaultReferenceName": "_Size",
+    "m_OverrideReferenceName": "_OutlineSize",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
+    "m_Value": 0.0,
+    "m_FloatType": 0,
+    "m_LiteralFloatMode": false,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "m_SliderType": 0,
+    "m_SliderPower": 3.0,
+    "m_EnumType": 0,
+    "m_CSharpEnumString": "",
+    "m_EnumNames": [
+        "Default"
+    ],
+    "m_EnumValues": [
+        0
+    ]
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "194b034b24b7412d9a7698ac29454d43",
+    "m_Title": "Base Code",
+    "m_Content": "// Shader definition, specifying a name for the shader.\r\nShader \"MMD Collection/URP/MMD - Multiple Outline (Code)\"\r\n{\r\n    Properties\r\n    {\r\n        // Warning: URP has limitations for this shader.\r\n        [Header(Warning Shader doesnt work in URP because URP )]\r\n        [Header(only draws the pass if it has a different LightMode )]\r\n        [Header(than the other and URP only has two modes.)]\r\n        [Header(_)]\r\n\r\n        [Enum(4 Layers,0,8 Layers,1)]_OutlineLayers(\"Outline Layers\", Float) = 0 // Outline layers property, allowing for either 4 or 8 layers.\r\n        _OutlineColor(\"Color\", Color) = (0,0,0,1) // Outline color setting.\r\n        _OutlineSize(\"Size\", Float) = 0 // Size of the outline.\r\n    }\r\n    SubShader // Begin the subshader block.\r\n    {\r\n        // Define rendering order and transparency settings.\r\n        Tags { \"RenderType\" = \"Overlay\" \"Queue\"=\"Transparent\" }\r\n        LOD 200 // Level of detail for the shader.\r\n\r\n        // First rendering pass for an outline layer.\r\n        Pass\r\n        {\r\n            Name \"Outline T1\" // Pass name.\r\n\r\n            //Tags { \"LightMode\"=\"???\" } // Placeholder, defining light mode can be important in URP.\r\n\r\n            Cull Front // Render only front-facing polygons.\r\n            ZWrite Off // Disable depth writing.\r\n            ZTest LEqual // Only draw if the current fragment depth is less than or equal to the existing depth.\r\n            Blend SrcAlpha OneMinusSrcAlpha // Alpha blending for transparency.\r\n            ColorMask RGBA // Output all color channels.\r\n\r\n            CGPROGRAM // Begin Cg shader program.\r\n            #pragma vertex vert // Define the vertex function.\r\n            #pragma fragment frag // Define the fragment function.\r\n            #include \"UnityCG.cginc\" // Include Unity helper functions.\r\n\r\n            // Define input data from the application.\r\n            struct appdata\r\n            {\r\n                float4 vertex : POSITION; // Vertex position.\r\n                float3 normal : NORMAL; // Normal vector.\r\n            };\r\n\r\n            // Define output data for the vertex function.\r\n            struct v2f\r\n            {\r\n                float4 pos : POSITION; // Final screen position.\r\n                float4 color : COLOR; // Color, including alpha.\r\n            };\r\n\r\n            // Define uniform variables for edge size, color, and layers.\r\n            uniform float _OutlineSize;\r\n            uniform float4 _OutlineColor;\r\n            uniform float _OutlineLayers;\r\n\r\n            // Vertex function, computing outline offset and alpha based on view angle.\r\n            v2f vert(appdata v)\r\n            {\r\n                v2f o; // Output structure for vertex shader.\r\n                o.color = _OutlineColor; // Set the outline color from the property.\r\n                half3 viewDir = normalize((half3) WorldSpaceViewDir(v.vertex)); // Compute view direction.\r\n                half r = saturate(dot(-viewDir, mul((float3x3) unity_ObjectToWorld, SCALED_NORMAL))); // Determine intensity based on view direction and normal.\r\n\r\n                // Set scale based on the number of outline layers.\r\n                float vertexScale = (_OutlineSize * (4.0 / 4.0));\r\n                float alphaScale = (1.0 / 4.0);\r\n\r\n                if (_OutlineLayers == 1)\r\n                {\r\n                    vertexScale = (_OutlineSize * (8.0 / 8.0));\r\n                    alphaScale = (1.0 / 8.0);\r\n                }\r\n\r\n                o.pos = UnityObjectToClipPos(v.vertex + v.normal * vertexScale); // Offset the vertex position outward to create an outline effect.\r\n                o.color.a *= r * alphaScale; // Modify alpha based on outline intensity.\r\n\r\n                return o; // Return the modified output.\r\n            }\r\n\r\n            // Fragment shader function, returns the color.\r\n            half4 frag(v2f i) : SV_Target\r\n            {\r\n                return i.color;\r\n            }\r\n            ENDCG // End Cg shader program.\r\n        }\r\n\r\n        Pass\r\n        {\r\n            Name \"Outline T2\"\r\n\r\n            //Tags { \"LightMode\"=\"???\" }\r\n\r\n            Cull Front\r\n            ZWrite Off\r\n            ZTest LEqual\r\n            Blend SrcAlpha OneMinusSrcAlpha\r\n            ColorMask RGBA\r\n\r\n            CGPROGRAM\r\n            #pragma vertex vert\r\n            #pragma fragment frag\r\n            #include \"UnityCG.cginc\"\r\n\r\n            struct appdata\r\n            {\r\n                float4 vertex : POSITION;\r\n                float3 normal : NORMAL;\r\n            };\r\n\r\n            struct v2f\r\n            {\r\n                float4 pos : POSITION;\r\n                float4 color : COLOR;\r\n            };\r\n\r\n            uniform float _OutlineSize;\r\n            uniform float4 _OutlineColor;\r\n            uniform float _OutlineLayers;\r\n\r\n            v2f vert(appdata v)\r\n            {\r\n                v2f o;\r\n                o.color = _OutlineColor;\r\n                half3 viewDir = normalize((half3) WorldSpaceViewDir(v.vertex));\r\n                half r = saturate(dot(-viewDir, mul((float3x3) unity_ObjectToWorld, SCALED_NORMAL)));\r\n\r\n                float vertexScale = (_OutlineSize * (3.0 / 4.0));\r\n                float alphaScale = (2.0 / 4.0);\r\n\r\n                if (_OutlineLayers == 1)\r\n                {\r\n                    vertexScale = (_OutlineSize * (7.0 / 8.0));\r\n                    alphaScale = (2.0 / 8.0);\r\n                }\r\n\r\n                o.pos = UnityObjectToClipPos(v.vertex + v.normal * vertexScale);\r\n                o.color.a *= r * alphaScale;\r\n\r\n                return o;\r\n            }\r\n\r\n            half4 frag(v2f i) : SV_Target\r\n            {\r\n                return i.color;\r\n            }\r\n            ENDCG\r\n        }\r\n\r\n        Pass\r\n        {\r\n            Name \"Outline T3\"\r\n\r\n            //Tags { \"LightMode\"=\"???\" }\r\n\r\n            Cull Front\r\n            ZWrite Off\r\n            ZTest LEqual\r\n            Blend SrcAlpha OneMinusSrcAlpha\r\n            ColorMask RGBA\r\n\r\n            CGPROGRAM\r\n            #pragma vertex vert\r\n            #pragma fragment frag\r\n            #include \"UnityCG.cginc\"\r\n\r\n            struct appdata\r\n            {\r\n                float4 vertex : POSITION;\r\n                float3 normal : NORMAL;\r\n            };\r\n\r\n            struct v2f\r\n            {\r\n                float4 pos : POSITION;\r\n                float4 color : COLOR;\r\n            };\r\n\r\n            uniform float _OutlineSize;\r\n            uniform float4 _OutlineColor;\r\n            uniform float _OutlineLayers;\r\n\r\n            v2f vert(appdata v)\r\n            {\r\n                v2f o;\r\n                o.color = _OutlineColor;\r\n                half3 viewDir = normalize((half3) WorldSpaceViewDir(v.vertex));\r\n                half r = saturate(dot(-viewDir, mul((float3x3) unity_ObjectToWorld, SCALED_NORMAL)));\r\n\r\n                float vertexScale = (_OutlineSize * (2.0 / 4.0));\r\n                float alphaScale = (3.0 / 4.0);\r\n\r\n                if (_OutlineLayers == 1)\r\n                {\r\n                    vertexScale = (_OutlineSize * (6.0 / 8.0));\r\n                    alphaScale = (3.0 / 8.0);\r\n                }\r\n\r\n                o.pos = UnityObjectToClipPos(v.vertex + v.normal * vertexScale);\r\n                o.color.a *= r * alphaScale;\r\n\r\n                return o;\r\n            }\r\n\r\n            half4 frag(v2f i) : SV_Target\r\n            {\r\n                return i.color;\r\n            }\r\n            ENDCG\r\n        }\r\n\r\n        Pass\r\n        {\r\n            Name \"Outline T4\"\r\n\r\n            //Tags { \"LightMode\"=\"???\" }\r\n\r\n            Cull Front\r\n            ZWrite Off\r\n            ZTest LEqual\r\n            Blend SrcAlpha OneMinusSrcAlpha\r\n            ColorMask RGBA\r\n\r\n            CGPROGRAM\r\n            #pragma vertex vert\r\n            #pragma fragment frag\r\n            #include \"UnityCG.cginc\"\r\n\r\n            struct appdata\r\n            {\r\n                float4 vertex : POSITION;\r\n                float3 normal : NORMAL;\r\n            };\r\n\r\n            struct v2f\r\n            {\r\n                float4 pos : POSITION;\r\n                float4 color : COLOR;\r\n            };\r\n\r\n            uniform float _OutlineSize;\r\n            uniform float4 _OutlineColor;\r\n            uniform float _OutlineLayers;\r\n\r\n            v2f vert(appdata v)\r\n            {\r\n                v2f o;\r\n                o.color = _OutlineColor;\r\n                half3 viewDir = normalize((half3) WorldSpaceViewDir(v.vertex));\r\n                half r = saturate(dot(-viewDir, mul((float3x3) unity_ObjectToWorld, SCALED_NORMAL)));\r\n\r\n                float vertexScale = (_OutlineSize * (1.0 / 4.0));\r\n                float alphaScale = (4.0 / 4.0);\r\n\r\n                if (_OutlineLayers == 1)\r\n                {\r\n                    vertexScale = (_OutlineSize * (5.0 / 8.0));\r\n                    alphaScale = (4.0 / 8.0);\r\n                }\r\n\r\n                o.pos = UnityObjectToClipPos(v.vertex + v.normal * vertexScale);\r\n                o.color.a *= r * alphaScale;\r\n\r\n                return o;\r\n            }\r\n\r\n            half4 frag(v2f i) : SV_Target\r\n            {\r\n                return i.color;\r\n            }\r\n            ENDCG\r\n        }\r\n\r\n        Pass\r\n        {\r\n            Name \"Outline T5\" // Pass name.\r\n\r\n            //Tags { \"LightMode\"=\"???\" } // Placeholder, defining light mode can be important in URP.\r\n\r\n            Cull Front // Render only front-facing polygons.\r\n            ZWrite Off // Disable depth writing.\r\n            ZTest LEqual // Only draw if the current fragment depth is less than or equal to the existing depth.\r\n            Blend SrcAlpha OneMinusSrcAlpha // Alpha blending for transparency.\r\n            ColorMask RGBA // Output all color channels.\r\n\r\n            CGPROGRAM // Begin Cg shader program.\r\n            #pragma vertex vert // Define the vertex function.\r\n            #pragma fragment frag // Define the fragment function.\r\n            #include \"UnityCG.cginc\" // Include Unity helper functions.\r\n\r\n            // Define input data from the application.\r\n            struct appdata\r\n            {\r\n                float4 vertex : POSITION; // Vertex position.\r\n                float3 normal : NORMAL; // Normal vector.\r\n            };\r\n\r\n            // Define output data for the vertex function.\r\n            struct v2f\r\n            {\r\n                float4 pos : POSITION; // Final screen position.\r\n                float4 color : COLOR; // Color, including alpha.\r\n            };\r\n\r\n            // Define uniform variables for edge size, color, and layers.\r\n            uniform float _OutlineSize;\r\n            uniform float4 _OutlineColor;\r\n            uniform float _OutlineLayers;\r\n\r\n            // Vertex function, computing outline offset and alpha based on view angle.\r\n            v2f vert(appdata v)\r\n            {\r\n                v2f o; // Output structure for vertex shader.\r\n                \r\n                // If _OutlineLayers is set to 0, skip rendering this pass.\r\n                if (_OutlineLayers == 0)\r\n                {\r\n                    o.color = 0; // Set color to zero.\r\n                    o.pos = 0; // Set position to zero.\r\n                    return o; // Return immediately to skip this outline layer.\r\n                }\r\n\r\n                o.color = _OutlineColor; // Set the outline color from the property.\r\n                half3 viewDir = normalize((half3) WorldSpaceViewDir(v.vertex)); // Compute view direction.\r\n                half r = saturate(dot(-viewDir, mul((float3x3) unity_ObjectToWorld, SCALED_NORMAL))); // Determine intensity based on view direction and normal.\r\n\r\n                o.pos = UnityObjectToClipPos(v.vertex + v.normal * (_OutlineSize * (4.0 / 8.0))); // Offset the vertex position outward based on _OutlineSize, specific to this layer.\r\n                o.color.a *= r * (5.0 / 8.0); // Adjust the outline alpha based on view intensity and layer-specific scale.\r\n\r\n                return o; // Return the modified output.\r\n            }\r\n\r\n            // Fragment shader function, returns the color.\r\n            half4 frag(v2f i) : SV_Target\r\n            {\r\n                return i.color;\r\n            }\r\n            ENDCG // End Cg shader program.\r\n        }\r\n\r\n        Pass\r\n        {\r\n            Name \"Outline T6\"\r\n\r\n            //Tags { \"LightMode\"=\"???\" }\r\n\r\n            Cull Front\r\n            ZWrite Off\r\n            ZTest LEqual\r\n            Blend SrcAlpha OneMinusSrcAlpha\r\n            ColorMask RGBA\r\n\r\n            CGPROGRAM\r\n            #pragma vertex vert\r\n            #pragma fragment frag\r\n            #include \"UnityCG.cginc\"\r\n\r\n            struct appdata\r\n            {\r\n                float4 vertex : POSITION;\r\n                float3 normal : NORMAL;\r\n            };\r\n\r\n            struct v2f\r\n            {\r\n                float4 pos : POSITION;\r\n                float4 color : COLOR;\r\n            };\r\n\r\n            uniform float _OutlineSize;\r\n            uniform float4 _OutlineColor;\r\n            uniform float _OutlineLayers;\r\n\r\n            v2f vert(appdata v)\r\n            {\r\n                v2f o;\r\n                \r\n                if (_OutlineLayers == 0)\r\n                {\r\n                    o.color = 0;\r\n                    o.pos = 0;\r\n                    return o;\r\n                }\r\n\r\n                o.color = _OutlineColor;\r\n                half3 viewDir = normalize((half3) WorldSpaceViewDir(v.vertex));\r\n                half r = saturate(dot(-viewDir, mul((float3x3) unity_ObjectToWorld, SCALED_NORMAL)));\r\n\r\n                o.pos = UnityObjectToClipPos(v.vertex + v.normal * (_OutlineSize * (3.0 / 8.0)));\r\n                o.color.a *= r * (6.0 / 8.0);\r\n\r\n                return o;\r\n            }\r\n\r\n            half4 frag(v2f i) : SV_Target\r\n            {\r\n                return i.color;\r\n            }\r\n            ENDCG\r\n        }\r\n\r\n        Pass\r\n        {\r\n            Name \"Outline T7\"\r\n\r\n            //Tags { \"LightMode\"=\"???\" }\r\n\r\n            Cull Front\r\n            ZWrite Off\r\n            ZTest LEqual\r\n            Blend SrcAlpha OneMinusSrcAlpha\r\n            ColorMask RGBA\r\n\r\n            CGPROGRAM\r\n            #pragma vertex vert\r\n            #pragma fragment frag\r\n            #include \"UnityCG.cginc\"\r\n\r\n            struct appdata\r\n            {\r\n                float4 vertex : POSITION;\r\n                float3 normal : NORMAL;\r\n            };\r\n\r\n            struct v2f\r\n            {\r\n                float4 pos : POSITION;\r\n                float4 color : COLOR;\r\n            };\r\n\r\n            uniform float _OutlineSize;\r\n            uniform float4 _OutlineColor;\r\n            uniform float _OutlineLayers;\r\n\r\n            v2f vert(appdata v)\r\n            {\r\n                v2f o;\r\n                \r\n                if (_OutlineLayers == 0)\r\n                {\r\n                    o.color = 0;\r\n                    o.pos = 0;\r\n                    return o;\r\n                }\r\n\r\n                o.color = _OutlineColor;\r\n                half3 viewDir = normalize((half3) WorldSpaceViewDir(v.vertex));\r\n                half r = saturate(dot(-viewDir, mul((float3x3) unity_ObjectToWorld, SCALED_NORMAL)));\r\n\r\n                o.pos = UnityObjectToClipPos(v.vertex + v.normal * (_OutlineSize * (2.0 / 8.0)));\r\n                o.color.a *= r * (7.0 / 8.0);\r\n\r\n                return o;\r\n            }\r\n\r\n            half4 frag(v2f i) : SV_Target\r\n            {\r\n                return i.color;\r\n            }\r\n            ENDCG\r\n        }\r\n\r\n        Pass\r\n        {\r\n            Name \"Outline T8\"\r\n\r\n            //Tags { \"LightMode\"=\"???\" }\r\n\r\n            Cull Front\r\n            ZWrite Off\r\n            ZTest LEqual\r\n            Blend SrcAlpha OneMinusSrcAlpha\r\n            ColorMask RGBA\r\n\r\n            CGPROGRAM\r\n            #pragma vertex vert\r\n            #pragma fragment frag\r\n            #include \"UnityCG.cginc\"\r\n\r\n            struct appdata\r\n            {\r\n                float4 vertex : POSITION;\r\n                float3 normal : NORMAL;\r\n            };\r\n\r\n            struct v2f\r\n            {\r\n                float4 pos : POSITION;\r\n                float4 color : COLOR;\r\n            };\r\n\r\n            uniform float _OutlineSize;\r\n            uniform float4 _OutlineColor;\r\n            uniform float _OutlineLayers;\r\n\r\n            v2f vert(appdata v)\r\n            {\r\n                v2f o;\r\n                \r\n                if (_OutlineLayers == 0)\r\n                {\r\n                    o.color = 0;\r\n                    o.pos = 0;\r\n                    return o;\r\n                }\r\n\r\n                o.color = _OutlineColor;\r\n                half3 viewDir = normalize((half3) WorldSpaceViewDir(v.vertex));\r\n                half r = saturate(dot(-viewDir, mul((float3x3) unity_ObjectToWorld, SCALED_NORMAL)));\r\n\r\n                o.pos = UnityObjectToClipPos(v.vertex + v.normal * (_OutlineSize * (1.0 / 8.0)));\r\n                o.color.a *= r * (8.0 / 8.0);\r\n\r\n                return o;\r\n            }\r\n\r\n            half4 frag(v2f i) : SV_Target\r\n            {\r\n                return i.color;\r\n            }\r\n            ENDCG\r\n        }\r\n    }\r\n\r\n    Fallback \"Universal Render Pipeline/Unlit\"\r\n}",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 628.0,
+        "y": 4.0,
+        "width": 630.4000244140625,
+        "height": 7148.7998046875
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
+}
+
+{
+    "m_SGVersion": 2,
+    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalUnlitSubTarget",
+    "m_ObjectId": "1becbd52114041fd8d2f1bd7010dd2f7",
+    "m_KeepLightingVariants": false,
+    "m_DefaultDecalBlending": true,
+    "m_DefaultSSAO": true
+}
+
+{
+    "m_SGVersion": 3,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
+    "m_ObjectId": "1e471879b5e646d6bba702d01bfb8fd7",
+    "m_Guid": {
+        "m_GuidSerialized": "edc7aa61-8913-44c7-9646-d1c2c694267a"
+    },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
+    "m_Name": "Color",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Color",
+    "m_DefaultReferenceName": "_Color",
+    "m_OverrideReferenceName": "_OutlineColor",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
+    "m_Value": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 1.0
+    },
+    "isMainColor": false,
+    "m_ColorMode": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "204643b1f6e64fc281c85649614c36b1",
+    "m_Id": 0,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "2bc97f13aaf44000a767228ba351d05b",
+    "m_Id": 1,
+    "m_DisplayName": "B",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "B",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "39ce0fff62c54a048a6d130882db7f15",
+    "m_Id": 4,
+    "m_DisplayName": "outlineColor",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "outlineColor",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.07999999821186066,
+        "y": 0.07999999821186066,
+        "z": 0.07999999821186066,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "3b5970e641b24467b1c0c5079c5f67f7",
+    "m_Id": 1,
+    "m_DisplayName": "R",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "R",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": [],
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "3fb83dbe70a248008b4e7ffa79f07755",
+    "m_Id": 2,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
+    "m_ObjectId": "407ab0fc9184436db86755400fc6332a",
+    "m_Id": 0,
+    "m_DisplayName": "A",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "A",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "e00": 0.0,
+        "e01": 0.0,
+        "e02": 0.0,
+        "e03": 0.0,
+        "e10": 0.0,
+        "e11": 0.0,
+        "e12": 0.0,
+        "e13": 0.0,
+        "e20": 0.0,
+        "e21": 0.0,
+        "e22": 0.0,
+        "e23": 0.0,
+        "e30": 0.0,
+        "e31": 0.0,
+        "e32": 0.0,
+        "e33": 0.0
+    },
+    "m_DefaultValue": {
+        "e00": 1.0,
+        "e01": 0.0,
+        "e02": 0.0,
+        "e03": 0.0,
+        "e10": 0.0,
+        "e11": 1.0,
+        "e12": 0.0,
+        "e13": 0.0,
+        "e20": 0.0,
+        "e21": 0.0,
+        "e22": 1.0,
+        "e23": 0.0,
+        "e30": 0.0,
+        "e31": 0.0,
+        "e32": 0.0,
+        "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "49081b443966424ca9a0ca4362c94917",
+    "m_Id": 4,
+    "m_DisplayName": "A",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "A",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": [],
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "4925ff429097457ea8c2835b15e14a1c",
+    "m_Id": 7,
+    "m_DisplayName": "useStepped",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "useStepped",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": [],
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "50d4a5f21176453aa9095c3fdabb0878",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "VertexDescription.Tangent",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "b9a14aa6eb504baf9ad764df16de2d49"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "VertexDescription.Tangent"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "51b157193b044a0b942ba6358d025e37",
+    "m_Id": 0,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 1.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "564d2447ce48466da3d8b2b8fbb6f1d4",
+    "m_Name": "",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "fc05a49c99ab40ab805df901df474388"
+        },
+        {
+            "m_Id": "1e471879b5e646d6bba702d01bfb8fd7"
+        },
+        {
+            "m_Id": "161933be7bd84f57a431994f53bd655f"
+        },
+        {
+            "m_Id": "de2b85a7a88c4785b830048561c87561"
+        }
+    ]
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "57a0f6e1c4284985936b1ab1a169686a",
+    "m_Id": 0,
+    "m_DisplayName": "Size",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": [],
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.NormalMaterialSlot",
+    "m_ObjectId": "57e1490ff9624ac99a470f6e29e2d83e",
+    "m_Id": 0,
+    "m_DisplayName": "Normal",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Normal",
+    "m_StageCapability": 1,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": [],
+    "m_Space": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "5abe4a1da4e44c09b91eb97000eebc36",
+    "m_Title": "MMD Procedural Multi Shell Outline",
+    "m_Content": "Simulates the original MMD multi-pass outline shader behavior inside a\r\nsingle Shader Graph Custom Function.\r\n\r\nThis function reproduces:\r\n- Layered shell alpha accumulation.\r\n- Progressive outline opacity buildup.\r\n- Optional stepped shell transitions.\r\n- 4 layer and 8 layer outline modes.\r\n\r\nIntended for:\r\n- Unity 6 URP.\r\n- Shader Graph Custom Function nodes.\r\n- Single pass procedural outline rendering.\r\n\r\nNotes:\r\n- Vertex extrusion must be handled externally in Shader Graph.\r\n- This function only computes the final outline color and alpha.\r\n- Alpha accumulation uses layered transparency blending similar to the\r\n  original multi-pass shader.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": -647.2000122070313,
+        "y": 608.0,
+        "width": 391.20001220703127,
+        "height": 325.5999755859375
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
+    "m_ObjectId": "68e022f8f98e4bec9a4cd8ba25aee98e",
+    "m_Title": "⚠️ WARNING ⚠️",
+    "m_Content": "This shader is a procedural approximation of the original multi-pass MMD outline shader.\n\nUnlike the original version that supported hard edges,\nthis implementation requires smooth normals to produce proper results.\n\nAccurate reproduction of the original effect would require true multi-pass support in URP.",
+    "m_TextSize": 0,
+    "m_Theme": 0,
+    "m_Position": {
+        "serializedVersion": "2",
+        "x": 243.1999969482422,
+        "y": 4.799999237060547,
+        "width": 350.39996337890627,
+        "height": 200.0
+    },
+    "m_Group": {
+        "m_Id": ""
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.NormalVectorNode",
+    "m_ObjectId": "69ad155dda4540f8a11d7c524fb79905",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Normal Vector",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1093.599853515625,
+            "y": -112.0,
+            "width": 208.0,
+            "height": 312.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "51b157193b044a0b942ba6358d025e37"
+        }
+    ],
+    "synonyms": [
+        "surface direction"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 2,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Space": 2
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "6da63028a34f4aa19c292d939cb08e1b",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.Alpha",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "9f9e1be2cbb9460f8e96dab522bed2ef"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.Alpha"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "786c717200d6493cb12fd4d86c170e97",
+    "m_Id": 2,
+    "m_DisplayName": "G",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "G",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": [],
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.SplitNode",
+    "m_ObjectId": "7c959aec7b9f41879eab854258a625cf",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Split",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -320.79998779296877,
+            "y": 434.4000244140625,
+            "width": 119.20001220703125,
+            "height": 148.79998779296876
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "9120f6642aaa4889931f3010383ad1f0"
+        },
+        {
+            "m_Id": "3b5970e641b24467b1c0c5079c5f67f7"
+        },
+        {
+            "m_Id": "786c717200d6493cb12fd4d86c170e97"
+        },
+        {
+            "m_Id": "cd25fc7826f4409baea1452395d6ffee"
+        },
+        {
+            "m_Id": "49081b443966424ca9a0ca4362c94917"
+        }
+    ],
+    "synonyms": [
+        "separate"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "7cc7543664e34fa29eb253617cf8b0cb",
+    "m_Id": 2,
+    "m_DisplayName": "viewDirectionWS",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "viewDirectionWS",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "7eff7a183b014e5d95c085e0d1ddf6b7",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.BaseColor",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "88b615bd58254daa8f9f6056749090fb"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.BaseColor"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "7f5220fee69742889cec41e83ac018c7",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "VertexDescription.Normal",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "57e1490ff9624ac99a470f6e29e2d83e"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "VertexDescription.Normal"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
+    "m_ObjectId": "846a07d2dde14d938e2a2ca32a8646a7",
+    "m_Id": 2,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "e00": 0.0,
+        "e01": 0.0,
+        "e02": 0.0,
+        "e03": 0.0,
+        "e10": 0.0,
+        "e11": 0.0,
+        "e12": 0.0,
+        "e13": 0.0,
+        "e20": 0.0,
+        "e21": 0.0,
+        "e22": 0.0,
+        "e23": 0.0,
+        "e30": 0.0,
+        "e31": 0.0,
+        "e32": 0.0,
+        "e33": 0.0
+    },
+    "m_DefaultValue": {
+        "e00": 1.0,
+        "e01": 0.0,
+        "e02": 0.0,
+        "e03": 0.0,
+        "e10": 0.0,
+        "e11": 1.0,
+        "e12": 0.0,
+        "e13": 0.0,
+        "e20": 0.0,
+        "e21": 0.0,
+        "e22": 1.0,
+        "e23": 0.0,
+        "e30": 0.0,
+        "e31": 0.0,
+        "e32": 0.0,
+        "e33": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.ColorRGBMaterialSlot",
+    "m_ObjectId": "88b615bd58254daa8f9f6056749090fb",
+    "m_Id": 0,
+    "m_DisplayName": "Base Color",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "BaseColor",
+    "m_StageCapability": 2,
+    "m_Value": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+    },
+    "m_DefaultValue": {
+        "x": 0.5,
+        "y": 0.5,
+        "z": 0.5
+    },
+    "m_Labels": [],
+    "m_ColorMode": 0,
+    "m_DefaultColor": {
+        "r": 0.5,
+        "g": 0.5,
+        "b": 0.5,
+        "a": 1.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
+    "m_ObjectId": "8ce1435c6eea43e589520082d9965857",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Multiply",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -655.2000122070313,
+            "y": -111.99998474121094,
+            "width": 207.99996948242188,
+            "height": 301.6000061035156
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "407ab0fc9184436db86755400fc6332a"
+        },
+        {
+            "m_Id": "059bb5070eed449d8f6a09ccff161277"
+        },
+        {
+            "m_Id": "846a07d2dde14d938e2a2ca32a8646a7"
+        }
+    ],
+    "synonyms": [
+        "multiplication",
+        "times",
+        "x"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "8db0a616a6804ac2ac9b0fad0e93e343",
+    "m_Id": 0,
+    "m_DisplayName": "Outline Layers",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": [],
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "8e7afd40392f4f05bfdf6c736ca9d16a",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -862.39990234375,
+            "y": 387.9999694824219,
+            "width": 159.20001220703126,
+            "height": 33.5999755859375
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "ee984805a175451f91b4c6e03dafa112"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "de2b85a7a88c4785b830048561c87561"
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "8ea9907bfe5e45629aa67b013e5a19ea",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -853.599853515625,
+            "y": 320.800048828125,
+            "width": 149.5999755859375,
+            "height": 33.599884033203128
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "8db0a616a6804ac2ac9b0fad0e93e343"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "fc05a49c99ab40ab805df901df474388"
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "9120f6642aaa4889931f3010383ad1f0",
+    "m_Id": 0,
+    "m_DisplayName": "In",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "In",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.PositionNode",
+    "m_ObjectId": "93d158222629425ea9e00c7aa96f1da1",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Position",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -655.2000122070313,
+            "y": -454.4000549316406,
+            "width": 207.99996948242188,
+            "height": 312.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "204643b1f6e64fc281c85649614c36b1"
+        }
+    ],
+    "synonyms": [
+        "location"
+    ],
+    "m_Precision": 1,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 2,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Space": 0,
+    "m_PositionSource": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.AddNode",
+    "m_ObjectId": "97a88e5e41b94a85a6b7478c3decb804",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Add",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -320.8000183105469,
+            "y": -111.99999237060547,
+            "width": 208.00003051757813,
+            "height": 301.60003662109377
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "e0cb9f316fa04780ba75a2bbb1145c24"
+        },
+        {
+            "m_Id": "2bc97f13aaf44000a767228ba351d05b"
+        },
+        {
+            "m_Id": "3fb83dbe70a248008b4e7ffa79f07755"
+        }
+    ],
+    "synonyms": [
+        "addition",
+        "sum",
+        "plus"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "9f9e1be2cbb9460f8e96dab522bed2ef",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Alpha",
+    "m_StageCapability": 2,
+    "m_Value": 1.0,
+    "m_DefaultValue": 1.0,
+    "m_Labels": [],
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "a8bb63b326804c37bb9238d19eee6d6f",
+    "m_Id": 0,
+    "m_DisplayName": "Color",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "a954261ddc44424e875839f489e34dee",
+    "m_Id": 1,
+    "m_DisplayName": "normalWS",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "normalWS",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
+    "m_ObjectId": "acd98d37fe6446579d7e50cb744e006a",
+    "m_Id": 0,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.TangentMaterialSlot",
+    "m_ObjectId": "b9a14aa6eb504baf9ad764df16de2d49",
+    "m_Id": 0,
+    "m_DisplayName": "Tangent",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Tangent",
+    "m_StageCapability": 1,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": [],
+    "m_Space": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "bd4f463557eb4a72babaf428c6ad0c72",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "VertexDescription.Position",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "e6edac29288e405c9b262ab7b537d7fe"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "VertexDescription.Position"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "c421d03015a74629b6c0a3e077e57f11",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -807.9998168945313,
+            "y": 354.3999328613281,
+            "width": 104.7999267578125,
+            "height": 33.60003662109375
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "a8bb63b326804c37bb9238d19eee6d6f"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "1e471879b5e646d6bba702d01bfb8fd7"
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "c8ba1ba5781749f69d8c3e4e35874b5a",
+    "m_Id": 0,
+    "m_DisplayName": "Color",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Color",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "cd25fc7826f4409baea1452395d6ffee",
+    "m_Id": 3,
+    "m_DisplayName": "B",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "B",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": [],
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty",
+    "m_ObjectId": "de2b85a7a88c4785b830048561c87561",
+    "m_Guid": {
+        "m_GuidSerialized": "6c3bf874-970b-4649-9805-318407784f1f"
+    },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
+    "m_Name": "Stepped Layers",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Stepped Layers",
+    "m_DefaultReferenceName": "_Stepped_Layers",
+    "m_OverrideReferenceName": "_SteppedLayers",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
+    "m_Value": true
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "e0cb9f316fa04780ba75a2bbb1145c24",
+    "m_Id": 0,
+    "m_DisplayName": "A",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "A",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalTarget",
+    "m_ObjectId": "e0d5f43b8bef44b7ae52ebdd6603452c",
+    "m_Datas": [],
+    "m_ActiveSubTarget": {
+        "m_Id": "1becbd52114041fd8d2f1bd7010dd2f7"
+    },
+    "m_AllowMaterialOverride": false,
+    "m_SurfaceType": 1,
+    "m_ZTestMode": 4,
+    "m_ZWriteControl": 2,
+    "m_AlphaMode": 0,
+    "m_RenderFace": 2,
+    "m_AlphaClip": false,
+    "m_CastShadows": true,
+    "m_ReceiveShadows": true,
+    "m_DisableTint": false,
+    "m_Sort3DAs2DCompatible": false,
+    "m_AdditionalMotionVectorMode": 0,
+    "m_AlembicMotionVectors": false,
+    "m_SupportsLODCrossFade": false,
+    "m_CustomEditorGUI": "",
+    "m_SupportVFX": false
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.CustomFunctionNode",
+    "m_ObjectId": "e1e85271f75a41c9b959cf0e021659cc",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "ProceduralMultiShellOutline (Custom Function)",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -655.1998901367188,
+            "y": 199.99998474121095,
+            "width": 246.39999389648438,
+            "height": 373.59991455078127
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "a954261ddc44424e875839f489e34dee"
+        },
+        {
+            "m_Id": "7cc7543664e34fa29eb253617cf8b0cb"
+        },
+        {
+            "m_Id": "09d49340e06143b1aa0e8a87d08b70d6"
+        },
+        {
+            "m_Id": "39ce0fff62c54a048a6d130882db7f15"
+        },
+        {
+            "m_Id": "4925ff429097457ea8c2835b15e14a1c"
+        },
+        {
+            "m_Id": "c8ba1ba5781749f69d8c3e4e35874b5a"
+        }
+    ],
+    "synonyms": [
+        "code",
+        "HLSL"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SourceType": 1,
+    "m_FunctionName": "ProceduralMultiShellOutline",
+    "m_FunctionSource": "b137e659a6c74d9429e1c0b8b55c4125",
+    "m_FunctionSourceUsePragmas": true,
+    "m_FunctionBody": "// Normalize the surface normal.\r\nfloat3 N = normalize(normalWS);\r\n\r\n// Normalize the camera view direction.\r\nfloat3 V = normalize(viewDirectionWS);\r\n\r\n// Compute the facing ratio between the camera and surface.\r\n// \r\n// Result:\r\n// - 1.0 = surface directly facing the camera.\r\n// - 0.0 = surface perpendicular to the camera.\r\n// \r\n// This matches the original shader rim intensity behavior.\r\nfloat r = saturate(dot(V, N));\r\n\r\n// Select layer count.\r\n// \r\n// outlineLayers:\r\n// - 0 = 4 shell layers.\r\n// - 1 = 8 shell layers.\r\nint layers = (outlineLayers < 0.5) ? 4 : 8;\r\n\r\n// Stores the accumulated alpha result.\r\nfloat alphaSum = 0.0;\r\n\r\n// Simulate all shell passes procedurally.\r\n[loop]\r\nfor (int i = 1; i <= layers; i++)\r\n{\r\n    // Compute the alpha scale for this layer.\r\n    // \r\n    // Outer layers are weaker.\r\n    // Inner layers become progressively stronger.\r\n    // \r\n    // Examples for 4 layers:\r\n    // - 0.25\r\n    // - 0.50\r\n    // - 0.75\r\n    // - 1.00\r\n    float layerAlphaScale = (float)i / (float)layers;\r\n\r\n    // Default processed rim value.\r\n    float r_processed = r;\r\n\r\n    // Optional stepped shell simulation.\r\n    // \r\n    // This reproduces the original layered shell appearance where\r\n    // each shell activates at a different threshold instead of using\r\n    // a fully smooth gradient.\r\n    if (useStepped > 0.5)\r\n    {\r\n        // Compute activation threshold for this shell layer.\r\n        float threshold = (float)(i - 1) / (float)layers;\r\n\r\n        // Convert the smooth rim into a shell step.\r\n        // \r\n        // Result:\r\n        // - 0.0 = shell inactive.\r\n        // - 1.0 = shell active.\r\n        r_processed = step(threshold, r);\r\n    }\r\n\r\n    // Compute current layer alpha contribution.\r\n    float layerAlpha = r_processed * layerAlphaScale;\r\n\r\n    // Accumulate alpha using layered transparency blending.\r\n    // \r\n    // This simulates:\r\n    // Blend SrcAlpha OneMinusSrcAlpha\r\n    // \r\n    // Used by the original multi-pass MMD shader.\r\n    alphaSum = layerAlpha + alphaSum * (1.0 - layerAlpha);\r\n}\r\n\r\n// Output final outline color.\r\n// \r\n// Alpha is clamped to prevent overflow.\r\nColor = float4(outlineColor.rgb, saturate(alphaSum) * outlineColor.a);"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PositionMaterialSlot",
+    "m_ObjectId": "e6edac29288e405c9b262ab7b537d7fe",
+    "m_Id": 0,
+    "m_DisplayName": "Position",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Position",
+    "m_StageCapability": 1,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": [],
+    "m_Space": 0
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
+    "m_ObjectId": "ee984805a175451f91b4c6e03dafa112",
+    "m_Id": 0,
+    "m_DisplayName": "Stepped Layers",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": false,
+    "m_DefaultValue": false
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
+    "m_ObjectId": "fc05a49c99ab40ab805df901df474388",
+    "m_Guid": {
+        "m_GuidSerialized": "69408940-22ea-4a6e-af27-1c7d0e5fd6dd"
+    },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
+    "m_Name": "Outline Layers",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Outline Layers",
+    "m_DefaultReferenceName": "_Outline_Layers",
+    "m_OverrideReferenceName": "_OutlineLayers",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
+    "m_Value": 0.0,
+    "m_FloatType": 3,
+    "m_LiteralFloatMode": false,
+    "m_RangeValues": {
+        "x": 0.0,
+        "y": 1.0
+    },
+    "m_SliderType": 0,
+    "m_SliderPower": 3.0,
+    "m_EnumType": 0,
+    "m_CSharpEnumString": "",
+    "m_EnumNames": [
+        "4 Layers",
+        "8 Layers"
+    ],
+    "m_EnumValues": [
+        0,
+        1
+    ]
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ViewDirectionNode",
+    "m_ObjectId": "fc90b5d976de42b993eef2ff7addd222",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "View Direction",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1093.599853515625,
+            "y": 261.5999755859375,
+            "width": 208.0,
+            "height": 311.99993896484377
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "acd98d37fe6446579d7e50cb744e006a"
+        }
+    ],
+    "synonyms": [
+        "eye direction"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 2,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Space": 2
+}
+

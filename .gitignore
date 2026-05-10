@@ -71,10 +71,16 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Ignora a pasta Assets/Packages/
-/Assets/Packages/AmplifyShaderEditor
-/Assets/Packages/MMD4Mecanim
-/Assets/Editor
-/Assets/Packages/AmplifyShaderPack
-/Assets/Packages/MMD6UnityTool-master
-/Assets/Test2
+# Assets
+Assets/Editor
+Assets/Editor.meta
+Assets/Tests
+Assets/Tests.meta
+Assets/Packages/AmplifyShaderEditor
+Assets/AmplifyShaderEditor.meta
+Assets/Packages/AmplifyShaderPack
+Assets/AmplifyShaderPack.meta
+Assets/Packages/MMD4Mecanim
+Assets/MMD4Mecanim.meta
+Assets/Packages/MMD6UnityTool-master
+Assets/MMD6UnityTool-master.meta

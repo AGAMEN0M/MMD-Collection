@@ -11,5 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MMD Collection/Scenes/Samples Lightmap.unity
     guid: b09c92290e02a3f40bb629bc042f1238
-  m_configObjects: {}
-  m_UseUCBPForAssetBundles: 0
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 152e4007dbadf0545ba06b7edfe90a4c,
+      type: 2}
