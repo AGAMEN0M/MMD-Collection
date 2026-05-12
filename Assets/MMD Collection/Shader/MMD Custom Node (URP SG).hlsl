@@ -1,3 +1,32 @@
+// ============================================================================
+// MMD Custom Node (URP SG)
+// ----------------------------------------------------------------------------
+// Description:
+// Collection of custom Universal Render Pipeline lighting utility functions
+// used for MMD-style toon shading, lightmap sampling, shadow processing,
+// and additional light accumulation inside Shader Graph.
+//
+// Provides access to realtime lighting data, baked lightmaps, shadow masks,
+// spherical harmonics ambient lighting, and additional light evaluation.
+//
+// Usage:
+// Intended for Shader Graph Custom Function nodes to reproduce advanced
+// MMD-inspired lighting behavior with URP.
+//
+// Notes:
+// - Compatible with Universal Render Pipeline (URP).
+// - Supports Shader Graph preview mode.
+// - Supports realtime and baked lighting workflows.
+// - Includes directional light, shadow, lightmap, and additional light helpers.
+// - Supports shadow masks and dynamic lightmaps.
+// - Additional lights use Lambert diffuse lighting accumulation.
+// - Compatible with Forward+ / Cluster Light Loop rendering.
+// - Designed for stylized toon and anime shading workflows.
+//
+// Author: Lucas Gomes Cecchini
+// Pseudonym: AGAMENOM
+// ============================================================================
+
 // Function to compute spherical harmonics lighting based on the normal direction.
 void vLight_float(float3 normal, out float3 Output)
 {

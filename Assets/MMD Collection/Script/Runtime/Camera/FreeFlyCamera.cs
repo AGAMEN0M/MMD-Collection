@@ -24,7 +24,7 @@ using UnityEngine;
 namespace MMDCollection
 {
     [RequireComponent(typeof(Camera))]
-    [AddComponentMenu("MMD Collection/Camera/Free Fly Camera")]
+    [AddComponentMenu("Tools/MMD Collection/Camera/Free Fly Camera")]
     public class FreeFlyCamera : MonoBehaviour
     {
         #region === Camera Settings ===

@@ -22,7 +22,9 @@ namespace MMDCollection.Editor
     {
         #region === Cached Reflection ===
 
-        // Cached reference to ShaderUtil.GetShaderGlobalKeywords to avoid repeated reflection calls.
+        /// <summary>
+        /// Cached reference to ShaderUtil.GetShaderGlobalKeywords to avoid repeated reflection calls.
+        /// </summary>
         private static MethodInfo getShaderGlobalKeywordsMethod;
 
         #endregion
@@ -32,7 +34,7 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Cleans invalid properties and keywords from all selected materials.
         /// </summary>
-        [MenuItem("Assets/MMD Collection/Clean Invalid Material Properties", false, 2)]
+        [MenuItem("Assets/Tools/MMD Collection/Clean Invalid Material Properties")]
         public static void CleanMaterialProperties()
         {
             // Confirm with user before proceeding.
@@ -50,7 +52,7 @@ namespace MMDCollection.Editor
             {
                 if (selectedObject is Material material)
                 {
-                    Shader shader = material.shader;
+                    var shader = material.shader;
 
                     // Skip materials without a shader.
                     if (shader == null)
@@ -99,6 +101,8 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Removes invalid properties from a serialized property array based on valid property names.
         /// </summary>
+        /// <param name="properties">Serialized property array containing saved material properties.</param>
+        /// <param name="validProperties">Collection of valid shader property names used to validate entries.</param>
         private static void RemoveInvalidProperties(SerializedProperty properties, HashSet<string> validProperties)
         {
             if (properties == null) return;
@@ -116,6 +120,8 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Removes shader keywords from a material that are no longer valid according to its shader.
         /// </summary>
+        /// <param name="material">Material instance that will have invalid shader keywords removed.</param>
+        /// <param name="shader">Shader used as reference to validate supported keywords.</param>
         private static void CleanInvalidKeywords(Material material, Shader shader)
         {
             if (material == null || shader == null) return;

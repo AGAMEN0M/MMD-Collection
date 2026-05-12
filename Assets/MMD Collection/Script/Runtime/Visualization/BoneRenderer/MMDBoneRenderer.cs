@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace MMDCollection.BoneRenderer
+namespace MMDCollection
 {
     #region === Data Structures ===
 
@@ -35,7 +35,7 @@ namespace MMDCollection.BoneRenderer
     #endregion
 
     [ExecuteInEditMode]
-    [AddComponentMenu("MMD Collection/Tools/Visualization/Bone Renderer")]
+    [AddComponentMenu("Tools/MMD Collection/Visualization/Bone Renderer")]
     public class MMDBoneRenderer : MonoBehaviour
     {
     #if UNITY_EDITOR

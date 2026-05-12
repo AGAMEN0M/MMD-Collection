@@ -16,7 +16,7 @@ using UnityEditor;
 using UnityEngine;
 using System;
 
-namespace MMDCollection.BoneRenderer
+namespace MMDCollection
 {
     #region === class Definition ===
 

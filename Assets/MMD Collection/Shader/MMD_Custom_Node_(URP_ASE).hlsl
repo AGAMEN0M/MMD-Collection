@@ -1,3 +1,30 @@
+// ============================================================================
+// MMD Custom Node (URP_ASE)
+// ----------------------------------------------------------------------------
+// Description:
+// Collection of custom Universal Render Pipeline lighting utility functions
+// used for MMD-style toon shading, lightmap sampling, shadow processing,
+// and additional light evaluation inside Amplify Shader Editor.
+//
+// Provides access to realtime lighting data, baked lightmaps, shadow masks,
+// spherical harmonics ambient lighting, and additional light evaluation.
+//
+// Usage:
+// Intended for Amplify Shader Editor custom nodes to reproduce advanced
+// MMD-inspired lighting behavior with URP.
+//
+// Notes:
+// - Compatible with Universal Render Pipeline (URP).
+// - Supports realtime and baked lighting workflows.
+// - Includes directional light, shadow, and lightmap helpers.
+// - Supports shadow masks and dynamic lightmaps.
+// - Designed for stylized toon and anime shading workflows.
+// - ASE version excludes Shader Graph preview handling.
+//
+// Author: Lucas Gomes Cecchini
+// Pseudonym: AGAMENOM
+// ============================================================================
+
 // Function to compute spherical harmonics lighting based on the normal direction.
 void vLight_float(float3 normal, out float3 Output)
 {

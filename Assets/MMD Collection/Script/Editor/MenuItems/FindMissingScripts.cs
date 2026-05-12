@@ -26,7 +26,7 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Finds all GameObjects in the current scene that have missing scripts and selects them in the Editor.
         /// </summary>
-        [MenuItem("GameObject/MMD Collection/Find Missing Scripts", false, 1)]
+        [MenuItem("GameObject/Tools/MMD Collection/Find Missing Scripts")]
         private static void FindAllMissingScripts()
         {
             List<GameObject> objectsWithMissingScripts = new(); // List to store all GameObjects with missing scripts.

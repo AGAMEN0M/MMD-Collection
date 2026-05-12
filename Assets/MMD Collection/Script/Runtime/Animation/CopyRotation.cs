@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace MMDCollection
 {
-    [AddComponentMenu("MMD Collection/Animation/Copy Rotation")]
+    [AddComponentMenu("Tools/MMD Collection/Animation/Copy Rotation")]
     public class CopyRotation : MonoBehaviour
     {
         #region === Inspector Fields ===

@@ -17,7 +17,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Linq;
 
-namespace MMDCollection.BoneRenderer
+namespace MMDCollection.Editor
 {
     [InitializeOnLoad]
     public static class MMDBoneRendererUtils
@@ -63,6 +63,9 @@ namespace MMDCollection.BoneRenderer
             /// <summary>
             /// Adds a new instance to be rendered.
             /// </summary>
+            /// <param name="matrix">Transformation matrix defining the instance position, rotation, and scale in world space.</param>
+            /// <param name="color">Base color applied to the bone instance for standard visualization.</param>
+            /// <param name="highlight">Highlight color applied when the bone is hovered or selected in the Scene view.</param>
             public void AddInstance(Matrix4x4 matrix, Color color, Color highlight)
             {
                 m_Matrices.Add(matrix);
@@ -83,11 +86,16 @@ namespace MMDCollection.BoneRenderer
             /// <summary>
             /// Calculates the required number of render chunks.
             /// </summary>
+            /// <param name="totalCount">Total number of instances to be rendered.</param>
+            /// <returns>The number of chunks required to render all instances using the maximum instancing limit per draw call.</returns>
             private static int RenderChunkCount(int totalCount) => Mathf.CeilToInt((totalCount / (float)kMaxDrawMeshInstanceCount));
 
             /// <summary>
             /// Extracts a chunk of data from a list for instanced rendering.
             /// </summary>
+            /// <param name="array">Source list containing the full set of data to be chunked for rendering.</param>
+            /// <param name="chunkIndex">Index of the chunk to retrieve from the full dataset.</param>
+            /// <returns>An array containing only the elements belonging to the specified render chunk.</returns>
             private static T[] GetRenderChunk<T>(List<T> array, int chunkIndex)
             {
                 int rangeCount = (chunkIndex < (RenderChunkCount(array.Count) - 1)) ? kMaxDrawMeshInstanceCount : array.Count - (chunkIndex * kMaxDrawMeshInstanceCount);
@@ -219,11 +227,11 @@ namespace MMDCollection.BoneRenderer
                     // Pyramid vertices.
                     Vector3[] vertices = new Vector3[]
                     {
-                        new(0f, 1f, 0f),  // Top of the pyramid (0).
+                        new(0f, 1f, 0f), // Top of the pyramid (0).
                         new(-1f, -1f, -1f), // Base - bottom left corner (1).
-                        new(1f, -1f, -1f),  // Base - bottom right corner (2).
-                        new(1f, -1f, 1f),   // Base - top right corner (3).
-                        new(-1f, -1f, 1f)   // Base - top left corner (4).
+                        new(1f, -1f, -1f), // Base - bottom right corner (2).
+                        new(1f, -1f, 1f), // Base - top right corner (3).
+                        new(-1f, -1f, 1f) // Base - top left corner (4).
                     };
                     mesh.vertices = vertices;
 
@@ -235,7 +243,7 @@ namespace MMDCollection.BoneRenderer
                         0, 3, 4, // Back face.
                         0, 4, 1, // Left face.
                         1, 4, 3, // Base (half 1).
-                        1, 3, 2  // Base (half 2).
+                        1, 3, 2 // Base (half 2).
                     };
                     mesh.SetIndices(boneFaceIndices, MeshTopology.Triangles, (int)BatchRenderer.SubMeshType.BoneFaces);
 
@@ -268,6 +276,7 @@ namespace MMDCollection.BoneRenderer
         /// <param name="end">World-space position of the bone tip or child transform.</param>
         /// <param name="length">Distance between the start and end positions of the bone.</param>
         /// <param name="size">Global scale factor applied to the bone thickness.</param>
+        /// <returns>A transformation matrix that encodes the bone's position, orientation, and scale for GPU instanced rendering.</returns>
         private static Matrix4x4 ComputeBoneMatrix(Vector3 start, Vector3 end, float length, float size)
         {
             // Bone direction (local Y axis of the pyramid).
@@ -277,10 +286,7 @@ namespace MMDCollection.BoneRenderer
             Vector3 tangent = Vector3.Cross(Vector3.up, direction);
 
             // Correct if it is almost parallel to the up.
-            if (tangent.sqrMagnitude < 0.001f)
-            {
-                tangent = Vector3.Cross(Vector3.right, direction);
-            }
+            if (tangent.sqrMagnitude < 0.001f) tangent = Vector3.Cross(Vector3.right, direction);
 
             tangent.Normalize();
 
@@ -412,9 +418,7 @@ namespace MMDCollection.BoneRenderer
         /// <param name="boneRendererList">List of bone renderer groups used to determine group membership.</param>
         /// <param name="bone1">First bone transform to compare.</param>
         /// <param name="bone2">Second bone transform to compare.</param>
-        /// <returns>
-        /// True if both transforms are found within the same bone group; otherwise, false.
-        /// </returns>
+        /// <returns>True if both transforms are found within the same bone group; otherwise, false.</returns>
         public static bool AreBonesInSameGroup(List<BoneRendererData> boneRendererList, Transform bone1, Transform bone2)
         {
             if (bone1 == null || bone2 == null) return false;

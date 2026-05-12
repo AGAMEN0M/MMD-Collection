@@ -1,3 +1,29 @@
+// ============================================================================
+// MMD Effects Custom Node (URP ASE)
+// ----------------------------------------------------------------------------
+// Description:
+// Retrieves the main directional light vector used for toon shading and
+// lighting calculations in Universal Render Pipeline.
+//
+// Supports both realtime directional lighting and directional lightmap data,
+// automatically selecting the correct source depending on the current shader
+// stage and lightmapping configuration.
+//
+// Usage:
+// Use this node to obtain the primary light direction for custom toon,
+// rim light, shadow ramp, or stylized lighting calculations.
+//
+// Notes:
+// - Supports directional lightmaps.
+// - Compatible with DOTS instancing lightmap sampling.
+// - Intended for Amplify Shader Editor custom function usage.
+// - Outputs light direction in world space.
+// - Lightmap direction vectors are decoded from [0,1] to [-1,1] range.
+//
+// Author: Lucas Gomes Cecchini
+// Pseudonym: AGAMENOM
+// ============================================================================
+
 // Gets the key light direction considering different build stages and lightmap settings.
 void GetMainLightDirection_float(float2 lightmapUV, out float3 Direction)
 {

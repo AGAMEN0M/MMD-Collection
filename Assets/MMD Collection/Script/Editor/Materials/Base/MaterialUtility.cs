@@ -106,9 +106,7 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Draws the Global Illumination mode dropdown.
         /// </summary>
-        /// <param name="materials">
-        /// Array of materials to edit. Supports multi-object editing and mixed values.
-        /// </param>
+        /// <param name="materials">Array of materials to edit. Supports multi-object editing and mixed values.</param>
         public static void RenderLightmapFlags(Material[] materials)
         {
             // Safety check to avoid null references or empty selections.
@@ -1084,9 +1082,7 @@ namespace MMDCollection.Editor
         /// Current render queue value of the material.
         /// Expected to be in the Geometry or AlphaTest ranges.
         /// </param>
-        /// <returns>
-        /// A render queue value mapped to the Transparent range, or the original value if no conversion applies.
-        /// </returns>
+        /// <returns>A render queue value mapped to the Transparent range, or the original value if no conversion applies.</returns>
         public static int ConvertRenderQueueToTransparent(int queue)
         {
             // Geometry (2000–2499) → Transparent
@@ -1105,9 +1101,7 @@ namespace MMDCollection.Editor
         /// Current render queue value of the material.
         /// Expected to be derived from a previous transparent conversion.
         /// </param>
-        /// <returns>
-        /// A render queue value mapped back to an opaque-compatible range, or the original value if no conversion applies.
-        /// </returns>
+        /// <returns>A render queue value mapped back to an opaque-compatible range, or the original value if no conversion applies.</returns>
         public static int ConvertRenderQueueToOpaque(int queue)
         {
             // Transparent derived from Geometry.
@@ -1129,9 +1123,7 @@ namespace MMDCollection.Editor
         /// <param name="properties">Material properties array used to resolve the target property across all selected materials.</param>
         /// <param name="propertyName">Name of the float property to check.</param>
         /// <param name="value">Expected float value to compare against.</param>
-        /// <returns>
-        /// True if all materials share the same value and it matches the requested value.
-        /// </returns>
+        /// <returns>True if all materials share the same value and it matches the requested value.</returns>
         public static bool HasFloatPropertyValue(MaterialProperty[] properties, string propertyName, float value)
         {
             // Fetch the material property across all selected materials.

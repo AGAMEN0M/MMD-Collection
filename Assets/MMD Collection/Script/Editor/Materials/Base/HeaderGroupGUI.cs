@@ -90,12 +90,14 @@ namespace MMDCollection.Editor
         }
 
         #endregion
-        
+
         #region === Internal Helpers ===
-        
+
         /// <summary>
         /// Retrieves the stored foldout state for a group.
         /// </summary>
+        /// <param name="groupName">Unique name used to identify the foldout group state.</param>
+        /// <returns>True if the group is expanded; otherwise, false.</returns>
         private static bool GetGroupState(string groupName)
         {
             if (!foldoutStates.TryGetValue(groupName, out bool state))
@@ -110,6 +112,8 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Saves the foldout state both in memory and EditorPrefs.
         /// </summary>
+        /// <param name="groupName">Unique name used to identify the foldout group state.</param>
+        /// <param name="state">Current expanded state of the foldout group.</param>
         private static void SaveGroupState(string groupName, bool state)
         {
             foldoutStates[groupName] = state;
@@ -119,6 +123,8 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Generates a unique EditorPrefs key for the group.
         /// </summary>
+        /// <param name="groupName">Unique name used to identify the foldout group.</param>
+        /// <returns>Generated EditorPrefs key used to store the foldout state.</returns>
         private static string GetPrefsKey(string groupName) => $"HeaderGroupGUI_Foldout_{groupName}";
 
         #endregion

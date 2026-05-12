@@ -16,7 +16,7 @@ using System;
 
 namespace MMDCollection
 {
-    [AddComponentMenu("MMD Collection/Tools/Rendering/Draw Mesh Instanced")]
+    [AddComponentMenu("Tools/MMD Collection/Rendering/Draw Mesh Instanced")]
     public class DrawMeshInstanced : MonoBehaviour
     {
         #region === Nested Types ===

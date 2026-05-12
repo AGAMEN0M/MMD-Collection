@@ -81,6 +81,8 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Main entry point for drawing the material inspector UI.
         /// </summary>
+        /// <param name="materialEditor">Unity material editor responsible for rendering inspector controls.</param>
+        /// <param name="properties">Array of material properties provided by the current shader.</param>
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)
         {
             // Cache references provided by Unity.
@@ -283,6 +285,10 @@ namespace MMDCollection.Editor
         /// Draws a mixed-value-aware string field backed by CustomMMDData.
         /// Fully Undo-safe and multi-object safe.
         /// </summary>
+        /// <param name="label">Label displayed next to the editable text field.</param>
+        /// <param name="isJP">Determines whether the field edits the Japanese or English material name.</param>
+        /// <param name="cachedValue">Cached string value currently displayed and edited in the inspector.</param>
+        /// <param name="width">Optional fixed width used when drawing the label.</param>
         protected void DrawMixedMaterialStringField(GUIContent label, bool isJP, ref string cachedValue, float width = 0)
         {
             bool hasMixedValue = false;
@@ -373,8 +379,8 @@ namespace MMDCollection.Editor
         {
             if (mmdData != null) return; // Avoid reloading if already cached.
 
-            mmdData = CustomMMDDataUtilityEditor.GetOrCreateCustomMMDData(); // Load or create shared MMD data asset.
-            CustomMMDDataUtilityEditor.RemoveInvalidMaterials(mmdData); // Remove invalid material references.
+            mmdData = CustomMMDDataUtility.GetCustomMMDData(); // Load or create shared MMD data asset.
+            CustomMMDDataUtility.RemoveInvalidMaterials(mmdData); // Remove invalid material references.
 
             // Load initial values from the first selected material.
             if (targets.Length > 0 && targets[0] is Material mat)

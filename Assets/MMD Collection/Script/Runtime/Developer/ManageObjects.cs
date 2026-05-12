@@ -24,12 +24,29 @@ using UnityEditor;
 using System;
 #endif
 
-namespace MMDCollection
+namespace MMDCollection.Developer
 {
-    [AddComponentMenu("MMD Collection/Tools/Scene/Manage Objects")]
+    [AddComponentMenu("Tools/MMD Collection/Developer/Manage Objects")]
     public class ManageObjects : MonoBehaviour
     {
     #if UNITY_EDITOR
+
+        #region === Serialized Class ===
+
+        /// <summary>
+        /// Serializable data container representing a managed GameObject and its state.
+        /// </summary>
+        [Serializable]
+        public sealed class ManageObjectsItem
+        {
+            [Tooltip("Managed GameObject reference.")]
+            public GameObject gameObject;
+
+            [Tooltip("Current active state of the GameObject.")]
+            public bool state;
+        }
+
+        #endregion
 
         #region === Serialized Fields ===
 
@@ -123,7 +140,12 @@ namespace MMDCollection
         #endregion
 
     #else
-        private void Start() => Destroy(this); // Automatically removes this component in non-editor builds.
+    
+        /// <summary>
+        /// Automatically removes this component in non-editor builds.
+        /// </summary>
+        private void Start() => Destroy(this);
+
     #endif
     }
 
@@ -156,12 +178,8 @@ namespace MMDCollection
             GUI.backgroundColor = hasMixedValues ? Color.yellow : scripts[0].GlobalState ? Color.green : Color.red;
 
             // Draw global toggle button.
-            var content = new GUIContent("Toggle All Managed Objects", "Toggles all registered GameObjects in every selected component.");
-
-            if (GUILayout.Button(content, GUILayout.Height(35)))
-            {
+            if (GUILayout.Button(new GUIContent("Toggle All Managed Objects", "Toggles all registered GameObjects in every selected component."), GUILayout.Height(35)))
                 foreach (var script in scripts) script.ToggleAll();
-            }
 
             GUI.backgroundColor = Color.white;
 
@@ -170,12 +188,12 @@ namespace MMDCollection
             EditorGUILayout.BeginHorizontal();
 
             // Toggle to hide or show the managed object list.
-            DrawBooleanMultiToggle(scripts, s => s.HideObjects, (s, v) => s.HideObjects = v, "Hide Object List", "If enabled, hides the managed object list UI.");
+            DrawBooleanMultiToggle(scripts, s => s.HideObjects, (s, v) => s.HideObjects = v, new GUIContent("Hide Object List", "If enabled, hides the managed object list UI."));
 
             EditorGUILayout.Space(10f);
 
             // Toggle to hide or show the default inspector.
-            DrawBooleanMultiToggle(scripts, s => s.HideDefaultInspector, (s, v) => s.HideDefaultInspector = v, "Hide Default Inspector", "If enabled, hides the default MonoBehaviour inspector.");
+            DrawBooleanMultiToggle(scripts, s => s.HideDefaultInspector, (s, v) => s.HideDefaultInspector = v, new GUIContent("Hide Default Inspector", "If enabled, hides the default MonoBehaviour inspector."));
 
             EditorGUILayout.EndHorizontal();
 
@@ -212,7 +230,7 @@ namespace MMDCollection
         /// <summary>
         /// Draws the list of managed objects with toggle and remove controls.
         /// </summary>
-        /// <param name="script">Target ManageObjects component.</param>
+        /// <param name="script">Target ManageObjects component used to render and interact with the managed object list.</param>
         private void DrawObjectList(ManageObjects script)
         {
             if (script.manageObjects.Length == 0)
@@ -231,10 +249,7 @@ namespace MMDCollection
                 // Change button color based on active state.
                 GUI.backgroundColor = item.state ? Color.green : Color.red;
 
-                if (GUILayout.Button(new GUIContent(item.gameObject.name, "Toggle this GameObject.")))
-                {
-                    script.ToggleObject(i);
-                }
+                if (GUILayout.Button(new GUIContent(item.gameObject.name, "Toggle this GameObject."))) script.ToggleObject(i);
 
                 GUI.backgroundColor = Color.white;
 
@@ -255,7 +270,11 @@ namespace MMDCollection
         /// <summary>
         /// Draws a boolean toggle that correctly supports mixed values across multiple targets.
         /// </summary>
-        private void DrawBooleanMultiToggle(ManageObjects[] scripts, Func<ManageObjects, bool> getter, Action<ManageObjects, bool> setter, string label, string tooltip)
+        /// <param name="scripts">Array of ManageObjects components currently selected in the inspector.</param>
+        /// <param name="getter">Function used to retrieve the current boolean value from a ManageObjects instance.</param>
+        /// <param name="setter">Action used to apply the new boolean value to a ManageObjects instance.</param>
+        /// <param name="label">GUI label and tooltip information used for the toggle control.</param>
+        private void DrawBooleanMultiToggle(ManageObjects[] scripts, Func<ManageObjects, bool> getter, Action<ManageObjects, bool> setter, GUIContent label)
         {
             // Determine whether selected objects have different values.
             bool hasMixedValues = scripts.Select(getter).Distinct().Count() > 1;
@@ -267,7 +286,7 @@ namespace MMDCollection
             EditorGUI.BeginChangeCheck();
 
             // Draw the toggle using the first object's value as reference.
-            bool newValue = EditorGUILayout.Toggle(new GUIContent(label, tooltip), getter(scripts[0]));
+            bool newValue = EditorGUILayout.Toggle(label, getter(scripts[0]));
 
             // Reset mixed state immediately after drawing the control.
             EditorGUI.showMixedValue = false;
@@ -289,7 +308,7 @@ namespace MMDCollection
         /// <summary>
         /// Draws the drag-and-drop area and registers GameObjects on all selected components.
         /// </summary>
-        /// <param name="script">Target ManageObjects component.</param>
+        /// <param name="scripts">Array of ManageObjects components that will receive dragged GameObjects when dropped into the UI area.</param>
         private void DrawDropArea(ManageObjects[] scripts)
         {
             GUIStyle centeredStyle = new(EditorStyles.helpBox)
@@ -323,7 +342,7 @@ namespace MMDCollection
                         {
                             if (script.manageObjects.Any(o => o.gameObject == obj)) continue;
 
-                            ArrayUtility.Add(ref script.manageObjects, new ManageObjectsItem
+                            ArrayUtility.Add(ref script.manageObjects, new ManageObjects.ManageObjectsItem
                             {
                                 gameObject = obj,
                                 state = obj.activeSelf
@@ -337,23 +356,6 @@ namespace MMDCollection
         }
 
         #endregion
-    }
-
-    #endregion
-
-    #region === Data Model ===
-
-    /// <summary>
-    /// Serializable data container representing a managed GameObject and its state.
-    /// </summary>
-    [Serializable]
-    public sealed class ManageObjectsItem
-    {
-        [Tooltip("Managed GameObject reference.")]
-        public GameObject gameObject;
-
-        [Tooltip("Current active state of the GameObject.")]
-        public bool state;
     }
 
     #endregion

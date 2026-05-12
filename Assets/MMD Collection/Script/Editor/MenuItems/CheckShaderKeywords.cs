@@ -18,7 +18,10 @@ namespace MMDCollection.Editor
     {
         #region === Variables ===
 
-        private static MethodInfo getShaderGlobalKeywordsMethod; // Cached reference to ShaderUtil.GetShaderGlobalKeywords to avoid repeated reflection calls.
+        /// <summary>
+        /// Cached reference to ShaderUtil.GetShaderGlobalKeywords to avoid repeated reflection calls.
+        /// </summary>
+        private static MethodInfo getShaderGlobalKeywordsMethod; 
 
         #endregion
 
@@ -27,7 +30,7 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Menu item to check global shader keywords for selected materials.
         /// </summary>
-        [MenuItem("Assets/MMD Collection/Check Shader Keywords", false, 1)]
+        [MenuItem("Assets/Tools/MMD Collection/Check Shader Keywords")]
         public static void CheckShaderKeywords()
         {
             // Iterate through all selected objects in the Unity editor.

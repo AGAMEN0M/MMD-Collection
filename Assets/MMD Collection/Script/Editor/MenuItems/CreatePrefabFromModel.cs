@@ -22,8 +22,10 @@ namespace MMDCollection.Editor
     {
         #region === Menu Methods ===
 
-        // Menu item to trigger prefab creation from selected models.
-        [MenuItem("Assets/MMD Collection/Create Prefabs From Selected Model", false, 4)]
+        /// <summary>
+        /// Menu item to trigger prefab creation from selected models.
+        /// </summary>
+        [MenuItem("Assets/Tools/MMD Collection/Create Prefabs From Selected Model")]
         private static void CreatePrefabsFromModel()
         {
             var selectedObjects = Selection.objects;
@@ -37,14 +39,8 @@ namespace MMDCollection.Editor
                     string modelPath = AssetDatabase.GetAssetPath(selectedObject);
                     var model = AssetDatabase.LoadAssetAtPath<GameObject>(modelPath);
 
-                    if (model != null)
-                    {
-                        models.Add(model);
-                    }
-                    else
-                    {
-                        Debug.LogError($"Failed to load model from path: {modelPath}", obj);
-                    }
+                    if (model != null) models.Add(model);
+                    else Debug.LogError($"Failed to load model from path: {modelPath}", obj);
                 }
             }
 
@@ -62,7 +58,10 @@ namespace MMDCollection.Editor
 
         #region === Conversion Methods ===
 
-        // Converts a GameObject model into prefabs.
+        /// <summary>
+        /// Converts a GameObject model into prefabs.
+        /// </summary>
+        /// <param name="model">The source model GameObject that will be converted into one or more prefab objects.</param>
         private static void ConvertModelToPrefab(GameObject model)
         {
             if (model == null) return;
@@ -73,17 +72,15 @@ namespace MMDCollection.Editor
             ConvertComponentsToGameObjects(model.GetComponentsInChildren<SkinnedMeshRenderer>(), createdObjects);
             ConvertComponentsToGameObjects(model.GetComponentsInChildren<MeshFilter>(), createdObjects);
 
-            if (createdObjects.Count > 0)
-            {
-                CreatePrefab(model, createdObjects);
-            }
-            else
-            {
-                Debug.LogError("The selected model does not contain any SkinnedMeshRenderer or MeshFilter components.", model);
-            }
+            if (createdObjects.Count > 0) CreatePrefab(model, createdObjects);
+            else Debug.LogError("The selected model does not contain any SkinnedMeshRenderer or MeshFilter components.", model);
         }
 
-        // Generic conversion for SkinnedMeshRenderer or MeshFilter components.
+        /// <summary>
+        /// Generic conversion for SkinnedMeshRenderer or MeshFilter components.
+        /// </summary>
+        /// <param name="components">Array of components that contain mesh and material data to extract.</param>
+        /// <param name="createdObjects">List used to store all generated GameObjects created from the extracted mesh data.</param>
         private static void ConvertComponentsToGameObjects<T>(T[] components, List<GameObject> createdObjects)
         {
             foreach (var component in components)
@@ -123,7 +120,12 @@ namespace MMDCollection.Editor
 
         #region === Utility Methods ===
 
-        // Creates a new GameObject with a mesh and materials.
+        /// <summary>
+        /// Creates a new GameObject with a mesh and materials.
+        /// </summary>
+        /// <param name="mesh">The mesh assigned to the generated MeshFilter component.</param>
+        /// <param name="materials">The materials assigned to the generated MeshRenderer component.</param>
+        /// <returns>The newly created GameObject containing the mesh and renderer components.</returns>
         private static GameObject CreateGameObjectWithMesh(Mesh mesh, Material[] materials)
         {
             GameObject emptyObject = new(mesh.name);
@@ -137,7 +139,11 @@ namespace MMDCollection.Editor
             return emptyObject;
         }
 
-        // Creates a prefab from a model and a list of created objects.
+        /// <summary>
+        /// Creates a prefab from a model and a list of created objects.
+        /// </summary>
+        /// <param name="model">The original source model used as the base reference for the prefab name and save location.</param>
+        /// <param name="createdObjects">List of generated GameObjects that will be combined and saved as a prefab.</param>
         private static void CreatePrefab(GameObject model, List<GameObject> createdObjects)
         {
             if (createdObjects == null || createdObjects.Count == 0)
@@ -168,14 +174,8 @@ namespace MMDCollection.Editor
             try
             {
                 var prefab = PrefabUtility.SaveAsPrefabAsset(prefabRoot, prefabPath);
-                if (prefab != null)
-                {
-                    Debug.Log($"Prefab created and saved at: {prefabPath}");
-                }
-                else
-                {
-                    Debug.LogError("Failed to create or save the prefab.");
-                }
+                if (prefab != null) Debug.Log($"Prefab created and saved at: {prefabPath}");
+                else Debug.LogError("Failed to create or save the prefab.");
             }
             catch (System.Exception e)
             {

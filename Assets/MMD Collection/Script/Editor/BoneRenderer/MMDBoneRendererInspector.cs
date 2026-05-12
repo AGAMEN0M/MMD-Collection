@@ -11,7 +11,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace MMDCollection.BoneRenderer
+namespace MMDCollection.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(MMDBoneRenderer))]

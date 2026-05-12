@@ -2,7 +2,7 @@
  * ---------------------------------------------------------------------------
  * Description: Optimized Unity editor tool to paste a selected prefab or scene object
  *              as a child of multiple selected objects. Supports name enumeration,
- *              Undo, and automatically expands hierarchy.
+ *              Undo, and improved selection feedback without using internal Unity APIs.
  *              
  * Author: Lucas Gomes Cecchini
  * Pseudonym: AGAMENOM
@@ -30,11 +30,10 @@ namespace MMDCollection.Editor
         /// <summary>
         /// Initializes and shows the custom editor window.
         /// </summary>
-        [MenuItem("GameObject/MMD Collection/Paste as Multiple Children", false, 2)]
+        [MenuItem("GameObject/Tools/MMD Collection/Paste as Multiple Children")]
         private static void Init()
         {
-            var window = GetWindow<PasteAsChildMultiple>();
-            window.titleContent = new GUIContent("Paste as Multiple Children");
+            var window = (PasteAsChildMultiple)GetWindow(typeof(PasteAsChildMultiple), true, "Paste as Multiple Children");
             window.minSize = new Vector2(350, 200);
             window.maxSize = new Vector2(350, 200);
             window.Show();
@@ -50,14 +49,14 @@ namespace MMDCollection.Editor
             GUILayout.Space(10f);
 
             // Object field for selecting the prefab or scene object.
-            objectToCopy = EditorGUILayout.ObjectField("Object to Copy:", objectToCopy, typeof(GameObject), true) as GameObject;
-            enumerate = EditorGUILayout.Toggle("Enumerate Names:", enumerate); // Toggle for enumerating names.
+            objectToCopy = EditorGUILayout.ObjectField(new GUIContent("Object to Copy", "The GameObject (prefab or scene object) that will be duplicated."), objectToCopy, typeof(GameObject), true) as GameObject;
+            enumerate = EditorGUILayout.Toggle(new GUIContent("Enumerate Names", "If enabled, adds a numeric suffix to each created object name."), enumerate);
 
             GUILayout.Space(30f);
 
             // Disable button if no object is selected.
             EditorGUI.BeginDisabledGroup(objectToCopy == null);
-            if (GUILayout.Button("Paste As Child", GUILayout.Height(40))) PasteAsChild();
+            if (GUILayout.Button(new GUIContent("Paste As Child", "Creates a copy of the selected object under all selected GameObjects."), GUILayout.Height(40))) PasteAsChild();
             EditorGUI.EndDisabledGroup();
         }
 
@@ -67,11 +66,12 @@ namespace MMDCollection.Editor
 
         /// <summary>
         /// Pastes the selected prefab or scene object as a child of all selected objects.
-        /// Supports Undo, name enumeration, and hierarchy expansion.
+        /// Supports Undo, name enumeration, and improved selection feedback.
         /// </summary>
         private void PasteAsChild()
         {
             var parents = Selection.gameObjects;
+
             if (parents.Length == 0)
             {
                 Debug.LogWarning("No parent objects selected.");
@@ -87,6 +87,9 @@ namespace MMDCollection.Editor
             List<GameObject> createdObjects = new();
             int globalCount = 1;
 
+            Undo.IncrementCurrentGroup();
+            int undoGroup = Undo.GetCurrentGroup();
+
             foreach (var parent in parents)
             {
                 try
@@ -101,10 +104,11 @@ namespace MMDCollection.Editor
                     else
                     {
                         newObj = Instantiate(objectToCopy);
-                        Undo.RegisterCreatedObjectUndo(newObj, "Paste As Child Multiple");
                     }
 
                     if (newObj == null) continue;
+
+                    Undo.RegisterCreatedObjectUndo(newObj, "Paste As Child Multiple");
 
                     // Parent the object and reset transform relative to parent.
                     newObj.transform.SetParent(parent.transform, false);
@@ -114,10 +118,11 @@ namespace MMDCollection.Editor
                     // Enumerate names if enabled.
                     if (enumerate) newObj.name = $"{objectToCopy.name} ({globalCount++})";
 
-                    Undo.RegisterCreatedObjectUndo(newObj, "Paste As Child Multiple");
-
                     createdObjects.Add(newObj);
-                    ExpandHierarchy(parent); // Expand the hierarchy to show new child.
+
+                    // Better UX: Unity auto-expands hierarchy when selecting parent + child exists.
+                    Selection.activeGameObject = parent;
+                    EditorGUIUtility.PingObject(newObj);
                 }
                 catch (Exception e)
                 {
@@ -128,32 +133,9 @@ namespace MMDCollection.Editor
             // Select newly created objects in the editor.
             if (createdObjects.Count > 0) Selection.objects = createdObjects.ToArray();
 
+            Undo.CollapseUndoOperations(undoGroup);
+
             Close(); // Close the editor window after pasting.
-        }
-
-        #endregion
-
-        #region === Helper Methods ===
-
-        /// <summary>
-        /// Expands the hierarchy in the editor for the given GameObject.
-        /// Uses reflection to access internal SceneHierarchyWindow methods.
-        /// </summary>
-        /// <param name="obj">The parent object whose hierarchy to expand.</param>
-        private void ExpandHierarchy(GameObject obj)
-        {
-            try
-            {
-                var hierarchyType = typeof(EditorWindow).Assembly.GetType("UnityEditor.SceneHierarchyWindow");
-                var window = GetWindow(hierarchyType);
-                var expandMethod = hierarchyType?.GetMethod("SetExpandedRecursive");
-
-                expandMethod?.Invoke(window, new object[] { obj.GetInstanceID(), true });
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Error expanding hierarchy: {e.Message}");
-            }
         }
 
         #endregion
