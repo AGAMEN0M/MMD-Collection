@@ -1,32 +1,89 @@
-# MMD-Collection
-This tool facilitates the use of [MMD (Miku Miku Dance)](https://learnmmd.com/downloads/) models in Unity, as well as custom Shaders for this purpose. 
+# MMD Collection
 
-# Compatibility
-- [Unity 6000.2.6f2](https://unity.com/releases/editor/whats-new/6000.1.7)
-- [Amplify Shader Editor v 1.9.9.8](https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570)
-- [MMD4Mecanim 2020-01-05](https://stereoarts.jp/)
+MMD Collection is a Unity toolset designed to improve the integration of **MikuMikuDance (MMD) models** into Unity.  
+It provides custom shaders, editor tools, and workflow improvements to make MMD content easier to use, customize, and render inside Unity.
 
-# Download
+---
 
-[MMD Collection - Package v0.1.3](https://drive.google.com/file/d/1RTpGK1p7-yxKB_2VDNw1-WmdToaF9L6L/view?usp=drive_link)
+# 🎯 Features
+
+- MMD model support inside Unity
+- Custom shaders for stylized rendering
+- Improved inspector UI inspired by MMD tools
+- Shader Graph and Amplify Shader Editor implementations
+- Editor utilities for faster workflow and material editing
+- Shadow, blending, and transparency control systems
+- Memo and metadata support for materials
+
+---
+
+# 🧩 Compatibility
+
+| Component | Version |
+|----------|--------|
+| Unity | [6000.4.2f1](https://unity.com/releases/editor/whats-new/6000.4.2f1) |
+| Amplify Shader Editor | [1.9.9.9](https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570) |
+| MMD4Mecanim | [2020-01-05](https://stereoarts.jp/) |
+
+---
+
+# 🖥️ Render Pipeline Support
+
+| Pipeline | Support |
+|----------|--------|
+| Built-in | ❌ |
+| URP | ✔️ |
+| HDRP | ❌ |
+
+---
+
+# 📦 Download
+
+- 📦 Package v0.1.4  
+[MMD Collection - Package v0.1.4](https://drive.google.com/file/d/1mxy3VuXCd5iZrHGLB9TOLmrltsBWrblA/view?usp=drive_link)
  / 
-[Documentation](https://drive.google.com/file/d/1MWnJcv4rRKJLmihIb-LCWvsL2WCBm92M/view?usp=drive_link)
+[Documentation](https://drive.google.com/file/d/1ABftLHVns4fD-Sqgdfc5MTrRgxnOpu_A/view?usp=drive_link)
 
-# Shader
-
-Built-in(❌) - URP(✔️) - HDRP(❌)
-
-# Description
-
-This tool facilitates the use of MMD models in Unity, as well as custom Shaders for this purpose.
-The Shaders were created based on studies in the 'MMD4Mecanim' package, and were recreated and improved in two tools: 'Shader Graph' and 'Amplify Shader Editor' due to the capabilities and applications of each resource.
-It also has Scripts that shape the Unity interface to make it similar to the MMD tools and make it more practical and faster to use. In addition to other things that allow you to speed up development.
-
-You can find more information on how to use it on the YouTube Playlist: [Click Here.](https://youtube.com/playlist?list=PL5hnfx09yM4IWSWveW0NKCfX1Anec4dw7&si=GZeV6Jm0JcsiMCxo)
-
-If you have suggestions for improvements and bug fixes, please share them with me so we can improve this package as much as possible.
-
-# Old Versions
+- 🕓 Old Versions Archive  
 [Old Versions - Package](https://drive.google.com/drive/folders/19pbcDSKguJPxQJnT9euMLY83m2MjU8hO?usp=drive_link)
 
-Current version in Git v6.9
+---
+
+# 📖 Description
+
+MMD Collection is built on research and experimentation with the **MMD4Mecanim** workflow, combined with modern Unity rendering pipelines.
+
+The shaders were recreated and improved using:
+- Shader Graph (for URP integration)
+- Amplify Shader Editor (for advanced control and flexibility)
+
+This project also includes custom Unity Editor scripts that extend the inspector, making it closer to traditional MMD tools while improving usability and development speed inside Unity.
+
+---
+
+# 🎬 Tutorials
+
+You can find usage tutorials and demonstrations in the official playlist:
+
+👉 [Click Here.](https://youtube.com/playlist?list=PL5hnfx09yM4IWSWveW0NKCfX1Anec4dw7&si=GZeV6Jm0JcsiMCxo)
+
+---
+
+# 🤝 Contribution
+
+Feedback, bug reports, and suggestions are welcome.  
+The goal is to continuously improve usability, performance, and compatibility.
+
+---
+
+# ⚠️ Notes
+
+- This project is focused on **URP only**
+- HDRP and Built-in pipelines are not supported
+- Designed primarily for MMD-style character rendering workflows
+
+---
+
+# 📌 Version
+
+Current Git version: **v7.3**
