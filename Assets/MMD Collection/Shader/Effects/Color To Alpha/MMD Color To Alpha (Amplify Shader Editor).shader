@@ -59,7 +59,7 @@ Shader "MMD Collection/URP/Effects/MMD Color To Alpha (Amplify Shader Editor)"
 		[HideInInspector][ToggleUI] _ReceiveShadows("Receive Shadows", Float) = 1.0
 
 		[HideInInspector] _XRMotionVectorsPass("_XRMotionVectorsPass", Float) = 1
-		
+
 		// ⚠️Manual modification to avoid conflicts⚠️
 		//[HideInInspector] _AlphaClip("__clip", Float) = 1.0
 	}
