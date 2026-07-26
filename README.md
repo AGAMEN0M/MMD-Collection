@@ -40,12 +40,12 @@ It provides custom shaders, editor tools, and workflow improvements to make MMD 
 # 📦 Download
 
 - 📦 Package v0.1.4  
-[MMD Collection - Package v0.1.4](https://drive.google.com/file/d/1mxy3VuXCd5iZrHGLB9TOLmrltsBWrblA/view?usp=drive_link)
+[MMD Collection - Package v0.1.4](https://github.com/AGAMEN0M/MMD-Collection/releases/download/v0.1.4/MMD.Collection.-.by.Lucas_AGAMENOM.unitypackage)
  / 
-[Documentation](https://drive.google.com/file/d/1ABftLHVns4fD-Sqgdfc5MTrRgxnOpu_A/view?usp=drive_link)
+[Documentation](https://github.com/user-attachments/files/30387947/Documentation.pdf)
 
 - 🕓 Old Versions Archive  
-[Old Versions - Package](https://drive.google.com/drive/folders/19pbcDSKguJPxQJnT9euMLY83m2MjU8hO?usp=drive_link)
+[Old Versions - Package](https://github.com/AGAMEN0M/MMD-Collection/releases)
 
 ---
 
