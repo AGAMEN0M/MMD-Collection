@@ -959,25 +959,22 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99c9d33bdc618414789f45646a6c4fe7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpeed: 3
-  fastMovementSpeed: 20
-  sensitivity: 3
-  zoomSensitivity: 10
-  fastZoomSensitivity: 50
-  left: 97
-  right: 100
-  front: 119
-  back: 115
-  up: 113
-  down: 101
-  upGlobal: 114
-  downGlobal: 102
-  observe: 324
-  run: 304
-  zoom: Mouse ScrollWheel
-  axisX: Mouse X
-  axisY: Mouse Y
+  m_EditorClassIdentifier: Assembly-CSharp::MMDCollection.FreeFlyCamera
+  movementSpeed: 10
+  fastMovementSpeed: 100
+  sensitivity: 15
+  zoomSensitivity: 100
+  fastZoomSensitivity: 500
+  left: 15
+  right: 18
+  front: 37
+  back: 33
+  up: 31
+  down: 19
+  upGlobal: 32
+  downGlobal: 20
+  observeButton: 1
+  run: 51
 --- !u!1 &335219534
 GameObject:
   m_ObjectHideFlags: 0

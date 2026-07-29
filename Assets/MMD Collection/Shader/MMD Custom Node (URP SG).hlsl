@@ -136,51 +136,76 @@ void SRPAdditionalLight_float(float3 WorldPosition, float2 ScreenUV, float3 Worl
 	#if defined(SHADERGRAPH_PREVIEW)
 		Output = 1; // In preview mode, output a constant value for debugging.
 	#else
-		float3 Color = 0; // Initialize color to black.
+		// Unity versions prior to 6.1 use the old Forward+ rendering path.
+		// Map the legacy macro to the newer Cluster Light Loop macro so the
+		// same code works across multiple URP versions.
+		#if (UNITY_VERSION < 60010000) && !defined(USE_CLUSTER_LIGHT_LOOP)
+			#define USE_CLUSTER_LIGHT_LOOP USE_FORWARD_PLUS
+		#endif
+
+		// Unity versions prior to 6.1 use a different macro name for skipping
+		// subtractive lights in the Forward+ light loop.
+		// Alias the old macro to the new name for compatibility.
+		#if (UNITY_VERSION < 60010000) && !defined(CLUSTER_LIGHT_LOOP_SUBTRACTIVE_LIGHT_CHECK)
+			#define CLUSTER_LIGHT_LOOP_SUBTRACTIVE_LIGHT_CHECK FORWARD_PLUS_SUBTRACTIVE_LIGHT_CHECK
+		#endif
+
+		float3 Color = 0; // Initialize accumulated light color to black.
 	
 		#if defined(_ADDITIONAL_LIGHTS)
-			// Define a macro to calculate Lambert lighting for additional lights.
+			// LightingLambert() was introduced in newer URP versions.
+			// Older versions use an equivalent manual Lambert calculation.
+			#if (UNITY_VERSION >= 60010000)
+				#define CALC_LAMBERT(Light) LightingLambert(AttLightColor, Light.direction, WorldNormal)
+			#else
+				#define CALC_LAMBERT(Light) (dot(Light.direction, WorldNormal) * 0.5 + 0.5)* AttLightColor
+			#endif
+
+			// Calculate the attenuated light color and accumulate its Lambert contribution.
 			#define SUM_LIGHTLAMBERT(Light)\
 				half3 AttLightColor = Light.color * (Light.distanceAttenuation * Light.shadowAttenuation);\
-				Color += LightingLambert(AttLightColor, Light.direction, WorldNormal); // Calculate Lambert diffuse contribution.
-	
-			InputData inputData = (InputData)0; // Initialize input data structure.
-			inputData.normalizedScreenSpaceUV = ScreenUV; // Assign screen UV coordinates.
-			inputData.positionWS = WorldPosition; // Assign world position in world space.
-	
-			uint meshRenderingLayers = GetMeshRenderingLayer(); // Retrieve mesh rendering layers.
-			uint pixelLightCount = GetAdditionalLightsCount(); // Get the number of additional lights affecting the pixel.
+				Color += CALC_LAMBERT(Light);
 
-			// Iterate through visible additional lights using Cluster Light Loop rendering.
+			InputData inputData = (InputData)0; // Initialize input data structure.
+			inputData.normalizedScreenSpaceUV = ScreenUV; // Assign screen-space UV coordinates.
+			inputData.positionWS = WorldPosition; // Assign world-space position.
+	
+			uint meshRenderingLayers = GetMeshRenderingLayer(); // Retrieve the mesh rendering layers.
+			uint pixelLightCount = GetAdditionalLightsCount(); // Retrieve the number of additional lights affecting this pixel.
+
+			// Process clustered/Forward+ directional lights.
+			// Depending on the Unity version, this loop may use either the
+			// new Cluster Light Loop or the legacy Forward+ implementation.
 			#if USE_CLUSTER_LIGHT_LOOP
-				[loop] for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
+				[loop]for (uint lightIndex = 0; lightIndex < min(URP_FP_DIRECTIONAL_LIGHTS_COUNT, MAX_VISIBLE_LIGHTS); lightIndex++)
 				{
+					// Skip subtractive lights when required by the current rendering path.
 					CLUSTER_LIGHT_LOOP_SUBTRACTIVE_LIGHT_CHECK
-					Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask); // Fetch light data.
+					Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask); // Retrieve light data.
 
 					#ifdef _LIGHT_LAYERS
-					if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Check if light layer matches the mesh.
+					if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Verify that the light affects this mesh.
 					#endif
 					{
-						SUM_LIGHTLAMBERT(light); // Accumulate light using Lambert model.
+						SUM_LIGHTLAMBERT(light); // Accumulate Lambert lighting.
 					}
 				}
 			#endif
 
-			// Fallback loop for all remaining additional lights.
+			// Process all remaining additional lights.
 			LIGHT_LOOP_BEGIN(pixelLightCount)
-				Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask); // Fetch light data.
+				Light light = GetAdditionalLight(lightIndex, WorldPosition, ShadowMask); // Retrieve light data.
 
 				#ifdef _LIGHT_LAYERS
-				if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Check if light layer matches the mesh.
+				if (IsMatchingLightLayer(light.layerMask, meshRenderingLayers)) // Verify that the light affects this mesh.
 				#endif
 				{
-					SUM_LIGHTLAMBERT(light); // Accumulate light using Lambert model.
+					SUM_LIGHTLAMBERT(light); // Accumulate Lambert lighting.
 				}
 	
 			LIGHT_LOOP_END
 		#endif
 
-		Output = Color; // Set the output color with the accumulated lighting.
+		Output = Color; // Return the accumulated additional lighting.
 	#endif
 }

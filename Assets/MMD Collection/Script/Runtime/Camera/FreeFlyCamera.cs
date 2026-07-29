@@ -19,6 +19,8 @@
  * ---------------------------------------------------------------------------
 */
 
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 namespace MMDCollection
@@ -37,13 +39,13 @@ namespace MMDCollection
         private float fastMovementSpeed = 100f;
 
         [SerializeField, Tooltip("Mouse sensitivity used to rotate the camera in look mode.")]
-        private float sensitivity = 3f;
+        private float sensitivity = 15f;
 
         [SerializeField, Tooltip("Zoom speed applied when scrolling the mouse wheel normally.")]
-        private float zoomSensitivity = 10f;
+        private float zoomSensitivity = 100f;
 
         [SerializeField, Tooltip("Zoom speed applied when scrolling while holding the run key.")]
-        private float fastZoomSensitivity = 50f;
+        private float fastZoomSensitivity = 500f;
 
         #endregion
 
@@ -51,56 +53,42 @@ namespace MMDCollection
 
         [Header("Key Settings")]
         [SerializeField, Tooltip("Key used to move the camera left, relative to its local orientation.")]
-        private KeyCode left = KeyCode.A;
+        private Key left = Key.A;
 
         [SerializeField, Tooltip("Key used to move the camera right, relative to its local orientation.")]
-        private KeyCode right = KeyCode.D;
+        private Key right = Key.D;
 
         [SerializeField, Tooltip("Key used to move the camera forward, relative to its local orientation.")]
-        private KeyCode front = KeyCode.W;
+        private Key front = Key.W;
 
         [SerializeField, Tooltip("Key used to move the camera backward, relative to its local orientation.")]
-        private KeyCode back = KeyCode.S;
+        private Key back = Key.S;
 
         [Space(10)]
 
         [SerializeField, Tooltip("Key used to move the camera upward in local space.")]
-        private KeyCode up = KeyCode.Q;
+        private Key up = Key.Q;
 
         [SerializeField, Tooltip("Key used to move the camera downward in local space.")]
-        private KeyCode down = KeyCode.E;
+        private Key down = Key.E;
 
         [Space(10)]
 
         [SerializeField, Tooltip("Key used to move the camera upward in world space.")]
-        private KeyCode upGlobal = KeyCode.R;
+        private Key upGlobal = Key.R;
 
         [SerializeField, Tooltip("Key used to move the camera downward in world space.")]
-        private KeyCode downGlobal = KeyCode.F;
+        private Key downGlobal = Key.F;
 
         [Space(10)]
 
-        [SerializeField, Tooltip("Key used to enable look mode and rotate the camera with the mouse.")]
-        private KeyCode observe = KeyCode.Mouse1;
+        [SerializeField, Tooltip("Mouse button used to enable look mode and rotate the camera with the mouse.")]
+        private int observeButton = 1; // 0 = left, 1 = right, 2 = middle (Mouse.current.*Button)
 
         [Space(10)]
 
         [SerializeField, Tooltip("Key used to enable fast movement and fast zoom modes.")]
-        private KeyCode run = KeyCode.LeftShift;
-
-        #endregion
-
-        #region === Axis Settings ===
-
-        [Header("Axis Settings")]
-        [SerializeField, Tooltip("Input axis name used for zooming the camera forward or backward.")]
-        private string zoom = "Mouse ScrollWheel";
-
-        [SerializeField, Tooltip("Input axis name used for horizontal mouse movement.")]
-        private string axisX = "Mouse X";
-
-        [SerializeField, Tooltip("Input axis name used for vertical mouse movement.")]
-        private string axisY = "Mouse Y";
+        private Key run = Key.LeftShift;
 
         #endregion
 
@@ -160,7 +148,7 @@ namespace MMDCollection
         /// <summary>
         /// Gets or sets the key used to move the camera left.
         /// </summary>
-        public KeyCode Left
+        public Key Left
         {
             get => left;
             set => left = value;
@@ -169,7 +157,7 @@ namespace MMDCollection
         /// <summary>
         /// Gets or sets the key used to move the camera right.
         /// </summary>
-        public KeyCode Right
+        public Key Right
         {
             get => right;
             set => right = value;
@@ -178,7 +166,7 @@ namespace MMDCollection
         /// <summary>
         /// Gets or sets the key used to move the camera forward.
         /// </summary>
-        public KeyCode Front
+        public Key Front
         {
             get => front;
             set => front = value;
@@ -187,7 +175,7 @@ namespace MMDCollection
         /// <summary>
         /// Gets or sets the key used to move the camera backward.
         /// </summary>
-        public KeyCode Back
+        public Key Back
         {
             get => back;
             set => back = value;
@@ -196,7 +184,7 @@ namespace MMDCollection
         /// <summary>
         /// Gets or sets the key used to move the camera upward in local space.
         /// </summary>
-        public KeyCode Up
+        public Key Up
         {
             get => up;
             set => up = value;
@@ -205,7 +193,7 @@ namespace MMDCollection
         /// <summary>
         /// Gets or sets the key used to move the camera downward in local space.
         /// </summary>
-        public KeyCode Down
+        public Key Down
         {
             get => down;
             set => down = value;
@@ -214,7 +202,7 @@ namespace MMDCollection
         /// <summary>
         /// Gets or sets the key used to move the camera upward in world space.
         /// </summary>
-        public KeyCode UpGlobal
+        public Key UpGlobal
         {
             get => upGlobal;
             set => upGlobal = value;
@@ -223,55 +211,28 @@ namespace MMDCollection
         /// <summary>
         /// Gets or sets the key used to move the camera downward in world space.
         /// </summary>
-        public KeyCode DownGlobal
+        public Key DownGlobal
         {
             get => downGlobal;
             set => downGlobal = value;
         }
 
         /// <summary>
-        /// Gets or sets the key used to toggle look mode.
+        /// Gets or sets the mouse button used to toggle look mode (0 = left, 1 = right, 2 = middle).
         /// </summary>
-        public KeyCode Observe
+        public int ObserveButton
         {
-            get => observe;
-            set => observe = value;
+            get => observeButton;
+            set => observeButton = value;
         }
 
         /// <summary>
         /// Gets or sets the key used to enable fast movement and zoom.
         /// </summary>
-        public KeyCode Run
+        public Key Run
         {
             get => run;
             set => run = value;
-        }
-
-        /// <summary>
-        /// Gets or sets the input axis name used for zooming.
-        /// </summary>
-        public string Zoom
-        {
-            get => zoom;
-            set => zoom = value;
-        }
-
-        /// <summary>
-        /// Gets or sets the input axis name used for horizontal mouse movement.
-        /// </summary>
-        public string AxisX
-        {
-            get => axisX;
-            set => axisX = value;
-        }
-
-        /// <summary>
-        /// Gets or sets the input axis name used for vertical mouse movement.
-        /// </summary>
-        public string AxisY
-        {
-            get => axisY;
-            set => axisY = value;
         }
 
         #endregion
@@ -280,55 +241,127 @@ namespace MMDCollection
 
         private void Update()
         {
-            // Determine whether fast mode is active.
-            var fastMode = Input.GetKey(run);
+            if (Keyboard.current == null) return;
+
+            var fastMode = IsKeyPressed(run);
+
+            HandleMovement(fastMode);
+            HandleLook();
+            HandleZoom(fastMode);
+            HandleObserveToggle();
+        }
+
+        // Ensure cursor state is restored when the component is disabled.
+        private void OnDisable() => StopLooking();
+
+        #endregion
+
+        #region === Input Handling (FN_ methods) ===
+
+        /// <summary>
+        /// Reads the movement keys and applies translation to the camera.
+        /// </summary>
+        private void HandleMovement(bool fastMode)
+        {
             var currentMovementSpeed = fastMode ? fastMovementSpeed : movementSpeed;
 
-            // Build the movement direction vector based on pressed keys.
             var moveDirection = Vector3.zero;
 
-            if (Input.GetKey(left)) moveDirection += -transform.right;
-            if (Input.GetKey(right)) moveDirection += transform.right;
-            if (Input.GetKey(front)) moveDirection += transform.forward;
-            if (Input.GetKey(back)) moveDirection += -transform.forward;
-            if (Input.GetKey(up)) moveDirection += transform.up;
-            if (Input.GetKey(down)) moveDirection += -transform.up;
-            if (Input.GetKey(upGlobal)) moveDirection += Vector3.up;
-            if (Input.GetKey(downGlobal)) moveDirection += Vector3.down;
+            if (IsKeyPressed(left)) moveDirection += -transform.right;
+            if (IsKeyPressed(right)) moveDirection += transform.right;
+            if (IsKeyPressed(front)) moveDirection += transform.forward;
+            if (IsKeyPressed(back)) moveDirection += -transform.forward;
+            if (IsKeyPressed(up)) moveDirection += transform.up;
+            if (IsKeyPressed(down)) moveDirection += -transform.up;
+            if (IsKeyPressed(upGlobal)) moveDirection += Vector3.up;
+            if (IsKeyPressed(downGlobal)) moveDirection += Vector3.down;
 
-            // Apply movement to the camera position.
             transform.position += currentMovementSpeed * Time.deltaTime * moveDirection;
+        }
 
-            // Rotate the camera when look mode is active.
-            if (looking)
+        /// <summary>
+        /// Rotates the camera based on mouse delta while look mode is active.
+        /// </summary>
+        private void HandleLook()
+        {
+            if (!looking || Mouse.current == null)
             {
-                float newRotationX = transform.localEulerAngles.y + Input.GetAxis(axisX) * sensitivity;
-                float newRotationY = transform.localEulerAngles.x - Input.GetAxis(axisY) * sensitivity;
-
-                transform.localEulerAngles = new Vector3(newRotationY, newRotationX, 0f);
+                return;
             }
 
-            // Handle zoom input.
-            float zoomAxis = Input.GetAxis(zoom);
+            var mouseDelta = Mouse.current.delta.ReadValue();
+
+            float newRotationX = transform.localEulerAngles.y + mouseDelta.x * sensitivity * Time.deltaTime;
+            float newRotationY = transform.localEulerAngles.x - mouseDelta.y * sensitivity * Time.deltaTime;
+
+            transform.localEulerAngles = new Vector3(newRotationY, newRotationX, 0f);
+        }
+
+        /// <summary>
+        /// Reads the mouse scroll wheel and moves the camera forward/backward.
+        /// </summary>
+        private void HandleZoom(bool fastMode)
+        {
+            if (Mouse.current == null)
+            {
+                return;
+            }
+
+            float zoomAxis = Mouse.current.scroll.ReadValue().y;
             if (zoomAxis != 0f)
             {
                 var currentZoomSensitivity = fastMode ? fastZoomSensitivity : zoomSensitivity;
-                transform.position += zoomAxis * currentZoomSensitivity * transform.forward;
+                transform.position += zoomAxis * currentZoomSensitivity * Time.deltaTime * transform.forward;
+            }
+        }
+
+        /// <summary>
+        /// Detects press/release of the configured mouse button to toggle look mode.
+        /// </summary>
+        private void HandleObserveToggle()
+        {
+            if (Mouse.current == null)
+            {
+                return;
             }
 
-            // Handle look mode activation and deactivation.
-            if (Input.GetKeyDown(observe))
+            var button = GetObserveButtonControl();
+            if (button == null)
+            {
+                return;
+            }
+
+            if (button.wasPressedThisFrame)
             {
                 StartLooking();
             }
-            else if (Input.GetKeyUp(observe))
+            else if (button.wasReleasedThisFrame)
             {
                 StopLooking();
             }
         }
 
-        // Ensure cursor state is restored when the component is disabled.
-        private void OnDisable() => StopLooking();
+        /// <summary>
+        /// Resolves the ButtonControl matching the configured observe mouse button index.
+        /// </summary>
+        private ButtonControl GetObserveButtonControl()
+        {
+            return observeButton switch
+            {
+                0 => Mouse.current.leftButton,
+                1 => Mouse.current.rightButton,
+                2 => Mouse.current.middleButton,
+                _ => Mouse.current.rightButton,
+            };
+        }
+
+        /// <summary>
+        /// Helper to check whether a given Key is currently held down.
+        /// </summary>
+        private static bool IsKeyPressed(Key key)
+        {
+            return Keyboard.current != null && Keyboard.current[key].isPressed;
+        }
 
         #endregion
 

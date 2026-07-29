@@ -22,7 +22,7 @@ It provides custom shaders, editor tools, and workflow improvements to make MMD 
 | Component | Version |
 |----------|--------|
 | Unity | [6000.4.2f1](https://unity.com/releases/editor/whats-new/6000.4.2f1) |
-| Amplify Shader Editor | [1.9.9.9](https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570) |
+| Amplify Shader Editor | [1.9.9.12](https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570) |
 | MMD4Mecanim | [2020-01-05](https://stereoarts.jp/) |
 
 ---
@@ -86,4 +86,4 @@ The goal is to continuously improve usability, performance, and compatibility.
 
 # 📌 Version
 
-Current Git version: **v7.3**
+Current Git version: **v7.4**
