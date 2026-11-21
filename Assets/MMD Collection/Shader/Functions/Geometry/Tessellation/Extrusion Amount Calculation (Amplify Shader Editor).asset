@@ -12,29 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
   m_Name: Extrusion Amount Calculation (Amplify Shader Editor)
   m_EditorClassIdentifier: AmplifyShaderEditor::AmplifyShaderEditor.AmplifyShaderFunction
-  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.12\n// Available at
-    the Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19912\n{\"type\":\"AmplifyShaderEditor.SimpleAddOpNode,
-    AmplifyShaderEditor\",\"id\":4,\"pos\":[-928,-256],\"params\":[\"Inherit\",\"True\",\"2\",\"2\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionInput,
-    AmplifyShaderEditor\",\"id\":8,\"pos\":[-1152,-256],\"params\":[\"Inherit\",\"True\",\"Size\",\"1\",\"0\",\"False\",\"1\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionInput,
-    AmplifyShaderEditor\",\"id\":9,\"pos\":[-1216,0],\"params\":[\"Inherit\",\"True\",\"Extrusion
-    Amount\",\"1\",\"1\",\"False\",\"1\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.SimpleMultiplyOpNode,
-    AmplifyShaderEditor\",\"id\":6,\"pos\":[-928,0],\"params\":[\"Inherit\",\"True\",\"2\",\"2\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.NormalVertexDataNode,
-    AmplifyShaderEditor\",\"id\":5,\"pos\":[-1216,256],\"params\":[\"Inherit\",\"True\",\"0\",\"5\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\",\"FLOAT\",\"4\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput,
-    AmplifyShaderEditor\",\"id\":0,\"pos\":[-672,-256],\"params\":[\"Inherit\",\"True\",\"True\",\"-1\",\"Extrusion
-    Size\",\"0\",\"False\",\"1\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput,
-    AmplifyShaderEditor\",\"id\":7,\"pos\":[-672,0],\"params\":[\"Inherit\",\"True\",\"False\",\"-1\",\"Extrusion
-    Vertex Offset\",\"1\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"wire\":[4,0,8,0]}\n{\"wire\":[4,1,9,0]}\n{\"wire\":[6,0,9,0]}\n{\"wire\":[6,1,5,0]}\n{\"wire\":[0,0,4,0]}\n{\"wire\":[7,0,6,0]}\nASEEND*/\n//CHKSM=E611AC4BD625E88BB3CBBE7898501E64519B6E01"
+  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.15\n// Available at the Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19915\n{\"type\":\"AmplifyShaderEditor.SimpleAddOpNode, AmplifyShaderEditor\",\"id\":4,\"pos\":[-928,-256],\"params\":[\"Inherit\",\"True\",\"2\",\"2\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionInput, AmplifyShaderEditor\",\"id\":8,\"pos\":[-1152,-256],\"params\":[\"Inherit\",\"True\",\"Size\",\"1\",\"0\",\"False\",\"\",\"\",\"\",\"\",\"False\",\"1\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionInput, AmplifyShaderEditor\",\"id\":9,\"pos\":[-1216,0],\"params\":[\"Inherit\",\"True\",\"Extrusion Amount\",\"1\",\"1\",\"False\",\"\",\"\",\"\",\"\",\"False\",\"1\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.SimpleMultiplyOpNode, AmplifyShaderEditor\",\"id\":6,\"pos\":[-928,0],\"params\":[\"Inherit\",\"True\",\"2\",\"2\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.NormalVertexDataNode, AmplifyShaderEditor\",\"id\":5,\"pos\":[-1216,256],\"params\":[\"Inherit\",\"True\",\"0\",\"5\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\",\"FLOAT\",\"4\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput, AmplifyShaderEditor\",\"id\":0,\"pos\":[-672,-256],\"params\":[\"Inherit\",\"True\",\"True\",\"-1\",\"Extrusion Size\",\"0\",\"False\",\"1\",\"0\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput, AmplifyShaderEditor\",\"id\":7,\"pos\":[-672,0],\"params\":[\"Inherit\",\"True\",\"False\",\"-1\",\"Extrusion Vertex Offset\",\"1\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"wire\":[4,0,8,0]}\n{\"wire\":[4,1,9,0]}\n{\"wire\":[6,0,9,0]}\n{\"wire\":[6,1,5,0]}\n{\"wire\":[0,0,4,0]}\n{\"wire\":[7,0,6,0]}\nASEEND*/\n//CHKSM=FA252F2EEFA38E57A22EA2B33C10A854E0C89149"
   m_functionName: 
-  m_description: 'Calculates vertex extrusion amount and vertex offset based on mesh
-    normals.
+  m_description: 'Calculates vertex extrusion amount and vertex offset based on mesh normals.
 
 
 
-    This function is designed to be used with Tessellation-enabled
-    shaders only.
+    This function is designed to be used with Tessellation-enabled shaders only.
 
-    It outputs both a scalar extrusion size and a vector vertex
-    offset, allowing
+    It outputs both a scalar extrusion size and a vector vertex offset, allowing
 
     consistent geometric expansion along vertex normals.'
   m_additionalIncludes:
@@ -53,7 +39,6 @@ MonoBehaviour:
     m_shaderFunctionDirectives: []
     m_nativeDirectives: []
     m_nativeDirectivesIndex: -1
-    m_nativeDirectivesFoldout: 0
     m_directivesSaveItems: []
     m_versionMaxExclusive: 1
   m_nodeCategory: 0

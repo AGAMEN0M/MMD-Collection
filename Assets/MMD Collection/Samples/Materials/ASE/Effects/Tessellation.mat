@@ -52,7 +52,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    m_Ints: []
+    m_Ints:
+    - _UVLayer: 0
     m_Floats:
     - _AddPrecomputedVelocity: 1
     - _AlphaClip: 0
@@ -76,11 +77,14 @@ Material:
     - _ReceiveShadows: 1
     - _SPHOpacity: 1
     - _SShad: 1
+    - _ScreenSpaceReflectionsContributeTransparent: 1
     - _ShadowLum: 1.5
     - _Shininess: 50
     - _SpecularIntensity: 1
     - _SrcBlend: 1
     - _Surface: 0
+    - _TessEdgeLength: 20
+    - _TessPhongStrength: 0.5
     - _UVLayer: 0
     - _XRMotionVectorsPass: 1
     - _ZTest: 4

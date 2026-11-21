@@ -12,22 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
   m_Name: Sphere Map UV (Amplify Shader Editor)
   m_EditorClassIdentifier: AmplifyShaderEditor::AmplifyShaderEditor.AmplifyShaderFunction
-  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.12\n// Available at
-    the Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19912\n{\"type\":\"AmplifyShaderEditor.PosVertexDataNode,
-    AmplifyShaderEditor\",\"id\":7,\"pos\":[-1152,0],\"params\":[\"Inherit\",\"True\",\"0\",\"0\",\"5\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\",\"FLOAT\",\"4\"]}\n{\"type\":\"AmplifyShaderEditor.NormalVertexDataNode,
-    AmplifyShaderEditor\",\"id\":1,\"pos\":[-1152,256],\"params\":[\"Inherit\",\"True\",\"0\",\"5\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\",\"FLOAT\",\"4\"]}\n{\"type\":\"AmplifyShaderEditor.NormalizeNode,
-    AmplifyShaderEditor\",\"id\":4,\"pos\":[-640,0],\"params\":[\"Inherit\",\"True\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.NormalizeNode,
-    AmplifyShaderEditor\",\"id\":5,\"pos\":[-640,256],\"params\":[\"Inherit\",\"True\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.ReflectOpNode,
-    AmplifyShaderEditor\",\"id\":6,\"pos\":[-352,0],\"params\":[\"Inherit\",\"True\",\"2\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.TransformPositionNode,
-    AmplifyShaderEditor\",\"id\":2,\"pos\":[-896,0],\"params\":[\"Inherit\",\"True\",\"Object\",\"View\",\"False\",\"Fast\",\"True\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"5\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\",\"FLOAT\",\"4\"]}\n{\"type\":\"AmplifyShaderEditor.TransformDirectionNode,
-    AmplifyShaderEditor\",\"id\":3,\"pos\":[-896,256],\"params\":[\"Inherit\",\"True\",\"Object\",\"View\",\"True\",\"Fast\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"4\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput,
-    AmplifyShaderEditor\",\"id\":0,\"pos\":[-64,0],\"params\":[\"Inherit\",\"True\",\"True\",\"-1\",\"Output\",\"0\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"wire\":[4,0,2,0]}\n{\"wire\":[5,0,3,0]}\n{\"wire\":[6,0,4,0]}\n{\"wire\":[6,1,5,0]}\n{\"wire\":[2,0,7,0]}\n{\"wire\":[3,0,1,0]}\n{\"wire\":[0,0,6,0]}\nASEEND*/\n//CHKSM=21595BA314B96E16476B894BF1CCA462E2C31F24"
+  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.15\n// Available at the Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19915\n{\"type\":\"AmplifyShaderEditor.PosVertexDataNode, AmplifyShaderEditor\",\"id\":7,\"pos\":[-1152,0],\"params\":[\"Inherit\",\"True\",\"0\",\"0\",\"5\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\",\"FLOAT\",\"4\"]}\n{\"type\":\"AmplifyShaderEditor.NormalVertexDataNode, AmplifyShaderEditor\",\"id\":1,\"pos\":[-1152,256],\"params\":[\"Inherit\",\"True\",\"0\",\"5\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\",\"FLOAT\",\"4\"]}\n{\"type\":\"AmplifyShaderEditor.NormalizeNode, AmplifyShaderEditor\",\"id\":4,\"pos\":[-640,0],\"params\":[\"Inherit\",\"True\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.NormalizeNode, AmplifyShaderEditor\",\"id\":5,\"pos\":[-640,256],\"params\":[\"Inherit\",\"True\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.ReflectOpNode, AmplifyShaderEditor\",\"id\":6,\"pos\":[-352,0],\"params\":[\"Inherit\",\"True\",\"2\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.TransformPositionNode, AmplifyShaderEditor\",\"id\":2,\"pos\":[-896,0],\"params\":[\"Inherit\",\"True\",\"Object\",\"View\",\"False\",\"Fast\",\"True\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"5\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\",\"FLOAT\",\"4\"]}\n{\"type\":\"AmplifyShaderEditor.TransformDirectionNode, AmplifyShaderEditor\",\"id\":3,\"pos\":[-896,256],\"params\":[\"Inherit\",\"True\",\"Object\",\"View\",\"True\",\"Fast\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"4\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput, AmplifyShaderEditor\",\"id\":0,\"pos\":[-64,0],\"params\":[\"Inherit\",\"True\",\"True\",\"-1\",\"Output\",\"0\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"wire\":[4,0,2,0]}\n{\"wire\":[5,0,3,0]}\n{\"wire\":[6,0,4,0]}\n{\"wire\":[6,1,5,0]}\n{\"wire\":[2,0,7,0]}\n{\"wire\":[3,0,1,0]}\n{\"wire\":[0,0,6,0]}\nASEEND*/\n//CHKSM=1251E3A81DE1C218570E451375CEC6C5E0108DB9"
   m_functionName: 
   m_description: 'Computes sphere map UV coordinates using view-space reflection.
 
-    Transforms
-    vertex position and normal into view space, normalizes both vectors, and outputs
-    reflected UVs suitable for MMD-style SPH texture mapping.'
+    Transforms vertex position and normal into view space, normalizes both vectors, and outputs reflected UVs suitable for MMD-style SPH texture mapping.'
   m_additionalIncludes:
     m_additionalIncludes: []
     m_outsideIncludes: []
@@ -44,7 +33,6 @@ MonoBehaviour:
     m_shaderFunctionDirectives: []
     m_nativeDirectives: []
     m_nativeDirectivesIndex: -1
-    m_nativeDirectivesFoldout: 0
     m_directivesSaveItems: []
     m_versionMaxExclusive: 1
   m_nodeCategory: 0

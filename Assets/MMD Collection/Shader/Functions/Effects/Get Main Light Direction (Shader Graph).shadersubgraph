@@ -75,7 +75,12 @@
         "preventRotation": false
     },
     "m_Path": "MMD Collection/Effects",
+    "m_DeprecateSubgraph": false,
+    "m_DeprecateSubgraphMessage": "",
     "m_GraphPrecision": 1,
+    "m_CustomPragmas": [],
+    "m_CustomDefines": [],
+    "m_CustomIncludes": [],
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": "ffb53b06d0e44ed6b7bd3253ddb8dc26"
@@ -92,8 +97,10 @@
     "m_DisplayName": "Direction",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Direction",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -115,8 +122,10 @@
     "m_DisplayName": "Output",
     "m_SlotType": 1,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Output",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0
@@ -136,8 +145,10 @@
     "m_DisplayName": "lightmapUV",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "lightmapUV",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0
@@ -157,8 +168,10 @@
     "m_DisplayName": "Direction",
     "m_SlotType": 1,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Direction",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -184,9 +197,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -220.79998779296876,
+            "x": -220.79998779296875,
             "y": -144.0,
-            "width": 207.99998474121095,
+            "width": 207.99998474121094,
             "height": 295.9999694824219
         }
     },
@@ -278,10 +291,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 323.20001220703127,
+            "x": 323.20001220703125,
             "y": -144.0,
             "width": 101.59991455078125,
-            "height": 76.80001068115235
+            "height": 76.80001068115234
         }
     },
     "m_Slots": [

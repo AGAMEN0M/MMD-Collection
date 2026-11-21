@@ -12,29 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b2425a2284af743826c689403a4924, type: 3}
   m_Name: MMD Constants (Amplify Shader Editor)
   m_EditorClassIdentifier: AmplifyShaderEditor::AmplifyShaderEditor.AmplifyShaderFunction
-  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.12\n// Available at
-    the Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19912\n{\"type\":\"AmplifyShaderEditor.SimpleDivideOpNode,
-    AmplifyShaderEditor\",\"id\":4,\"pos\":[-832,256],\"params\":[\"Inherit\",\"True\",\"2\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.RangedFloatNode,
-    AmplifyShaderEditor\",\"id\":7,\"pos\":[-1024,448],\"params\":[\"Inherit\",\"True\",\"Constant\",\"_Float7\",\"Float
-    7\",\"10\",\"0\",\"Create\",\"True\",\"0\",\"0\",\"0\",\"False\",\"0\",\"False\",\"Object\",\"-1\",\"\",\"0.5\",\"0\",\"0\",\"0\",\"0\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.Vector3Node,
-    AmplifyShaderEditor\",\"id\":8,\"pos\":[-1024,128],\"params\":[\"Half\",\"True\",\"Constant\",\"_Vector4\",\"Vector
-    2\",\"14\",\"0\",\"Create\",\"True\",\"0\",\"0\",\"0\",\"False\",\"0\",\"False\",\"Object\",\"-1\",\"\",\"1,1,1\",\"0,0,0\",\"0\",\"4\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\"]}\n{\"type\":\"AmplifyShaderEditor.Vector3Node,
-    AmplifyShaderEditor\",\"id\":9,\"pos\":[-1024,-192],\"params\":[\"Half\",\"True\",\"Constant\",\"_Vector3\",\"Vector
-    2\",\"14\",\"0\",\"Create\",\"True\",\"0\",\"0\",\"0\",\"False\",\"0\",\"False\",\"Object\",\"-1\",\"\",\"0.5,0.5,0.5\",\"0,0,0\",\"0\",\"4\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\"]}\n{\"type\":\"AmplifyShaderEditor.Vector3Node,
-    AmplifyShaderEditor\",\"id\":10,\"pos\":[-1024,-512],\"params\":[\"Half\",\"True\",\"Constant\",\"_Vector2\",\"Vector
-    2\",\"14\",\"0\",\"Create\",\"True\",\"0\",\"0\",\"0\",\"False\",\"0\",\"False\",\"Object\",\"-1\",\"\",\"0.6,0.6,0.6\",\"0,0,0\",\"0\",\"4\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput,
-    AmplifyShaderEditor\",\"id\":0,\"pos\":[-800,-512],\"params\":[\"Inherit\",\"True\",\"True\",\"-1\",\"Global
-    Light Scale\",\"2\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput,
-    AmplifyShaderEditor\",\"id\":1,\"pos\":[-800,-192],\"params\":[\"Inherit\",\"True\",\"False\",\"-1\",\"Toon
-    Light Pivot\",\"0\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput,
-    AmplifyShaderEditor\",\"id\":2,\"pos\":[-608,256],\"params\":[\"Inherit\",\"True\",\"False\",\"-1\",\"Toon
-    Light Pivot Inv\",\"1\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"wire\":[4,0,8,0]}\n{\"wire\":[4,1,7,0]}\n{\"wire\":[0,0,10,0]}\n{\"wire\":[1,0,9,0]}\n{\"wire\":[2,0,4,0]}\nASEEND*/\n//CHKSM=FFDF7F206A96AA2467C45EFF745DC7BDA28B1410"
+  m_functionInfo: "// Made with Amplify Shader Editor v1.9.9.15\n// Available at the Unity Asset Store - http://u3d.as/y3X \n/*ASEBEGIN\nVersion=19915\n{\"type\":\"AmplifyShaderEditor.SimpleDivideOpNode, AmplifyShaderEditor\",\"id\":4,\"pos\":[-832,256],\"params\":[\"Inherit\",\"True\",\"2\",\"2\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT\",\"0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.RangedFloatNode, AmplifyShaderEditor\",\"id\":7,\"pos\":[-1024,448],\"params\":[\"Inherit\",\"True\",\"Constant\",\"_Float7\",\"Float 7\",\"10\",\"0\",\"Create\",\"True\",\"0\",\"0\",\"0\",\"False\",\"0\",\"False\",\"Object\",\"-1\",\"\",\"0.5\",\"0\",\"0\",\"0\",\"0\",\"1\",\"FLOAT\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.Vector3Node, AmplifyShaderEditor\",\"id\":8,\"pos\":[-1024,128],\"params\":[\"Half\",\"True\",\"Constant\",\"_Vector4\",\"Vector 2\",\"14\",\"0\",\"Create\",\"True\",\"0\",\"0\",\"0\",\"False\",\"0\",\"False\",\"Object\",\"-1\",\"\",\"1,1,1\",\"0,0,0\",\"0\",\"4\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\"]}\n{\"type\":\"AmplifyShaderEditor.Vector3Node, AmplifyShaderEditor\",\"id\":9,\"pos\":[-1024,-192],\"params\":[\"Half\",\"True\",\"Constant\",\"_Vector3\",\"Vector 2\",\"14\",\"0\",\"Create\",\"True\",\"0\",\"0\",\"0\",\"False\",\"0\",\"False\",\"Object\",\"-1\",\"\",\"0.5,0.5,0.5\",\"0,0,0\",\"0\",\"4\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\"]}\n{\"type\":\"AmplifyShaderEditor.Vector3Node, AmplifyShaderEditor\",\"id\":10,\"pos\":[-1024,-512],\"params\":[\"Half\",\"True\",\"Constant\",\"_Vector2\",\"Vector 2\",\"14\",\"0\",\"Create\",\"True\",\"0\",\"0\",\"0\",\"False\",\"0\",\"False\",\"Object\",\"-1\",\"\",\"0.6,0.6,0.6\",\"0,0,0\",\"0\",\"4\",\"FLOAT3\",\"0\",\"FLOAT\",\"1\",\"FLOAT\",\"2\",\"FLOAT\",\"3\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput, AmplifyShaderEditor\",\"id\":0,\"pos\":[-800,-512],\"params\":[\"Inherit\",\"True\",\"True\",\"-1\",\"Global Light Scale\",\"2\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput, AmplifyShaderEditor\",\"id\":1,\"pos\":[-800,-192],\"params\":[\"Inherit\",\"True\",\"False\",\"-1\",\"Toon Light Pivot\",\"0\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"type\":\"AmplifyShaderEditor.FunctionOutput, AmplifyShaderEditor\",\"id\":2,\"pos\":[-608,256],\"params\":[\"Inherit\",\"True\",\"False\",\"-1\",\"Toon Light Pivot Inv\",\"1\",\"False\",\"1\",\"0\",\"FLOAT3\",\"0,0,0\",\"False\",\"1\",\"FLOAT3\",\"0\"]}\n{\"wire\":[4,0,8,0]}\n{\"wire\":[4,1,7,0]}\n{\"wire\":[0,0,10,0]}\n{\"wire\":[1,0,9,0]}\n{\"wire\":[2,0,4,0]}\nASEEND*/\n//CHKSM=C50685F4A53EE0571C6D6073FC8CAC9BBFFBDD07"
   m_functionName: 
-  m_description: 'Provides core MMD toon lighting constants used for global light
-    scaling and tonal centering.
+  m_description: 'Provides core MMD toon lighting constants used for global light scaling and tonal centering.
 
-    Outputs a global light scale, a toon light
-    pivot value, and its inverse for normalized lighting adjustments.'
+    Outputs a global light scale, a toon light pivot value, and its inverse for normalized lighting adjustments.'
   m_additionalIncludes:
     m_additionalIncludes: []
     m_outsideIncludes: []
@@ -51,7 +33,6 @@ MonoBehaviour:
     m_shaderFunctionDirectives: []
     m_nativeDirectives: []
     m_nativeDirectivesIndex: -1
-    m_nativeDirectivesFoldout: 0
     m_directivesSaveItems: []
     m_versionMaxExclusive: 1
   m_nodeCategory: 0

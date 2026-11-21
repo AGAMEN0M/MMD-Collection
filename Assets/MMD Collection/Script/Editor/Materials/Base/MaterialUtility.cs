@@ -571,13 +571,13 @@ namespace MMDCollection.Editor
         #region === Dropdown Controls ===
 
         /// <summary>
-        /// Draws a float-backed dropdown, behaving like an enum selector.
+        /// Draws a dropdown backed by either a float, range or integer property, behaving like an enum selector.
         /// </summary>
         /// <param name="label">GUI label displayed in the inspector.</param>
         /// <param name="properties">Material properties array used to resolve the target property.</param>
-        /// <param name="propertyName">Name of the float property backing the dropdown.</param>
+        /// <param name="propertyName">Name of the float, range or integer property backing the dropdown.</param>
         /// <param name="displayOptions">Display strings shown in the popup.</param>
-        /// <param name="valueOptions">Float values mapped to each display option.</param>
+        /// <param name="valueOptions">Numeric values mapped to each display option.</param>
         public static void FloatDropdownProperty(GUIContent label, MaterialProperty[] properties, string propertyName, string[] displayOptions, float[] valueOptions)
         {
             // Validate input arrays.
@@ -594,6 +594,16 @@ namespace MMDCollection.Editor
 
             if (prop == null) return;
 
+            // Validate property type.
+            bool isInteger = prop.propertyType == UnityEngine.Rendering.ShaderPropertyType.Int;
+            bool isFloat = prop.propertyType == UnityEngine.Rendering.ShaderPropertyType.Float || prop.propertyType == UnityEngine.Rendering.ShaderPropertyType.Range;
+
+            if (!isInteger && !isFloat)
+            {
+                Debug.LogError($"{propertyName} must be a Float, Range or Integer property.");
+                return;
+            }
+
             EditorGUILayout.BeginHorizontal();
 
             GUILayout.Label(label, GUILayout.MinWidth(50f));
@@ -602,8 +612,9 @@ namespace MMDCollection.Editor
             EditorGUI.showMixedValue = prop.hasMixedValue;
             EditorGUI.BeginChangeCheck();
 
-            // Resolve current value index from the float backing value.
-            int currentIndex = Array.IndexOf(valueOptions, prop.floatValue);
+            // Resolve current value index from the property backing value.
+            int currentIndex = isInteger ? Array.FindIndex(valueOptions, value => Mathf.RoundToInt(value) == prop.intValue) : Array.IndexOf(valueOptions, prop.floatValue);
+
             if (currentIndex < 0) currentIndex = 0;
 
             int newIndex = EditorGUILayout.Popup(currentIndex, displayOptions, GUILayout.MinWidth(100f), GUILayout.MaxWidth(200f));
@@ -614,7 +625,9 @@ namespace MMDCollection.Editor
             if (EditorGUI.EndChangeCheck())
             {
                 Undo.RecordObjects(prop.targets, $"Change {propertyName}");
-                prop.floatValue = valueOptions[newIndex];
+
+                if (isInteger) prop.intValue = Mathf.RoundToInt(valueOptions[newIndex]);
+                else prop.floatValue = valueOptions[newIndex];
             }
 
             EditorGUILayout.EndHorizontal();

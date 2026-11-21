@@ -113,7 +113,12 @@
         "preventRotation": false
     },
     "m_Path": "MMD Collection/SphereMap",
+    "m_DeprecateSubgraph": false,
+    "m_DeprecateSubgraphMessage": "",
     "m_GraphPrecision": 1,
+    "m_CustomPragmas": [],
+    "m_CustomDefines": [],
+    "m_CustomIncludes": [],
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": "fbe3e1cc7c21455b83723023e10f9e02"
@@ -156,11 +161,12 @@
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
+    "hideConnector": false,
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
     "m_Value": {
-        "m_SerializedCubemap": "{\"cubemap\":{\"instanceID\":0}}",
+        "m_SerializedCubemap": "",
         "m_Guid": ""
     },
     "isHDR": false,
@@ -175,8 +181,10 @@
     "m_DisplayName": "Cube Map",
     "m_SlotType": 1,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_BareResource": false
 }
 
@@ -192,7 +200,7 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -344.79998779296877,
+            "x": -344.79998779296875,
             "y": -341.6000061035156,
             "width": 207.99996948242188,
             "height": 312.0000305175781
@@ -224,8 +232,10 @@
     "m_DisplayName": "Sampler",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Sampler",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_BareResource": false
 }
 
@@ -237,8 +247,10 @@
     "m_DisplayName": "Out",
     "m_SlotType": 1,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -260,11 +272,13 @@
     "m_DisplayName": "Cube",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Cube",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_BareResource": false,
     "m_Cubemap": {
-        "m_SerializedCubemap": "{\"cubemap\":{\"instanceID\":0}}",
+        "m_SerializedCubemap": "",
         "m_Guid": ""
     }
 }
@@ -283,7 +297,7 @@
             "serializedVersion": "2",
             "x": -52.00001907348633,
             "y": -341.6000061035156,
-            "width": 208.00001525878907,
+            "width": 208.00001525878906,
             "height": 373.5999755859375
         }
     },
@@ -325,8 +339,10 @@
     "m_DisplayName": "Normal",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Normal",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -349,8 +365,10 @@
     "m_DisplayName": "ViewDir",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "ViewDir",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -373,8 +391,10 @@
     "m_DisplayName": "LOD",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "LOD",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": [],
@@ -389,8 +409,10 @@
     "m_DisplayName": "Output",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Output",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -418,8 +440,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -344.79998779296877,
-            "y": 31.999984741210939,
+            "x": -344.79998779296875,
+            "y": 31.999984741210938,
             "width": 207.99996948242188,
             "height": 312.0
         }
@@ -450,8 +472,10 @@
     "m_DisplayName": "Out",
     "m_SlotType": 1,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -512,9 +536,9 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -270.3999938964844,
-            "y": -404.79998779296877,
+            "y": -404.79998779296875,
             "width": 133.5999755859375,
-            "height": 33.600006103515628
+            "height": 33.600006103515625
         }
     },
     "m_Slots": [
@@ -543,8 +567,10 @@
     "m_DisplayName": "Out",
     "m_SlotType": 1,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,

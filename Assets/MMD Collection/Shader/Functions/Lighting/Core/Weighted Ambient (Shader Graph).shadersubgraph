@@ -99,7 +99,12 @@
         "preventRotation": false
     },
     "m_Path": "MMD Collection/Lighting/Core",
+    "m_DeprecateSubgraph": false,
+    "m_DeprecateSubgraphMessage": "",
     "m_GraphPrecision": 1,
+    "m_CustomPragmas": [],
+    "m_CustomDefines": [],
+    "m_CustomIncludes": [],
     "m_PreviewMode": 2,
     "m_OutputNode": {
         "m_Id": "c5191d67a5b846089faace8485256a72"
@@ -120,10 +125,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -278.39996337890627,
+            "x": -278.39996337890625,
             "y": -151.1999969482422,
-            "width": 158.40000915527345,
-            "height": 33.600006103515628
+            "width": 158.40000915527344,
+            "height": 33.600006103515625
         }
     },
     "m_Slots": [
@@ -158,8 +163,8 @@
             "serializedVersion": "2",
             "x": -311.9999694824219,
             "y": -87.19999694824219,
-            "width": 192.00001525878907,
-            "height": 33.599998474121097
+            "width": 192.00001525878906,
+            "height": 33.599998474121094
         }
     },
     "m_Slots": [
@@ -188,8 +193,10 @@
     "m_DisplayName": "Out",
     "m_SlotType": 1,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "e00": 0.0,
         "e01": 0.0,
@@ -236,8 +243,10 @@
     "m_DisplayName": "Ambient Blend Factor",
     "m_SlotType": 1,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -259,8 +268,10 @@
     "m_DisplayName": "Output",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Output",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -282,8 +293,10 @@
     "m_DisplayName": "B",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "B",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "e00": 2.0,
         "e01": 2.0,
@@ -344,6 +357,7 @@
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
+    "hideConnector": false,
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
@@ -377,6 +391,7 @@
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
+    "hideConnector": false,
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
@@ -400,7 +415,7 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 132.79998779296876,
+            "x": 132.79998779296875,
             "y": -151.1999969482422,
             "width": 92.0,
             "height": 76.80000305175781
@@ -430,8 +445,10 @@
     "m_DisplayName": "A",
     "m_SlotType": 0,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "A",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "e00": 0.0,
         "e01": 0.0,
@@ -478,8 +495,10 @@
     "m_DisplayName": "Global Ambient",
     "m_SlotType": 1,
     "m_Hidden": false,
+    "m_HideConnector": false,
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
+    "m_CustomBinding": "",
     "m_Value": {
         "x": 0.0,
         "y": 0.0,
@@ -506,7 +525,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -104.0,
-            "y": -150.79998779296876,
+            "y": -150.79998779296875,
             "width": 208.00003051757813,
             "height": 301.6000061035156
         }
